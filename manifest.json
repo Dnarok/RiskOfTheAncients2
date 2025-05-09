@@ -1,0 +1,17 @@
+{
+  "name": "RiskOfTheAncients2",
+  "version_number": "1.0.0",
+  "website_url": "",
+  "description": "Dota 2 items in Risk of Rain 2!",
+  "dependencies": [
+    "bbepis-BepInExPack-5.4.2117",
+    "RiskofThunder-R2API_Core-5.1.5",
+    "RiskofThunder-R2API_ContentManagement-1.0.9",
+    "RiskofThunder-R2API_Dot-1.0.3",
+    "RiskofThunder-R2API_Language-1.0.1",
+    "RiskofThunder-R2API_Items-1.0.4",
+    "RiskofThunder-R2API_RecalculateStats-1.5.0",
+    "RiskofThunder-R2API_CommandHelper-1.0.2",
+    "RiskofThunder-R2API_ProcType-1.0.2"
+  ]
+}
