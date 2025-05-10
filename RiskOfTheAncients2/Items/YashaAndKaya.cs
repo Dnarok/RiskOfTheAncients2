@@ -42,14 +42,14 @@ namespace ROTA2.Items
         public float DamagePerStack;
         public void CreateConfig(ConfigFile configuration)
         {
-            AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Attack Speed Bonus", 18.0f, "How much attack speed should be provided by the first stack?").Value;
-            AttackSpeedPerStack = configuration.Bind("Item: " + ItemName, "Stacking Attack Speed Bonus", 18.0f, "How much attack speed should be provided by subsequent stacks?").Value;
-            MovementSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Movement Speed Bonus", 18.0f, "How much movement speed should be provided by the first stack?").Value;
-            MovementSpeedPerStack = configuration.Bind("Item: " + ItemName, "Stacking Movement Speed Bonus", 18.0f, "How much movement speed should be provided by subsequent stacks?").Value;
-            SkillCooldownReductionBase = configuration.Bind("Item: " + ItemName, "Initial Skill Cooldown Reduction", 12.0f, "How much skill cooldown reduction should be provided by the first stack?").Value;
-            SkillCooldownReductionPerStack = configuration.Bind("Item: " + ItemName, "Stacking Skill Cooldown Reduction", 12.0f, "How much skill cooldown reduction should be provided by subsequent stacks?").Value;
-            DamageBase = configuration.Bind("Item: " + ItemName, "Initial Damage Bonus", 15.0f, "How much damage should be provided by the first stack?").Value;
-            DamagePerStack = configuration.Bind("Item: " + ItemName, "Stacking Damage Bonus", 15.0f, "How much damage should be provided by subsequent stacks?").Value;
+            AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Attack Speed Bonus", 22.5f, "How much attack speed should be provided by the first stack?").Value;
+            AttackSpeedPerStack = configuration.Bind("Item: " + ItemName, "Stacking Attack Speed Bonus", 22.5f, "How much attack speed should be provided by subsequent stacks?").Value;
+            MovementSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Movement Speed Bonus", 22.5f, "How much movement speed should be provided by the first stack?").Value;
+            MovementSpeedPerStack = configuration.Bind("Item: " + ItemName, "Stacking Movement Speed Bonus", 22.5f, "How much movement speed should be provided by subsequent stacks?").Value;
+            SkillCooldownReductionBase = configuration.Bind("Item: " + ItemName, "Initial Skill Cooldown Reduction", 9.0f, "How much skill cooldown reduction should be provided by the first stack?").Value;
+            SkillCooldownReductionPerStack = configuration.Bind("Item: " + ItemName, "Stacking Skill Cooldown Reduction", 9.0f, "How much skill cooldown reduction should be provided by subsequent stacks?").Value;
+            DamageBase = configuration.Bind("Item: " + ItemName, "Initial Damage Bonus", 18.0f, "How much damage should be provided by the first stack?").Value;
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Stacking Damage Bonus", 18.0f, "How much damage should be provided by subsequent stacks?").Value;
         }
 
         private void AddAttackSpeed(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs arguments)

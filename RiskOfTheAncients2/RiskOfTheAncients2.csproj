@@ -7,6 +7,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Icons\aeon_disk.png" />
+	  <None Remove="Icons\aeon_disk_cooldown.png" />
 	  <None Remove="Icons\black_king_bar.png" />
 	  <None Remove="Icons\bottle.png" />
 	  <None Remove="Icons\bottle_arcane.png" />
@@ -19,11 +21,15 @@
 	  <None Remove="Icons\bottle_water.png" />
 	  <None Remove="Icons\bottle_wisdom.png" />
 	  <None Remove="Icons\consumed_mango.png" />
+	  <None Remove="Icons\dragon_scale.png" />
 	  <None Remove="Icons\enchanted_mango.png" />
 	  <None Remove="Icons\fairys_trinket.png" />
 	  <None Remove="Icons\ghost_scepter.png" />
 	  <None Remove="Icons\healing_salve.png" />
 	  <None Remove="Icons\javelin.png" />
+	  <None Remove="Icons\lance_of_pursuit.png" />
+	  <None Remove="Icons\nemesis_curse.png" />
+	  <None Remove="Icons\nemesis_curse_cooldown.png" />
 	  <None Remove="Icons\orb_of_blight.png" />
 	  <None Remove="Icons\orb_of_corrosion.png" />
 	  <None Remove="Icons\orb_of_frost.png" />
@@ -58,6 +64,14 @@
 	</ItemGroup>
 
   <ItemGroup>
+    <Reference Include="LookingGlass">
+      <HintPath>libs\LookingGlass.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\aeon_disk.png" />
+    <EmbeddedResource Include="Icons\aeon_disk_cooldown.png" />
     <EmbeddedResource Include="Icons\black_king_bar.png" />
     <EmbeddedResource Include="Icons\boots_of_speed.png" />
     <EmbeddedResource Include="Icons\bottle.png" />
@@ -72,6 +86,7 @@
     <EmbeddedResource Include="Icons\bottle_water.png" />
     <EmbeddedResource Include="Icons\bottle_wisdom.png" />
     <EmbeddedResource Include="Icons\consumed_mango.png" />
+    <EmbeddedResource Include="Icons\dragon_scale.png" />
     <EmbeddedResource Include="Icons\enchanted_mango.png" />
     <EmbeddedResource Include="Icons\fairys_trinket.png" />
     <EmbeddedResource Include="Icons\ghost_scepter.png" />
@@ -79,6 +94,9 @@
     <EmbeddedResource Include="Icons\heart_of_tarrasque.png" />
     <EmbeddedResource Include="Icons\javelin.png" />
     <EmbeddedResource Include="Icons\kaya.png" />
+    <EmbeddedResource Include="Icons\lance_of_pursuit.png" />
+    <EmbeddedResource Include="Icons\nemesis_curse.png" />
+    <EmbeddedResource Include="Icons\nemesis_curse_cooldown.png" />
     <EmbeddedResource Include="Icons\orb_of_blight.png" />
     <EmbeddedResource Include="Icons\orb_of_corrosion.png" />
     <EmbeddedResource Include="Icons\orb_of_frost.png" />

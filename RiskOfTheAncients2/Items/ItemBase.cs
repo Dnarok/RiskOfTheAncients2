@@ -31,6 +31,7 @@ namespace ROTA2.Items
         public Func<string, string> Stack   = x => "<style=cStack>"     + x + "</style>";
         public Func<string, string> Health  = x => "<style=cIsHealth>"  + x + "</style>";
         public Func<string, string> Gold = x => "<style=cShrine>" + x + "</style>";
+        public Func<string, string> Death = x => "<style=cDeath>" + x + "</style>";
         public Func<string, string, string> Color = (x, hex) => "<" + hex + ">" + x + "</color>";
 
         public abstract string ItemName { get; }

@@ -27,11 +27,11 @@ namespace ROTA2.Items
             Hooks();
         }
 
-        float ProcChance;
-        float DamageBase;
-        float DamagePerStack;
-        float BashDuration;
-        float BashCooldown;
+        public float ProcChance;
+        public float DamageBase;
+        public float DamagePerStack;
+        public float BashDuration;
+        public float BashCooldown;
         public void CreateConfig(ConfigFile configuration)
         {
             ProcChance     = configuration.Bind("Item: " + ItemName, "Proc Chance",      15.0f,  "What is the chance on hit to proc?").Value;

@@ -26,8 +26,8 @@ namespace ROTA2.Items
             Hooks();
         }
 
-        float DamageBase;
-        float DamagePerStack;
+        public float DamageBase;
+        public float DamagePerStack;
         public void CreateConfig(ConfigFile configuration)
         {
             DamageBase     = configuration.Bind("Item: " + ItemName, "Damage Base",      6.0f, "How much flat damage should the first stack provide?").Value;

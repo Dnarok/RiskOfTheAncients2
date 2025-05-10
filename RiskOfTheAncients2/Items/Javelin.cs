@@ -29,10 +29,10 @@ namespace ROTA2.Items
             proc = ProcTypeAPI.ReserveProcType();
         }
 
-        float ProcChance;
-        float DamageBase;
-        float DamagePerStack;
-        float ProcCoefficient;
+        public float ProcChance;
+        public float DamageBase;
+        public float DamagePerStack;
+        public float ProcCoefficient;
         public void CreateConfig(ConfigFile configuration)
         {
             ProcChance       = configuration.Bind("Item: " + ItemName, "Proc Chance",       20.0f,  "What is the chance on hit to proc?").Value;

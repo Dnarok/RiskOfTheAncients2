@@ -42,10 +42,10 @@ namespace ROTA2.Items
         public float BaseHealthRegenerationPerStack;
         public void CreateConfig(ConfigFile configuration)
         {
-            SkillCooldownReductionBase = configuration.Bind("Item: " + ItemName, "Initial Skill Cooldown Reduction", 12.0f, "How much skill cooldown reduction should be provided by the first stack?").Value;
-            SkillCooldownReductionPerStack = configuration.Bind("Item: " + ItemName, "Stacking Skill Cooldown Reduction", 12.0f, "How much skill cooldown reduction should be provided by subsequent stacks?").Value;
-            DamageBase = configuration.Bind("Item: " + ItemName, "Initial Damage Bonus", 15.0f, "How much damage should be provided by the first stack?").Value;
-            DamagePerStack = configuration.Bind("Item: " + ItemName, "Stacking Damage Bonus", 15.0f, "How much damage should be provided by subsequent stacks?").Value;
+            SkillCooldownReductionBase = configuration.Bind("Item: " + ItemName, "Initial Skill Cooldown Reduction", 9.0f, "How much skill cooldown reduction should be provided by the first stack?").Value;
+            SkillCooldownReductionPerStack = configuration.Bind("Item: " + ItemName, "Stacking Skill Cooldown Reduction", 9.0f, "How much skill cooldown reduction should be provided by subsequent stacks?").Value;
+            DamageBase = configuration.Bind("Item: " + ItemName, "Initial Damage Bonus", 18.0f, "How much damage should be provided by the first stack?").Value;
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Stacking Damage Bonus", 18.0f, "How much damage should be provided by subsequent stacks?").Value;
             MaximumHealthBase = configuration.Bind("Item: " + ItemName, "Initial Maximum Health Bonus", 60.0f, "How much maximum health should be provided by the first stack?").Value;
             MaximumHealthPerStack = configuration.Bind("Item: " + ItemName, "Stacking Maximum Health Bonus", 60.0f, "How much maximum health should be provided by subsequent stacks?").Value;
             BaseHealthRegenerationBase = configuration.Bind("Item: " + ItemName, "Initial Base Health Regeneration Bonus", 2.4f, "How much base health regeneration should be provided by the first stack?").Value;

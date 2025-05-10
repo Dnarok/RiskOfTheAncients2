@@ -12,6 +12,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using BepInEx.Bootstrap;
 
 namespace ROTA2
 {
@@ -20,6 +21,7 @@ namespace ROTA2
     [BepInDependency(RecalculateStatsAPI.PluginGUID)]
     [BepInDependency(CommandHelper.PluginGUID)]
     [BepInDependency(DotAPI.PluginGUID)]
+    [BepInDependency("droppod.lookingglass", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
 
     public class Plugin : BaseUnityPlugin
@@ -27,7 +29,7 @@ namespace ROTA2
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Dnarok";
         public const string PluginName = "RiskOfTheAncients2";
-        public const string PluginVersion = "1.0.0";
+        public const string PluginVersion = "1.0.2";
 
         public List<ItemBase> Items = [];
         public static Dictionary<ItemBase, bool> ItemsEnabled = [];
@@ -36,6 +38,8 @@ namespace ROTA2
         public List<BuffBase> Buffs = [];
 
         public static SkillDef disabledSkill;
+
+        public static bool isLookingGlassInstalled => Chainloader.PluginInfos.ContainsKey("droppod.lookingglass");
 
         public void Awake()
         {
@@ -123,6 +127,12 @@ namespace ROTA2
                 disabledSkill.keywordTokens = captain.keywordTokens;
 
                 ContentAddition.AddSkillDef(disabledSkill);
+            }
+
+            if (isLookingGlassInstalled)
+            {
+                Log.Debug("Adding LookingGlass item definitions.");
+                RoR2Application.onLoad += Compatibility.LookingGlassCompatibility;
             }
         }
 

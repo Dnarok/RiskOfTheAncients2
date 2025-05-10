@@ -48,6 +48,8 @@ namespace ROTA2.Items
                     duration = BuffDuration
                 });
             }
+
+            orig(body, skill);
         }
     }
 }

@@ -35,10 +35,10 @@ namespace ROTA2.Items
         public float DamagePerStack;
         public void CreateConfig(ConfigFile configuration)
         {
-            SkillCooldownReductionBase = configuration.Bind("Item: " + ItemName, "Initial Skill Cooldown Reduction", 8.0f, "How much skill cooldown reduction should be provided by the first stack?").Value;
-            SkillCooldownReductionPerStack = configuration.Bind("Item: " + ItemName, "Stacking Skill Cooldown Reduction", 8.0f, "How much skill cooldown reduction should be provided by subsequent stacks?").Value;
-            DamageBase = configuration.Bind("Item: " + ItemName, "Initial Damage Bonus", 10.0f, "How much damage should be provided by the first stack?").Value;
-            DamagePerStack = configuration.Bind("Item: " + ItemName, "Stacking Damage Bonus", 10.0f, "How much damage should be provided by subsequent stacks?").Value;
+            SkillCooldownReductionBase = configuration.Bind("Item: " + ItemName, "Initial Skill Cooldown Reduction", 6.0f, "How much skill cooldown reduction should be provided by the first stack?").Value;
+            SkillCooldownReductionPerStack = configuration.Bind("Item: " + ItemName, "Stacking Skill Cooldown Reduction", 6.0f, "How much skill cooldown reduction should be provided by subsequent stacks?").Value;
+            DamageBase = configuration.Bind("Item: " + ItemName, "Initial Damage Bonus", 12.0f, "How much damage should be provided by the first stack?").Value;
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Stacking Damage Bonus", 12.0f, "How much damage should be provided by subsequent stacks?").Value;
         }
 
         private void AddCooldownReduction(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs arguments)
