@@ -17,7 +17,7 @@ namespace ROTA2.Items
 @$"{Damage($"{OutProcChance}%")} chance on hit to {Damage("curse")} an enemy, increasing {Damage("all damage")} they take by {Damage($"{DamageBase}%")} {Stack($"(+{DamagePerStack}% per stack, exponential)")} for {Damage($"{CurseDuration} seconds")}. Recharges every {Damage($"{CurseCooldown} seconds")}.
 {Health($"{InProcChance}%")} chance on {Health("being hit")} to be {Health("cursed")}, receiving {Death("permanent damage")}.";
         public override string ItemTokenLore => "The cursed amulet of a revenge-obsessed prince.";
-        public override string ItemIconPath => "RiskOfTheAncients2.Icons.nemesis_curse.png";
+        public override string ItemIconPath => "ROTA2.Icons.nemesis_curse.png";
         public override ItemTier Tier => ItemTier.Lunar;
         public override void Hooks()
         {

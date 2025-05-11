@@ -14,7 +14,7 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"{Damage($"{ProcChance}%")} chance on hit to {Damage("hit again")} for {Damage($"{DamageBase}%")} {Stack($"(+{DamagePerStack}% per stack)")} TOTAL damage.";
         public override string ItemTokenLore => "A rather typical spear that can sometimes pierce through an enemy's armor when used to attack.";
         public override ItemTier Tier => ItemTier.Tier1;
-        public override string ItemIconPath => "RiskOfTheAncients2.Icons.javelin.png";
+        public override string ItemIconPath => "ROTA2.Icons.javelin.png";
         public override void Hooks()
         {
             On.RoR2.GlobalEventManager.OnHitEnemy += OnHit;

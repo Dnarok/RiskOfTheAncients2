@@ -37,6 +37,7 @@ namespace ROTA2
         public static Dictionary<EquipmentBase, bool> EquipmentEnabled = [];
         public List<BuffBase> Buffs = [];
 
+        public static Dictionary<string, Sprite> SpritesLoaded = [];
         public static SkillDef disabledSkill;
 
         public static bool isLookingGlassInstalled => Chainloader.PluginInfos.ContainsKey("droppod.lookingglass");
@@ -165,6 +166,12 @@ namespace ROTA2
         }
         public static Sprite ExtractSprite(string filename)
         {
+            Sprite sprite = null;
+            if (SpritesLoaded.TryGetValue(filename, out sprite))
+            {
+                return sprite;
+            }
+
             if (filename == "")
             {
                 return Addressables.LoadAssetAsync<Sprite>("RoR2/Base/Common/MiscIcons/texMysteryIcon.png").WaitForCompletion();
@@ -186,7 +193,9 @@ namespace ROTA2
                 else
                 {
                     Log.Info($"Successfully loaded texture from resource \"{filename}\": {icon_texture.width}x{icon_texture.height}, {icon_texture.graphicsFormat:G}.");
-                    return Sprite.Create(icon_texture, new Rect(0.0f, 0.0f, icon_texture.width, icon_texture.height), new Vector2(0.5f, 0.5f));
+                    Sprite result = Sprite.Create(icon_texture, new Rect(0.0f, 0.0f, icon_texture.width, icon_texture.height), new Vector2(0.5f, 0.5f));
+                    SpritesLoaded.Add(filename, result);
+                    return result;
                 }
             }
         }

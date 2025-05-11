@@ -1,11 +1,9 @@
 ﻿using BepInEx.Configuration;
 using ROTA2.Buffs;
 using RoR2;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
+using System;
 
 namespace ROTA2.Items
 {
@@ -17,13 +15,12 @@ namespace ROTA2.Items
         public override string ItemTokenPickup => "Ignite and blind nearby enemies.";
         public override string ItemTokenDesc => $"{Damage("Ignite")} enemies within {Damage($"{RadiusBase}m")} {Stack($"(+{RadiusPerStack}m per stack)")} for {Damage($"{IgniteBase}%")} {Stack($"(+{IgnitePerStack}% per stack)")} base damage. Additionally, enemies {Damage("burn")} for {Damage($"{BurnBase}%")} {Stack($"(+{BurnPerStack}% per stack)")} base damage and are {Utility("blinded")}, causing them to {Utility($"miss {MissChance}%")} of the time. {Utility("Unaffected by luck")}.";
         public override string ItemTokenLore => "A divine weapon that causes damage and a bright burning effect that lays waste to nearby enemies.";
-        public override string ItemIconPath => "RiskOfTheAncients2.Icons.radiance.png";
+        public override string ItemIconPath => "ROTA2.Icons.radiance.png";
         public override ItemTier Tier => ItemTier.Tier3;
         public override void Hooks()
         {
             CharacterBody.onBodyInventoryChangedGlobal += OnInventoryChanged;
         }
-
         public override void Init(ConfigFile configuration)
         {
             CreateConfig(configuration);

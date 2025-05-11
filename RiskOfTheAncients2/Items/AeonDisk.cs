@@ -16,7 +16,7 @@ namespace ROTA2.Items
         public override string ItemTokenLore => "A powerful artifact long ago smuggled out of the Ivory Incubarium. Or so many believe.";
         public override ItemTier Tier => ItemTier.Tier3;
         public override string ItemModelPath => "RoR2/Base/Mystery/PickupMystery.prefab";
-        public override string ItemIconPath => "RiskOfTheAncients2.Icons.aeon_disk.png";
+        public override string ItemIconPath => "ROTA2.Icons.aeon_disk.png";
         public override void Hooks()
         {
             On.RoR2.HealthComponent.UpdateLastHitTime += OnHit;

@@ -14,7 +14,7 @@ namespace ROTA2.Items
         public override string ItemTokenLore => "An unnerving stone unearthed beneath the Fields of Endless Carnage.";
         public override ItemTier Tier => ItemTier.Tier1;
         public override string ItemModelPath => "RoR2/Base/Mystery/PickupMystery.prefab";
-        public override string ItemIconPath => "RiskOfTheAncients2.Icons.orb_of_blight.png";
+        public override string ItemIconPath => "ROTA2.Icons.orb_of_blight.png";
         public override void Hooks()
         {
             On.RoR2.HealthComponent.TakeDamage += OnHit;

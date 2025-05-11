@@ -14,7 +14,7 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"Reduces {Utility("skill cooldowns")} by {Utility($"{SkillCooldownReductionBase}%")} {Stack($"(+{SkillCooldownReductionPerStack}% per stack)")}, and increases {Damage("damage")} by {Damage($"{DamageBase}%")} {Stack($"(+{DamagePerStack}% per stack)")} and {Healing("maximum health")} by {Healing($"{MaximumHealthBase}")} {Stack($"(+{MaximumHealthPerStack} per stack)")}.";
         public override string ItemTokenLore => "A small token imbued with the fortune of the fae in recognition of an intriguing display of mortal kindness.";
         public override ItemTier Tier => ItemTier.Tier1;
-        public override string ItemIconPath => "RiskOfTheAncients2.Icons.fairys_trinket.png";
+        public override string ItemIconPath => "ROTA2.Icons.fairys_trinket.png";
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += AddCooldownReduction;

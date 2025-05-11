@@ -16,7 +16,7 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"Taking damage to below {Health($"{HealthThreshold}% health")} {Utility("consumes")} this item, {Utility("resetting all skill cooldowns")} and increasing {Damage("damage")} by {Damage($"{DamageBonus}%")} for {Damage($"{DamageDuration} seconds")}.";
         public override string ItemTokenLore => "The bittersweet flavors of Jidi Isle are irresistible to amphibians.";
         public override ItemTier Tier => ItemTier.Tier1;
-        public override string ItemIconPath => "RiskOfTheAncients2.Icons.enchanted_mango.png";
+        public override string ItemIconPath => "ROTA2.Icons.enchanted_mango.png";
         public override void Hooks()
         {
             On.RoR2.HealthComponent.UpdateLastHitTime += OnHit;
@@ -34,7 +34,7 @@ namespace ROTA2.Items
         public float DamageDuration;
         public void CreateConfig(ConfigFile configuration)
         {
-            HealthThreshold = configuration.Bind("Item: " + ItemName, "Health Threshold", 50.0f, "At what percent of health should this item activate?").Value;
+            HealthThreshold = configuration.Bind("Item: " + ItemName, "Health Threshold", 40.0f, "At what percent of health should this item activate?").Value;
             DamageBonus     = configuration.Bind("Item: " + ItemName, "Damage Bonus",     50.0f, "How much bonus damage should be provided by activation?").Value;
             DamageDuration  = configuration.Bind("Item: " + ItemName, "Damage Duration",  5.0f,  "How long should the bonus damage last?").Value;
         }
@@ -66,6 +66,8 @@ namespace ROTA2.Items
                 }
 
                 self.body.inventory.RemoveItem(ItemDef);
+                self.body.inventory.GiveItem(ConsumedMango.Instance.ItemDef);
+                CharacterMasterNotificationQueue.PushItemTransformNotification(self.body.master, EnchantedMango.Instance.ItemDef.itemIndex, ConsumedMango.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
             }
         }
     }
@@ -80,7 +82,7 @@ namespace ROTA2.Items
         public override string ItemTokenLore => "I miss it already...";
         public override ItemTier Tier => ItemTier.NoTier;
         public override ItemTag[] ItemTags => [ItemTag.WorldUnique];
-        public override string ItemIconPath => "RiskOfTheAncients2.Icons.consumed_mango.png";
+        public override string ItemIconPath => "ROTA2.Icons.consumed_mango.png";
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += AddDamage;

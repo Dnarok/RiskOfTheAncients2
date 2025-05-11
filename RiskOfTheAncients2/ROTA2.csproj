@@ -9,6 +9,7 @@
 	<ItemGroup>
 	  <None Remove="Icons\aeon_disk.png" />
 	  <None Remove="Icons\aeon_disk_cooldown.png" />
+	  <None Remove="Icons\assault_cuirass.png" />
 	  <None Remove="Icons\black_king_bar.png" />
 	  <None Remove="Icons\bottle.png" />
 	  <None Remove="Icons\bottle_arcane.png" />
@@ -21,6 +22,7 @@
 	  <None Remove="Icons\bottle_water.png" />
 	  <None Remove="Icons\bottle_wisdom.png" />
 	  <None Remove="Icons\consumed_mango.png" />
+	  <None Remove="Icons\daedalus.png" />
 	  <None Remove="Icons\dragon_scale.png" />
 	  <None Remove="Icons\enchanted_mango.png" />
 	  <None Remove="Icons\fairys_trinket.png" />
@@ -35,6 +37,7 @@
 	  <None Remove="Icons\orb_of_frost.png" />
 	  <None Remove="Icons\orb_of_venom.png" />
 	  <None Remove="Icons\quelling_blade.png" />
+	  <None Remove="Icons\quicksilver_amulet.png" />
 	  <None Remove="Icons\radiance.png" />
 	  <None Remove="Icons\skull_basher.png" />
 	  <None Remove="Icons\skull_basher_cooldown.png" />
@@ -72,6 +75,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Icons\aeon_disk.png" />
     <EmbeddedResource Include="Icons\aeon_disk_cooldown.png" />
+    <EmbeddedResource Include="Icons\assault_cuirass.png" />
     <EmbeddedResource Include="Icons\black_king_bar.png" />
     <EmbeddedResource Include="Icons\boots_of_speed.png" />
     <EmbeddedResource Include="Icons\bottle.png" />
@@ -86,6 +90,7 @@
     <EmbeddedResource Include="Icons\bottle_water.png" />
     <EmbeddedResource Include="Icons\bottle_wisdom.png" />
     <EmbeddedResource Include="Icons\consumed_mango.png" />
+    <EmbeddedResource Include="Icons\daedalus.png" />
     <EmbeddedResource Include="Icons\dragon_scale.png" />
     <EmbeddedResource Include="Icons\enchanted_mango.png" />
     <EmbeddedResource Include="Icons\fairys_trinket.png" />
@@ -102,6 +107,7 @@
     <EmbeddedResource Include="Icons\orb_of_frost.png" />
     <EmbeddedResource Include="Icons\orb_of_venom.png" />
     <EmbeddedResource Include="Icons\quelling_blade.png" />
+    <EmbeddedResource Include="Icons\quicksilver_amulet.png" />
     <EmbeddedResource Include="Icons\radiance.png" />
     <EmbeddedResource Include="Icons\sange.png" />
     <EmbeddedResource Include="Icons\skull_basher.png" />

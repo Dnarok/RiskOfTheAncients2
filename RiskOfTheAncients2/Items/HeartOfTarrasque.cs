@@ -14,7 +14,7 @@ namespace ROTA2.Items
         public override string ItemTokenLore => "Preserved heart of an extinct monster, it bolsters the bearer's fortitude.";
         public override ItemTier Tier => ItemTier.Tier3;
         public override string ItemModelPath => "RoR2/Base/Mystery/PickupMystery.prefab";
-        public override string ItemIconPath => "RiskOfTheAncients2.Icons.heart_of_tarrasque.png";
+        public override string ItemIconPath => "ROTA2.Icons.heart_of_tarrasque.png";
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += AddMaximumHealth;

@@ -16,7 +16,7 @@ namespace ROTA2.Items
         public override ItemTier Tier => ItemTier.Tier2;
         public override ItemTag[] ItemTags => [ItemTag.WorldUnique];
         public override string ItemModelPath => "RoR2/Base/Mystery/PickupMystery.prefab";
-        public override string ItemIconPath => "RiskOfTheAncients2.Icons.kaya_and_sange.png";
+        public override string ItemIconPath => "ROTA2.Icons.kaya_and_sange.png";
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += AddCooldownReduction;

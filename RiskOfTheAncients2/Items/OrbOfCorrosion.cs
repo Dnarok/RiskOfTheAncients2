@@ -23,7 +23,7 @@ Effects stack with component items.";
         public override ItemTier Tier => ItemTier.Tier2;
         public override ItemTag[] ItemTags => [ItemTag.WorldUnique];
         public override string ItemModelPath => "RoR2/Base/Mystery/PickupMystery.prefab";
-        public override string ItemIconPath => "RiskOfTheAncients2.Icons.orb_of_corrosion.png";
+        public override string ItemIconPath => "ROTA2.Icons.orb_of_corrosion.png";
         public override void Hooks()
         {
             On.RoR2.HealthComponent.TakeDamage += OnHit;

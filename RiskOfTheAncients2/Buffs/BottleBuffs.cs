@@ -12,7 +12,7 @@ namespace ROTA2.Buffs
         public override bool BuffStacks => false;
         public override bool IsDebuff => false;
         public override Color BuffColor => Color.white;
-        public override string BuffIconPath => "RiskOfTheAncients2.Icons.bottle_amplify_damage.png";
+        public override string BuffIconPath => "ROTA2.Icons.bottle_amplify_damage.png";
         public override EliteDef BuffEliteDef => null;
         public override bool IsCooldown => false;
         public override bool IsHidden => false;
@@ -38,7 +38,7 @@ namespace ROTA2.Buffs
         public override bool BuffStacks => false;
         public override bool IsDebuff => false;
         public override Color BuffColor => Color.white;
-        public override string BuffIconPath => "RiskOfTheAncients2.Icons.bottle_arcane.png";
+        public override string BuffIconPath => "ROTA2.Icons.bottle_arcane.png";
         public override EliteDef BuffEliteDef => null;
         public override bool IsCooldown => false;
         public override bool IsHidden => false;
@@ -64,7 +64,7 @@ namespace ROTA2.Buffs
         public override bool BuffStacks => false;
         public override bool IsDebuff => false;
         public override Color BuffColor => Color.white;
-        public override string BuffIconPath => "RiskOfTheAncients2.Icons.bottle_haste.png";
+        public override string BuffIconPath => "ROTA2.Icons.bottle_haste.png";
         public override EliteDef BuffEliteDef => null;
         public override bool IsCooldown => false;
         public override bool IsHidden => false;
@@ -90,7 +90,7 @@ namespace ROTA2.Buffs
         public override bool BuffStacks => false;
         public override bool IsDebuff => false;
         public override Color BuffColor => Color.white;
-        public override string BuffIconPath => "RiskOfTheAncients2.Icons.bottle_regeneration.png";
+        public override string BuffIconPath => "ROTA2.Icons.bottle_regeneration.png";
         public override EliteDef BuffEliteDef => null;
         public override bool IsCooldown => false;
         public override bool IsHidden => false;

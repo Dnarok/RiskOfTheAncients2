@@ -14,7 +14,7 @@ namespace ROTA2.Items
         public override string ItemTokenLore => "Be strong, fortunes can change on a dime.";
         public override ItemTier Tier => ItemTier.Tier1;
         public override string ItemModelPath => "RoR2/Base/Mystery/PickupMystery.prefab";
-        public override string ItemIconPath => "RiskOfTheAncients2.Icons.spark_of_courage.png";
+        public override string ItemIconPath => "ROTA2.Icons.spark_of_courage.png";
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += AddDamage;

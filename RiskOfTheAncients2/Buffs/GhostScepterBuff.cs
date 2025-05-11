@@ -10,7 +10,7 @@ namespace ROTA2.Buffs
         public override bool BuffStacks => false;
         public override bool IsDebuff => false;
         public override Color BuffColor => Color.white;
-        public override string BuffIconPath => "RiskOfTheAncients2.Icons.ghost_scepter.png";
+        public override string BuffIconPath => "ROTA2.Icons.ghost_scepter.png";
         public override EliteDef BuffEliteDef => null;
         public override bool IsCooldown => false;
         public override bool IsHidden => false;
@@ -35,7 +35,7 @@ namespace ROTA2.Buffs
         {
             if (self && self.skillLocator && self.inventory && buffDef == BuffDef)
             {
-                SkillSlot[] slots = [SkillSlot.Primary, SkillSlot.Secondary, SkillSlot.Utility, SkillSlot.Special];
+                SkillSlot[] slots = [SkillSlot.Primary];
                 foreach (SkillSlot slot in slots)
                 {
                     GenericSkill skill = self.skillLocator.GetSkill(slot);
@@ -55,7 +55,7 @@ namespace ROTA2.Buffs
         {
             if (self && self.skillLocator && self.inventory && buffDef == BuffDef)
             {
-                SkillSlot[] slots = [SkillSlot.Primary, SkillSlot.Secondary, SkillSlot.Utility, SkillSlot.Special];
+                SkillSlot[] slots = [SkillSlot.Primary];
                 foreach (SkillSlot slot in slots)
                 {
                     GenericSkill skill = self.skillLocator.GetSkill(slot);

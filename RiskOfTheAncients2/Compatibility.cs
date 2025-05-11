@@ -329,6 +329,58 @@ namespace ROTA2
             };
             ItemDefinitions.RegisterItemStatsDef(item, SkullBasher.Instance.ItemDef.itemIndex);
 
+            // Daedalus
+            item = new();
+            item.descriptions.Add("Crit Chance: ");
+            item.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+            item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+            item.descriptions.Add("Crit Damage: ");
+            item.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+            item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+            item.calculateValuesNew = (luck, count, proc) =>
+            {
+                List<float> values =
+                [
+                    Utils.CalculateChanceWithLuck(Daedalus.Instance.CriticalChance / 100.0f, luck),
+                    Daedalus.Instance.CriticalDamageBase / 100.0f + Daedalus.Instance.CriticalDamagePerStack / 100.0f * (count - 1)
+                ];
+                return values;
+            };
+            ItemDefinitions.RegisterItemStatsDef(item, Daedalus.Instance.ItemDef.itemIndex);
+
+            // QuicksilverAmulet
+            item = new();
+            item.descriptions.Add("Max Attack Speed: ");
+            item.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+            item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+            item.descriptions.Add("Max Movement Speed: ");
+            item.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+            item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+            item.calculateValues = (master, count) =>
+            {
+                int cooldowns = 0;
+                var skills = master.GetBody()?.skillLocator?.allSkills;
+                if (skills != null)
+                {
+                    foreach (var skill in skills)
+                    {
+                        // only count skills that can actually have a cooldown.
+                        // e.g. Commando's primary *wouldn't* count.
+                        if (skill && skill.baseRechargeInterval > 0.0f)
+                        {
+                            ++cooldowns;
+                        }
+                    }
+                }
+                List<float> values =
+                [
+                    (QuicksilverAmulet.Instance.AttackSpeedBase / 100.0f + QuicksilverAmulet.Instance.AttackSpeedPerStack / 100.0f * (count - 1)) * cooldowns,
+                    (QuicksilverAmulet.Instance.MovementSpeedBase / 100.0f + QuicksilverAmulet.Instance.MovementSpeedPerStack / 100.0f * (count - 1)) * cooldowns
+                ];
+                return values;
+            };
+            ItemDefinitions.RegisterItemStatsDef(item, QuicksilverAmulet.Instance.ItemDef.itemIndex);
+
             // Heart of Tarrasque
             item = new();
             item.descriptions.Add("Bonus Health: ");
@@ -385,6 +437,25 @@ namespace ROTA2
                 return values;
             };
             ItemDefinitions.RegisterItemStatsDef(item, AeonDisk.Instance.ItemDef.itemIndex);
+
+            // Assault Cuirass
+            item = new();
+            item.descriptions.Add("Attack Speed: ");
+            item.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+            item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+            item.descriptions.Add("Armor: ");
+            item.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+            item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+            item.calculateValuesNew = (luck, count, proc) =>
+            {
+                List<float> values =
+                [
+                    AssaultCuirass.Instance.AttackSpeedBase / 100.0f + AssaultCuirass.Instance.AttackSpeedPerStack / 100.0f * (count - 1),
+                    AssaultCuirass.Instance.ArmorBase + AssaultCuirass.Instance.ArmorPerStack * (count - 1)
+                ];
+                return values;
+            };
+            ItemDefinitions.RegisterItemStatsDef(item, AssaultCuirass.Instance.ItemDef.itemIndex);
 
             // Nemesis Curse
             item = new();

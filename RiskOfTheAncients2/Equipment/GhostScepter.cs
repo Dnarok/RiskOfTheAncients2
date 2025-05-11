@@ -9,9 +9,9 @@ namespace ROTA2.Equipment
         public override string EquipmentName => "Ghost Scepter";
         public override string EquipmentTokenName => "GHOST_SCEPTER";
         public override string EquipmentTokenPickup => "Become immune to damage and unable to use your skills for a short time.";
-        public override string EquipmentTokenDesc => $"Become {Utility("immune")} to {Damage("all incoming damage")} for {Utility($"{EtherealDuration} seconds")}. During this time, you {Health("cannot use your skills")}.";
+        public override string EquipmentTokenDesc => $"Become {Utility("immune")} to {Damage("all incoming damage")} for {Utility($"{EtherealDuration} seconds")}. During this time, you {Health("cannot use your Primary skill")}.";
         public override string EquipmentTokenLore => "Imbues the wielder with a ghostly presence, allowing them to evade physical damage.";
-        public override string EquipmentIconPath => "RiskOfTheAncients2.Icons.ghost_scepter.png";
+        public override string EquipmentIconPath => "ROTA2.Icons.ghost_scepter.png";
         public override float EquipmentCooldown => GhostScepterCooldown;
         public override void Init(ConfigFile config)
         {

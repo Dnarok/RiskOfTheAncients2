@@ -29,7 +29,7 @@ $@"Drink to gain one of the following rune effects:
 Runes will be removed from the pool until all effects have been seen.";
         public override string EquipmentTokenLore => "An old bottle that survived the ages, the contents placed inside become enchanted.";
         public override float EquipmentCooldown => BottleCooldown;
-        public override string EquipmentIconPath => "RiskOfTheAncients2.Icons.bottle.png";
+        public override string EquipmentIconPath => "ROTA2.Icons.bottle.png";
         public override void Hooks()
         {
 

@@ -12,7 +12,7 @@ namespace ROTA2.Equipment
         public override string EquipmentTokenPickup => "Become immune to negative effects and reduce incoming damage for a short time.";
         public override string EquipmentTokenDesc => $"Become {Utility("immune")} to all negative effects and reduce all {Damage("incoming damage")} by {Damage($"{DamageReduction}%")} for {Utility($"{AvatarDuration} seconds")}.";
         public override string EquipmentTokenLore => "A powerful staff imbued with the strength of giants.";
-        public override string EquipmentIconPath => "RiskOfTheAncients2.Icons.black_king_bar.png";
+        public override string EquipmentIconPath => "ROTA2.Icons.black_king_bar.png";
         public override float EquipmentCooldown => BlackKingBarCooldown;
         public override void Init(ConfigFile config)
         {

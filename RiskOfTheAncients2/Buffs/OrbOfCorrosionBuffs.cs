@@ -13,7 +13,7 @@ namespace ROTA2.Buffs
         public override bool BuffStacks => true;
         public override bool IsDebuff => true;
         public override Color BuffColor => Color.red;
-        public override string BuffIconPath => "RiskOfTheAncients2.Icons.orb_of_corrosion.png";
+        public override string BuffIconPath => "ROTA2.Icons.orb_of_corrosion.png";
         public override EliteDef BuffEliteDef => null;
         public override bool IsCooldown => false;
         public override bool IsHidden => false;
@@ -40,7 +40,7 @@ namespace ROTA2.Buffs
         public override bool BuffStacks => true;
         public override bool IsDebuff => true;
         public override Color BuffColor => Color.blue;
-        public override string BuffIconPath => "RiskOfTheAncients2.Icons.orb_of_corrosion.png";
+        public override string BuffIconPath => "ROTA2.Icons.orb_of_corrosion.png";
         public override EliteDef BuffEliteDef => null;
         public override bool IsCooldown => false;
         public override bool IsHidden => false;
@@ -76,7 +76,7 @@ namespace ROTA2.Buffs
         public override bool BuffStacks => false;
         public override bool IsDebuff => true;
         public override Color BuffColor => Color.green;
-        public override string BuffIconPath => "RiskOfTheAncients2.Icons.orb_of_corrosion.png";
+        public override string BuffIconPath => "ROTA2.Icons.orb_of_corrosion.png";
         public override EliteDef BuffEliteDef => null;
         public override bool IsCooldown => false;
         public override bool IsHidden => false;

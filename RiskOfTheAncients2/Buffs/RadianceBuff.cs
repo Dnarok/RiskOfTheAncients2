@@ -13,7 +13,7 @@ namespace ROTA2.Buffs
         public override bool BuffStacks => false;
         public override bool IsDebuff => true;
         public override Color BuffColor => Color.white;
-        public override string BuffIconPath => "RiskOfTheAncients2.Icons.radiance.png";
+        public override string BuffIconPath => "ROTA2.Icons.radiance.png";
         public override EliteDef BuffEliteDef => null;
         public override bool IsCooldown => false;
         public override bool IsHidden => false;
