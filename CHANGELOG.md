@@ -1,8 +1,8 @@
 ## 1.03
-- Added Daedalus (green), Quicksilver Amulet (green), Assault Cuirass (red).
+- Added Daedalus (green), Quicksilver Amulet (green), and Assault Cuirass (red).
 - Ghost Scepter: Now only disables the Primary skill while active.
 - Enchanted Mango: Health Threshold reduced from `50%` -> `40%`.
-- Enchanted Mango: Now transforms into a `Consumed Mango` on use, that provides `2.5%` damage per stack.
+- Enchanted Mango: Now transforms into a `Consumed Mango` on use that provides `2.5%` damage per stack.
 
 ## 1.0.2
 - Added Aeon Disk (red), Dragon Scale (white), Lance of Pursuit (white), and Nemesis Curse (lunar).
