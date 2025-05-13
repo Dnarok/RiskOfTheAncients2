@@ -1,3 +1,13 @@
+## 1.0.5
+- Added Iron Branch (white).
+- Nemesis Curse: Now only applies the curse from damage with a proc coefficient.
+- Nemesis Curse: Recharge duration from `5` -> `7.5`.
+- Nemesis Curse: Increased permanent damage stacks coefficient base/per stack from `40`/`40` -> `80`/`80`.
+    - The hyperbolic nature of the reduction makes this less punishing than it seems.
+    - All of these are just to make it more of a side-grade to Shaped Glass.
+- Radiance: Fixed the Ignite having a proc coefficient (I think?!)
+- Ghost Scepter: Fixed eating OnBuffFirstStackGained and OnBuffFinalStackLost, thanks to Snoresville for the point-out.
+
 ## 1.0.4
 - Fixed newest (and any future ones if I hadn't been shown the issue) DLL being skipped, thanks to Farlier on Discord for the heads-up!
 - Added Moon Shard (equipment) and Infused Raindrops (white).

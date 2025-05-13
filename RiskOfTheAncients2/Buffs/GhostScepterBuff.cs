@@ -50,6 +50,8 @@ namespace ROTA2.Buffs
                     self.inventory.GiveItem(RoR2Content.Items.Ghost);
                 }
             }
+
+            orig(self, buffDef);
         }
         private void OnRemove(On.RoR2.CharacterBody.orig_OnBuffFinalStackLost orig, CharacterBody self, BuffDef buffDef)
         {
@@ -70,6 +72,8 @@ namespace ROTA2.Buffs
                     self.inventory.RemoveItem(RoR2Content.Items.Ghost);
                 }
             }
+
+            orig(self, buffDef);
         }
     }
 }

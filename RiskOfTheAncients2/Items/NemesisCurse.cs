@@ -47,21 +47,21 @@ namespace ROTA2.Items
             InProcChance                       = configuration.Bind("Item: " + ItemName, "Self Proc Chance",                       100.0f, "").Value;
             DamageBase                         = configuration.Bind("Item: " + ItemName, "Damage Increase Base",                   100.0f, "Exponential").Value;
             DamagePerStack                     = configuration.Bind("Item: " + ItemName, "Damage Increase Per Stack",              100.0f, "Exponential").Value;
-            PermanentDamageCoefficientBase     = configuration.Bind("Item: " + ItemName, "Permanent Damage Coefficient Base",      40.0f, "Permanent damage curse stacks formula: ([this number] + [per stack number]) * Damage / Max Health. Maximum health is reduced by a factor of 1 + 0.01 * N, where N is the number of stacks total.").Value;
-            PermanentDamageCoefficientPerStack = configuration.Bind("Item: " + ItemName, "Permanent Damage Coefficient Per Stack", 40.0f, "").Value;
+            PermanentDamageCoefficientBase     = configuration.Bind("Item: " + ItemName, "Permanent Damage Coefficient Base",      80.0f, "Permanent damage curse stacks formula: ([this number] + [per stack number]) * Damage / Max Health. Maximum health is reduced by a factor of 1 + 0.01 * N, where N is the number of stacks total.").Value;
+            PermanentDamageCoefficientPerStack = configuration.Bind("Item: " + ItemName, "Permanent Damage Coefficient Per Stack", 80.0f, "").Value;
             CurseDuration                      = configuration.Bind("Item: " + ItemName, "Curse Duration", 5.0f, "").Value;
-            CurseCooldown                      = configuration.Bind("Item: " + ItemName, "Curse Cooldown", 5.0f, "").Value;
+            CurseCooldown                      = configuration.Bind("Item: " + ItemName, "Curse Cooldown", 7.5f, "").Value;
         }
 
         private void OnTakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, RoR2.HealthComponent self, RoR2.DamageInfo info)
         {
-            if (self && info.attacker)
+            if (self && info.attacker && info.procCoefficient > 0.0f)
             {
                 CharacterBody attacker_body = info.attacker.GetComponent<CharacterBody>();
                 if (self.body && !NemesisCurseCooldown.Instance.HasThisBuff(attacker_body))
                 {
                     int count = GetCount(attacker_body);
-                    if (count > 0 && Util.CheckRoll(OutProcChance, attacker_body.master))
+                    if (count > 0 && Util.CheckRoll(OutProcChance * info.procCoefficient, attacker_body.master))
                     {
                         NemesisCurseBuff.Instance.ApplyTo(new BuffBase.ApplyParameters
                         {

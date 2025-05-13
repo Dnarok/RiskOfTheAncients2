@@ -31,6 +31,7 @@
 	  <None Remove="Icons\ghost_scepter.png" />
 	  <None Remove="Icons\healing_salve.png" />
 	  <None Remove="Icons\infused_raindrops.png" />
+	  <None Remove="Icons\iron_branch.png" />
 	  <None Remove="Icons\javelin.png" />
 	  <None Remove="Icons\lance_of_pursuit.png" />
 	  <None Remove="Icons\moon_shard.png" />
@@ -104,6 +105,7 @@
     <EmbeddedResource Include="Icons\healing_salve.png" />
     <EmbeddedResource Include="Icons\heart_of_tarrasque.png" />
     <EmbeddedResource Include="Icons\infused_raindrops.png" />
+    <EmbeddedResource Include="Icons\iron_branch.png" />
     <EmbeddedResource Include="Icons\javelin.png" />
     <EmbeddedResource Include="Icons\kaya.png" />
     <EmbeddedResource Include="Icons\lance_of_pursuit.png" />

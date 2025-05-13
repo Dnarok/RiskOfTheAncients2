@@ -114,7 +114,8 @@ namespace ROTA2.Items
                                         attacker = body.gameObject,
                                         damage = body.damage * (Radiance.Instance.IgniteBase / 100.0f + Radiance.Instance.IgnitePerStack / 100.0f * (count - 1)),
                                         position = enemy.transform.position,
-                                        damageType = DamageType.AOE
+                                        damageType = DamageType.AOE,
+                                        procCoefficient = 0.0f
                                     };
                                     enemy.healthComponent.TakeDamage(ignite);
                                 }

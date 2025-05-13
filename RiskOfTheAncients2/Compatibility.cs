@@ -303,6 +303,21 @@ namespace ROTA2
             };
             ItemDefinitions.RegisterItemStatsDef(item, DehydratedRaindrops.Instance.ItemDef.itemIndex);
 
+            // Iron Branch
+            item = new();
+            item.descriptions.Add("Stats Increase: ");
+            item.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+            item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+            item.calculateValuesNew = (luck, count, proc) =>
+            {
+                List<float> values =
+                [
+                    IronBranch.Instance.StatIncreaseBase / 100.0f + IronBranch.Instance.StatIncreasePerStack / 100.0f * (count - 1)
+                ];
+                return values;
+            };
+            ItemDefinitions.RegisterItemStatsDef(item, IronBranch.Instance.ItemDef.itemIndex);
+
             // Kaya
             item = new();
             item.descriptions.Add("Cooldown Reduction: ");
