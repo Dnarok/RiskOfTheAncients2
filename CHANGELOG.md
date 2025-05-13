@@ -1,4 +1,9 @@
-## 1.03
+## 1.0.4
+- Fixed newest (and any future ones if I hadn't been shown the issue) DLL being skipped, thanks to Farlier on Discord for the heads-up!
+- Added Moon Shard (equipment) and Infused Raindrops (white).
+- Redid all of the item icons in a way that is more a.) consistent, and b.) closer to vanilla. Some touch-ups will still need to be done, a few are a bit blocky from having to size up Dota 2 item icons from 88x64...
+
+## 1.0.3
 - Added Daedalus (green), Quicksilver Amulet (green), and Assault Cuirass (red).
 - Ghost Scepter: Now only disables the Primary skill while active.
 - Enchanted Mango: Health Threshold reduced from `50%` -> `40%`.

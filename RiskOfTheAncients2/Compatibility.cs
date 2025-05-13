@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using LookingGlass.ItemStatsNameSpace;
+using ROTA2.Equipment;
 using ROTA2.Items;
 using UnityEngine;
 
@@ -72,6 +73,21 @@ namespace ROTA2
                 return values;
             };
             ItemDefinitions.RegisterItemStatsDef(item, EnchantedMango.Instance.ItemDef.itemIndex);
+
+            // Consumed Mango
+            item = new();
+            item.descriptions.Add("Damage: ");
+            item.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+            item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+            item.calculateValuesNew = (luck, count, proc) =>
+            {
+                List<float> values =
+                [
+                    ConsumedMango.Instance.DamageBase / 100.0f + ConsumedMango.Instance.DamagePerStack / 100.0f * (count - 1)
+                ];
+                return values;
+            };
+            ItemDefinitions.RegisterItemStatsDef(item, ConsumedMango.Instance.ItemDef.itemIndex);
 
             // Fairy's Trinket
             item = new();
@@ -250,6 +266,42 @@ namespace ROTA2
                 return values;
             };
             ItemDefinitions.RegisterItemStatsDef(item, LanceOfPursuit.Instance.ItemDef.itemIndex);
+
+            // Infused Raindrops
+            item = new();
+            item.descriptions.Add("Blocks Left: ");
+            item.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+            item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+            item.calculateValues = (master, count) =>
+            {
+                int total = 0;
+                var behavior = master.GetBody().GetComponent<InfusedRaindrops.InfusedRaindropsBehavior>();
+                if (behavior)
+                {
+                    total = behavior.remaining_charges;
+                }
+                List<float> values =
+                [
+                    total
+                ];
+                return values;
+            };
+            ItemDefinitions.RegisterItemStatsDef(item, InfusedRaindrops.Instance.ItemDef.itemIndex);
+
+            // Dehydrated Raindrops
+            item = new();
+            item.descriptions.Add("Cooldown Reduction: ");
+            item.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+            item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+            item.calculateValuesNew = (luck, count, proc) =>
+            {
+                List<float> values =
+                [
+                    Utils.GetExponentialStacking(DehydratedRaindrops.Instance.SkillCooldownReductionBase / 100.0f, DehydratedRaindrops.Instance.SkillCooldownReductionPerStack / 100.0f, count)
+                ];
+                return values;
+            };
+            ItemDefinitions.RegisterItemStatsDef(item, DehydratedRaindrops.Instance.ItemDef.itemIndex);
 
             // Kaya
             item = new();
@@ -615,6 +667,21 @@ namespace ROTA2
                 return values;
             };
             ItemDefinitions.RegisterItemStatsDef(item, Trident.Instance.ItemDef.itemIndex);
+
+            // Consumed Moon Shard
+            item = new();
+            item.descriptions.Add("Attack Speed: ");
+            item.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+            item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+            item.calculateValuesNew = (luck, count, proc) =>
+            {
+                List<float> values =
+                [
+                    ConsumedMoonShard.Instance.AttackSpeedBase / 100.0f + ConsumedMoonShard.Instance.AttackSpeedPerStack / 100.0f * (count - 1)
+                ];
+                return values;
+            };
+            ItemDefinitions.RegisterItemStatsDef(item, ConsumedMoonShard.Instance.ItemDef.itemIndex);
         }
     }
 }

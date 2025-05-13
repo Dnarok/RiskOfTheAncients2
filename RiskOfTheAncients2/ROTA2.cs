@@ -29,7 +29,7 @@ namespace ROTA2
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Dnarok";
         public const string PluginName = "RiskOfTheAncients2";
-        public const string PluginVersion = "1.0.3";
+        public const string PluginVersion = "1.0.4";
 
         public List<ItemBase> Items = [];
         public static Dictionary<ItemBase, bool> ItemsEnabled = [];
@@ -50,52 +50,47 @@ namespace ROTA2
             foreach (string resource in resources)
             {
                 Logger.LogInfo(resource);
-            } 
+            }
 
-            var ItemTypes = Assembly.GetExecutingAssembly().GetTypes().Where(
-                type => !type.IsAbstract
-                && (type.IsSubclassOf(typeof(ItemBase))
-                ||  type.IsSubclassOf(typeof(EquipmentBase))
-                ||  type.IsSubclassOf(typeof(BuffBase))));
+            var ItemTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(ItemBase)));
             foreach (var type in ItemTypes)
             {
-                if (type.IsSubclassOf(typeof(ItemBase)))
+                ItemBase item = (ItemBase)System.Activator.CreateInstance(type);
+                ItemsEnabled.Add(item, Config.Bind("Item: " + item.ConfigItemName, "Enabled", true, "Should this item be available?").Value);
+                if (ItemsEnabled[item])
                 {
-                    ItemBase item = (ItemBase)System.Activator.CreateInstance(type);
-                    ItemsEnabled.Add(item, Config.Bind("Item: " + item.ConfigItemName, "Enabled", true, "Should this item be available?").Value);
-                    if (ItemsEnabled[item])
-                    {
-                        Items.Add(item);
-                        item.Init(Config);
-                        Logger.LogInfo($"Item: {item.ItemName} initialized!");
-                    }
-                    else
-                    {
-                        Logger.LogInfo($"Item: {item.ItemName} NOT initialized!");
-                    }
+                    Items.Add(item);
+                    item.Init(Config);
+                    Logger.LogInfo($"Item: {item.ItemName} initialized!");
                 }
-                else if (type.IsSubclassOf(typeof(EquipmentBase)))
+                else
                 {
-                    EquipmentBase equipment = (EquipmentBase)System.Activator.CreateInstance(type);
-                    EquipmentEnabled.Add(equipment, Config.Bind("Item: " + equipment.EquipmentName, "Enabled", true, "Should this item be available?").Value);
-                    if (EquipmentEnabled[equipment])
-                    {
-                        Equipment.Add(equipment);
-                        equipment.Init(Config);
-                        Logger.LogInfo($"Equipment: {equipment.EquipmentName} initialized!");
-                    }
-                    else
-                    {
-                        Logger.LogInfo($"Equipment: {equipment.EquipmentName} NOT initialized!");
-                    }
+                    Logger.LogInfo($"Item: {item.ItemName} NOT initialized!");
                 }
-                else if (type.IsSubclassOf(typeof(BuffBase)))
+            }
+            var EquipmentTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(EquipmentBase)));
+            foreach (var type in EquipmentTypes)
+            {
+                EquipmentBase equipment = (EquipmentBase)System.Activator.CreateInstance(type);
+                EquipmentEnabled.Add(equipment, Config.Bind("Item: " + equipment.EquipmentName, "Enabled", true, "Should this item be available?").Value);
+                if (EquipmentEnabled[equipment])
                 {
-                    BuffBase buff = (BuffBase)System.Activator.CreateInstance(type);
-                    Buffs.Add(buff);
-                    buff.Init();
-                    Logger.LogInfo($"Buff: {buff.BuffName} initialized!");
+                    Equipment.Add(equipment);
+                    equipment.Init(Config);
+                    Logger.LogInfo($"Equipment: {equipment.EquipmentName} initialized!");
                 }
+                else
+                {
+                    Logger.LogInfo($"Equipment: {equipment.EquipmentName} NOT initialized!");
+                }
+            }
+            var BuffTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(BuffBase)));
+            foreach (var type in BuffTypes)
+            {
+                BuffBase buff = (BuffBase)System.Activator.CreateInstance(type);
+                Buffs.Add(buff);
+                buff.Init();
+                Logger.LogInfo($"Buff: {buff.BuffName} initialized!");
             }
 
             if (disabledSkill == null)
