@@ -39,7 +39,7 @@ namespace ROTA2.Equipment
         public abstract string EquipmentTokenDesc { get; }
         public abstract string EquipmentTokenLore { get; }
         public abstract float EquipmentCooldown { get; }
-        public virtual string EquipmentModelPath { get; } = "RoR2/Base/Mystery/PickupMystery.prefab";
+        public virtual string EquipmentModelPath { get; } = "item_box.prefab";
         public virtual string EquipmentIconPath { get; } = "";
         public abstract void Init(ConfigFile config);
         public virtual void Hooks()
@@ -64,7 +64,13 @@ namespace ROTA2.Equipment
             EquipmentDef.pickupToken = "EQUIPMENT_" + EquipmentTokenName + "_PICKUP";
             EquipmentDef.descriptionToken = "EQUIPMENT_" + EquipmentTokenName + "_DESCRIPTION";
             EquipmentDef.loreToken = "EQUIPMENT_" + EquipmentTokenName + "_LORE";
-            EquipmentDef.pickupModelPrefab = Addressables.LoadAssetAsync<GameObject>(EquipmentModelPath).WaitForCompletion();
+            GameObject prefab = Plugin.bundle.LoadAsset<GameObject>(EquipmentModelPath);
+            ModelPanelParameters logbook = prefab.AddComponent<ModelPanelParameters>();
+            logbook.minDistance = 4.0f;
+            logbook.maxDistance = 10.0f;
+            logbook.focusPointTransform = prefab.transform.GetChild(0);
+            logbook.cameraPositionTransform = prefab.transform.GetChild(0);
+            EquipmentDef.pickupModelPrefab = prefab;
             EquipmentDef.appearsInMultiPlayer = true;
             EquipmentDef.appearsInSinglePlayer = true;
             EquipmentDef.canDrop = true;

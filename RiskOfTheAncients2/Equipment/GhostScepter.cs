@@ -38,6 +38,8 @@ namespace ROTA2.Equipment
                     victim = body,
                     duration = EtherealDuration
                 });
+
+                Util.PlaySound("GhostScepter", body.gameObject);
             }
 
             return true;

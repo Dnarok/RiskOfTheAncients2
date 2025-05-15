@@ -47,6 +47,8 @@
 	  <None Remove="Icons\skull_basher.png" />
 	  <None Remove="Icons\skull_basher_cooldown.png" />
 	  <None Remove="Icons\spark_of_courage.png" />
+	  <None Remove="models" />
+	  <None Remove="models.manifest" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -65,6 +67,7 @@
 		<PackageReference Include="R2API.Language" Version="1.0.*" />
 		<PackageReference Include="R2API.ProcType" Version="1.0.2" />
 		<PackageReference Include="R2API.RecalculateStats" Version="1.5.0" />
+		<PackageReference Include="R2API.Sound" Version="1.0.3" />
 
 		<PackageReference Include="UnityEngine.Modules" Version="6000.1.1" IncludeAssets="compile" />
     <PackageReference Include="RiskOfRain2.GameLibs" Version="1.3.7.0-r.0" />
@@ -128,6 +131,8 @@
     <EmbeddedResource Include="Icons\sange_and_yasha.png" />
     <EmbeddedResource Include="Icons\yasha_and_kaya.png" />
     <EmbeddedResource Include="Icons\trident.png" />
+    <EmbeddedResource Include="models" />
+    <EmbeddedResource Include="models.manifest" />
   </ItemGroup>
 
   <ItemGroup>

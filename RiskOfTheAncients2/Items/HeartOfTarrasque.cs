@@ -13,7 +13,6 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"Increases {Healing("base health regeneration")} by {Healing($"{MaximumHealthRegenerationPercentage}% of your maximum health")} per second, and increases {Healing("maximum health")} by {Healing($"{MaximumHealthBase}")} {Stack($"(+{MaximumHealthPerStack} per stack)")}.";
         public override string ItemTokenLore => "Preserved heart of an extinct monster, it bolsters the bearer's fortitude.";
         public override ItemTier Tier => ItemTier.Tier3;
-        public override string ItemModelPath => "RoR2/Base/Mystery/PickupMystery.prefab";
         public override string ItemIconPath => "ROTA2.Icons.heart_of_tarrasque.png";
         public override void Hooks()
         {

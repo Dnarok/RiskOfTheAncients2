@@ -15,7 +15,6 @@ namespace ROTA2.Items
         public override string ItemTokenLore => "Yasha and Kaya when paired together share a natural resonance.";
         public override ItemTier Tier => ItemTier.Tier2;
         public override ItemTag[] ItemTags => [ItemTag.WorldUnique];
-        public override string ItemModelPath => "RoR2/Base/Mystery/PickupMystery.prefab";
         public override string ItemIconPath => "ROTA2.Icons.yasha_and_kaya.png";
         public override void Hooks()
         {

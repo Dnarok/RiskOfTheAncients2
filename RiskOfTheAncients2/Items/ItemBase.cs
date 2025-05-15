@@ -41,7 +41,7 @@ namespace ROTA2.Items
         public abstract string ItemTokenDesc { get; }
         public abstract string ItemTokenLore { get; }
         public abstract ItemTier Tier { get; }
-        public virtual string ItemModelPath { get; } = "RoR2/Base/Mystery/PickupMystery.prefab";
+        public virtual string ItemModelPath { get; } = "item_box.prefab";
         public virtual string ItemIconPath { get; } = "";
         public virtual ItemTag[] ItemTags { get; } = [];
         public virtual bool Removable { get; } = true;
@@ -66,7 +66,13 @@ namespace ROTA2.Items
             ItemDef.pickupToken = "ITEM_" + ItemTokenName + "_PICKUP";
             ItemDef.descriptionToken = "ITEM_" + ItemTokenName + "_DESCRIPTION";
             ItemDef.loreToken = "ITEM_" + ItemTokenName + "_LORE";
-            ItemDef.pickupModelPrefab = Addressables.LoadAssetAsync<GameObject>(ItemModelPath).WaitForCompletion();
+            GameObject prefab = Plugin.bundle.LoadAsset<GameObject>(ItemModelPath);
+            ModelPanelParameters logbook = prefab.AddComponent<ModelPanelParameters>();
+            logbook.minDistance = 4.0f;
+            logbook.maxDistance = 10.0f;
+            logbook.focusPointTransform = prefab.transform.GetChild(0);
+            logbook.cameraPositionTransform = prefab.transform.GetChild(0);
+            ItemDef.pickupModelPrefab = prefab;
             ItemDef.hidden = Hidden;
             ItemDef.canRemove = Removable;
             ItemDef.deprecatedTier = Tier;

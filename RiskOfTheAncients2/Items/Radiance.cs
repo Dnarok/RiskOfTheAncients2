@@ -3,7 +3,6 @@ using ROTA2.Buffs;
 using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
-using System;
 
 namespace ROTA2.Items
 {

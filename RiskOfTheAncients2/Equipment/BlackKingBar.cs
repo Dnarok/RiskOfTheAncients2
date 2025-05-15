@@ -2,6 +2,8 @@
 using ROTA2.Buffs;
 using RoR2;
 using UnityEngine;
+using IL.RoR2.WwiseUtils;
+using RoR2.WwiseUtils;
 
 namespace ROTA2.Equipment
 {
@@ -31,6 +33,7 @@ namespace ROTA2.Equipment
             BlackKingBarCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown",                  75.0f, "").Value;
         }
 
+        public uint SoundID = 3471834074;
         protected override bool ActivateEquipment(EquipmentSlot slot)
         {
             var body = slot.characterBody;
@@ -50,6 +53,8 @@ namespace ROTA2.Equipment
                 effectData.SetHurtBoxReference(body.mainHurtBox);
                 EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/CleanseEffect"), effectData, transmit: true);
                 Util.CleanseBody(body, removeDebuffs: true, removeBuffs: false, removeCooldownBuffs: true, removeDots: true, removeStun: true, removeNearbyProjectiles: false);
+
+                Util.PlaySound("BlackKingBar", body.gameObject);
             }
 
             return true;

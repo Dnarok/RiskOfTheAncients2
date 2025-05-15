@@ -13,7 +13,6 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"Increases {Damage("attack speed")} by {Damage($"{AttackSpeedBase}%")} {Stack($"(+{AttackSpeedPerStack}% per stack)")} and {Utility("movement speed")} by {Utility($"{MovementSpeedBase}%")} {Stack($"(+{MovementSpeedPerStack}% per stack)")}.";
         public override string ItemTokenLore => "Yasha is regarded as the swiftest weapon ever created.";
         public override ItemTier Tier => ItemTier.Tier2;
-        public override string ItemModelPath => "RoR2/Base/Mystery/PickupMystery.prefab";
         public override string ItemIconPath => "ROTA2.Icons.yasha.png";
         public override void Hooks()
         {

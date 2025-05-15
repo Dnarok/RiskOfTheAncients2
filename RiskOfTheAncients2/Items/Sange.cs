@@ -13,7 +13,6 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"Increases {Healing("maximum health")} by {Healing($"{MaximumHealthBase}")} {Stack($"(+{MaximumHealthPerStack} per stack)")} and {Healing("base health regeneration")} by {Healing($"+{BaseHealthRegenerationBase} hp/s")} {Stack($"(+{BaseHealthRegenerationPerStack} hp/s per stack)")}.";
         public override string ItemTokenLore => "Sange is an unusually accurate weapon, seeking weak points automatically.";
         public override ItemTier Tier => ItemTier.Tier2;
-        public override string ItemModelPath => "RoR2/Base/Mystery/PickupMystery.prefab";
         public override string ItemIconPath => "ROTA2.Icons.sange.png";
         public override void Hooks()
         {

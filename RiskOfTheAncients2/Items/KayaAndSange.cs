@@ -15,7 +15,6 @@ namespace ROTA2.Items
         public override string ItemTokenLore => "Two of three known items of unimaginable power that many believe were crafted at the same enchanter's forge.";
         public override ItemTier Tier => ItemTier.Tier2;
         public override ItemTag[] ItemTags => [ItemTag.WorldUnique];
-        public override string ItemModelPath => "RoR2/Base/Mystery/PickupMystery.prefab";
         public override string ItemIconPath => "ROTA2.Icons.kaya_and_sange.png";
         public override void Hooks()
         {

@@ -51,8 +51,8 @@ The following items cannot drop - instead, they are combinations of other items 
 
 
 ## Issues
-- None of the items have models currently, so they are all using the question mark (make sure to ping those multishops!)
-- No sounds and pretty stuff like that.
+- Most items are using a placeholder model (Dota 2's item-on-ground-box), with a few being pulled from existing Dota 2 item models.
+- No visual effects for things right now.
 - Bottle icon should change based on the contained rune.
 
 ## etc.

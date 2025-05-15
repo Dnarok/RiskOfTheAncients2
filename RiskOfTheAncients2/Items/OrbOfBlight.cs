@@ -13,7 +13,6 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"On hit reduce {Damage("armor")} by {Damage($"{ArmorReduction}")} for {Damage($"{ArmorReductionDuration} seconds")}, up to {Damage($"{MaxStacksBase} times")} {Stack($"(+{MaxStacksPerStack} per stack)")}.";
         public override string ItemTokenLore => "An unnerving stone unearthed beneath the Fields of Endless Carnage.";
         public override ItemTier Tier => ItemTier.Tier1;
-        public override string ItemModelPath => "RoR2/Base/Mystery/PickupMystery.prefab";
         public override string ItemIconPath => "ROTA2.Icons.orb_of_blight.png";
         public override void Hooks()
         {

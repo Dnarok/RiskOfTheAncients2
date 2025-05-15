@@ -1,3 +1,12 @@
+## 1.1.0
+- Added models!
+  - Bottle, Iron Branch, Quelling Blade, Boots of Speed, Healing Salve, and Enchanted Mango all received unique models.
+  - All other items are now using the classic Dota 2 item box - thanks to Retorikal on Github for the idea.
+- Added sounds!
+  - Most items with sounds in Dota 2 now play their sound at the appropriate time.
+  - Radiance exception, since it's a constant looping noise and that seems like a bit much.
+- Lance of Pursuit: Fixed doubling all 0 proc coefficient damage, including fall damage. Thanks to SalTheThief on Github for the hint!
+
 ## 1.0.5
 - Added Iron Branch (white).
 - Nemesis Curse: Now only applies the curse from damage with a proc coefficient.

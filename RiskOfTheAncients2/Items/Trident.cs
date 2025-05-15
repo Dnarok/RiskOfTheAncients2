@@ -17,7 +17,6 @@ namespace ROTA2.Items
         public override string ItemTokenLore => "A weapon capable of killing even gods, it was fractured into the three mighty weapons to prevent anyone from misusing its power.";
         public override ItemTier Tier => ItemTier.Tier3;
         public override ItemTag[] ItemTags => [ItemTag.WorldUnique];
-        public override string ItemModelPath => "RoR2/Base/Mystery/PickupMystery.prefab";
         public override string ItemIconPath => "ROTA2.Icons.trident.png";
         public override void Hooks()
         {

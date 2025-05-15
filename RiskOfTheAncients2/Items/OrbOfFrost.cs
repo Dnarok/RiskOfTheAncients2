@@ -13,7 +13,6 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"{Utility("Slow")} enemies on hit for {Utility($"{MovementSpeedSlowBase}% movement speed")} {Stack($"(-{MovementSpeedSlowPerStack}% per stack)")} and {Utility($"-{AttackSpeedSlowBase}% attack speed")} {Stack($"-{AttackSpeedSlowPerStack}% per stack)")} for {Utility($"{DebuffDuration} seconds")}.";
         public override string ItemTokenLore => "Freezes your foes with a frosty force.";
         public override ItemTier Tier => ItemTier.Tier1;
-        public override string ItemModelPath => "RoR2/Base/Mystery/PickupMystery.prefab";
         public override string ItemIconPath => "ROTA2.Icons.orb_of_frost.png";
         public override void Hooks()
         {

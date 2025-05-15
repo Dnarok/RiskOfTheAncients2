@@ -16,6 +16,7 @@ namespace ROTA2.Items
         public override string ItemTokenPickup => "Increases all stats by a small amount.";
         public override string ItemTokenDesc => $"Grants {Utility($"{StatIncreaseBase}%")} {Stack($"(+{StatIncreasePerStack}% per stack)")} increase to {Utility("ALL stats")}.";
         public override string ItemTokenLore => "A seemingly ordinary branch, its ironlike qualities are bestowed upon the bearer.";
+        public override string ItemModelPath => "iron_branch.prefab";
         public override string ItemIconPath => "ROTA2.Icons.iron_branch.png";
         public override ItemTier Tier => ItemTier.Tier1;
         public override void Hooks()

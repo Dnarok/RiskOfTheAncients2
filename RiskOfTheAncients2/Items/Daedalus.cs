@@ -1,6 +1,8 @@
 ﻿using BepInEx.Configuration;
 using R2API;
 using RoR2;
+using System;
+using UnityEngine;
 
 namespace ROTA2.Items
 {
@@ -18,7 +20,10 @@ namespace ROTA2.Items
         {
             RecalculateStatsAPI.GetStatCoefficients += AddCritChance;
             RecalculateStatsAPI.GetStatCoefficients += AddCritDamage;
+            On.RoR2.HealthComponent.TakeDamage += OnTakeDamage;
         }
+
+
         public override void Init(ConfigFile configuration)
         {
             CreateConfig(configuration);
@@ -51,6 +56,15 @@ namespace ROTA2.Items
             if (count > 0)
             {
                 args.critDamageMultAdd += CriticalDamageBase / 100.0f + CriticalDamagePerStack / 100.0f * (count - 1);
+            }
+        }
+        private void OnTakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo info)
+        {
+            orig(self, info);
+
+            if (!info.rejected && info.damage > 0.0f && info.crit && info.attacker && GetCount(info.attacker.GetComponent<CharacterBody>()) > 0)
+            {
+                Util.PlaySound("Daedalus", self.body.gameObject);
             }
         }
     }

@@ -13,7 +13,7 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"Increases {Utility("base movement speed")} by {Utility($"{MovementSpeedBase}")} {Stack($"(+{MovementSpeedPerStack} per stack)")}.";
         public override string ItemTokenLore => "Fleet footwear, increasing movement.";
         public override ItemTier Tier => ItemTier.Tier1;
-        public override string ItemModelPath => "RoR2/Base/Mystery/PickupMystery.prefab";
+        public override string ItemModelPath => "boots_of_speed.prefab";
         public override string ItemIconPath => "ROTA2.Icons.boots_of_speed.png";
         public override void Hooks()
         {

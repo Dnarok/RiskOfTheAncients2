@@ -22,7 +22,6 @@ Effects stack with component items.";
         public override string ItemTokenLore => "Seepage from the wounds of a warrior deity, sealed in an arcanist's orb following a campaign of vicious slaughter.";
         public override ItemTier Tier => ItemTier.Tier2;
         public override ItemTag[] ItemTags => [ItemTag.WorldUnique];
-        public override string ItemModelPath => "RoR2/Base/Mystery/PickupMystery.prefab";
         public override string ItemIconPath => "ROTA2.Icons.orb_of_corrosion.png";
         public override void Hooks()
         {

@@ -43,6 +43,7 @@ namespace ROTA2.Items
             if (info.rejected || info.procCoefficient <= 0)
             {
                 orig(self, info);
+                return;
             }
 
             GameObject attacker = info.attacker;

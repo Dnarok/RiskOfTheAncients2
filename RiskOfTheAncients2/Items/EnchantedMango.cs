@@ -16,6 +16,7 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"Taking damage to below {Health($"{HealthThreshold}% health")} {Utility("consumes")} this item, {Utility("resetting all skill cooldowns")} and increasing {Damage("damage")} by {Damage($"{DamageBonus}%")} for {Damage($"{DamageDuration} seconds")}.";
         public override string ItemTokenLore => "The bittersweet flavors of Jidi Isle are irresistible to amphibians.";
         public override ItemTier Tier => ItemTier.Tier1;
+        public override string ItemModelPath => "enchanted_mango.prefab";
         public override string ItemIconPath => "ROTA2.Icons.enchanted_mango.png";
         public override void Hooks()
         {
@@ -68,6 +69,8 @@ namespace ROTA2.Items
                 self.body.inventory.RemoveItem(ItemDef);
                 self.body.inventory.GiveItem(ConsumedMango.Instance.ItemDef);
                 CharacterMasterNotificationQueue.PushItemTransformNotification(self.body.master, EnchantedMango.Instance.ItemDef.itemIndex, ConsumedMango.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
+
+                Util.PlaySound("EnchantedMango", self.body.gameObject);
             }
         }
     }

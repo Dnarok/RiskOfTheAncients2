@@ -30,6 +30,7 @@ Runes will be removed from the pool until all effects have been seen.";
         public override string EquipmentTokenLore => "An old bottle that survived the ages, the contents placed inside become enchanted.";
         public override float EquipmentCooldown => BottleCooldown;
         public override string EquipmentIconPath => "ROTA2.Icons.bottle.png";
+        public override string EquipmentModelPath => "bottle.prefab";
         public override void Init(ConfigFile config)
         {
             CreateConfig(config);
@@ -142,6 +143,8 @@ Runes will be removed from the pool until all effects have been seen.";
                 victim = body,
                 duration = AmplifyDamageDuration
             });
+
+            Util.PlaySound("AmplifyDamage", body.gameObject);
         }
         void DoArcane(CharacterBody body)
         {
@@ -150,11 +153,15 @@ Runes will be removed from the pool until all effects have been seen.";
                 victim = body,
                 duration = ArcaneDuration
             });
+
+            Util.PlaySound("Arcane", body.gameObject);
         }
         void DoBounty(CharacterBody body)
         {
             float cost = Run.instance.GetDifficultyScaledCost(BountyGold, Run.instance.difficultyCoefficient);
             body.master.GiveMoney((uint)cost);
+
+            Util.PlaySound("Bounty", body.gameObject);
         }
         void DoHaste(CharacterBody body)
         {
@@ -163,10 +170,14 @@ Runes will be removed from the pool until all effects have been seen.";
                 victim = body,
                 duration = HasteDuration
             });
+
+            Util.PlaySound("Haste", body.gameObject);
         }
         void DoInvisibility(CharacterBody body)
         {
             body.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, InvisibilityDuration);
+
+            Util.PlaySound("Invisibility", body.gameObject);
         }
         void DoIllusion(CharacterBody body)
         {
@@ -174,6 +185,8 @@ Runes will be removed from the pool until all effects have been seen.";
             {
                 SpawnIllusion(body);
             }
+
+            Util.PlaySound("Illusion", body.gameObject);
         }
         void DoRegeneration(CharacterBody body)
         {
@@ -182,6 +195,8 @@ Runes will be removed from the pool until all effects have been seen.";
                 victim = body,
                 duration = RegenerationDuration
             });
+
+            Util.PlaySound("Regeneration", body.gameObject);
         }
         void DoShield(CharacterBody body)
         {
@@ -189,6 +204,8 @@ Runes will be removed from the pool until all effects have been seen.";
             {
                 body.healthComponent.AddBarrier(body.healthComponent.fullCombinedHealth * ShieldBarrier / 100.0f);
             }
+
+            Util.PlaySound("Shield", body.gameObject);
         }
         void DoWater(CharacterBody body)
         {
@@ -207,12 +224,16 @@ Runes will be removed from the pool until all effects have been seen.";
                     }
                 }
             }
+
+            Util.PlaySound("Water", body.gameObject);
         }
         void DoWisdom(CharacterBody body)
         {
             ulong required_next = TeamManager.GetExperienceForLevel(TeamManager.instance.GetTeamLevel(body.teamComponent.teamIndex) + 1);
             ulong required_now = TeamManager.instance.GetTeamCurrentLevelExperience(body.teamComponent.teamIndex);
             ExperienceManager.instance.AwardExperience(body.transform.position, body, (ulong)((required_next - required_now) * WisdomExperience / 100.0f));
+
+            Util.PlaySound("Wisdom", body.gameObject);
         }
 
         private class BottleBehavior : MonoBehaviour

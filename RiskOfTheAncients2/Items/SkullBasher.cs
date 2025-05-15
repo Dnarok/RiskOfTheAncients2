@@ -79,6 +79,8 @@ namespace ROTA2.Items
                             victim = attacker_body,
                             duration = BashCooldown
                         });
+
+                        Util.PlaySound("SkullBasher", victim);
                     }
                 }
             }

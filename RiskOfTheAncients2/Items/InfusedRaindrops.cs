@@ -119,6 +119,8 @@ namespace ROTA2.Items
 
                         CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, InfusedRaindrops.Instance.ItemDef.itemIndex, DehydratedRaindrops.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
                         body.RecalculateStats();
+
+                        Util.PlaySound("InfusedRaindrops", body.gameObject);
                     }
                 }
 

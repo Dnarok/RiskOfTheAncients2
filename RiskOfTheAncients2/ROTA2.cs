@@ -11,8 +11,9 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using BepInEx.Bootstrap;
+using UnityEngine.AddressableAssets;
+using Path = System.IO.Path;
 
 namespace ROTA2
 {
@@ -29,7 +30,7 @@ namespace ROTA2
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Dnarok";
         public const string PluginName = "RiskOfTheAncients2";
-        public const string PluginVersion = "1.0.5";
+        public const string PluginVersion = "1.1.0";
 
         public List<ItemBase> Items = [];
         public static Dictionary<ItemBase, bool> ItemsEnabled = [];
@@ -39,6 +40,7 @@ namespace ROTA2
 
         public static Dictionary<string, Sprite> SpritesLoaded = [];
         public static SkillDef disabledSkill;
+        public static AssetBundle bundle;
 
         public static bool isLookingGlassInstalled => Chainloader.PluginInfos.ContainsKey("droppod.lookingglass");
 
@@ -50,6 +52,11 @@ namespace ROTA2
             foreach (string resource in resources)
             {
                 Logger.LogInfo(resource);
+            }
+
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("ROTA2.models"))
+            {
+                bundle = AssetBundle.LoadFromStream(stream);
             }
 
             var ItemTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(ItemBase)));
