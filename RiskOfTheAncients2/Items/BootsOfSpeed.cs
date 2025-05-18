@@ -31,8 +31,8 @@ namespace ROTA2.Items
         public float MovementSpeedPerStack;
         public void CreateConfig(ConfigFile configuration)
         {
-            MovementSpeedBase       = configuration.Bind("Item: " + ItemName, "Initial Base Movement Speed Bonus",  0.5f, "How much base movement speed should be provided by the first stack?").Value;
-            MovementSpeedPerStack   = configuration.Bind("Item: " + ItemName, "Stacking Base Movement Speed Bonus", 0.5f, "How much base movement speed should be provided by subsequent stacks?").Value;
+            MovementSpeedBase       = configuration.Bind("Item: " + ItemName, "Initial Base Movement Speed Bonus",  0.7f, "How much base movement speed should be provided by the first stack?").Value;
+            MovementSpeedPerStack   = configuration.Bind("Item: " + ItemName, "Stacking Base Movement Speed Bonus", 0.7f, "How much base movement speed should be provided by subsequent stacks?").Value;
         }
 
         private void AddMovementSpeed(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs arguments)

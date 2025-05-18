@@ -31,6 +31,7 @@ namespace ROTA2.Equipment
         public Func<string, string> Stack = x => "<style=cStack>" + x + "</style>";
         public Func<string, string> Health = x => "<style=cIsHealth>" + x + "</style>";
         public Func<string, string> Gold = x => "<style=cShrine>" + x + "</style>";
+        public Func<string, string> Death = x => "<style=cDeath>" + x + "</style>";
         public Func<string, string, string> Color = (x, hex) => "<" + hex + ">" + x + "</color>";
 
         public abstract string EquipmentName { get; }
@@ -41,6 +42,9 @@ namespace ROTA2.Equipment
         public abstract float EquipmentCooldown { get; }
         public virtual string EquipmentModelPath { get; } = "item_box.prefab";
         public virtual string EquipmentIconPath { get; } = "";
+        public virtual bool EquipmentCanDrop { get; } = true;
+        public virtual bool EquipmentIsLunar { get; } = false;
+        public virtual bool EquipmentCanBeRandomlyTriggered { get; } = true;
         public abstract void Init(ConfigFile config);
         public virtual void Hooks()
         { 
@@ -73,11 +77,12 @@ namespace ROTA2.Equipment
             EquipmentDef.pickupModelPrefab = prefab;
             EquipmentDef.appearsInMultiPlayer = true;
             EquipmentDef.appearsInSinglePlayer = true;
-            EquipmentDef.canDrop = true;
+            EquipmentDef.canDrop = EquipmentCanDrop;
             EquipmentDef.cooldown = EquipmentCooldown;
             EquipmentDef.enigmaCompatible = true;
             EquipmentDef.isBoss = false;
-            EquipmentDef.isLunar = false;
+            EquipmentDef.isLunar = EquipmentIsLunar;
+            EquipmentDef.canBeRandomlyTriggered = EquipmentCanBeRandomlyTriggered;
 
             if (EquipmentIconPath == "")
             {

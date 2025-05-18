@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2895795273
+CRC: 883067213
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 0a2f555ca4b4237a29170ab9bbeeccf4
+    Hash: e25854c08df37e4a4a22015bfb13e8d6
   TypeTreeHash:
     serializedVersion: 2
     Hash: c4fe1fdcbb1a331074c17958100faf9a
@@ -28,6 +28,7 @@ ClassTypes:
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/quelling_blade.prefab
+- Assets/armlet_of_mordiggian.prefab
 - Assets/item_box.prefab
 - Assets/boots_of_speed.prefab
 - Assets/healing_salve.prefab

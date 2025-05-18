@@ -31,8 +31,8 @@ namespace ROTA2.Items
         public float DamagePerStack;
         public void CreateConfig(ConfigFile configuration)
         {
-            DamageBase     = configuration.Bind("Item: " + ItemName, "Damage Base",      6.0f, "How much flat damage should the first stack provide?").Value;
-            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 6.0f, "How much flat damage should subsequent stacks provide?").Value;
+            DamageBase     = configuration.Bind("Item: " + ItemName, "Damage Base",      8.0f, "How much flat damage should the first stack provide?").Value;
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 8.0f, "How much flat damage should subsequent stacks provide?").Value;
         }
 
         private void OnDamageDealt(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo info)

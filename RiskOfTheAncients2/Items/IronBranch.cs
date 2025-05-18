@@ -32,7 +32,6 @@ namespace ROTA2.Items
                 cursor.Emit(OpCodes.Ldarg_0);
                 cursor.EmitDelegate<Action<CharacterBody>>((body) =>
                 {
-                    Log.Debug("IronBranch RecalculateStats IL delegate called.");
                     int count = GetCount(body);
                     if (count > 0)
                     {

@@ -1,3 +1,17 @@
+## 1.1.1
+- Added Armlet of Mordiggian (Lunar Equipment), Tranquil Boots (green), and Shadow Amulet (green).
+- Infused Raindrops: Fixed horrible laggy implementation, especially on Engineer.
+- Infused Raindrops: Now only conusmes stacks after most damage rejection has occurred.
+- Kaya, Sange, and Yasha: Combination order rearranged.
+  - The items will attempt to combine in this order: Trident, Kaya and Sange, Sange and Yasha, Yasha and Kaya.
+  - This should avoid something like Kaya -> Kaya -> Sange -> Yasha turning into Kaya and Sange + Kaya and Yasha. Now it will be Trident + Kaya.
+- Boots of Speed: Base movement speed increased from `0.5` -> `0.7`.
+  - Should now be more in line with the relative increases of other white items.
+- Moon Shard: Can no longer be randomly triggered.
+  - This will prevent Bottled Chaos from deleting your held equipment in exchange for the consumed moon shard item.
+- Quelling Blade: Non-Boss flat damage increased from `6`/`6` -> `8`/`8`.
+- Spark of Courage: Damage bonus increased from `8%`/`8%` -> `10%`/`10%`.
+
 ## 1.1.0
 - Added models!
   - Bottle, Iron Branch, Quelling Blade, Boots of Speed, Healing Salve, and Enchanted Mango all received unique models.

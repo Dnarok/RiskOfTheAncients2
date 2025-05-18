@@ -1,9 +1,6 @@
 ﻿using BepInEx.Configuration;
 using ROTA2.Buffs;
 using RoR2;
-using System;
-using UnityEngine;
-using UnityEngine.Networking;
 
 namespace ROTA2.Items
 {
@@ -26,7 +23,6 @@ Effects stack with component items.";
         public override void Hooks()
         {
             On.RoR2.HealthComponent.TakeDamage += OnHit;
-            CharacterBody.onBodyInventoryChangedGlobal += OnInventoryChanged;
         }
         public override void Init(ConfigFile configuration)
         {
@@ -99,47 +95,6 @@ Effects stack with component items.";
             }
 
             orig(self, info);
-        }
-        private void OnInventoryChanged(CharacterBody body)
-        {
-            if (!body.GetComponent<OrbOfCorrosionInventoryBehavior>())
-            {
-                body.gameObject.AddComponent<OrbOfCorrosionInventoryBehavior>();
-            }
-        }
-
-        public class OrbOfCorrosionInventoryBehavior : MonoBehaviour
-        {
-            public CharacterBody body;
-
-            public void Awake()
-            {
-                body = GetComponent<CharacterBody>();
-            }
-            public void Update()
-            {
-                if (NetworkServer.active && body && body.inventory)
-                {
-                    int blights = body.inventory.GetItemCount(OrbOfBlight.Instance.ItemDef);
-                    int frosts = body.inventory.GetItemCount(OrbOfFrost.Instance.ItemDef);
-                    int venoms = body.inventory.GetItemCount(OrbOfVenom.Instance.ItemDef);
-
-                    if (blights > 0 && frosts > 0 && venoms > 0)
-                    {
-                        int transform = Math.Min(blights, Math.Min(frosts, venoms));
-                        Log.Info($"Converting {transform} blights, frosts, and venoms.");
-                        body.inventory.RemoveItem(OrbOfBlight.Instance.ItemDef, transform);
-                        body.inventory.RemoveItem(OrbOfFrost.Instance.ItemDef, transform);
-                        body.inventory.RemoveItem(OrbOfVenom.Instance.ItemDef, transform);
-                        body.inventory.GiveItem(OrbOfCorrosion.Instance.ItemDef, transform);
-
-
-                        CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, OrbOfBlight.Instance.ItemDef.itemIndex, OrbOfCorrosion.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-                        CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, OrbOfFrost.Instance.ItemDef.itemIndex, OrbOfCorrosion.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-                        CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, OrbOfVenom.Instance.ItemDef.itemIndex, OrbOfCorrosion.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-                    }
-                }
-            }
         }
     }
 }

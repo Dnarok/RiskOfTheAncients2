@@ -14,6 +14,7 @@ namespace ROTA2.Equipment
         public override string EquipmentTokenLore => "Said to be a tear from the lunar goddess Selemene.";
         public override string EquipmentIconPath => "ROTA2.Icons.moon_shard.png";
         public override float EquipmentCooldown => 0.5f;
+        public override bool EquipmentCanBeRandomlyTriggered => false;
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += AddAttackSpeed;

@@ -9,6 +9,8 @@
 	<ItemGroup>
 	  <None Remove="Icons\aeon_disk.png" />
 	  <None Remove="Icons\aeon_disk_cooldown.png" />
+	  <None Remove="Icons\armlet_of_mordiggian.png" />
+	  <None Remove="Icons\armlet_of_mordiggian_toggled.png" />
 	  <None Remove="Icons\assault_cuirass.png" />
 	  <None Remove="Icons\black_king_bar.png" />
 	  <None Remove="Icons\bottle.png" />
@@ -44,9 +46,11 @@
 	  <None Remove="Icons\quelling_blade.png" />
 	  <None Remove="Icons\quicksilver_amulet.png" />
 	  <None Remove="Icons\radiance.png" />
+	  <None Remove="Icons\shadow_amulet.png" />
 	  <None Remove="Icons\skull_basher.png" />
 	  <None Remove="Icons\skull_basher_cooldown.png" />
 	  <None Remove="Icons\spark_of_courage.png" />
+	  <None Remove="Icons\tranquil_boots.png" />
 	  <None Remove="models" />
 	  <None Remove="models.manifest" />
 	</ItemGroup>
@@ -83,6 +87,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Icons\aeon_disk.png" />
     <EmbeddedResource Include="Icons\aeon_disk_cooldown.png" />
+    <EmbeddedResource Include="Icons\armlet_of_mordiggian.png" />
+    <EmbeddedResource Include="Icons\armlet_of_mordiggian_toggled.png" />
     <EmbeddedResource Include="Icons\assault_cuirass.png" />
     <EmbeddedResource Include="Icons\black_king_bar.png" />
     <EmbeddedResource Include="Icons\boots_of_speed.png" />
@@ -123,9 +129,11 @@
     <EmbeddedResource Include="Icons\quicksilver_amulet.png" />
     <EmbeddedResource Include="Icons\radiance.png" />
     <EmbeddedResource Include="Icons\sange.png" />
+    <EmbeddedResource Include="Icons\shadow_amulet.png" />
     <EmbeddedResource Include="Icons\skull_basher.png" />
     <EmbeddedResource Include="Icons\skull_basher_cooldown.png" />
     <EmbeddedResource Include="Icons\spark_of_courage.png" />
+    <EmbeddedResource Include="Icons\tranquil_boots.png" />
     <EmbeddedResource Include="Icons\yasha.png" />
     <EmbeddedResource Include="Icons\kaya_and_sange.png" />
     <EmbeddedResource Include="Icons\sange_and_yasha.png" />

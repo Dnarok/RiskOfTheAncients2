@@ -26,7 +26,6 @@ namespace ROTA2.Items
             RecalculateStatsAPI.GetStatCoefficients += AddBaseHealthRegeneration;
             RecalculateStatsAPI.GetStatCoefficients += AddAttackSpeed;
             RecalculateStatsAPI.GetStatCoefficients += AddMovementSpeed;
-            CharacterBody.onBodyInventoryChangedGlobal += OnInventoryChanged;
         }
         public override void Init(ConfigFile configuration)
         {
@@ -114,117 +113,6 @@ namespace ROTA2.Items
             if (count > 0)
             {
                 arguments.moveSpeedMultAdd += MovementSpeedBase / 100.0f + MovementSpeedPerStack / 100.0f * (count - 1);
-            }
-        }
-        private void OnInventoryChanged(CharacterBody body)
-        {
-            if (!body.GetComponent<TridentInventoryBehavior>())
-            {
-                body.gameObject.AddComponent<TridentInventoryBehavior>();
-            }
-        }
-
-        public class TridentInventoryBehavior : MonoBehaviour
-        {
-            public CharacterBody body;
-
-            public void Awake()
-            {
-                body = GetComponent<CharacterBody>();
-            }
-            public void Update()
-            {
-                if (NetworkServer.active && body && body.inventory)
-                {
-                    int kayas = body.inventory.GetItemCount(Kaya.Instance.ItemDef);
-                    int sanges = body.inventory.GetItemCount(Sange.Instance.ItemDef);
-                    int yashas = body.inventory.GetItemCount(Yasha.Instance.ItemDef);
-                    int kaya_and_sanges = body.inventory.GetItemCount(KayaAndSange.Instance.ItemDef);
-                    int sange_and_yashas = body.inventory.GetItemCount(SangeAndYasha.Instance.ItemDef);
-                    int yasha_and_kayas = body.inventory.GetItemCount(YashaAndKaya.Instance.ItemDef);
-
-                    if (kayas > 0 && sanges > 0)
-                    {
-                        int transform = Math.Min(kayas, sanges);
-                        Log.Info($"Converting {transform} kayas and sanges.");
-                        body.inventory.RemoveItem(Kaya.Instance.ItemDef, transform);
-                        kayas -= transform;
-                        body.inventory.RemoveItem(Sange.Instance.ItemDef, transform);
-                        sanges -= transform;
-                        body.inventory.GiveItem(KayaAndSange.Instance.ItemDef, transform);
-                        kaya_and_sanges += transform;
-
-                        CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, Kaya.Instance.ItemDef.itemIndex, KayaAndSange.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-                        CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, Sange.Instance.ItemDef.itemIndex, KayaAndSange.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-                    }
-                    if (sanges > 0 && yashas > 0)
-                    {
-                        int transform = Math.Min(yashas, sanges);
-                        Log.Info($"Converting {transform} sanges and yashas.");
-                        body.inventory.RemoveItem(Sange.Instance.ItemDef, transform);
-                        sanges -= transform;
-                        body.inventory.RemoveItem(Yasha.Instance.ItemDef, transform);
-                        yashas -= transform;
-                        body.inventory.GiveItem(SangeAndYasha.Instance.ItemDef, transform);
-                        sange_and_yashas += transform;
-
-                        CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, Sange.Instance.ItemDef.itemIndex, SangeAndYasha.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-                        CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, Yasha.Instance.ItemDef.itemIndex, SangeAndYasha.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-                    }
-                    if (yashas > 0 && kayas > 0)
-                    {
-                        int transform = Math.Min(yashas, kayas);
-                        Log.Info($"Converting {transform} yashas and kayas.");
-                        body.inventory.RemoveItem(Yasha.Instance.ItemDef, transform);
-                        yashas -= transform;
-                        body.inventory.RemoveItem(Kaya.Instance.ItemDef, transform);
-                        kayas -= transform;
-                        body.inventory.GiveItem(YashaAndKaya.Instance.ItemDef, transform);
-                        yasha_and_kayas += transform;
-
-                        CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, Yasha.Instance.ItemDef.itemIndex, YashaAndKaya.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-                        CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, Kaya.Instance.ItemDef.itemIndex, YashaAndKaya.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-                    }
-                    if (kaya_and_sanges > 0 && yashas > 0)
-                    {
-                        int transform = Math.Min(kaya_and_sanges, yashas);
-                        Log.Info($"Converting {transform} kaya and sanges and yashas.");
-                        body.inventory.RemoveItem(KayaAndSange.Instance.ItemDef, transform);
-                        kaya_and_sanges -= transform;
-                        body.inventory.RemoveItem(Yasha.Instance.ItemDef, transform);
-                        yashas -= transform;
-                        body.inventory.GiveItem(Trident.Instance.ItemDef, transform);
-
-                        CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, KayaAndSange.Instance.ItemDef.itemIndex, Trident.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-                        CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, Yasha.Instance.ItemDef.itemIndex, Trident.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-                    }
-                    if (sange_and_yashas > 0 && kayas > 0)
-                    {
-                        int transform = Math.Min(sange_and_yashas, kayas);
-                        Log.Info($"Converting {transform} sange and yashas and kayas.");
-                        body.inventory.RemoveItem(SangeAndYasha.Instance.ItemDef, transform);
-                        sange_and_yashas -= transform;
-                        body.inventory.RemoveItem(Kaya.Instance.ItemDef, transform);
-                        kayas -= transform;
-                        body.inventory.GiveItem(Trident.Instance.ItemDef, transform);
-
-                        CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, SangeAndYasha.Instance.ItemDef.itemIndex, Trident.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-                        CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, Kaya.Instance.ItemDef.itemIndex, Trident.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-                    }
-                    if (yasha_and_kayas > 0 && sanges > 0)
-                    {
-                        int transform = Math.Min(yasha_and_kayas, sanges);
-                        Log.Info($"Converting {transform} yasha and kayas and sanges.");
-                        body.inventory.RemoveItem(YashaAndKaya.Instance.ItemDef, transform);
-                        yasha_and_kayas -= transform;
-                        body.inventory.RemoveItem(Sange.Instance.ItemDef, transform);
-                        sanges -= transform;
-                        body.inventory.GiveItem(Trident.Instance.ItemDef, transform);
-
-                        CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, YashaAndKaya.Instance.ItemDef.itemIndex, Trident.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-                        CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, Sange.Instance.ItemDef.itemIndex, Trident.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-                    }
-                }
             }
         }
     }

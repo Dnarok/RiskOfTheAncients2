@@ -13,7 +13,6 @@ using System.Reflection;
 using UnityEngine;
 using BepInEx.Bootstrap;
 using UnityEngine.AddressableAssets;
-using Path = System.IO.Path;
 
 namespace ROTA2
 {
@@ -30,13 +29,13 @@ namespace ROTA2
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Dnarok";
         public const string PluginName = "RiskOfTheAncients2";
-        public const string PluginVersion = "1.1.0";
+        public const string PluginVersion = "1.1.1";
 
-        public List<ItemBase> Items = [];
+        public static List<ItemBase> Items = [];
         public static Dictionary<ItemBase, bool> ItemsEnabled = [];
-        public List<EquipmentBase> Equipment = [];
+        public static List<EquipmentBase> Equipment = [];
         public static Dictionary<EquipmentBase, bool> EquipmentEnabled = [];
-        public List<BuffBase> Buffs = [];
+        public static List<BuffBase> Buffs = [];
 
         public static Dictionary<string, Sprite> SpritesLoaded = [];
         public static SkillDef disabledSkill;
@@ -99,6 +98,11 @@ namespace ROTA2
                 buff.Init();
                 Logger.LogInfo($"Buff: {buff.BuffName} initialized!");
             }
+
+            RoR2Application.onLoad += () =>
+            {
+                RecipeManager.Init();
+            };
 
             if (disabledSkill == null)
             {

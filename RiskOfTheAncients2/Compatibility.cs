@@ -275,10 +275,9 @@ namespace ROTA2
             item.calculateValues = (master, count) =>
             {
                 int total = 0;
-                var behavior = master.GetBody().GetComponent<InfusedRaindrops.InfusedRaindropsBehavior>();
-                if (behavior)
+                if (InfusedRaindrops.Instance.counts.ContainsKey(master.GetBody()))
                 {
-                    total = behavior.remaining_charges;
+                    total = InfusedRaindrops.Instance.counts[master.GetBody()].charges;
                 }
                 List<float> values =
                 [
