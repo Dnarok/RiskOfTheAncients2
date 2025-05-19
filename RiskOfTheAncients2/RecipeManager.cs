@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using Newtonsoft.Json.Utilities;
+using RoR2;
 using ROTA2.Items;
 using System;
 using System.Collections;
@@ -38,25 +39,75 @@ namespace ROTA2
 
         public static void Init()
         {
-            Add([OrbOfVenom.Instance.ItemDef, OrbOfBlight.Instance.ItemDef, OrbOfFrost.Instance.ItemDef], OrbOfCorrosion.Instance.ItemDef);
-            Add([KayaAndSange.Instance.ItemDef, Yasha.Instance.ItemDef], Trident.Instance.ItemDef);
-            Add([SangeAndYasha.Instance.ItemDef, Kaya.Instance.ItemDef], Trident.Instance.ItemDef);
-            Add([YashaAndKaya.Instance.ItemDef, Sange.Instance.ItemDef], Trident.Instance.ItemDef);
-            Add([Kaya.Instance.ItemDef, Sange.Instance.ItemDef], KayaAndSange.Instance.ItemDef);
-            Add([Sange.Instance.ItemDef, Yasha.Instance.ItemDef], SangeAndYasha.Instance.ItemDef);
-            Add([Yasha.Instance.ItemDef, Kaya.Instance.ItemDef], YashaAndKaya.Instance.ItemDef);
-            Add([BootsOfSpeed.Instance.ItemDef, RoR2Content.Items.HealWhileSafe], TranquilBoots.Instance.ItemDef);
-
-            itemsToWatchFor.AddRange([
-                Kaya.Instance.ItemDef,
-                Sange.Instance.ItemDef,
-                Yasha.Instance.ItemDef,
-                OrbOfFrost.Instance.ItemDef,
-                OrbOfVenom.Instance.ItemDef,
-                OrbOfBlight.Instance.ItemDef,
-                BootsOfSpeed.Instance.ItemDef,
-                RoR2Content.Items.HealWhileSafe
-            ]);
+            if (Plugin.ItemsEnabled[OrbOfVenom.Instance] &&
+                Plugin.ItemsEnabled[OrbOfFrost.Instance] &&
+                Plugin.ItemsEnabled[OrbOfBlight.Instance] &&
+                Plugin.ItemsEnabled[OrbOfCorrosion.Instance])
+            {
+                Add([OrbOfVenom.Instance.ItemDef, OrbOfBlight.Instance.ItemDef, OrbOfFrost.Instance.ItemDef], OrbOfCorrosion.Instance.ItemDef);
+                itemsToWatchFor.AddRange([
+                    OrbOfFrost.Instance.ItemDef,
+                    OrbOfBlight.Instance.ItemDef,
+                    OrbOfVenom.Instance.ItemDef
+                ]);
+            }
+            if (Plugin.ItemsEnabled[KayaAndSange.Instance] &&
+                Plugin.ItemsEnabled[Yasha.Instance] &&
+                Plugin.ItemsEnabled[Trident.Instance])
+            {
+                Add([KayaAndSange.Instance.ItemDef, Yasha.Instance.ItemDef], Trident.Instance.ItemDef);
+            }
+            if (Plugin.ItemsEnabled[SangeAndYasha.Instance] &&
+                Plugin.ItemsEnabled[Kaya.Instance] &&
+                Plugin.ItemsEnabled[Trident.Instance])
+            {
+                Add([SangeAndYasha.Instance.ItemDef, Kaya.Instance.ItemDef], Trident.Instance.ItemDef);
+            }
+            if (Plugin.ItemsEnabled[YashaAndKaya.Instance] &&
+                Plugin.ItemsEnabled[Sange.Instance] &&
+                Plugin.ItemsEnabled[Trident.Instance])
+            {
+                Add([YashaAndKaya.Instance.ItemDef, Sange.Instance.ItemDef], Trident.Instance.ItemDef);
+            }
+            if (Plugin.ItemsEnabled[Kaya.Instance] &&
+                Plugin.ItemsEnabled[Sange.Instance] &&
+                Plugin.ItemsEnabled[Trident.Instance])
+            {
+                Add([Kaya.Instance.ItemDef, Sange.Instance.ItemDef], KayaAndSange.Instance.ItemDef);
+            }
+            if (Plugin.ItemsEnabled[Sange.Instance] &&
+                Plugin.ItemsEnabled[Yasha.Instance] &&
+                Plugin.ItemsEnabled[Trident.Instance])
+            {
+                Add([Sange.Instance.ItemDef, Yasha.Instance.ItemDef], SangeAndYasha.Instance.ItemDef);
+            }
+            if (Plugin.ItemsEnabled[Yasha.Instance] &&
+                Plugin.ItemsEnabled[Kaya.Instance] &&
+                Plugin.ItemsEnabled[Trident.Instance])
+            {
+                Add([Yasha.Instance.ItemDef, Kaya.Instance.ItemDef], YashaAndKaya.Instance.ItemDef);
+            }
+            if (Plugin.ItemsEnabled[Yasha.Instance] &&
+                Plugin.ItemsEnabled[Kaya.Instance] &&
+                Plugin.ItemsEnabled[Sange.Instance] &&
+                Plugin.ItemsEnabled[Trident.Instance])
+            {
+                Add([Yasha.Instance.ItemDef, Kaya.Instance.ItemDef, Sange.Instance.ItemDef], Trident.Instance.ItemDef);
+                itemsToWatchFor.AddRange([
+                    Yasha.Instance.ItemDef,
+                    Kaya.Instance.ItemDef,
+                    Sange.Instance.ItemDef
+                ]);
+            }
+            if (Plugin.ItemsEnabled[BootsOfSpeed.Instance] &&
+                Plugin.ItemsEnabled[TranquilBoots.Instance])
+            {
+                Add([BootsOfSpeed.Instance.ItemDef, RoR2Content.Items.HealWhileSafe], TranquilBoots.Instance.ItemDef);
+                itemsToWatchFor.AddRange([
+                    BootsOfSpeed.Instance.ItemDef,
+                    RoR2Content.Items.HealWhileSafe
+                ]);
+            }
 
             CharacterBody.onBodyInventoryChangedGlobal += OnInventoryChanged;
             Log.Debug($"RecipeManager initialized, added {recipes.Count} recipes and {itemsToWatchFor.Count} items to watch for.");

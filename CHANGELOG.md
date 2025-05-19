@@ -1,3 +1,8 @@
+## 1.1.2
+- Infused Raindrops: Rearranged implementation again. If this fails one more time, this item is getting reworked.
+- Infused Raindrops and Shadow Amulet: Added LookingGlass integration.
+- Added safety checks for when items are disabled, should prevent some null derefs.
+
 ## 1.1.1
 - Added Armlet of Mordiggian (Lunar Equipment), Tranquil Boots (green), and Shadow Amulet (green).
 - Infused Raindrops: Fixed horrible laggy implementation, especially on Engineer.

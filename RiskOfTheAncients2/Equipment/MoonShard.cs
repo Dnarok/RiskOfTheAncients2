@@ -64,6 +64,7 @@ namespace ROTA2.Equipment
         public override ItemTier Tier => ItemTier.NoTier;
         public override ItemTag[] ItemTags => [ItemTag.WorldUnique];
         public override string ItemIconPath => "ROTA2.Icons.consumed_moon_shard.png";
+        public override bool Removable => false;
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += AddAttackSpeed;

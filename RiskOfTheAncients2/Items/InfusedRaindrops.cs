@@ -23,65 +23,6 @@ namespace ROTA2.Items
         public override void Hooks()
         {
             CharacterBody.onBodyInventoryChangedGlobal += OnInventoryChanged;
-            IL.RoR2.HealthComponent.TakeDamageProcess += (il) =>
-            {
-                ILCursor cursor = new(il);
-                cursor.GotoNext(
-                    x => x.MatchLdloc(0),
-                    x => x.MatchLdfld(out _),
-                    x => x.MatchLdfld(out _),
-                    x => x.MatchBrfalse(out _),
-                    x => x.MatchRet()
-                );
-                cursor.Emit(OpCodes.Ldarg_0);
-                cursor.Emit(OpCodes.Ldarg_1);
-                cursor.EmitDelegate<Action<HealthComponent, DamageInfo>>((self, info) =>
-                {
-                    int count = GetCount(self.body);
-                    if (info.rejected || info.damageType.damageType.HasFlag(DamageType.BypassBlock) || info.damage <= self.fullCombinedHealth * DamageThreshold / 100.0f)
-                    {
-                        if (count > 0)
-                        {
-                            counts[self.body].count = count;
-                        }
-
-                        return;
-                    }
-
-                    if (count > 0)
-                    {
-                        CountAndCharges value = counts[self.body];
-                        if (value.charges > 0)
-                        {
-                            info.damage -= DamageBlock;
-                            info.damage = Mathf.Max(0.0f, info.damage);
-                            if (info.damage == 0)
-                            {
-                                EffectData effectData = new EffectData
-                                {
-                                    origin = info.position,
-                                    rotation = Util.QuaternionSafeLookRotation((info.force != Vector3.zero) ? info.force : UnityEngine.Random.onUnitSphere)
-                                };
-                                EffectManager.SpawnEffect(HealthComponent.AssetReferences.bearEffectPrefab, effectData, transmit: true);
-                                info.rejected = true;
-                            }
-
-                            --value.charges;
-                            if (value.charges % BlockCount == 0)
-                            {
-                                ignore = true;
-                                self.body.inventory.RemoveItem(ItemDef);
-                                self.body.inventory.GiveItem(DehydratedRaindrops.Instance.ItemDef);
-                                ignore = false;
-                                --value.count;
-
-                                CharacterMasterNotificationQueue.PushItemTransformNotification(self.body.master, ItemDef.itemIndex, DehydratedRaindrops.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-                                Util.PlaySound("InfusedRaindrops", self.body.gameObject);
-                            }
-                        }
-                    }
-                });
-            };
         }
 
         public override void Init(ConfigFile configuration)
@@ -119,6 +60,11 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (GetCount(body) > 0)
             {
+                if (!body.GetComponent<RaindropsBehavior>())
+                {
+                    body.gameObject.AddComponent<RaindropsBehavior>();
+                }
+
                 if (!counts.ContainsKey(body))
                 {
                     counts.Add(body, new ()
@@ -141,46 +87,76 @@ namespace ROTA2.Items
                 }
             }
         }
-        private void OnTakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo info)
+
+        public class RaindropsBehavior : MonoBehaviour, IOnIncomingDamageServerReceiver
         {
-            int count = GetCount(self.body);
-            if (!info.rejected && info.damage > self.fullCombinedHealth * DamageThreshold / 100.0f && count > 0)
+            CharacterBody body;
+
+            void Awake()
             {
-                if (counts[self.body].charges > 0)
+                body = GetComponent<CharacterBody>();
+                if (body && body.healthComponent)
                 {
-                    info.damage -= DamageBlock;
-                    info.damage = Mathf.Max(0.0f, info.damage);
-                    if (info.damage == 0)
+                    HG.ArrayUtils.ArrayAppend(ref body.healthComponent.onIncomingDamageReceivers, this);
+                }
+            }
+            void OnDestroy()
+            {
+                if (body && body.healthComponent)
+                {
+                    int i = Array.IndexOf(body.healthComponent.onIncomingDamageReceivers, this);
+                    if (i != -1)
                     {
-                        EffectData effectData = new EffectData
-                        {
-                            origin = info.position,
-                            rotation = Util.QuaternionSafeLookRotation((info.force != Vector3.zero) ? info.force : UnityEngine.Random.onUnitSphere)
-                        };
-                        EffectManager.SpawnEffect(HealthComponent.AssetReferences.bearEffectPrefab, effectData, transmit: true);
-                        info.rejected = true;
-                    }
-
-                    --counts[self.body].charges;
-                    if (counts[self.body].charges % 10 == 0)
-                    {
-                        ignore = true;
-                        self.body.inventory.RemoveItem(ItemDef);
-                        self.body.inventory.GiveItem(DehydratedRaindrops.Instance.ItemDef);
-                        ignore = false;
-                        --counts[self.body].count;
-
-                        CharacterMasterNotificationQueue.PushItemTransformNotification(self.body.master, ItemDef.itemIndex, DehydratedRaindrops.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-                        Util.PlaySound("InfusedRaindrops", self.body.gameObject);
+                        HG.ArrayUtils.ArrayRemoveAtAndResize(ref body.healthComponent.onIncomingDamageReceivers, body.healthComponent.onIncomingDamageReceivers.Length, i);
                     }
                 }
             }
-            else if (count > 0)
+            public void OnIncomingDamageServer(DamageInfo info)
             {
-                counts[self.body].count = count;
-            }
+                int count = Instance.GetCount(body);
+                if (info.rejected || info.damageType.damageType.HasFlag(DamageType.BypassBlock) || info.damage <= body.healthComponent.fullCombinedHealth * Instance.DamageThreshold / 100.0f)
+                {
+                    if (count > 0)
+                    {
+                        Instance.counts[body].count = count;
+                    }
 
-            orig(self, info);
+                    return;
+                }
+
+                if (count > 0)
+                {
+                    CountAndCharges value = Instance.counts[body];
+                    if (value.charges > 0)
+                    {
+                        info.damage -= Instance.DamageBlock;
+                        info.damage = Mathf.Max(0.0f, info.damage);
+                        if (info.damage == 0)
+                        {
+                            EffectData effectData = new EffectData
+                            {
+                                origin = info.position,
+                                rotation = Util.QuaternionSafeLookRotation((info.force != Vector3.zero) ? info.force : UnityEngine.Random.onUnitSphere)
+                            };
+                            EffectManager.SpawnEffect(HealthComponent.AssetReferences.bearEffectPrefab, effectData, transmit: true);
+                            info.rejected = true;
+                        }
+
+                        --value.charges;
+                        if (value.charges % Instance.BlockCount == 0)
+                        {
+                            Instance.ignore = true;
+                            body.inventory.RemoveItem(Instance.ItemDef);
+                            body.inventory.GiveItem(DehydratedRaindrops.Instance.ItemDef);
+                            Instance.ignore = false;
+                            --value.count;
+
+                            CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, Instance.ItemDef.itemIndex, DehydratedRaindrops.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
+                            Util.PlaySound("InfusedRaindrops", body.gameObject);
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -195,6 +171,7 @@ namespace ROTA2.Items
         public override ItemTier Tier => ItemTier.NoTier;
         public override ItemTag[] ItemTags => [ItemTag.WorldUnique];
         public override string ItemIconPath => "ROTA2.Icons.dehydrated_raindrops.png";
+        public override bool Removable => false;
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += AddCooldownReduction;

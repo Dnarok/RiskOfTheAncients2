@@ -29,7 +29,7 @@ namespace ROTA2
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Dnarok";
         public const string PluginName = "RiskOfTheAncients2";
-        public const string PluginVersion = "1.1.1";
+        public const string PluginVersion = "1.1.2";
 
         public static List<ItemBase> Items = [];
         public static Dictionary<ItemBase, bool> ItemsEnabled = [];
@@ -101,6 +101,7 @@ namespace ROTA2
 
             RoR2Application.onLoad += () =>
             {
+                Log.Debug("Initializing RecipeManager.");
                 RecipeManager.Init();
             };
 
@@ -138,7 +139,6 @@ namespace ROTA2
 
             if (isLookingGlassInstalled)
             {
-                Log.Debug("Adding LookingGlass item definitions.");
                 RoR2Application.onLoad += Compatibility.LookingGlassCompatibility;
             }
         }

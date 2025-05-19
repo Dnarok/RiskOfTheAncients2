@@ -86,6 +86,7 @@ namespace ROTA2.Items
         public override ItemTier Tier => ItemTier.NoTier;
         public override ItemTag[] ItemTags => [ItemTag.WorldUnique];
         public override string ItemIconPath => "ROTA2.Icons.consumed_mango.png";
+        public override bool Removable => false;
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += AddDamage;
