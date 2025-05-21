@@ -30,16 +30,15 @@ namespace ROTA2.Equipment
 
         protected override bool ActivateEquipment(EquipmentSlot slot)
         {
-            var body = slot.characterBody;
-            if (body)
+            if (slot && HasThisEquipment(slot.characterBody))
             {
                 GhostScepterBuff.Instance.ApplyTo(new BuffBase.ApplyParameters
                 {
-                    victim = body,
+                    victim = slot.characterBody,
                     duration = EtherealDuration
                 });
 
-                Util.PlaySound("GhostScepter", body.gameObject);
+                Util.PlaySound("GhostScepter", slot.characterBody.gameObject);
             }
 
             return true;

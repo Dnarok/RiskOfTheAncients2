@@ -29,7 +29,7 @@ namespace ROTA2
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Dnarok";
         public const string PluginName = "RiskOfTheAncients2";
-        public const string PluginVersion = "1.1.2";
+        public const string PluginVersion = "1.1.3";
 
         public static List<ItemBase> Items = [];
         public static Dictionary<ItemBase, bool> ItemsEnabled = [];
@@ -141,6 +141,9 @@ namespace ROTA2
             {
                 RoR2Application.onLoad += Compatibility.LookingGlassCompatibility;
             }
+
+            // network debugging
+            // On.RoR2.Networking.NetworkManagerSystemSteam.OnClientConnect += (s, u, t) => { };
         }
 
         private void Update()

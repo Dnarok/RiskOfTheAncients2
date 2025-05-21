@@ -35,7 +35,7 @@ namespace ROTA2.Equipment
 
         protected override bool ActivateEquipment(EquipmentSlot slot)
         {
-            if (slot && slot.characterBody && slot.characterBody.inventory)
+            if (slot && HasThisEquipment(slot.characterBody))
             {
                 slot.characterBody.inventory.SetEquipmentIndexForSlot(EquipmentIndex.None, slot.activeEquipmentSlot);
                 slot.characterBody.inventory.GiveItem(ConsumedMoonShard.Instance.ItemDef);

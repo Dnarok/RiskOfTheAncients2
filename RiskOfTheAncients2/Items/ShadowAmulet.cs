@@ -1,6 +1,7 @@
 ﻿using BepInEx.Configuration;
 using R2API;
 using RoR2;
+using ROTA2.Buffs;
 using System;
 using UnityEngine;
 
@@ -19,7 +20,6 @@ namespace ROTA2.Items
         public override void Hooks()
         {
             CharacterBody.onBodyInventoryChangedGlobal += OnInventoryChanged;
-            RecalculateStatsAPI.GetStatCoefficients += AddAttackSpeed;
         }
 
         public override void Init(ConfigFile configuration)
@@ -47,18 +47,6 @@ namespace ROTA2.Items
                 body.gameObject.AddComponent<ShadowAmuletBehavior>();
             }
         }
-        private void AddAttackSpeed(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs args)
-        {
-            int count = GetCount(body);
-            if (count > 0)
-            {
-                ShadowAmuletBehavior behavior = body.GetComponent<ShadowAmuletBehavior>();
-                if (behavior && behavior.invisible)
-                {
-                    args.attackSpeedMultAdd += AttackSpeedBase / 100.0f + AttackSpeedPerStack / 100.0f * (count - 1);
-                }
-            }
-        }
 
         public class ShadowAmuletBehavior : MonoBehaviour
         {
@@ -74,6 +62,20 @@ namespace ROTA2.Items
             }
             void Update()
             {
+                int count = Instance.GetCount(body);
+                if (count == 0)
+                {
+                    if (invisible)
+                    {
+                        body.RemoveBuff(RoR2Content.Buffs.Cloak);
+                        body.SetBuffCount(ShadowAmuletBuff.Instance.BuffDef.buffIndex, 0);
+                        body.MarkAllStatsDirty();
+                        invisible = false;
+                        last_invisible = false;
+                    }
+                    return;
+                }
+
                 if (body.notMovingStopwatch >= ShadowAmulet.Instance.StandingStillDuration)
                 {
                     invisible = true;
@@ -86,12 +88,19 @@ namespace ROTA2.Items
                 if (invisible && !last_invisible)
                 {
                     body.AddBuff(RoR2Content.Buffs.Cloak);
+                    ShadowAmuletBuff.Instance.ApplyTo(new BuffBase.ApplyParameters
+                    {
+                        victim = body,
+                        stacks = count,
+                        max_stacks = count,
+                    });
                     Util.PlaySound("ShadowAmulet", body.gameObject);
                     body.MarkAllStatsDirty();
                 }
                 else if (!invisible && last_invisible)
                 {
                     body.RemoveBuff(RoR2Content.Buffs.Cloak);
+                    body.SetBuffCount(ShadowAmuletBuff.Instance.BuffDef.buffIndex, 0);
                     body.MarkAllStatsDirty();
                 }
 

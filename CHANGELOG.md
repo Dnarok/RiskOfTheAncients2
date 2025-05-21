@@ -1,6 +1,15 @@
+## 1.1.3
+- Added Arcane Boots (equipment), Mekansm (equipment), and Guardian Greaves (equipment).
+- Fixed ROTA2 equipment activating on everyone in multiplayer lobbies.
+- Shadow Amulet: Fixed invisibility portion still working after removing item.
+- Tranquil Boots: Fixed Cautious Slug sound still playing after removing item.
+- Black King Bar: Fixed NRE.
+- Fixed tierless items being able to be removed at a scrapper.
+- Code improvements.
+
 ## 1.1.2
 - Infused Raindrops: Rearranged implementation again. If this fails one more time, this item is getting reworked.
-- Infused Raindrops and Shadow Amulet: Added LookingGlass integration.
+- Tranquil Boots and Shadow Amulet: Added LookingGlass integration.
 - Added safety checks for when items are disabled, should prevent some null derefs.
 
 ## 1.1.1

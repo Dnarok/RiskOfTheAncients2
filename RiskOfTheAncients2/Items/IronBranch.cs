@@ -24,11 +24,25 @@ namespace ROTA2.Items
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>
             {
                 ILCursor cursor = new(il);
-                cursor.GotoNext(
-                    x => x.MatchLdarg(0),
-                    x => x.MatchCall<CharacterBody>("get_maxHealth"),
-                    x => x.MatchCall<CharacterBody>("set_maxBonusHealth")
-                );
+                var index = 0;
+                ILLabel label = null;
+                if (!cursor.TryGotoNext
+                    (
+                        x => x.MatchLdsfld(typeof(DLC2Content.Items), nameof(DLC2Content.Items.BoostAllStats)),
+                        x => x.MatchCallOrCallvirt<Inventory>(nameof(Inventory.GetItemCount)),
+                        x => x.MatchStloc(out index)
+                    ) ||
+                    !cursor.TryGotoNext
+                    (
+                        x => x.MatchLdloc(index),
+                        x => x.MatchLdcI4(0),
+                        x => x.MatchBle(out label)
+                    )
+                ){
+                    Log.Error("Failed to match IL for Iron Branch, it won't do anything!");
+                    return;
+                }
+                cursor.GotoLabel(label);
                 cursor.Emit(OpCodes.Ldarg_0);
                 cursor.EmitDelegate<Action<CharacterBody>>((body) =>
                 {

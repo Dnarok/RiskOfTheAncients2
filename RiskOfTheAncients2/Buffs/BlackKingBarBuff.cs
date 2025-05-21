@@ -29,7 +29,7 @@ namespace ROTA2.Buffs
 
         private void OnTakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo info)
         {
-            if (self && self.body && HasThisBuff(self.body))
+            if (self && HasThisBuff(self.body))
             {
                 info.damage *= 1.0f - (BlackKingBar.Instance.DamageReduction / 100.0f);
             }
@@ -38,7 +38,7 @@ namespace ROTA2.Buffs
         }
         private void OnAddDot(On.RoR2.DotController.orig_AddDot orig, DotController self, GameObject attackerObject, float duration, DotController.DotIndex dotIndex, float damageMultiplier, uint? maxStacksFromAttacker, float? totalDamage, DotController.DotIndex? preUpgradeDotIndex)
         {
-            if (self && self.victimBody && HasThisBuff(self.victimBody))
+            if (self && HasThisBuff(self.victimBody))
             {
                 // don't add it.
                 return;
@@ -50,7 +50,7 @@ namespace ROTA2.Buffs
         }
         private void OnAddBuff_BuffDef(On.RoR2.CharacterBody.orig_AddBuff_BuffDef orig, CharacterBody self, BuffDef buffDef)
         {
-            if (self && buffDef.isDebuff && !buffDef.isCooldown && HasThisBuff(self))
+            if (self && buffDef != null && buffDef.isDebuff && !buffDef.isCooldown && HasThisBuff(self))
             {
                 // don't add it.
                 return;
@@ -88,7 +88,7 @@ namespace ROTA2.Buffs
         }
         private void OnAddTimedBuff_BuffDef_float(On.RoR2.CharacterBody.orig_AddTimedBuff_BuffDef_float orig, CharacterBody self, BuffDef buffDef, float duration)
         {
-            if (self && buffDef.isDebuff && !buffDef.isCooldown && HasThisBuff(self))
+            if (self && buffDef != null && buffDef.isDebuff && !buffDef.isCooldown && HasThisBuff(self))
             {
                 // don't add it.
                 return;
@@ -100,7 +100,7 @@ namespace ROTA2.Buffs
         }
         private void OnAddTimedBuff_BuffDef_float_int(On.RoR2.CharacterBody.orig_AddTimedBuff_BuffDef_float_int orig, CharacterBody self, BuffDef buffDef, float duration, int maxStacks)
         {
-            if (self && buffDef.isDebuff && !buffDef.isCooldown && HasThisBuff(self))
+            if (self && buffDef != null && buffDef.isDebuff && !buffDef.isCooldown && HasThisBuff(self))
             {
                 // don't add it.
                 return;

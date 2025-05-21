@@ -17,6 +17,7 @@ namespace ROTA2.Equipment
         public override string EquipmentModelPath => "armlet_of_mordiggian.prefab";
         public override bool EquipmentIsLunar => true;
         public override bool EquipmentCanBeRandomlyTriggered => false;
+        public override ColorCatalog.ColorIndex EquipmentColorIndex => ColorCatalog.ColorIndex.LunarItem;
         public override void Init(ConfigFile config)
         {
             CreateConfig(config);
@@ -40,7 +41,7 @@ namespace ROTA2.Equipment
 
         protected override bool ActivateEquipment(EquipmentSlot slot)
         {
-            if (slot && slot.inventory)
+            if (slot && HasThisEquipment(slot.characterBody))
             {
                 EquipmentState state = new()
                 {
@@ -69,6 +70,7 @@ namespace ROTA2.Equipment
         public override bool EquipmentIsLunar => true;
         public override bool EquipmentCanDrop => false;
         public override bool EquipmentCanBeRandomlyTriggered => false;
+        public override ColorCatalog.ColorIndex EquipmentColorIndex => ColorCatalog.ColorIndex.LunarItem;
         public override void Hooks()
         {
             On.RoR2.CharacterBody.OnEquipmentGained += OnEquipmentGained;
@@ -98,7 +100,7 @@ namespace ROTA2.Equipment
 
         protected override bool ActivateEquipment(EquipmentSlot slot)
         {
-            if (slot && slot.inventory)
+            if (slot && HasThisEquipment(slot.characterBody))
             {
                 EquipmentState state = new()
                 {

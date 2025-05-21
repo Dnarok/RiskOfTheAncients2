@@ -1,8 +1,6 @@
 ﻿using BepInEx.Configuration;
-using IL.RoR2.Achievements.Railgunner;
 using RoR2;
 using ROTA2.Buffs;
-using System;
 using UnityEngine;
 
 namespace ROTA2.Items

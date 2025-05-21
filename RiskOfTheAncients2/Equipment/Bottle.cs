@@ -79,7 +79,7 @@ Runes will be removed from the pool until all effects have been seen.";
         protected override bool ActivateEquipment(EquipmentSlot slot)
         {
             var body = slot.characterBody;
-            if (body)
+            if (HasThisEquipment(body))
             {
                 var behavior = body.GetComponent<BottleBehavior>();
                 if (!behavior)

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Utilities;
 using RoR2;
+using ROTA2.Equipment;
 using ROTA2.Items;
 using System;
 using System.Collections;
@@ -12,33 +13,55 @@ namespace ROTA2
 {
     public class RecipeManager
     {
-        public class Recipe
+        public class ItemRecipe
         {
             // map of [item in : amount required]
             public Dictionary<ItemDef, int> inputs { get; set; }
             // [item out : amount made]
             public KeyValuePair<ItemDef, int> output { get; set; }
         }
-
-        public static List<Recipe> recipes = [];
-        public static List<ItemDef> itemsToWatchFor = [];
-
-        public static void Add(Recipe recipe)
+        // equipment -> equipment recipes are necessarily simpler, since you can
+        // only swap two equipment at a time.
+        public class EquipmentRecipe
         {
-            recipes.Add(recipe);
+            public EquipmentDef input_1 { get; set; }
+            public EquipmentDef input_2 { get; set; }
+            public EquipmentDef output { get; set; }
+        }
+
+        public static List<ItemRecipe> item_recipes = [];
+        public static List<ItemDef> itemsToWatchFor = [];
+        public static List<EquipmentRecipe> equipment_recipes = [];
+
+        public static void Add(EquipmentRecipe recipe)
+        {
+            equipment_recipes.Add(recipe);
+        }
+        public static void Add(EquipmentDef input_1, EquipmentDef input_2, EquipmentDef output)
+        {
+            equipment_recipes.Add(new EquipmentRecipe
+            {
+                input_1 = input_1,
+                input_2 = input_2,
+                output = output
+            });
+        }
+        public static void Add(ItemRecipe recipe)
+        {
+            item_recipes.Add(recipe);
         }
         public static void Add(ItemDef[] inputs, ItemDef output)
         {
-            Recipe recipe = new()
+            item_recipes.Add(new ItemRecipe
             {
                 inputs = inputs.Distinct().ToDictionary(x => x, y => 1),
                 output = KeyValuePair.Create(output, 1)
-            };
-            recipes.Add(recipe);
+            });
         }
 
         public static void Init()
         {
+            // ITEM RECIPES //
             if (Plugin.ItemsEnabled[OrbOfVenom.Instance] &&
                 Plugin.ItemsEnabled[OrbOfFrost.Instance] &&
                 Plugin.ItemsEnabled[OrbOfBlight.Instance] &&
@@ -109,8 +132,19 @@ namespace ROTA2
                 ]);
             }
 
+            // EQUIPMENT RECIPES //
+            if (Plugin.EquipmentEnabled[ArcaneBoots.Instance] &&
+                Plugin.EquipmentEnabled[Mekansm.Instance] &&
+                Plugin.EquipmentEnabled[GuardianGreaves.Instance])
+            {
+                Add(ArcaneBoots.Instance.EquipmentDef, Mekansm.Instance.EquipmentDef, GuardianGreaves.Instance.EquipmentDef);
+            }
+
+            // HOOKS //
             CharacterBody.onBodyInventoryChangedGlobal += OnInventoryChanged;
-            Log.Debug($"RecipeManager initialized, added {recipes.Count} recipes and {itemsToWatchFor.Count} items to watch for.");
+            On.RoR2.EquipmentDef.AttemptGrant += OnAttemptGrant;
+            
+            Log.Debug($"RecipeManager initialized, added {item_recipes.Count} item recipes and {itemsToWatchFor.Count} items to watch for, and {equipment_recipes.Count} equipment recipes.");
         }
 
         private static void OnInventoryChanged(CharacterBody body)
@@ -128,6 +162,34 @@ namespace ROTA2
                 }
             }
         }
+        private static void OnAttemptGrant(On.RoR2.EquipmentDef.orig_AttemptGrant orig, ref PickupDef.GrantContext context)
+        {
+            bool callOriginal = true;
+            EquipmentIndex currentEquipmentIndex = context.body.inventory.currentEquipmentIndex;
+            EquipmentIndex equipmentIndex = PickupCatalog.GetPickupDef(context.controller.pickupIndex)?.equipmentIndex ?? EquipmentIndex.None;
+            foreach (EquipmentRecipe recipe in equipment_recipes)
+            {
+                if ((currentEquipmentIndex == recipe.input_1.equipmentIndex &&
+                     equipmentIndex == recipe.input_2.equipmentIndex) ||
+                    (currentEquipmentIndex == recipe.input_2.equipmentIndex &&
+                     equipmentIndex == recipe.input_1.equipmentIndex))
+                {
+                    context.body.inventory.SetEquipmentIndex(recipe.output.equipmentIndex);
+                    context.controller.StartWaitTime();
+                    context.shouldDestroy = true;
+                    context.shouldNotify = false;
+                    CharacterMasterNotificationQueue.PushEquipmentTransformNotification(context.body.master, currentEquipmentIndex, recipe.output.equipmentIndex, default);
+                    CharacterMasterNotificationQueue.PushEquipmentTransformNotification(context.body.master, equipmentIndex, recipe.output.equipmentIndex, default);
+                    callOriginal = false;
+                    break;
+                }
+            }
+
+            if (callOriginal)
+            {
+                orig(ref context);
+            }
+        }
         private class RecipeBehavior : MonoBehaviour
         {
             CharacterBody body;
@@ -140,19 +202,19 @@ namespace ROTA2
             {
                 if (NetworkServer.active && body && body.inventory)
                 {
-                    foreach (Recipe recipe in recipes)
+                    foreach (ItemRecipe ItemRecipe in item_recipes)
                     {
                         bool bail = false;
                         int amount_to_make = int.MaxValue; 
-                        foreach (var item in recipe.inputs.Keys)
+                        foreach (var item in ItemRecipe.inputs.Keys)
                         {
                             int count = body.inventory.GetItemCount(item);
-                            if (count < recipe.inputs[item])
+                            if (count < ItemRecipe.inputs[item])
                             {
                                 bail = true;
                                 break;
                             }
-                            amount_to_make = Math.Min(amount_to_make, count / recipe.inputs[item]);
+                            amount_to_make = Math.Min(amount_to_make, count / ItemRecipe.inputs[item]);
                         }
 
                         if (bail)
@@ -160,15 +222,15 @@ namespace ROTA2
                             continue;
                         }
 
-                        Log.Debug($"Creating {amount_to_make * recipe.output.Value} {recipe.output.Key.nameToken}.");
+                        Log.Debug($"Creating {amount_to_make * ItemRecipe.output.Value} {ItemRecipe.output.Key.nameToken}.");
 
-                        foreach (var pair in recipe.inputs)
+                        foreach (var pair in ItemRecipe.inputs)
                         {
                             body.inventory.RemoveItem(pair.Key, amount_to_make * pair.Value);
 
-                            CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, pair.Key.itemIndex, recipe.output.Key.itemIndex, default);
+                            CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, pair.Key.itemIndex, ItemRecipe.output.Key.itemIndex, default);
                         }
-                        body.inventory.GiveItem(recipe.output.Key, amount_to_make * recipe.output.Value);
+                        body.inventory.GiveItem(ItemRecipe.output.Key, amount_to_make * ItemRecipe.output.Value);
                     }
                 }
             }

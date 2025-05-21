@@ -45,6 +45,7 @@ namespace ROTA2.Equipment
         public virtual bool EquipmentCanDrop { get; } = true;
         public virtual bool EquipmentIsLunar { get; } = false;
         public virtual bool EquipmentCanBeRandomlyTriggered { get; } = true;
+        public virtual ColorCatalog.ColorIndex EquipmentColorIndex { get; } = ColorCatalog.ColorIndex.Equipment;
         public abstract void Init(ConfigFile config);
         public virtual void Hooks()
         { 
@@ -83,6 +84,7 @@ namespace ROTA2.Equipment
             EquipmentDef.isBoss = false;
             EquipmentDef.isLunar = EquipmentIsLunar;
             EquipmentDef.canBeRandomlyTriggered = EquipmentCanBeRandomlyTriggered;
+            EquipmentDef.colorIndex = EquipmentColorIndex;
 
             if (EquipmentIconPath == "")
             {

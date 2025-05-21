@@ -1,6 +1,7 @@
 ﻿using BepInEx.Configuration;
 using R2API;
 using RoR2;
+using ROTA2.Buffs;
 using System;
 using UnityEngine;
 
@@ -20,8 +21,6 @@ namespace ROTA2.Items
         public override void Hooks()
         {
             CharacterBody.onBodyInventoryChangedGlobal += OnInventoryChanged;
-            RecalculateStatsAPI.GetStatCoefficients += AddMovementSpeed;
-            RecalculateStatsAPI.GetStatCoefficients += AddHealthRegeneration;
         }
 
         public override void Init(ConfigFile configuration)
@@ -57,31 +56,6 @@ namespace ROTA2.Items
                 body.gameObject.AddComponent<TranquilBootsBehavior>();
             }
         }
-        private void AddMovementSpeed(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs args)
-        {
-            int count = GetCount(body);
-            if (count > 0)
-            {
-                args.baseMoveSpeedAdd += MovementSpeedBase + MovementSpeedPerStack * (count - 1);
-                TranquilBootsBehavior behavior = body.GetComponent<TranquilBootsBehavior>();
-                if (behavior && behavior.out_of_danger)
-                {
-                    args.baseMoveSpeedAdd += OODMovementSpeedBase + OODMovementSpeedPerStack * (count - 1);
-                }
-            }
-        }
-        private void AddHealthRegeneration(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs args)
-        {
-            int count = GetCount(body);
-            if (count > 0)
-            {
-                TranquilBootsBehavior behavior = body.GetComponent<TranquilBootsBehavior>();
-                if (behavior && behavior.out_of_danger)
-                {
-                    args.baseRegenAdd += OODHealthRegenerationBase + OODHealthRegenerationPerStack * (count - 1) * (1.0f + 0.2f * (body.level - 1));
-                }
-            }
-        }
 
         public class TranquilBootsBehavior : MonoBehaviour
         {
@@ -97,6 +71,19 @@ namespace ROTA2.Items
             }
             void Update()
             {
+                int count = Instance.GetCount(body);
+                if (count == 0)
+                {
+                    if (out_of_danger)
+                    {
+                        body.SetBuffCount(TranquilBootsBuff.Instance.BuffDef.buffIndex, 0);
+                        body.MarkAllStatsDirty();
+                        out_of_danger = false;
+                        last_out_of_danger = false;
+                    }
+                    return;
+                }
+
                 if (body.healthComponent.timeSinceLastHit >= TranquilBoots.Instance.OODDelay)
                 {
                     out_of_danger = true;
@@ -108,11 +95,18 @@ namespace ROTA2.Items
 
                 if (out_of_danger && !last_out_of_danger)
                 {
+                    TranquilBootsBuff.Instance.ApplyTo(new BuffBase.ApplyParameters
+                    {
+                        victim = body,
+                        stacks = count,
+                        max_stacks = count
+                    });
                     Util.PlaySound("Play_item_proc_slug_emerge", body.gameObject);
                     body.MarkAllStatsDirty();
                 }
                 else if (!out_of_danger && last_out_of_danger)
                 {
+                    body.SetBuffCount(TranquilBootsBuff.Instance.BuffDef.buffIndex, 0);
                     Util.PlaySound("Play_item_proc_slug_hide", body.gameObject);
                     body.MarkAllStatsDirty();
                 }

@@ -9,6 +9,7 @@
 	<ItemGroup>
 	  <None Remove="Icons\aeon_disk.png" />
 	  <None Remove="Icons\aeon_disk_cooldown.png" />
+	  <None Remove="Icons\arcane_boots.png" />
 	  <None Remove="Icons\armlet_of_mordiggian.png" />
 	  <None Remove="Icons\armlet_of_mordiggian_toggled.png" />
 	  <None Remove="Icons\assault_cuirass.png" />
@@ -31,11 +32,13 @@
 	  <None Remove="Icons\enchanted_mango.png" />
 	  <None Remove="Icons\fairys_trinket.png" />
 	  <None Remove="Icons\ghost_scepter.png" />
+	  <None Remove="Icons\guardian_greaves.png" />
 	  <None Remove="Icons\healing_salve.png" />
 	  <None Remove="Icons\infused_raindrops.png" />
 	  <None Remove="Icons\iron_branch.png" />
 	  <None Remove="Icons\javelin.png" />
 	  <None Remove="Icons\lance_of_pursuit.png" />
+	  <None Remove="Icons\mekansm.png" />
 	  <None Remove="Icons\moon_shard.png" />
 	  <None Remove="Icons\nemesis_curse.png" />
 	  <None Remove="Icons\nemesis_curse_cooldown.png" />
@@ -87,6 +90,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Icons\aeon_disk.png" />
     <EmbeddedResource Include="Icons\aeon_disk_cooldown.png" />
+    <EmbeddedResource Include="Icons\arcane_boots.png" />
     <EmbeddedResource Include="Icons\armlet_of_mordiggian.png" />
     <EmbeddedResource Include="Icons\armlet_of_mordiggian_toggled.png" />
     <EmbeddedResource Include="Icons\assault_cuirass.png" />
@@ -111,6 +115,7 @@
     <EmbeddedResource Include="Icons\enchanted_mango.png" />
     <EmbeddedResource Include="Icons\fairys_trinket.png" />
     <EmbeddedResource Include="Icons\ghost_scepter.png" />
+    <EmbeddedResource Include="Icons\guardian_greaves.png" />
     <EmbeddedResource Include="Icons\healing_salve.png" />
     <EmbeddedResource Include="Icons\heart_of_tarrasque.png" />
     <EmbeddedResource Include="Icons\infused_raindrops.png" />
@@ -118,6 +123,7 @@
     <EmbeddedResource Include="Icons\javelin.png" />
     <EmbeddedResource Include="Icons\kaya.png" />
     <EmbeddedResource Include="Icons\lance_of_pursuit.png" />
+    <EmbeddedResource Include="Icons\mekansm.png" />
     <EmbeddedResource Include="Icons\moon_shard.png" />
     <EmbeddedResource Include="Icons\nemesis_curse.png" />
     <EmbeddedResource Include="Icons\nemesis_curse_cooldown.png" />

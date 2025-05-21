@@ -93,7 +93,7 @@ namespace ROTA2.Buffs
                     }
                 }
 
-                parameters.victim.RecalculateStats();
+                parameters.victim.MarkAllStatsDirty();
             }
         }
 
