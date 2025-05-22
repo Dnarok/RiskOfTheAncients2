@@ -13,6 +13,8 @@ namespace ROTA2
 {
     public class RecipeManager
     {
+        // items -> items recipes define some list of items and their amounts
+        // required, and the amount of outputs produced.
         public class ItemRecipe
         {
             // map of [item in : amount required]
@@ -28,11 +30,32 @@ namespace ROTA2
             public EquipmentDef input_2 { get; set; }
             public EquipmentDef output { get; set; }
         }
+        // item + equipment -> equipment
+        public class MixedRecipe
+        {
+            public Dictionary<ItemDef, int> items { get; set; }
+            public EquipmentDef equipment { get; set; }
+            public EquipmentDef output { get; set; }
+        }
 
         public static List<ItemRecipe> item_recipes = [];
         public static List<ItemDef> itemsToWatchFor = [];
         public static List<EquipmentRecipe> equipment_recipes = [];
+        public static List<MixedRecipe> mixed_recipes = [];
 
+        public static void Add(MixedRecipe recipe)
+        {
+            mixed_recipes.Add(recipe);
+        }
+        public static void Add(ItemDef[] items, EquipmentDef equipment, EquipmentDef output)
+        {
+            mixed_recipes.Add(new MixedRecipe
+            {
+                items = items.Distinct().ToDictionary(x => x, y => 1),
+                equipment = equipment, 
+                output = output
+            });
+        }
         public static void Add(EquipmentRecipe recipe)
         {
             equipment_recipes.Add(recipe);
@@ -140,6 +163,13 @@ namespace ROTA2
                 Add(ArcaneBoots.Instance.EquipmentDef, Mekansm.Instance.EquipmentDef, GuardianGreaves.Instance.EquipmentDef);
             }
 
+            // MIXED RECIPES //
+            if (Plugin.ItemsEnabled[TranquilBoots.Instance] &&
+                Plugin.EquipmentEnabled[BootsOfBearing.Instance])
+            {
+                Add([TranquilBoots.Instance.ItemDef], RoR2Content.Equipment.TeamWarCry, BootsOfBearing.Instance.EquipmentDef);
+            }
+
             // HOOKS //
             CharacterBody.onBodyInventoryChangedGlobal += OnInventoryChanged;
             On.RoR2.EquipmentDef.AttemptGrant += OnAttemptGrant;
@@ -231,6 +261,34 @@ namespace ROTA2
                             CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, pair.Key.itemIndex, ItemRecipe.output.Key.itemIndex, default);
                         }
                         body.inventory.GiveItem(ItemRecipe.output.Key, amount_to_make * ItemRecipe.output.Value);
+                    }
+
+                    foreach (MixedRecipe MixedRecipe in mixed_recipes)
+                    {
+                        bool bail = false;
+                        foreach (var item in MixedRecipe.items.Keys)
+                        {
+                            int count = body.inventory.GetItemCount(item);
+                            if (count < MixedRecipe.items[item])
+                            {
+                                bail = true;
+                                break;
+                            }
+                        }
+
+                        if (bail || body.inventory.currentEquipmentIndex != MixedRecipe.equipment.equipmentIndex)
+                        {
+                            continue;
+                        }
+
+                        Log.Debug($"Creating {MixedRecipe.output.nameToken}.");
+
+                        foreach (var pair in MixedRecipe.items)
+                        {
+                            body.inventory.RemoveItem(pair.Key, pair.Value);
+                        }
+                        CharacterMasterNotificationQueue.PushEquipmentTransformNotification(body.master, MixedRecipe.equipment.equipmentIndex, MixedRecipe.output.equipmentIndex, default);
+                        body.inventory.SetEquipmentIndexForSlot(MixedRecipe.output.equipmentIndex, body.inventory.activeEquipmentSlot);
                     }
                 }
             }

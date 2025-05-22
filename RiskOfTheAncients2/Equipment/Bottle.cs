@@ -6,6 +6,9 @@ using ROTA2.Buffs;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 using System.Linq;
+using RoR2.UI;
+using MonoMod.RuntimeDetour;
+using System;
 
 namespace ROTA2.Equipment
 {
@@ -31,11 +34,19 @@ Runes will be removed from the pool until all effects have been seen.";
         public override float EquipmentCooldown => BottleCooldown;
         public override string EquipmentIconPath => "ROTA2.Icons.bottle.png";
         public override string EquipmentModelPath => "bottle.prefab";
+        public override void Hooks()
+        {
+            var target = typeof(EquipmentIcon).GetMethod(nameof(EquipmentIcon.SetDisplayData), System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var destination = typeof(Bottle).GetMethod(nameof(ModifyDisplayData), System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            new Hook(target, destination, this);
+        }
+
         public override void Init(ConfigFile config)
         {
             CreateConfig(config);
             CreateLanguageTokens();
             CreateEquipmentDef();
+            Hooks();
         }
 
         public float AmplifyDamageBonus;
@@ -74,6 +85,81 @@ Runes will be removed from the pool until all effects have been seen.";
             WaterStocksRestored                 = config.Bind("Equipment: " + EquipmentName, "Water Stocks Restored",                   1.0f,   "").Value;
             WisdomExperience                    = config.Bind("Equipment: " + EquipmentName, "Wisdom Percent Of Level Requirement",     50.0f,  "").Value;
             BottleCooldown                      = config.Bind("Equipment: " + EquipmentName, "Cooldown",                                45.0f,  "").Value;
+        }
+
+        private string AmplifyDamageIconPath    = "ROTA2.Icons.bottle_amplify_damage.png";
+        private string ArcaneIconPath           = "ROTA2.Icons.bottle_arcane.png";
+        private string BountyIconPath           = "ROTA2.Icons.bottle_bounty.png";
+        private string HasteIconPath            = "ROTA2.Icons.bottle_haste.png";
+        private string IllusionIconPath         = "ROTA2.Icons.bottle_illusion.png";
+        private string InvisibilityIconPath     = "ROTA2.Icons.bottle_invisibility.png";
+        private string RegenerationIconPath     = "ROTA2.Icons.bottle_regeneration.png";
+        private string ShieldIconPath           = "ROTA2.Icons.bottle_shield.png";
+        private string WaterIconPath            = "ROTA2.Icons.bottle_water.png";
+        private string WisdomIconPath           = "ROTA2.Icons.bottle_wisdom.png";
+        private void ModifyDisplayData(Action<EquipmentIcon, EquipmentIcon.DisplayData> orig, EquipmentIcon self, EquipmentIcon.DisplayData data)
+        {
+            orig(self, data);
+            if (self && self.targetEquipmentSlot && self.targetEquipmentSlot.characterBody && self.currentDisplayData.equipmentDef == EquipmentDef)
+            {
+                BottleBehavior behavior = self.targetEquipmentSlot.characterBody.GetComponent<BottleBehavior>();
+                if (!behavior)
+                {
+                    behavior = self.targetEquipmentSlot.characterBody.gameObject.AddComponent<BottleBehavior>();
+                }
+                if (behavior)
+                {
+                    Texture new_texture = null;
+                    switch (behavior.PeekNext())
+                    {
+                        // amplify damage
+                        case 0:
+                            new_texture = Plugin.ExtractSprite(AmplifyDamageIconPath).texture;
+                            break;
+                        // arcane
+                        case 1:
+                            new_texture = Plugin.ExtractSprite(ArcaneIconPath).texture;
+                            break;
+                        // bounty
+                        case 2:
+                            new_texture = Plugin.ExtractSprite(BountyIconPath).texture;
+                            break;
+                        // haste
+                        case 3:
+                            new_texture = Plugin.ExtractSprite(HasteIconPath).texture;
+                            break;
+                        // invisibility
+                        case 4:
+                            new_texture = Plugin.ExtractSprite(InvisibilityIconPath).texture;
+                            break;
+                        // illusion
+                        case 5:
+                            new_texture = Plugin.ExtractSprite(IllusionIconPath).texture;
+                            break;
+                        // regeneration
+                        case 6:
+                            new_texture = Plugin.ExtractSprite(RegenerationIconPath).texture;
+                            break;
+                        // shield
+                        case 7:
+                            new_texture = Plugin.ExtractSprite(ShieldIconPath).texture;
+                            break;
+                        // water
+                        case 8:
+                            new_texture = Plugin.ExtractSprite(WaterIconPath).texture;
+                            break;
+                        // wisdom
+                        case 9:
+                            new_texture = Plugin.ExtractSprite(WisdomIconPath).texture;
+                            break;
+                    }
+
+                    if (new_texture)
+                    {
+                        self.iconImage.texture = new_texture;
+                    }
+                }
+            }
         }
 
         protected override bool ActivateEquipment(EquipmentSlot slot)
@@ -251,7 +337,7 @@ Runes will be removed from the pool until all effects have been seen.";
             {
                 if (runes.Count == 0)
                 {
-                    runes = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+                    runes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
                     Util.ShuffleList(runes);
                 }
 
@@ -261,6 +347,12 @@ Runes will be removed from the pool until all effects have been seen.";
             }
             public int PeekNext()
             {
+                if (runes.Count == 0)
+                {
+                    runes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+                    Util.ShuffleList(runes);
+                }
+
                 return runes[^1];
             }
         }
@@ -320,9 +412,9 @@ Runes will be removed from the pool until all effects have been seen.";
                 if (gameObject)
                 {
                     position = gameObject.transform.position;
-                    Object.Destroy(gameObject);
+                    UnityEngine.Object.Destroy(gameObject);
                 }
-                Object.Destroy(card);
+                UnityEngine.Object.Destroy(card);
 
                 summon.position = position;
             }

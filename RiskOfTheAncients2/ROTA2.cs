@@ -13,6 +13,7 @@ using System.Reflection;
 using UnityEngine;
 using BepInEx.Bootstrap;
 using UnityEngine.AddressableAssets;
+using Newtonsoft.Json.Utilities;
 
 namespace ROTA2
 {
@@ -29,7 +30,7 @@ namespace ROTA2
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Dnarok";
         public const string PluginName = "RiskOfTheAncients2";
-        public const string PluginVersion = "1.1.3";
+        public const string PluginVersion = "1.1.4";
 
         public static List<ItemBase> Items = [];
         public static Dictionary<ItemBase, bool> ItemsEnabled = [];
@@ -103,6 +104,29 @@ namespace ROTA2
             {
                 Log.Debug("Initializing RecipeManager.");
                 RecipeManager.Init();
+            };
+
+            On.RoR2.Items.ContagiousItemManager.Init += (orig) =>
+            {
+                List<ItemDef.Pair> pairs = new();
+                Debug.Log("Adding void items.");
+
+                foreach (ItemBase item in Items)
+                {
+                    if (item.VoidFor != null)
+                    {
+                        Debug.Log($"Pairing {item.ItemDef.nameToken} to {item.VoidFor.nameToken}.");
+                        pairs.Add(new ItemDef.Pair() 
+                        { 
+                            itemDef1 = item.VoidFor,
+                            itemDef2 = item.ItemDef
+                        });
+                    }
+                }
+
+                var relationships = ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem];
+                ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem] = relationships.Union(pairs).ToArray();
+                orig();
             };
 
             if (disabledSkill == null)

@@ -1,3 +1,11 @@
+## 1.1.4
+- Added Boots of Bearing (equipment), and Pirate Hat (void red).
+- Enchanted Mango: Now regenerates from Consumed Mango at the start of the stage.
+- Tranquil Boots: Fixed missing movement speed.
+- Bottle: Icon now changes based on the contained rune.
+- Bottle: Fixed Wisdom never showing up again after the first one.
+- Armlet of Mordiggian: No longer two separate equipment (active/inactive).
+
 ## 1.1.3
 - Added Arcane Boots (equipment), Mekansm (equipment), and Guardian Greaves (equipment).
 - Fixed ROTA2 equipment activating on everyone in multiplayer lobbies.

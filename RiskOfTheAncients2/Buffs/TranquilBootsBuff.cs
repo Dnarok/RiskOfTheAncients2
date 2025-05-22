@@ -28,7 +28,7 @@ namespace ROTA2.Buffs
             int count = GetBuffCount(body);
             if (count > 0)
             {
-                args.attackSpeedMultAdd += TranquilBoots.Instance.OODMovementSpeedBase / 100.0f + TranquilBoots.Instance.OODMovementSpeedPerStack / 100.0f * (count - 1);
+                args.moveSpeedMultAdd += TranquilBoots.Instance.OODMovementSpeedBase + TranquilBoots.Instance.OODMovementSpeedPerStack * (count - 1);
             }
         }
         private void AddHealthRegeneration(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs args)

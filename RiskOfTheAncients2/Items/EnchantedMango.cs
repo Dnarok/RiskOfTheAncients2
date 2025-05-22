@@ -4,6 +4,7 @@ using R2API;
 using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
+using System;
 
 namespace ROTA2.Items
 {
@@ -13,7 +14,7 @@ namespace ROTA2.Items
         public override string ConfigItemName => ItemName;
         public override string ItemTokenName => "ENCHANTED_MANGO";
         public override string ItemTokenPickup => "Receive bonus damage and reset all skill cooldowns at low health. Consumed on use.";
-        public override string ItemTokenDesc => $"Taking damage to below {Health($"{HealthThreshold}% health")} {Utility("consumes")} this item, {Utility("resetting all skill cooldowns")} and increasing {Damage("damage")} by {Damage($"{DamageBonus}%")} for {Damage($"{DamageDuration} seconds")}.";
+        public override string ItemTokenDesc => $"Taking damage to below {Health($"{HealthThreshold}% health")} {Utility("consumes")} this item, {Utility("resetting all skill cooldowns")} and increasing {Damage("damage")} by {Damage($"{DamageBonus}%")} for {Damage($"{DamageDuration} seconds")}. Regenerates at the start of each stage.";
         public override string ItemTokenLore => "The bittersweet flavors of Jidi Isle are irresistible to amphibians.";
         public override ItemTier Tier => ItemTier.Tier1;
         public override string ItemModelPath => "enchanted_mango.prefab";
@@ -22,6 +23,7 @@ namespace ROTA2.Items
         {
             On.RoR2.HealthComponent.UpdateLastHitTime += OnHit;
         }
+
         public override void Init(ConfigFile configuration)
         {
             CreateConfig(configuration);
@@ -90,6 +92,7 @@ namespace ROTA2.Items
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += AddDamage;
+            RoR2.Stage.onStageStartGlobal += OnStageStart;
         }
         public override void Init(ConfigFile configuration)
         {
@@ -113,6 +116,22 @@ namespace ROTA2.Items
             if (count > 0)
             {
                 args.damageMultAdd += DamageBase / 100.0f + DamagePerStack / 100.0f * (count - 1);
+            }
+        }
+        private void OnStageStart(Stage stage)
+        {
+            if (CharacterMaster.instancesList != null)
+            {
+                foreach (CharacterMaster master in CharacterMaster.instancesList)
+                {
+                    int count = GetCount(master);
+                    if (count > 0)
+                    {
+                        master.inventory.RemoveItem(ItemDef, count);
+                        master.inventory.GiveItem(EnchantedMango.Instance.ItemDef, count);
+                        CharacterMasterNotificationQueue.PushItemTransformNotification(master, ItemDef.itemIndex, EnchantedMango.Instance.ItemDef.itemIndex, default);
+                    }
+                }
             }
         }
     }

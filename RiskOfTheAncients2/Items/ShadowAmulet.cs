@@ -1,8 +1,6 @@
 ﻿using BepInEx.Configuration;
-using R2API;
 using RoR2;
 using ROTA2.Buffs;
-using System;
 using UnityEngine;
 
 namespace ROTA2.Items

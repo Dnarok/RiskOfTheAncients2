@@ -6,7 +6,7 @@ A mod that adds Dota 2 items to Risk of Rain 2!
 |Icon|Name|Description|Tier|
 |-|-|-|:-:|
 |<img src="https://raw.githubusercontent.com/Dnarok/RiskOfTheAncients2/refs/heads/main/RiskOfTheAncients2/Icons/boots_of_speed.png" width="128"/>|**Boots of Speed**|Increases base movement speed by `0.7` (+`0.7` per stack).|White
-|<img src="https://raw.githubusercontent.com/Dnarok/RiskOfTheAncients2/refs/heads/main/RiskOfTheAncients2/Icons/enchanted_mango.png" width="128"/>|**Enchanted Mango**|Taking damage to below `40%` health consumes this item, resetting all skill cooldowns and increasing damage by `50%` for `5` seconds.|White|
+|<img src="https://raw.githubusercontent.com/Dnarok/RiskOfTheAncients2/refs/heads/main/RiskOfTheAncients2/Icons/enchanted_mango.png" width="128"/>|**Enchanted Mango**|Taking damage to below `40%` health consumes this item, resetting all skill cooldowns and increasing damage by `50%` for `5` seconds. Regenerates at the start of each stage.|White|
 |<img src="https://raw.githubusercontent.com/Dnarok/RiskOfTheAncients2/refs/heads/main/RiskOfTheAncients2/Icons/fairys_trinket.png" width="128"/>|**Fairy's Trinket**|Reduces skill cooldowns by `2.5%` (+`2.5%` per stack), and increases damage by `3.5%` (+`3.5%` per stack) and maximum health by `10` (+`10` per stack).|White|
 |<img src="https://raw.githubusercontent.com/Dnarok/RiskOfTheAncients2/refs/heads/main/RiskOfTheAncients2/Icons/healing_salve.png" width="128"/>|**Healing Salve**|Activating your Special skill heals you for `2%` (+`2%` per stack) of your maximum health per second for `5` seconds. Healing is `interrupted by taking damage`.|White|
 |<img src="https://raw.githubusercontent.com/Dnarok/RiskOfTheAncients2/refs/heads/main/RiskOfTheAncients2/Icons/javelin.png" width="128"/>|**Javelin**|`20%` chance on hit to hit again for `25%` (+`15%` per stack) TOTAL damage.|White|
@@ -30,6 +30,7 @@ A mod that adds Dota 2 items to Risk of Rain 2!
 |<img src="https://raw.githubusercontent.com/Dnarok/RiskOfTheAncients2/refs/heads/main/RiskOfTheAncients2/Icons/radiance.png" width="128"/>|**Radiance**|Ignite enemies within `25m` (+`10m` per stack) for `200%` (+`200%` per stack) base damage. Additionally, enemies burn for `100%` (+`50%` per stack) base damage and are blinded, causing them to miss `15%` of the time. Unaffected by luck.|Red|
 |<img src="https://raw.githubusercontent.com/Dnarok/RiskOfTheAncients2/refs/heads/main/RiskOfTheAncients2/Icons/aeon_disk.png" width="128"/>|**Aeon Disk**|Taking lethal damage leaves you at `1` health, makes you invulnerable for `2.5` (+`1` per stack) seconds, and increases your movement speed by `50%` for `5` (+`2` per stack) seconds. Recharges every `90` seconds.|Red|
 |<img src="https://raw.githubusercontent.com/Dnarok/RiskOfTheAncients2/refs/heads/main/RiskOfTheAncients2/Icons/assault_cuirass.png" width="128"/>|**Assault Cuirass**|Increase attack speed by `40%` (+`40%` per stack) and armor by `30` (+`30` per stack) for allies within `30m`.|Red|
+|<img src="https://raw.githubusercontent.com/Dnarok/RiskOfTheAncients2/refs/heads/main/RiskOfTheAncients2/Icons/pirate_hat.png" width="128"/>|**Pirate Hat**|When a monster is killed it has a `3%` (+`1.5%` per stack) chance of dropping scrap.|Void Red (Sonorous Whispers)|
 |<img src="https://raw.githubusercontent.com/Dnarok/RiskOfTheAncients2/refs/heads/main/RiskOfTheAncients2/Icons/nemesis_curse.png" width="128"/>|**Nemesis Curse**|`100%` chance on hit to curse an enemy, increasing all damage they take by `100%` (+`100%` per stack, exponential) for `5` seconds. Recharges every `7.5` seconds.<br>`100%` chance on **being hit** to be **cursed**, receiving **permanent damage**.|Lunar|
 
 The following items and equipment cannot drop - instead, they are combinations of other items or equipment that will automatically be given when you own all of the components. Equipment that are made from two other equipment will give you the item when you try to swap them.
@@ -43,6 +44,7 @@ The following items and equipment cannot drop - instead, they are combinations o
 |<img src="https://raw.githubusercontent.com/Dnarok/RiskOfTheAncients2/refs/heads/main/RiskOfTheAncients2/Icons/tranquil_boots.png" width="128"/>|**Tranquil Boots**|Increase base movement speed by `0.5` (+`0.5` per stack). Outside of danger, increase base health regeneration by +`4.5` hp/s (+`4.5` hp/s per stack) and further increase base movement speed by `0.5` (+`0.5` per stack).|Boots of Speed + Cautious Slug|Green|
 |<img src="https://raw.githubusercontent.com/Dnarok/RiskOfTheAncients2/refs/heads/main/RiskOfTheAncients2/Icons/trident.png" width="128"/>|**Trident**|Reduces skill cooldowns by `12%` (+`12%` per stack) and increases damage by `24%` (+`24%` per stack), maximum health by `80` (+`80` per stack), base health regeneration by +`3.2` hp/s (+`3.2` hp/s per stack), attack speed by `30%` (+`30%` per stack), and movement speed by `30%` (+`30%` per stack).|Kaya + Sange + Yasha|Red|
 |<img src="https://raw.githubusercontent.com/Dnarok/RiskOfTheAncients2/refs/heads/main/RiskOfTheAncients2/Icons/guardian_greaves.png" width="128"/>|**Guardian Greaves**|Heal all allies for `50%` of their maximum health, reset all of their skill cooldowns, and increase their armor by `100` for `8` seconds. `30` second cooldown.|Arcane Boots + Mekansm|Equipment|
+|<img src="https://raw.githubusercontent.com/Dnarok/RiskOfTheAncients2/refs/heads/main/RiskOfTheAncients2/Icons/boots_of_bearing.png" width="128"/>|**Boots of Bearing**|Passively increases base movement speed by `1.2` and base health regeneration by `+5.0` hp/s. Activate to send all allies into a frenzy for `7` seconds, increasing movement speed by `75%` and attack speed by `150%`. `45` second cooldown.|Tranquil Boots + Gorag's Opus|Equipment|
 
 ## Equipment
 |Icon|Name|Description|Cooldown|
@@ -58,7 +60,6 @@ The following items and equipment cannot drop - instead, they are combinations o
 ## Issues
 - Most items are using a placeholder model (Dota 2's item-on-ground box), with a few being pulled from existing Dota 2 item models.
 - No visual effects for things right now.
-- Bottle icon should change based on the contained rune.
 
 ## etc.
 The icon was made by reddit user [piemoO](https://www.reddit.com/user/piemoO).

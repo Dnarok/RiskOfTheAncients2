@@ -21,6 +21,7 @@ namespace ROTA2.Items
         public override void Hooks()
         {
             CharacterBody.onBodyInventoryChangedGlobal += OnInventoryChanged;
+            RecalculateStatsAPI.GetStatCoefficients += AddMovementSpeed;
         }
 
         public override void Init(ConfigFile configuration)
@@ -54,6 +55,14 @@ namespace ROTA2.Items
             if (GetCount(body) > 0 && !body.GetComponent<TranquilBootsBehavior>())
             {
                 body.gameObject.AddComponent<TranquilBootsBehavior>();
+            }
+        }
+        private void AddMovementSpeed(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs args)
+        {
+            int count = GetCount(body);
+            if (count > 0)
+            {
+                args.baseMoveSpeedAdd += MovementSpeedBase + MovementSpeedPerStack * (count - 1);
             }
         }
 

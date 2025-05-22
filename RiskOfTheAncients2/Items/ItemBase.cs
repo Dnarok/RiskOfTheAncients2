@@ -4,6 +4,7 @@ using UnityEngine;
 using BepInEx.Configuration;
 using System;
 using UnityEngine.AddressableAssets;
+using RoR2.ExpansionManagement;
 
 namespace ROTA2.Items
 {
@@ -46,6 +47,7 @@ namespace ROTA2.Items
         public virtual ItemTag[] ItemTags { get; } = [];
         public virtual bool Removable { get; } = true;
         public virtual bool Hidden { get; } = false;
+        public virtual ItemDef VoidFor { get; } = null;
         public abstract void Init(ConfigFile configuration);
         public abstract void Hooks();
 
@@ -77,6 +79,10 @@ namespace ROTA2.Items
             ItemDef.canRemove = Removable;
             ItemDef.deprecatedTier = Tier;
             ItemDef.tags = ItemTags;
+            if (Tier == ItemTier.VoidTier1 || Tier == ItemTier.VoidTier2 || Tier == ItemTier.VoidTier3)
+            {
+                ItemDef.requiredExpansion = Addressables.LoadAssetAsync<ExpansionDef>("RoR2/DLC1/Common/DLC1.asset").WaitForCompletion();
+            }
 
             if (ItemIconPath == "")
             {
