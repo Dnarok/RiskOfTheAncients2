@@ -12,6 +12,7 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"Increase {Damage($"outgoing skill damage")} by {Damage($"{DamageBase}")} {Stack($"(+{DamagePerStack} per stack)")} against {Damage("non-Boss enemies")}.";
         public override string ItemTokenLore => "The axe of a fallen gnome, it allows you to effectively maneuver the forest.";
         public override ItemTier Tier => ItemTier.Tier1;
+        public override ItemTag[] ItemTags => [ItemTag.Damage];
         public override string ItemIconPath => "ROTA2.Icons.quelling_blade.png";
         public override string ItemModelPath => "quelling_blade.prefab";
         public override void Hooks()

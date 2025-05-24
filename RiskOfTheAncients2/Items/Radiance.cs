@@ -16,6 +16,7 @@ namespace ROTA2.Items
         public override string ItemTokenLore => "A divine weapon that causes damage and a bright burning effect that lays waste to nearby enemies.";
         public override string ItemIconPath => "ROTA2.Icons.radiance.png";
         public override ItemTier Tier => ItemTier.Tier3;
+        public override ItemTag[] ItemTags => [ItemTag.Damage];
         public override void Hooks()
         {
             CharacterBody.onBodyInventoryChangedGlobal += OnInventoryChanged;

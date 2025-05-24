@@ -1,10 +1,11 @@
 {
   "name": "RiskOfTheAncients2",
-  "version_number": "1.1.4",
+  "version_number": "1.1.5",
   "website_url": "https://github.com/Dnarok/RiskOfTheAncients2",
   "description": "Dota 2 items in Risk of Rain 2!",
   "dependencies": [
     "bbepis-BepInExPack-5.4.2117",
+    "RiskofThunder-HookGenPatcher-1.2.7",
     "RiskofThunder-R2API_Core-5.1.5",
     "RiskofThunder-R2API_ContentManagement-1.0.9",
     "RiskofThunder-R2API_Dot-1.0.3",

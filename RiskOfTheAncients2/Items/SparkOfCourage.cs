@@ -13,6 +13,7 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"Increases {Damage("damage")} by {Damage($"{DamageBase}%")} {Stack($"(+{DamagePerStack}% per stack)")} when {Health($"above {HealthThreshold}% health")}, and increases {Utility("armor")} by {Utility($"{ArmorBase}")} {Stack($"(+{ArmorPerStack} per stack")} when {Health("below")}.";
         public override string ItemTokenLore => "Be strong, fortunes can change on a dime.";
         public override ItemTier Tier => ItemTier.Tier1;
+        public override ItemTag[] ItemTags => [ItemTag.Utility, ItemTag.Damage];
         public override string ItemIconPath => "ROTA2.Icons.spark_of_courage.png";
         public override void Hooks()
         {

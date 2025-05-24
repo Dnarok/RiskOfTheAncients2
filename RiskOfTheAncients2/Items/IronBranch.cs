@@ -19,6 +19,7 @@ namespace ROTA2.Items
         public override string ItemModelPath => "iron_branch.prefab";
         public override string ItemIconPath => "ROTA2.Icons.iron_branch.png";
         public override ItemTier Tier => ItemTier.Tier1;
+        public override ItemTag[] ItemTags => [ItemTag.Utility, ItemTag.Damage, ItemTag.Healing];
         public override void Hooks()
         {
             IL.RoR2.CharacterBody.RecalculateStats += (il) =>

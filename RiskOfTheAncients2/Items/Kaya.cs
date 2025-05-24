@@ -14,6 +14,7 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"Reduces {Utility("skill cooldowns")} by {Utility($"{SkillCooldownReductionBase}%")} {Stack($"(+{SkillCooldownReductionPerStack}% per stack)")} and increases {Damage("damage")} by {Damage($"{DamageBase}%")} {Stack($"(+{DamagePerStack}% per stack)")}.";
         public override string ItemTokenLore => "The staff of a renowned sorceress, lost for countless millennia.";
         public override ItemTier Tier => ItemTier.Tier2;
+        public override ItemTag[] ItemTags => [ItemTag.Utility, ItemTag.Damage];
         public override string ItemIconPath => "ROTA2.Icons.kaya.png";
         public override void Hooks()
         {

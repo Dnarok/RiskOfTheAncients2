@@ -14,6 +14,7 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"After standing still for {Utility($"{StandingStillDuration} seconds")}, become {Utility("invisible")} and increase {Damage("attack speed")} by {Damage($"{AttackSpeedBase}%")} {Stack($"(+{AttackSpeedPerStack}% per stack)")}.";
         public override string ItemTokenLore => "A small talisman that clouds the senses of one's enemies when held perfectly still.";
         public override ItemTier Tier => ItemTier.Tier2;
+        public override ItemTag[] ItemTags => [ItemTag.Utility, ItemTag.Damage];
         public override string ItemIconPath => "ROTA2.Icons.shadow_amulet.png";
         public override void Hooks()
         {

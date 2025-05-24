@@ -15,6 +15,7 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"Deal an additional {Damage($"{DamageBase}%")} {Stack($"(+{DamagePerStack}% per stack)")} damage when hitting an enemy from {Damage("behind")}.";
         public override string ItemTokenLore => "The gleaming weapon of a tarnished knight haunted by his duties to an unworthy king.";
         public override ItemTier Tier => ItemTier.Tier1;
+        public override ItemTag[] ItemTags => [ItemTag.Damage];
         public override string ItemIconPath => "ROTA2.Icons.lance_of_pursuit.png";
         public override void Hooks()
         {

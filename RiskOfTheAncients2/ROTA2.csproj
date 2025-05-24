@@ -37,6 +37,7 @@
 	  <None Remove="Icons\healing_salve.png" />
 	  <None Remove="Icons\infused_raindrops.png" />
 	  <None Remove="Icons\iron_branch.png" />
+	  <None Remove="Icons\iron_talon.png" />
 	  <None Remove="Icons\javelin.png" />
 	  <None Remove="Icons\lance_of_pursuit.png" />
 	  <None Remove="Icons\mekansm.png" />
@@ -78,9 +79,9 @@
 		<PackageReference Include="R2API.RecalculateStats" Version="1.5.0" />
 		<PackageReference Include="R2API.Sound" Version="1.0.3" />
 
-		<PackageReference Include="UnityEngine.Modules" Version="6000.1.1" IncludeAssets="compile" />
+		<PackageReference Include="UnityEngine.Modules" Version="6000.1.4" IncludeAssets="compile" />
     <PackageReference Include="RiskOfRain2.GameLibs" Version="1.3.7.0-r.0" />
-		<PackageReference Include="MMHOOK.RoR2" Version="2025.5.5" NoWarn="NU1701" />
+		<PackageReference Include="MMHOOK.RoR2" Version="2025.5.23" NoWarn="NU1701" />
 	</ItemGroup>
 
   <ItemGroup>
@@ -123,6 +124,7 @@
     <EmbeddedResource Include="Icons\heart_of_tarrasque.png" />
     <EmbeddedResource Include="Icons\infused_raindrops.png" />
     <EmbeddedResource Include="Icons\iron_branch.png" />
+    <EmbeddedResource Include="Icons\iron_talon.png" />
     <EmbeddedResource Include="Icons\javelin.png" />
     <EmbeddedResource Include="Icons\kaya.png" />
     <EmbeddedResource Include="Icons\lance_of_pursuit.png" />

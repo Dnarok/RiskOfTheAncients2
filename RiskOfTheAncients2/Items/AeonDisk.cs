@@ -15,6 +15,7 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"Taking {Health("lethal damage")} leaves you at {Health("1 health")}, makes you {Utility("invulnerable")} for {Utility($"{InvulnerabilityDurationBase}")} {Stack($"(+{InvulnerabilityDurationPerStack} per stack)")} {Utility("seconds")}, and increases your {Utility("movement speed")} by {Utility($"{MovementSpeed}%")} for {Utility($"{MovementSpeedDurationBase}")} {Stack($"(+{MovementSpeedDurationPerStack} per stack)")} {Utility("seconds")}. Recharges every {Utility($"{Cooldown} seconds")}.";
         public override string ItemTokenLore => "A powerful artifact long ago smuggled out of the Ivory Incubarium. Or so many believe.";
         public override ItemTier Tier => ItemTier.Tier3;
+        public override ItemTag[] ItemTags => [ItemTag.Utility];
         public override string ItemIconPath => "ROTA2.Icons.aeon_disk.png";
         public override void Hooks()
         {

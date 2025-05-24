@@ -13,6 +13,7 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"Activating your {Utility("Special skill")} {Healing("heals")} you for {Healing($"{MaximumHealthRegenerationBase}%")} {Stack($"(+{MaximumHealthRegenerationPerStack}% per stack)")} {Healing("of your maximum health")} per second for {Utility($"{BuffDuration} seconds")}. Healing is {Health("interrupted by taking damage.")}";
         public override string ItemTokenLore => "A magical salve that can quickly mend even the deepest of wounds.";
         public override ItemTier Tier => ItemTier.Tier1;
+        public override ItemTag[] ItemTags => [ItemTag.Healing];
         public override string ItemModelPath => "healing_salve.prefab";
         public override string ItemIconPath => "ROTA2.Icons.healing_salve.png";
         public override void Hooks()

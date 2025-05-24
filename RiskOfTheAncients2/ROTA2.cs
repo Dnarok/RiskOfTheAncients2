@@ -30,7 +30,7 @@ namespace ROTA2
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Dnarok";
         public const string PluginName = "RiskOfTheAncients2";
-        public const string PluginVersion = "1.1.4";
+        public const string PluginVersion = "1.1.5";
 
         public static List<ItemBase> Items = [];
         public static Dictionary<ItemBase, bool> ItemsEnabled = [];
@@ -51,7 +51,7 @@ namespace ROTA2
             string[] resources = Assembly.GetExecutingAssembly().GetManifestResourceNames();
             foreach (string resource in resources)
             {
-                Logger.LogInfo(resource);
+                Log.Info(resource);
             }
 
             using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("ROTA2.models"))
@@ -64,40 +64,50 @@ namespace ROTA2
             {
                 ItemBase item = (ItemBase)System.Activator.CreateInstance(type);
                 ItemsEnabled.Add(item, Config.Bind("Item: " + item.ConfigItemName, "Enabled", true, "Should this item be available?").Value);
-                if (ItemsEnabled[item])
-                {
-                    Items.Add(item);
-                    item.Init(Config);
-                    Logger.LogInfo($"Item: {item.ItemName} initialized!");
-                }
-                else
-                {
-                    Logger.LogInfo($"Item: {item.ItemName} NOT initialized!");
-                }
             }
+
             var EquipmentTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(EquipmentBase)));
             foreach (var type in EquipmentTypes)
             {
                 EquipmentBase equipment = (EquipmentBase)System.Activator.CreateInstance(type);
                 EquipmentEnabled.Add(equipment, Config.Bind("Item: " + equipment.EquipmentName, "Enabled", true, "Should this item be available?").Value);
-                if (EquipmentEnabled[equipment])
+            }
+
+            foreach (var pair in ItemsEnabled)
+            {
+                if (pair.Value)
                 {
-                    Equipment.Add(equipment);
-                    equipment.Init(Config);
-                    Logger.LogInfo($"Equipment: {equipment.EquipmentName} initialized!");
+                    Items.Add(pair.Key);
+                    pair.Key.Init(Config);
+                    Log.Info($"Item: {pair.Key.ItemName} initialized!");
                 }
                 else
                 {
-                    Logger.LogInfo($"Equipment: {equipment.EquipmentName} NOT initialized!");
+                    Log.Warning($"Item: {pair.Key.ItemName} NOT initialized.");
                 }
             }
+
+            foreach (var pair in EquipmentEnabled)
+            {
+                if (pair.Value)
+                {
+                    Equipment.Add(pair.Key);
+                    pair.Key.Init(Config);
+                    Log.Info($"Equipment: {pair.Key.EquipmentName} initialized!");
+                }
+                else
+                {
+                    Log.Warning($"Equipment: {pair.Key.EquipmentName} NOT initialized.");
+                }
+            }
+
             var BuffTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(BuffBase)));
             foreach (var type in BuffTypes)
             {
                 BuffBase buff = (BuffBase)System.Activator.CreateInstance(type);
                 Buffs.Add(buff);
                 buff.Init();
-                Logger.LogInfo($"Buff: {buff.BuffName} initialized!");
+                Log.Info($"Buff: {buff.BuffName} initialized!");
             }
 
             RoR2Application.onLoad += () =>
@@ -109,13 +119,13 @@ namespace ROTA2
             On.RoR2.Items.ContagiousItemManager.Init += (orig) =>
             {
                 List<ItemDef.Pair> pairs = new();
-                Debug.Log("Adding void items.");
+                Log.Debug("Adding void items.");
 
                 foreach (ItemBase item in Items)
                 {
                     if (item.VoidFor != null)
                     {
-                        Debug.Log($"Pairing {item.ItemDef.nameToken} to {item.VoidFor.nameToken}.");
+                        Log.Debug($"Pairing {item.ItemDef.nameToken} to {item.VoidFor.nameToken}.");
                         pairs.Add(new ItemDef.Pair() 
                         { 
                             itemDef1 = item.VoidFor,

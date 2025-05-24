@@ -17,6 +17,7 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"Taking damage to below {Health($"{HealthThreshold}% health")} {Utility("consumes")} this item, {Utility("resetting all skill cooldowns")} and increasing {Damage("damage")} by {Damage($"{DamageBonus}%")} for {Damage($"{DamageDuration} seconds")}. Regenerates at the start of each stage.";
         public override string ItemTokenLore => "The bittersweet flavors of Jidi Isle are irresistible to amphibians.";
         public override ItemTier Tier => ItemTier.Tier1;
+        public override ItemTag[] ItemTags => [ItemTag.Utility, ItemTag.Damage];
         public override string ItemModelPath => "enchanted_mango.prefab";
         public override string ItemIconPath => "ROTA2.Icons.enchanted_mango.png";
         public override void Hooks()

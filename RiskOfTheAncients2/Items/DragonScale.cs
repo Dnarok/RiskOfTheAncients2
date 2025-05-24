@@ -14,6 +14,7 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"{Damage($"{ProcChance}%")} chance on hit to {Damage("burn")} enemies for {Damage($"{DamageBase}%")} {Stack($"(+{DamagePerStack}% per stack)")} base damage.";
         public override string ItemTokenLore => "The remains of a dragon always outvalue the wealth of even the most prodigious hoard.";
         public override ItemTier Tier => ItemTier.Tier1;
+        public override ItemTag[] ItemTags => [ItemTag.Damage];
         public override string ItemIconPath => "ROTA2.Icons.dragon_scale.png";
         public override void Hooks()
         {

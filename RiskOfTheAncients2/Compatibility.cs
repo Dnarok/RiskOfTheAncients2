@@ -308,47 +308,6 @@ namespace ROTA2
                 ItemDefinitions.RegisterItemStatsDef(item, LanceOfPursuit.Instance.ItemDef.itemIndex);
             }
 
-            // Infused Raindrops
-            if (Plugin.ItemsEnabled[InfusedRaindrops.Instance])
-            {
-                item = new();
-                item.descriptions.Add("Blocks Left: ");
-                item.valueTypes.Add(ItemStatsDef.ValueType.Utility);
-                item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
-                item.calculateValues = (master, count) =>
-                {
-                    int total = 0;
-                    if (InfusedRaindrops.Instance.counts.ContainsKey(master.GetBody()))
-                    {
-                        total = InfusedRaindrops.Instance.counts[master.GetBody()].charges;
-                    }
-                    List<float> values =
-                    [
-                        total
-                    ];
-                    return values;
-                };
-                ItemDefinitions.RegisterItemStatsDef(item, InfusedRaindrops.Instance.ItemDef.itemIndex);
-            }
-
-            // Dehydrated Raindrops
-            if (Plugin.ItemsEnabled[DehydratedRaindrops.Instance])
-            {
-                item = new();
-                item.descriptions.Add("Cooldown Reduction: ");
-                item.valueTypes.Add(ItemStatsDef.ValueType.Utility);
-                item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                item.calculateValuesNew = (luck, count, proc) =>
-                {
-                    List<float> values =
-                    [
-                        Utils.GetExponentialStacking(DehydratedRaindrops.Instance.SkillCooldownReductionBase / 100.0f, DehydratedRaindrops.Instance.SkillCooldownReductionPerStack / 100.0f, count)
-                    ];
-                    return values;
-                };
-                ItemDefinitions.RegisterItemStatsDef(item, DehydratedRaindrops.Instance.ItemDef.itemIndex);
-            }
-
             // Iron Branch
             if (Plugin.ItemsEnabled[IronBranch.Instance])
             {
@@ -533,6 +492,24 @@ namespace ROTA2
                 ItemDefinitions.RegisterItemStatsDef(item, ShadowAmulet.Instance.ItemDef.itemIndex);
             }
 
+            // Iron Talon
+            if (Plugin.ItemsEnabled[IronTalon.Instance])
+            {
+                item = new();
+                item.descriptions.Add("Damage: ");
+                item.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                item.calculateValuesNew = (luck, count, proc) =>
+                {
+                    List<float> values =
+                    [
+                        RoR2.Util.ConvertAmplificationPercentageIntoReductionNormalized(IronTalon.Instance.HealthDamageBase / 100.0f + IronTalon.Instance.HealthDamagePerStack / 100.0f * (count - 1))
+                    ];
+                    return values;
+                };
+                ItemDefinitions.RegisterItemStatsDef(item, IronTalon.Instance.ItemDef.itemIndex);
+            }
+
             // Heart of Tarrasque
             if (Plugin.ItemsEnabled[HeartOfTarrasque.Instance])
             {
@@ -619,6 +596,44 @@ namespace ROTA2
                     return values;
                 };
                 ItemDefinitions.RegisterItemStatsDef(item, AssaultCuirass.Instance.ItemDef.itemIndex);
+            }
+
+            // Infused Raindrops
+            if (Plugin.ItemsEnabled[InfusedRaindrops.Instance])
+            {
+                item = new();
+                item.descriptions.Add("Damage Reduction: ");
+                item.valueTypes.Add(ItemStatsDef.ValueType.Armor);
+                item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                item.calculateValuesNew = (luck, count, proc) =>
+                {
+                    List<float> values =
+                    [
+                        InfusedRaindrops.Instance.DamageBlockBase + InfusedRaindrops.Instance.DamageBlockPerStack * (count - 1)
+                    ];
+                    return values;
+                };
+                ItemDefinitions.RegisterItemStatsDef(item, InfusedRaindrops.Instance.ItemDef.itemIndex);
+            }
+
+            // Pirate Hat
+            if (Plugin.ItemsEnabled[PirateHat.Instance])
+            {
+                item = new();
+                item.descriptions.Add("Scrap Chance: ");
+                item.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                item.hasChance = true;
+                item.chanceScaling = ItemStatsDef.ChanceScaling.Linear;
+                item.calculateValuesNew = (luck, count, proc) =>
+                {
+                    List<float> values =
+                    [
+                        Utils.CalculateChanceWithLuck(PirateHat.Instance.DropChanceBase / 100.0f + PirateHat.Instance.DropChancePerStack / 100.0f * (count - 1), luck)
+                    ];
+                    return values;
+                };
+                ItemDefinitions.RegisterItemStatsDef(item, PirateHat.Instance.ItemDef.itemIndex);
             }
 
             // Nemesis Curse

@@ -14,6 +14,7 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"{Damage($"{ProcChance}%")} chance on hit to {Damage("bash")} for {Damage($"{DamageBase}%")} {Stack($"(+{DamagePerStack}% per stack)")} TOTAL damage and {Utility("stun")} enemies for {Utility($"{BashDuration} seconds")}. Recharges every {Utility($"{BashCooldown} seconds")}.";
         public override string ItemTokenLore => "A rather typical spear that can sometimes pierce through an enemy's armor when used to attack.";
         public override ItemTier Tier => ItemTier.Tier2;
+        public override ItemTag[] ItemTags => [ItemTag.Damage];
         public override string ItemIconPath => "ROTA2.Icons.skull_basher.png";
         public override void Hooks()
         {

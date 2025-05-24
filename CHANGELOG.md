@@ -1,3 +1,11 @@
+## 1.1.5
+- Added Iron Talon (green).
+- Infused Raindrops: Reworked.
+  - Old behavior: White. Taking more than `5%` of your maximum health as damage will reduce the damage by `50`. Can occur `10` times per stack before the stack is consumed.
+  - New behavior: Void White (Repulsion Armor Plate). Reduce all incoming damage over `60` by `15` (+`15` per stack). Cannot be reduced below `1`.
+- Assault Cuirass: Aura is now global.
+- Added item tags to all items so they can spawn in the category chests.
+
 ## 1.1.4
 - Added Boots of Bearing (equipment), and Pirate Hat (void red).
 - Enchanted Mango: Now regenerates from Consumed Mango at the start of the stage.

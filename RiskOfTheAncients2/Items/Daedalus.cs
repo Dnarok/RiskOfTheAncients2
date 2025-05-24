@@ -16,6 +16,7 @@ namespace ROTA2.Items
         public override string ItemTokenLore => "A weapon of incredible power that is difficult for even the strongest of warriors to control.";
         public override string ItemIconPath => "ROTA2.Icons.daedalus.png";
         public override ItemTier Tier => ItemTier.Tier2;
+        public override ItemTag[] ItemTags => [ItemTag.Damage];
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += AddCritChance;

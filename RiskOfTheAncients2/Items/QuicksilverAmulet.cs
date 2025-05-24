@@ -16,6 +16,7 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"Increase {Damage("attack speed")} by {Damage($"{AttackSpeedBase}%")} {Stack($"(+{AttackSpeedPerStack}% per stack)")} and {Utility("movement speed")} by {Utility($"{MovementSpeedBase}%")} {Stack($"(+{MovementSpeedPerStack}% per stack)")} for each {Utility("skill on cooldown")}.";
         public override string ItemTokenLore => "An enchanted talisman brimming with a mysterious substance.";
         public override ItemTier Tier => ItemTier.Tier2;
+        public override ItemTag[] ItemTags => [ItemTag.Damage, ItemTag.Utility];
         public override string ItemIconPath => "ROTA2.Icons.quicksilver_amulet.png";
         public override void Hooks()
         {
