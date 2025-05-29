@@ -32,11 +32,13 @@ namespace ROTA2.Items
         public float MaximumHealthRegenerationBase;
         public float MaximumHealthRegenerationPerStack;
         public float BuffDuration;
+        public bool PlaySound;
         public void CreateConfig(ConfigFile configuration)
         {
             MaximumHealthRegenerationBase     = configuration.Bind("Item: " + ItemName, "Maximum Health Regeneration Base",      2.0f, "How much maximum health percentage regeneration should the first stack provide?").Value;
             MaximumHealthRegenerationPerStack = configuration.Bind("Item: " + ItemName, "Maximum Health Regeneration Per Stack", 2.0f, "How much maximum health percentage regeneration should subsequent stacks provide?").Value;
             BuffDuration                      = configuration.Bind("Item: " + ItemName, "Healing Duration",                      5.0f, "How long should the regeneration last?").Value;
+            PlaySound                         = configuration.Bind("Item: " + ItemName, "Play Sound",                            true, "").Value;
         }
 
         private void OnSkill(On.RoR2.CharacterBody.orig_OnSkillActivated orig, CharacterBody body, GenericSkill skill)
@@ -50,7 +52,10 @@ namespace ROTA2.Items
                     duration = BuffDuration
                 });
 
-                Util.PlaySound("HealingSalve", body.gameObject);
+                if (PlaySound)
+                {
+                    Util.PlaySound("HealingSalve", body.gameObject);
+                }
             }
 
             orig(body, skill);

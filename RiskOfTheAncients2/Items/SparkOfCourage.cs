@@ -35,10 +35,10 @@ namespace ROTA2.Items
         public float HealthThreshold;
         public void CreateConfig(ConfigFile configuration)
         {
-            DamageBase = configuration.Bind("Item: " + ItemName, "Initial Damage Bonus", 10.0f, "How much damage should be provided by the first stack?").Value;
-            DamagePerStack = configuration.Bind("Item: " + ItemName, "Stacking Damage Bonus", 10.0f, "How much damage should be provided by subsequent stacks?").Value;
-            ArmorBase = configuration.Bind("Item: " + ItemName, "Initial Armor Bonus", 8.0f, "How much armor should be provided by the first stack?").Value;
-            ArmorPerStack = configuration.Bind("Item: " + ItemName, "Stacking Armor Bonus", 8.0f, "How much armor should be provided by subsequent stacks?").Value;
+            DamageBase = configuration.Bind("Item: " + ItemName, "Initial Damage Bonus", 15.0f, "How much damage should be provided by the first stack?").Value;
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Stacking Damage Bonus", 15.0f, "How much damage should be provided by subsequent stacks?").Value;
+            ArmorBase = configuration.Bind("Item: " + ItemName, "Initial Armor Bonus", 10.0f, "How much armor should be provided by the first stack?").Value;
+            ArmorPerStack = configuration.Bind("Item: " + ItemName, "Stacking Armor Bonus", 10.0f, "How much armor should be provided by subsequent stacks?").Value;
             HealthThreshold = configuration.Bind("Item: " + ItemName, "Health Threshold", 50.0f, "At what percent of maximum health should the bonus flip from damage to armor?").Value;
         }
 

@@ -27,8 +27,8 @@ namespace ROTA2.Equipment
         private void CreateConfig(ConfigFile config)
         {
             AvatarDuration       = config.Bind("Equipment: " + EquipmentName, "Avatar Duration",           6.0f,  "How long should the immunity and damage reduction last?").Value;
-            DamageReduction      = config.Bind("Equipment: " + EquipmentName, "Incoming Damage Reduction", 25.0f, "What percentage of incoming damage should be reduced while active?").Value;
-            BlackKingBarCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown",                  75.0f, "").Value;
+            DamageReduction      = config.Bind("Equipment: " + EquipmentName, "Incoming Damage Reduction", 35.0f, "What percentage of incoming damage should be reduced while active?").Value;
+            BlackKingBarCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown",                  65.0f, "").Value;
         }
 
         protected override bool ActivateEquipment(EquipmentSlot slot)

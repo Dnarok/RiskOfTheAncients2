@@ -154,6 +154,15 @@ namespace ROTA2
                     RoR2Content.Items.HealWhileSafe
                 ]);
             }
+            if (Plugin.ItemsEnabled[BladesOfAttack.Instance] &&
+                Plugin.ItemsEnabled[PhaseBoots.Instance])
+            {
+                Add([BladesOfAttack.Instance.ItemDef, RoR2Content.Items.SprintBonus], PhaseBoots.Instance.ItemDef);
+                itemsToWatchFor.AddRange([
+                    BladesOfAttack.Instance.ItemDef,
+                    RoR2Content.Items.SprintBonus
+                ]);
+            }
 
             // EQUIPMENT RECIPES //
             if (Plugin.EquipmentEnabled[ArcaneBoots.Instance] &&
@@ -228,7 +237,7 @@ namespace ROTA2
             {
                 body = GetComponent<CharacterBody>();
             }
-            void Update()
+            void FixedUpdate()
             {
                 if (NetworkServer.active && body && body.inventory)
                 {

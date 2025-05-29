@@ -326,6 +326,24 @@ namespace ROTA2
                 ItemDefinitions.RegisterItemStatsDef(item, IronBranch.Instance.ItemDef.itemIndex);
             }
 
+            // Blades of Attack
+            if (Plugin.ItemsEnabled[BladesOfAttack.Instance])
+            {
+                item = new();
+                item.descriptions.Add("Damage: ");
+                item.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                item.calculateValuesNew = (luck, count, proc) =>
+                {
+                    List<float> values =
+                    [
+                        BladesOfAttack.Instance.DamageBase / 100.0f + BladesOfAttack.Instance.DamagePerStack / 100.0f * (count - 1)
+                    ];
+                    return values;
+                };
+                ItemDefinitions.RegisterItemStatsDef(item, BladesOfAttack.Instance.ItemDef.itemIndex);
+            }
+
             // Kaya
             if (Plugin.ItemsEnabled[Kaya.Instance])
             {
@@ -532,9 +550,6 @@ namespace ROTA2
             if (Plugin.ItemsEnabled[Radiance.Instance])
             {
                 item = new();
-                item.descriptions.Add("Radius: ");
-                item.valueTypes.Add(ItemStatsDef.ValueType.Damage);
-                item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Meters);
                 item.descriptions.Add("Ignite Damage: ");
                 item.valueTypes.Add(ItemStatsDef.ValueType.Damage);
                 item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
@@ -545,7 +560,6 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Radiance.Instance.RadiusBase + Radiance.Instance.RadiusPerStack * (count - 1),
                         Radiance.Instance.IgniteBase / 100.0f + Radiance.Instance.IgnitePerStack / 100.0f * (count - 1),
                         (Radiance.Instance.BurnBase / 100.0f + Radiance.Instance.BurnPerStack / 100.0f * (count - 1)) * Radiance.Instance.BurnDuration
                     ];
@@ -708,6 +722,28 @@ namespace ROTA2
                     return values;
                 };
                 ItemDefinitions.RegisterItemStatsDef(item, TranquilBoots.Instance.ItemDef.itemIndex);
+            }
+
+            // Phase Boots
+            if (Plugin.ItemsEnabled[PhaseBoots.Instance])
+            {
+                item = new();
+                item.descriptions.Add("Damage: ");
+                item.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                item.descriptions.Add("Sprint Bonus: ");
+                item.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                item.calculateValuesNew = (luck, count, proc) =>
+                {
+                    List<float> values =
+                    [
+                        PhaseBoots.Instance.DamageBase / 100.0f + PhaseBoots.Instance.DamagePerStack / 100.0f * (count - 1),
+                        PhaseBoots.Instance.SprintSpeedBase / 100.0f + PhaseBoots.Instance.SprintSpeedPerStack / 100.0f * (count - 1)
+                    ];
+                    return values;
+                };
+                ItemDefinitions.RegisterItemStatsDef(item, PhaseBoots.Instance.ItemDef.itemIndex);
             }
 
             // Kaya and Sange

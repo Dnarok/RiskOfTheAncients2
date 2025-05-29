@@ -36,6 +36,7 @@ namespace ROTA2.Items
         public float MovementSpeedDurationBase;
         public float MovementSpeedDurationPerStack;
         public float Cooldown;
+        public bool PlaySound;
         public void CreateConfig(ConfigFile configuration)
         {
             InvulnerabilityDurationBase     = configuration.Bind("Item: " + ItemName, "Invulnerability Duration Base",      2.5f,  "").Value;
@@ -44,6 +45,7 @@ namespace ROTA2.Items
             MovementSpeedDurationBase       = configuration.Bind("Item: " + ItemName, "Movement Speed Duration Base",       5.0f,  "").Value;
             MovementSpeedDurationPerStack   = configuration.Bind("Item: " + ItemName, "Movement Speed Duration Per Stack",  2.0f,  "").Value;
             Cooldown                        = configuration.Bind("Item: " + ItemName, "Cooldown",                           90.0f, "").Value;
+            PlaySound                       = configuration.Bind("Item: " + ItemName, "Play Sound",                         true,  "").Value;
         }
 
         private void OnHit(On.RoR2.HealthComponent.orig_UpdateLastHitTime orig, RoR2.HealthComponent self, float damageValue, Vector3 damagePosition, bool damageIsSilent, GameObject attacker, bool delayedDamage, bool firstHitOfDelayedDamage)
@@ -69,7 +71,10 @@ namespace ROTA2.Items
                     duration = Cooldown
                 });
 
-                Util.PlaySound("AeonDisk", self.body.gameObject);
+                if (PlaySound)
+                {
+                    Util.PlaySound("AeonDisk", self.body.gameObject);
+                }
             }
 
             orig(self, damageValue, damagePosition, damageIsSilent, attacker, delayedDamage, firstHitOfDelayedDamage);

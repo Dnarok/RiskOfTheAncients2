@@ -267,12 +267,15 @@ Runes will be removed from the pool until all effects have been seen.";
         }
         void DoIllusion(CharacterBody body)
         {
-            for (int i = 0; i < IllusionCount; ++i)
+            if (body.inventory.GetItemCount(RoR2Content.Items.Ghost) <= 0)
             {
-                SpawnIllusion(body);
-            }
+                for (int i = 0; i < IllusionCount; ++i)
+                {
+                    SpawnIllusion(body);
+                }
 
-            Util.PlaySound("Illusion", body.gameObject);
+                Util.PlaySound("Illusion", body.gameObject);
+            }
         }
         void DoRegeneration(CharacterBody body)
         {

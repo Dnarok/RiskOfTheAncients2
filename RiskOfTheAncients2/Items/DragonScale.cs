@@ -35,8 +35,8 @@ namespace ROTA2.Items
         public void CreateConfig(ConfigFile configuration)
         {
             ProcChance = configuration.Bind("Item: " + ItemName, "Proc Chance", 20.0f, "What is the chance on hit to proc?").Value;
-            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Base", 60.0f, "How much base damage should the burn do with the first stack?").Value;
-            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 60.0f, "How much extra base damage should the burn do with subsequent stacks?").Value;
+            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Base", 70.0f, "How much base damage should the burn do with the first stack?").Value;
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 70.0f, "How much extra base damage should the burn do with subsequent stacks?").Value;
             BurnDuration = configuration.Bind("Item: " + ItemName, "Burn Duration", 3.0f, "How long should each stack of burn last?").Value;
         }
 

@@ -105,7 +105,7 @@ namespace ROTA2.Items
                 body = GetComponent<CharacterBody>();
                 stocks = new();
             }
-            void Update()
+            void FixedUpdate()
             {
                 if (QuicksilverAmulet.Instance.GetCount(body) <= 0 || !body.skillLocator || !NetworkServer.active || (body.healthComponent && !body.healthComponent.alive))
                 {

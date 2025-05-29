@@ -122,9 +122,9 @@ namespace ROTA2.Equipment
                 health = GetComponent<HealthComponent>();
             }
 
-            void Update()
+            void FixedUpdate()
             {
-                elapsed += Time.deltaTime;
+                elapsed += Time.fixedDeltaTime;
                 if (elapsed >= tick)
                 {
                     elapsed -= tick;

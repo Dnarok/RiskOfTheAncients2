@@ -14,6 +14,7 @@
 	  <None Remove="Icons\armlet_of_mordiggian_toggled.png" />
 	  <None Remove="Icons\assault_cuirass.png" />
 	  <None Remove="Icons\black_king_bar.png" />
+	  <None Remove="Icons\blades_of_attack.png" />
 	  <None Remove="Icons\boots_of_bearing.png" />
 	  <None Remove="Icons\bottle.png" />
 	  <None Remove="Icons\bottle_arcane.png" />
@@ -48,6 +49,7 @@
 	  <None Remove="Icons\orb_of_corrosion.png" />
 	  <None Remove="Icons\orb_of_frost.png" />
 	  <None Remove="Icons\orb_of_venom.png" />
+	  <None Remove="Icons\phase_boots.png" />
 	  <None Remove="Icons\pirate_hat.png" />
 	  <None Remove="Icons\quelling_blade.png" />
 	  <None Remove="Icons\quicksilver_amulet.png" />
@@ -98,6 +100,7 @@
     <EmbeddedResource Include="Icons\armlet_of_mordiggian_toggled.png" />
     <EmbeddedResource Include="Icons\assault_cuirass.png" />
     <EmbeddedResource Include="Icons\black_king_bar.png" />
+    <EmbeddedResource Include="Icons\blades_of_attack.png" />
     <EmbeddedResource Include="Icons\boots_of_bearing.png" />
     <EmbeddedResource Include="Icons\boots_of_speed.png" />
     <EmbeddedResource Include="Icons\bottle.png" />
@@ -136,6 +139,7 @@
     <EmbeddedResource Include="Icons\orb_of_corrosion.png" />
     <EmbeddedResource Include="Icons\orb_of_frost.png" />
     <EmbeddedResource Include="Icons\orb_of_venom.png" />
+    <EmbeddedResource Include="Icons\phase_boots.png" />
     <EmbeddedResource Include="Icons\pirate_hat.png" />
     <EmbeddedResource Include="Icons\quelling_blade.png" />
     <EmbeddedResource Include="Icons\quicksilver_amulet.png" />

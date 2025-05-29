@@ -84,7 +84,7 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count > 0)
             {
-                arguments.baseRegenAdd += BaseHealthRegenerationBase + BaseHealthRegenerationPerStack * (count - 1);
+                arguments.baseRegenAdd += (BaseHealthRegenerationBase + BaseHealthRegenerationPerStack * (count - 1)) * (1 + 0.2f * body.level);
             }
         }
     }

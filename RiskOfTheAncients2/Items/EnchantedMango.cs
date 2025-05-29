@@ -36,11 +36,13 @@ namespace ROTA2.Items
         public float HealthThreshold;
         public float DamageBonus;
         public float DamageDuration;
+        public bool PlaySound;
         public void CreateConfig(ConfigFile configuration)
         {
             HealthThreshold = configuration.Bind("Item: " + ItemName, "Health Threshold", 40.0f, "At what percent of health should this item activate?").Value;
             DamageBonus     = configuration.Bind("Item: " + ItemName, "Damage Bonus",     50.0f, "How much bonus damage should be provided by activation?").Value;
             DamageDuration  = configuration.Bind("Item: " + ItemName, "Damage Duration",  5.0f,  "How long should the bonus damage last?").Value;
+            PlaySound       = configuration.Bind("Item: " + ItemName, "Play Sound",       true,  "").Value;
         }
 
         private void OnHit(On.RoR2.HealthComponent.orig_UpdateLastHitTime orig, RoR2.HealthComponent self, float damageValue, Vector3 damagePosition, bool damageIsSilent, GameObject attacker, bool delayedDamage, bool firstHitOfDelayedDamage)
@@ -73,7 +75,10 @@ namespace ROTA2.Items
                 self.body.inventory.GiveItem(ConsumedMango.Instance.ItemDef);
                 CharacterMasterNotificationQueue.PushItemTransformNotification(self.body.master, EnchantedMango.Instance.ItemDef.itemIndex, ConsumedMango.Instance.ItemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
 
-                Util.PlaySound("EnchantedMango", self.body.gameObject);
+                if (PlaySound)
+                {
+                    Util.PlaySound("EnchantedMango", self.body.gameObject);
+                }
             }
         }
     }

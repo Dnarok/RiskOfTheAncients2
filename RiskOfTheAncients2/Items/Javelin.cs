@@ -37,9 +37,9 @@ namespace ROTA2.Items
         public void CreateConfig(ConfigFile configuration)
         {
             ProcChance       = configuration.Bind("Item: " + ItemName, "Proc Chance",       20.0f,  "What is the chance on hit to proc?").Value;
-            DamageBase       = configuration.Bind("Item: " + ItemName, "Damage Base",       25.0f,  "How much total damage should the bonus hit do on the first stack?").Value;
-            DamagePerStack   = configuration.Bind("Item: " + ItemName, "Damage Per Stack",  15.0f,  "How much extra total damage should the bonus hit do for subsequent stacks?").Value;
-            ProcCoefficient  = configuration.Bind("Item: " + ItemName, "Proc Coefficient",  0.2f,   "What is the proc coefficient of the bonus hit?").Value;
+            DamageBase       = configuration.Bind("Item: " + ItemName, "Damage Base",       20.0f,  "How much total damage should the bonus hit do on the first stack?").Value;
+            DamagePerStack   = configuration.Bind("Item: " + ItemName, "Damage Per Stack",  20.0f,  "How much extra total damage should the bonus hit do for subsequent stacks?").Value;
+            ProcCoefficient  = configuration.Bind("Item: " + ItemName, "Proc Coefficient",  0.3f,   "What is the proc coefficient of the bonus hit?").Value;
         }
 
         private ModdedProcType proc;

@@ -28,7 +28,7 @@ namespace ROTA2.Buffs
             int count = GetBuffCount(body);
             if (count > 0)
             {
-                args.moveSpeedMultAdd += TranquilBoots.Instance.OODMovementSpeedBase + TranquilBoots.Instance.OODMovementSpeedPerStack * (count - 1);
+                args.baseMoveSpeedAdd += TranquilBoots.Instance.OODMovementSpeedBase + TranquilBoots.Instance.OODMovementSpeedPerStack * (count - 1);
             }
         }
         private void AddHealthRegeneration(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs args)
@@ -36,7 +36,7 @@ namespace ROTA2.Buffs
             int count = GetBuffCount(body);
             if (count > 0)
             {
-                args.baseRegenAdd += TranquilBoots.Instance.OODHealthRegenerationBase + TranquilBoots.Instance.OODHealthRegenerationPerStack * (count - 1) * (1.0f + 0.2f * (body.level - 1));
+                args.baseRegenAdd += (TranquilBoots.Instance.OODHealthRegenerationBase + TranquilBoots.Instance.OODHealthRegenerationPerStack * (count - 1)) * (1 + 0.2f * (body.level - 1));
             }
         }
     }

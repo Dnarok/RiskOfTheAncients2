@@ -21,7 +21,10 @@ namespace ROTA2.Items
         {
             RecalculateStatsAPI.GetStatCoefficients += AddCritChance;
             RecalculateStatsAPI.GetStatCoefficients += AddCritDamage;
-            On.RoR2.HealthComponent.TakeDamage += OnTakeDamage;
+            if (PlaySound)
+            {
+                On.RoR2.HealthComponent.TakeDamage += OnTakeDamage;
+            }
         }
 
 
@@ -36,11 +39,13 @@ namespace ROTA2.Items
         public float CriticalChance;
         public float CriticalDamageBase;
         public float CriticalDamagePerStack;
+        public bool PlaySound;
         private void CreateConfig(ConfigFile configuration)
         {
             CriticalChance         = configuration.Bind("Item: " + ItemName, "Critical Chance",           15.0f, "").Value;
             CriticalDamageBase     = configuration.Bind("Item: " + ItemName, "Critical Damage Base",      20.0f, "").Value;
             CriticalDamagePerStack = configuration.Bind("Item: " + ItemName, "Critical Damage Per Stack", 20.0f, "").Value;
+            PlaySound              = configuration.Bind("Item: " + ItemName, "Play Sound",                true,  "").Value;
         }
 
         private void AddCritChance(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs args)

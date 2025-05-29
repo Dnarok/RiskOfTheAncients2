@@ -12,7 +12,7 @@ namespace ROTA2.Items
         public override string ConfigItemName => ItemName;
         public override string ItemTokenName => "RADIANCE";
         public override string ItemTokenPickup => "Ignite and blind nearby enemies.";
-        public override string ItemTokenDesc => $"{Damage("Ignite")} enemies within {Damage($"{RadiusBase}m")} {Stack($"(+{RadiusPerStack}m per stack)")} for {Damage($"{IgniteBase}%")} {Stack($"(+{IgnitePerStack}% per stack)")} base damage. Additionally, enemies {Damage("burn")} for {Damage($"{BurnBase}%")} {Stack($"(+{BurnPerStack}% per stack)")} base damage and are {Utility("blinded")}, causing them to {Utility($"miss {MissChance}%")} of the time. {Utility("Unaffected by luck")}.";
+        public override string ItemTokenDesc => $"{Damage("Ignite")} enemies within {Damage($"{Radius}m")} for {Damage($"{IgniteBase}%")} {Stack($"(+{IgnitePerStack}% per stack)")} base damage. Additionally, enemies {Damage("burn")} for {Damage($"{BurnBase}%")} {Stack($"(+{BurnPerStack}% per stack)")} base damage and are {Utility("blinded")}, causing them to {Utility($"miss {MissChance}%")} of the time. {Utility("Unaffected by luck")}.";
         public override string ItemTokenLore => "A divine weapon that causes damage and a bright burning effect that lays waste to nearby enemies.";
         public override string ItemIconPath => "ROTA2.Icons.radiance.png";
         public override ItemTier Tier => ItemTier.Tier3;
@@ -29,8 +29,7 @@ namespace ROTA2.Items
             Hooks();
         }
 
-        public float RadiusBase;
-        public float RadiusPerStack;
+        public float Radius;
         public float IgniteBase;
         public float IgnitePerStack;
         public float BurnBase;
@@ -40,14 +39,13 @@ namespace ROTA2.Items
         public float LingerDuration;
         private void CreateConfig(ConfigFile configuration)
         {
-            RadiusBase      = configuration.Bind("Item: " + ItemName, "Radius Base",                25.0f,  "").Value;
-            RadiusPerStack  = configuration.Bind("Item: " + ItemName, "Radius Per Stack",           10.0f,  "").Value;
-            IgniteBase      = configuration.Bind("Item: " + ItemName, "Ignite Base Damage",         200.0f, "").Value;
-            IgnitePerStack  = configuration.Bind("Item: " + ItemName, "Ignite Per Stack Damage",    100.0f, "").Value;
+            Radius          = configuration.Bind("Item: " + ItemName, "Radius",                     30.0f,  "").Value;
+            IgniteBase      = configuration.Bind("Item: " + ItemName, "Ignite Base Damage",         150.0f, "").Value;
+            IgnitePerStack  = configuration.Bind("Item: " + ItemName, "Ignite Per Stack Damage",    150.0f, "").Value;
             BurnBase        = configuration.Bind("Item: " + ItemName, "Burn Base Damage",           100.0f, "").Value;
             BurnPerStack    = configuration.Bind("Item: " + ItemName, "Burn Per Stack Damage",      50.0f,  "").Value;
-            BurnDuration    = configuration.Bind("Item: " + ItemName, "Burn Duration",              5.0f,   "").Value;
-            MissChance      = configuration.Bind("Item: " + ItemName, "Miss Chance",                15.0f,  "").Value;
+            BurnDuration    = configuration.Bind("Item: " + ItemName, "Burn Duration",              3.0f,   "").Value;
+            MissChance      = configuration.Bind("Item: " + ItemName, "Miss Chance",                25.0f,  "").Value;
             LingerDuration  = configuration.Bind("Item: " + ItemName, "Miss Linger Duration",       1.0f,   "").Value;
         }
 
@@ -80,8 +78,7 @@ namespace ROTA2.Items
                 {
                     timer -= 1.0f;
                     int count = Radiance.Instance.GetCount(body);
-                    float radius2 = Radiance.Instance.RadiusBase + Radiance.Instance.RadiusPerStack * (count - 1);
-                    radius2 *= radius2;
+                    float radius2 = Radiance.Instance.Radius * Radiance.Instance.Radius;
                     
                     for (TeamIndex index = TeamIndex.Neutral; index < TeamIndex.Count; index++)
                     {

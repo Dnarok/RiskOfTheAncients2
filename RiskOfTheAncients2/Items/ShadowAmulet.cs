@@ -32,11 +32,13 @@ namespace ROTA2.Items
         public float StandingStillDuration;
         public float AttackSpeedBase;
         public float AttackSpeedPerStack;
+        public float LingerDuration;
         private void CreateConfig(ConfigFile configuration)
         {
-            StandingStillDuration   = configuration.Bind("Item: " + ItemName, "Standing Still Duration", 2.0f, "").Value;
+            StandingStillDuration   = configuration.Bind("Item: " + ItemName, "Standing Still Duration", 1.5f, "").Value;
             AttackSpeedBase         = configuration.Bind("Item: " + ItemName, "Attack Speed Base", 30.0f, "").Value;
             AttackSpeedPerStack     = configuration.Bind("Item: " + ItemName, "Attack Speed Per Stack", 30.0f, "").Value;
+            LingerDuration          = configuration.Bind("Item: " + ItemName, "Linger Duration", 1.0f, "").Value;
         }
 
         private void OnInventoryChanged(CharacterBody body)
@@ -59,7 +61,7 @@ namespace ROTA2.Items
                 invisible = false;
                 last_invisible = false;
             }
-            void Update()
+            void FixedUpdate()
             {
                 int count = Instance.GetCount(body);
                 if (count == 0)
@@ -84,21 +86,23 @@ namespace ROTA2.Items
                     invisible = false;
                 }
 
-                if (invisible && !last_invisible)
+                if (invisible)
                 {
-                    body.AddBuff(RoR2Content.Buffs.Cloak);
-                    ShadowAmuletBuff.Instance.ApplyTo(new BuffBase.ApplyParameters
+                    body.AddTimedBuff(RoR2Content.Buffs.Cloak, Instance.LingerDuration, 1);
+                    if (!last_invisible)
                     {
-                        victim = body,
-                        stacks = count,
-                        max_stacks = count,
-                    });
-                    Util.PlaySound("ShadowAmulet", body.gameObject);
-                    body.MarkAllStatsDirty();
+                        ShadowAmuletBuff.Instance.ApplyTo(new BuffBase.ApplyParameters
+                        {
+                            victim = body,
+                            stacks = count,
+                            max_stacks = count
+                        });
+                        Util.PlaySound("ShadowAmulet", body.gameObject);
+                        body.MarkAllStatsDirty();
+                    }
                 }
                 else if (!invisible && last_invisible)
                 {
-                    body.RemoveBuff(RoR2Content.Buffs.Cloak);
                     body.SetBuffCount(ShadowAmuletBuff.Instance.BuffDef.buffIndex, 0);
                     body.MarkAllStatsDirty();
                 }

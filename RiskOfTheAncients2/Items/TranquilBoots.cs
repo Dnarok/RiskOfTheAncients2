@@ -78,7 +78,7 @@ namespace ROTA2.Items
                 last_out_of_danger = false;
                 out_of_danger = false;
             }
-            void Update()
+            void FixedUpdate()
             {
                 int count = Instance.GetCount(body);
                 if (count == 0)

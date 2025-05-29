@@ -1,3 +1,28 @@
+## 1.1.6 - New items, bug fixes, and a balance pass.
+#### Reset your configs for this one...
+- Added Blades of Attack (white), and Phase Boots (green).
+- Added the option to all items that play a sound to disable their sound.
+  - Daedalus ear destruction can now be avoided!
+- Spark of Courage: Damage base/per stack increased from `10%`/`10%` -> `15%`/`15%`.
+- Spark of Courage: Armor base/per stack increased from `8`/`8` -> `10`/`10`.
+- Javelin: Damage base/per stack rescaled from `25%`/`15%` -> `20%`/`20%`.
+- Javelin: Proc coefficient increased from `0.2` -> `0.3`.
+- Dragon Scale: Burn damage base/per stack increased from `60%`/`60%` -> `70%`/`70%`.
+- Shadow Amulet: Decreased wait time from `2` -> `1.5`.
+- Shadow Amulet: Invisibility now lingers for `1` second after moving.
+- Sange, Sange and Yasha, Kaya and Sange, and Trident: Health regeneration now scales with level.
+  - This occurs in vanilla for most sources of passive health regen.
+- Radiance: Radius rescaled from `25m`/`+10m` to `30m`.
+- Radiance: Ignite damage base/per stack reduced from `200%`/`200%` -> `150%`/`150%`.
+- Radiance: Burn duration reduced from `5` -> `3`.
+- Radiance: Miss chance increased from `15%` -> `25%`.
+  - These changes try to make Radiance less of a free win if you have Ignition Tank, and center its identity more on the unique type of evasion it provides.
+- Black King Bar: Damage reduction increased from `25%` -> `35%`.
+- Black King Bar: Cooldown reduced from `75` -> `65`.
+- Tranquil Boots: Fixed out-of-danger movement speed bonus being way too high.
+- Tranquil Boots: Fixed first stack having less regen per level than expected.
+- Bottle: Fixed illusions being able to summon more illusions.
+
 ## 1.1.5
 - Added Iron Talon (green).
 - Infused Raindrops: Reworked.
