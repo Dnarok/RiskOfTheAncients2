@@ -15,6 +15,7 @@ namespace ROTA2.Items
         public override ItemTier Tier => ItemTier.Tier2;
         public override ItemTag[] ItemTags => [ItemTag.Healing];
         public override string ItemIconPath => "ROTA2.Icons.sange.png";
+        public override string ItemModelPath => "sange.prefab";
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += AddMaximumHealth;

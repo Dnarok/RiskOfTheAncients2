@@ -1,7 +1,8 @@
 ﻿using BepInEx.Configuration;
-using ROTA2.Buffs;
 using RoR2;
+using ROTA2.Buffs;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace ROTA2.Items
@@ -15,6 +16,7 @@ namespace ROTA2.Items
         public override string ItemTokenDesc => $"{Damage("Ignite")} enemies within {Damage($"{Radius}m")} for {Damage($"{IgniteBase}%")} {Stack($"(+{IgnitePerStack}% per stack)")} base damage. Additionally, enemies {Damage("burn")} for {Damage($"{BurnBase}%")} {Stack($"(+{BurnPerStack}% per stack)")} base damage and are {Utility("blinded")}, causing them to {Utility($"miss {MissChance}%")} of the time. {Utility("Unaffected by luck")}.";
         public override string ItemTokenLore => "A divine weapon that causes damage and a bright burning effect that lays waste to nearby enemies.";
         public override string ItemIconPath => "ROTA2.Icons.radiance.png";
+        public override string ItemModelPath => "radiance.prefab";
         public override ItemTier Tier => ItemTier.Tier3;
         public override ItemTag[] ItemTags => [ItemTag.Damage];
         public override void Hooks()
@@ -59,25 +61,61 @@ namespace ROTA2.Items
 
         private class RadianceBehavior : MonoBehaviour
         {
+            static GameObject prefab;
             CharacterBody body;
+            GameObject indicator;
             float timer = 0.0f;
 
             void Awake()
             {
                 body = GetComponent<CharacterBody>();
+                if (prefab == null)
+                {
+                    prefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/NearbyDamageBonus/NearbyDamageBonusIndicator.prefab").WaitForCompletion();
+                }
             }
             void FixedUpdate()
             {
-                if (!body || (body.healthComponent && !body.healthComponent.alive) || !NetworkServer.active || Radiance.Instance.GetCount(body) <= 0)
+                if (!body || (body.healthComponent && !body.healthComponent.alive) || !NetworkServer.active)
                 {
                     return;
+                }
+
+                int count = Radiance.Instance.GetCount(body);
+                if (count <= 0)
+                {
+                    if (indicator != null)
+                    {
+                        Object.Destroy(indicator);
+                        indicator = null;
+                    }
+
+                    return;
+                }
+                else if (count > 0 && indicator == null)
+                {
+                    indicator = Object.Instantiate(prefab, body.corePosition, Quaternion.identity);
+                    foreach (var renderer in indicator.GetComponentsInChildren<Renderer>())
+                    {
+                        renderer.material.SetColor("_TintColor", new UnityEngine.Color()
+                        {
+                            r = 1.0f,
+                            g = 0.6f,
+                            b = 0.0f,
+                            a = 0.5f
+                        });
+                    }
+                    foreach (Transform child in indicator.transform)
+                    {
+                        child.localScale = new Vector3(Instance.Radius * 2, Instance.Radius * 2, Instance.Radius * 2);
+                    }
+                    indicator.GetComponent<NetworkedBodyAttachment>().AttachToGameObjectAndSpawn(body.gameObject);
                 }
 
                 timer += Time.fixedDeltaTime;
                 if (timer > 1.0f)
                 {
                     timer -= 1.0f;
-                    int count = Radiance.Instance.GetCount(body);
                     float radius2 = Radiance.Instance.Radius * Radiance.Instance.Radius;
                     
                     for (TeamIndex index = TeamIndex.Neutral; index < TeamIndex.Count; index++)

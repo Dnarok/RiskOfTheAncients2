@@ -17,6 +17,7 @@ namespace ROTA2.Items
         public override ItemTier Tier => ItemTier.Tier3;
         public override ItemTag[] ItemTags => [ItemTag.Utility, ItemTag.Damage];
         public override string ItemIconPath => "ROTA2.Icons.assault_cuirass.png";
+        public override string ItemModelPath => "assault_cuirass.prefab";
         public override void Hooks()
         {
             CharacterBody.onBodyInventoryChangedGlobal += OnInventoryChanged;

@@ -30,7 +30,7 @@ namespace ROTA2
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Dnarok";
         public const string PluginName = "RiskOfTheAncients2";
-        public const string PluginVersion = "1.1.6";
+        public const string PluginVersion = "1.1.7";
 
         public static List<ItemBase> Items = [];
         public static Dictionary<ItemBase, bool> ItemsEnabled = [];
@@ -58,6 +58,33 @@ namespace ROTA2
             {
                 bundle = AssetBundle.LoadFromStream(stream);
             }
+
+            string[] assets = bundle.GetAllAssetNames();
+            foreach (string asset in assets)
+            {
+                Log.Info(asset);
+            }
+
+            // foreach (var material in bundle.LoadAllAssets<Material>())
+            // {
+            //     var shaderName = material.shader.name;
+            //     Log.Debug("Trying to swap " + shaderName);
+            //     if (shaderName.Contains("Stubbed"))
+            //     {
+            //         shaderName = shaderName.Replace("Stubbed", string.Empty) + ".shader";
+            //         var replacementShader = Addressables.LoadAssetAsync<Shader>(shaderName).WaitForCompletion();
+            // 
+            //         if (replacementShader != null)
+            //         {
+            //             material.shader = replacementShader;
+            //             Log.Debug("Successfully swapped to " + shaderName);
+            //         }
+            //         else
+            //         {
+            //             Log.Error("Failed to load shader " + shaderName);
+            //         }
+            //     }
+            // }
 
             var ItemTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(ItemBase)));
             foreach (var type in ItemTypes)
@@ -183,6 +210,31 @@ namespace ROTA2
         private void Update()
         {
 
+        }
+
+        public static void TrySwapShadersInPrefab(GameObject prefab)
+        {
+            foreach (var renderer in prefab.GetComponentsInChildren<Renderer>())
+            {
+                var material = renderer.material;
+                var shaderName = material.shader.name;
+                Log.Debug("Trying to swap " + shaderName + " in " + prefab.name);
+                if (shaderName.Contains("Stubbed"))
+                {
+                    shaderName = shaderName.Replace("Stubbed", string.Empty) + ".shader";
+                    var replacementShader = Addressables.LoadAssetAsync<Shader>(shaderName).WaitForCompletion();
+
+                    if (replacementShader != null)
+                    {
+                        material.shader = replacementShader;
+                        Log.Debug("Successfully swapped to " + shaderName);
+                    }
+                    else
+                    {
+                        Log.Error("Failed to load shader " + shaderName);
+                    }
+                }
+            }
         }
 
         public static byte[] ExtractResource(string filename)

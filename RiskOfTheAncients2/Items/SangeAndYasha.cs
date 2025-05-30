@@ -15,6 +15,7 @@ namespace ROTA2.Items
         public override ItemTier Tier => ItemTier.Tier2;
         public override ItemTag[] ItemTags => [ItemTag.WorldUnique];
         public override string ItemIconPath => "ROTA2.Icons.sange_and_yasha.png";
+        public override string ItemModelPath => "sange_and_yasha.prefab";
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += AddMaximumHealth;

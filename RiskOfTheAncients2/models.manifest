@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 883067213
+CRC: 349616655
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e25854c08df37e4a4a22015bfb13e8d6
+    Hash: 3840c203a34ae7b0a04a20b0b89f702d
   TypeTreeHash:
     serializedVersion: 2
     Hash: c4fe1fdcbb1a331074c17958100faf9a
@@ -28,11 +28,19 @@ ClassTypes:
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/quelling_blade.prefab
+- Assets/yasha.prefab
+- Assets/black_king_bar.prefab
+- Assets/radiance.prefab
 - Assets/armlet_of_mordiggian.prefab
 - Assets/item_box.prefab
 - Assets/boots_of_speed.prefab
+- Assets/sange.prefab
+- Assets/skull_basher.prefab
 - Assets/healing_salve.prefab
+- Assets/assault_cuirass.prefab
 - Assets/iron_branch.prefab
+- Assets/sange_and_yasha.prefab
 - Assets/enchanted_mango.prefab
+- Assets/radiance_indicator.prefab
 - Assets/bottle.prefab
 Dependencies: []

@@ -16,6 +16,7 @@ namespace ROTA2.Items
         public override ItemTier Tier => ItemTier.Tier2;
         public override ItemTag[] ItemTags => [ItemTag.Damage];
         public override string ItemIconPath => "ROTA2.Icons.skull_basher.png";
+        public override string ItemModelPath => "skull_basher.prefab";
         public override void Hooks()
         {
             On.RoR2.GlobalEventManager.OnHitEnemy += OnHit;

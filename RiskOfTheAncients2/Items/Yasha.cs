@@ -15,6 +15,7 @@ namespace ROTA2.Items
         public override ItemTier Tier => ItemTier.Tier2;
         public override ItemTag[] ItemTags => [ItemTag.Utility, ItemTag.Damage];
         public override string ItemIconPath => "ROTA2.Icons.yasha.png";
+        public override string ItemModelPath => "yasha.prefab";
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += AddAttackSpeed;

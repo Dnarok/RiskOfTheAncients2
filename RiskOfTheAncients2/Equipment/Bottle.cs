@@ -84,7 +84,7 @@ Runes will be removed from the pool until all effects have been seen.";
             WaterHeal                           = config.Bind("Equipment: " + EquipmentName, "Water Maximum Health Percentage",         33.0f,  "").Value;
             WaterStocksRestored                 = config.Bind("Equipment: " + EquipmentName, "Water Stocks Restored",                   1.0f,   "").Value;
             WisdomExperience                    = config.Bind("Equipment: " + EquipmentName, "Wisdom Percent Of Level Requirement",     50.0f,  "").Value;
-            BottleCooldown                      = config.Bind("Equipment: " + EquipmentName, "Cooldown",                                45.0f,  "").Value;
+            BottleCooldown                      = config.Bind("Equipment: " + EquipmentName, "Cooldown",                                40.0f,  "").Value;
         }
 
         private string AmplifyDamageIconPath    = "ROTA2.Icons.bottle_amplify_damage.png";

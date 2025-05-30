@@ -29,6 +29,8 @@ namespace ROTA2.Buffs
                 self.gameObject.layer = LayerIndex.GetAppropriateFakeLayerForTeam(self.teamComponent.teamIndex).intVal;
                 self.characterMotor.Motor.RebuildCollidableLayers();
             }
+
+            orig(self, buffDef);
         }
         private void OnRemove(On.RoR2.CharacterBody.orig_OnBuffFinalStackLost orig, CharacterBody self, BuffDef buffDef)
         {
@@ -37,6 +39,8 @@ namespace ROTA2.Buffs
                 self.gameObject.layer = LayerIndex.GetAppropriateLayerForTeam(self.teamComponent.teamIndex);
                 self.characterMotor.Motor.RebuildCollidableLayers();
             }
+
+            orig(self, buffDef);
         }
     }
 }

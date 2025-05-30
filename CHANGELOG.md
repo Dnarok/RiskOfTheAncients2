@@ -1,3 +1,16 @@
+## 1.1.7 - Bugfix, new models, and some more balance adjustments.
+- Phase Boots: No longer eats OnBuffFirstStackGained and OnBuffFinalStackLost.
+#### These new models are coming from item sets for different heroes.
+- Radiance: Added a model and radius indicator.
+- Sange, Yasha, and Sange and Yasha: Added models.
+- Skull Basher: Added model.
+- Assault Cuirass: Added model.
+#### And some balance changes, of course.
+- Bottle: Reduced cooldown from `45` -> `40`.
+- Armlet of Mordiggian: Increased damage from `50%` -> `60%`.
+- Armlet of Mordiggian: Increased attack speed from `50%` -> `60%`.
+- Armlet of Mordiggian: Reduced cooldown from `6` -> `5`.
+
 ## 1.1.6 - New items, bug fixes, and a balance pass.
 #### Reset your configs for this one...
 - Added Blades of Attack (white), and Phase Boots (green).
