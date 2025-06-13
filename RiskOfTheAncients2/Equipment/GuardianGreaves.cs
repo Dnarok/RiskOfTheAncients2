@@ -1,7 +1,10 @@
 ﻿using BepInEx.Configuration;
+using R2API;
+using RiskOfOptions;
+using RiskOfOptions.Options;
 using RoR2;
 using ROTA2.Buffs;
-using System;
+using UnityEngine.AddressableAssets;
 
 namespace ROTA2.Equipment
 {
@@ -10,28 +13,38 @@ namespace ROTA2.Equipment
         public override string EquipmentName => "Guardian Greaves";
         public override string EquipmentTokenName => "GUARDIAN_GREAVES";
         public override string EquipmentTokenPickup => "Heal all allies, reset all of their skill cooldowns, and give them armor for a short time.";
-        public override string EquipmentTokenDesc => $"{Healing("Heal")} all allies for {Healing($"{MaximumHealthHeal}% of their maximum health")}, {Utility("reset all of their skill cooldowns")}, and increase their {Damage("armor")} by {Damage($"{ArmorBonus}")} for {Utility($"{ArmorBonusDuration} seconds")}.";
+        public override string EquipmentTokenDesc => $"{Healing("Heal")} all allies for {Healing($"{MaximumHealthHeal.Value}% of their maximum health")}, {Utility("reset all of their skill cooldowns")}, and increase their {Damage("armor")} by {Damage($"{ArmorBonus.Value}")} for {Utility($"{ArmorBonusDuration.Value} seconds")}.";
         public override string EquipmentTokenLore => "One of many holy instruments constructed to honor the Omniscience.";
-        public override float EquipmentCooldown => GuardianGreavesCooldown;
-        public override string EquipmentIconPath => "ROTA2.Icons.guardian_greaves.png";
-        public override bool EquipmentCanDrop => false;
+        public override float EquipmentCooldown => GuardianGreavesCooldown.Value;
+        public override string EquipmentDefGUID => Assets.GuardianGreaves.EquipmentDef;
         public override void Init(ConfigFile config)
         {
             CreateConfig(config);
+            CreateSounds();
             CreateLanguageTokens();
             CreateEquipmentDef();
         }
 
-        public float MaximumHealthHeal;
-        public float ArmorBonus;
-        public float ArmorBonusDuration;
-        public float GuardianGreavesCooldown;
+        public ConfigEntry<float> MaximumHealthHeal;
+        public ConfigEntry<float> ArmorBonus;
+        public ConfigEntry<float> ArmorBonusDuration;
+        public ConfigEntry<float> GuardianGreavesCooldown;
         private void CreateConfig(ConfigFile config)
         {
-            MaximumHealthHeal       = config.Bind("Equipment: " + EquipmentName, "Maximum Health Heal", 50.0f, "").Value;
-            ArmorBonus              = config.Bind("Equipment: " + EquipmentName, "Armor Bonus",         100.0f, "").Value;
-            ArmorBonusDuration      = config.Bind("Equipment: " + EquipmentName, "Armor Duration",      8.0f, "").Value;
-            GuardianGreavesCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown",            30.0f, "").Value;
+            MaximumHealthHeal = config.Bind("Equipment: " + EquipmentName, "Maximum Health Heal", 50.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthHeal));
+            ArmorBonus = config.Bind("Equipment: " + EquipmentName, "Armor Bonus", 100.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(ArmorBonus));
+            ArmorBonusDuration = config.Bind("Equipment: " + EquipmentName, "Armor Duration", 8.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(ArmorBonusDuration));
+            GuardianGreavesCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 30.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(GuardianGreavesCooldown));
+        }
+
+        NetworkSoundEventDef sound = null;
+        protected void CreateSounds()
+        {
+            Addressables.LoadAssetAsync<NetworkSoundEventDef>(Assets.GuardianGreaves.NetworkSoundEventDef).Completed += (x) => { ContentAddition.AddNetworkSoundEventDef(x.Result); sound = x.Result; };
         }
 
         protected override bool ActivateEquipment(EquipmentSlot slot)
@@ -56,16 +69,15 @@ namespace ROTA2.Equipment
                             }
                         }
 
-                        ally.healthComponent.HealFraction(MaximumHealthHeal / 100.0f, default);
-                        GuardianGreavesBuff.Instance.ApplyTo(new Buffs.BuffBase.ApplyParameters
-                        {
-                            victim = ally,
-                            duration = ArmorBonusDuration
-                        });
+                        ally.healthComponent.HealFraction(MaximumHealthHeal.Value / 100.0f, default);
+                        GuardianGreavesBuff.ApplyTo(
+                            body: ally,
+                            duration: ArmorBonusDuration.Value
+                        );
                     }
                 }
 
-                Util.PlaySound("GuardianGreaves", slot.characterBody.gameObject);
+                EffectManager.SimpleSoundEffect(sound.index, slot.characterBody.corePosition, true);
             }
 
             return true;

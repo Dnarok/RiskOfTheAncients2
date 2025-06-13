@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1284244208, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
+  m_Name: ItemDef
+  m_EditorClassIdentifier: 
+  deprecatedTier: 0
+  _itemTierDef: {fileID: 0}
+  nameToken: ITEM_BOOTS_OF_SPEED_NAME
+  pickupToken: ITEM_BOOTS_OF_SPEED_PICKUP
+  descriptionToken: ITEM_BOOTS_OF_SPEED_DESCRIPTION
+  loreToken: ITEM_BOOTS_OF_SPEED_LORE
+  unlockableDef: {fileID: 0}
+  pickupModelPrefab: {fileID: 0}
+  pickupModelReference:
+    m_AssetGUID: c6e1c9de7e225d44cb8c0a07516f023d
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  pickupIconSprite: {fileID: 21300000, guid: 3dbb8e95f285c164593c088483a34b25, type: 3}
+  isConsumed: 0
+  hidden: 0
+  canRemove: 1
+  tags: 03000000
+  requiredExpansion: {fileID: 0}

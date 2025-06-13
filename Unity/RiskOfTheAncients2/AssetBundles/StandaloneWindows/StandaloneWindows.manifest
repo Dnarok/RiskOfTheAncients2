@@ -1,0 +1,10 @@
+ManifestFileVersion: 0
+CRC: 1538879223
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: models
+      Dependencies: {}
+    Info_1:
+      Name: particles
+      Dependencies: {}

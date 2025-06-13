@@ -1,5 +1,7 @@
 ﻿using BepInEx.Configuration;
 using R2API;
+using RiskOfOptions;
+using RiskOfOptions.Options;
 using RoR2;
 
 namespace ROTA2.Items
@@ -10,11 +12,9 @@ namespace ROTA2.Items
         public override string ConfigItemName => ItemName;
         public override string ItemTokenName => "BLADES_OF_ATTACK";
         public override string ItemTokenPickup => "Increases damage.";
-        public override string ItemTokenDesc => $"Increases {Damage("damage")} by {Damage($"{DamageBase}%")} {Stack($"(+{DamagePerStack}% per stack)")}.";
+        public override string ItemTokenDesc => $"Increases {Damage("damage")} by {Damage($"{DamageBase.Value}%")} {Stack($"(+{DamagePerStack.Value}% per stack)")}.";
         public override string ItemTokenLore => "The damage of these small, concealable blades should not be underestimated.";
-        public override ItemTier Tier => ItemTier.Tier1;
-        public override ItemTag[] ItemTags => [ItemTag.Damage];
-        public override string ItemIconPath => "ROTA2.Icons.blades_of_attack.png";
+        public override string ItemDefGUID => Assets.BladesOfAttack.ItemDef;
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += AddDamage;
@@ -27,12 +27,14 @@ namespace ROTA2.Items
             Hooks();
         }
 
-        public float DamageBase;
-        public float DamagePerStack;
+        public ConfigEntry<float> DamageBase;
+        public ConfigEntry<float> DamagePerStack;
         private void CreateConfig(ConfigFile configuration)
         {
-            DamageBase      = configuration.Bind("Item: " + ItemName, "Damage Base",      10.0f, "").Value;
-            DamagePerStack  = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 10.0f, "").Value;
+            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Base", 10.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(DamageBase));
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 10.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(DamagePerStack));
         }
 
         private void AddDamage(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs args)
@@ -40,7 +42,7 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count > 0)
             {
-                args.damageMultAdd += DamageBase / 100.0f + DamagePerStack / 100.0f * (count - 1);
+                args.damageMultAdd += DamageBase.Value / 100.0f + DamagePerStack.Value / 100.0f * (count - 1);
             }
         }
     }

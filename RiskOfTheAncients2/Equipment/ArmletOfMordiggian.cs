@@ -1,10 +1,12 @@
 ﻿using BepInEx.Configuration;
-using MonoMod.RuntimeDetour;
+using R2API;
+using RiskOfOptions;
+using RiskOfOptions.Options;
 using RoR2;
 using RoR2.UI;
 using ROTA2.Buffs;
-using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 namespace ROTA2.Equipment
 {
     public class ArmletOfMordiggian : EquipmentBase<ArmletOfMordiggian>
@@ -12,42 +14,58 @@ namespace ROTA2.Equipment
         public override string EquipmentName => "Armlet of Mordiggian";
         public override string EquipmentTokenName => "ARMLET_OF_MORDIGGIAN";
         public override string EquipmentTokenPickup => $"Toggle to increase damage, attack speed, and armor... {Health("BUT remove all healing and lose health rapidly.")}";
-        public override string EquipmentTokenDesc => $"{Utility("Toggle")}, increasing {Damage("damage")} by {Damage($"{DamageBonus}%")}, {Damage("attack speed")} by {Damage($"{AttackSpeedBonus}%")}, and {Damage("armor")} by {Damage($"{ArmorBonus}")}. While {Utility("toggled")}, {Health("prevent all healing")} and {Death($"lose {MaximumHealthLostPerSecond}%")} of your {Health("maximum health")} per second.";
+        public override string EquipmentTokenDesc => $"{Utility("Toggle")}, increasing {Damage("damage")} by {Damage($"{DamageBonus.Value}%")}, {Damage("attack speed")} by {Damage($"{AttackSpeedBonus.Value}%")}, and {Damage("armor")} by {Damage($"{ArmorBonus.Value}")}. While {Utility("toggled")}, {Health("prevent all healing")} and {Death($"lose {MaximumHealthLostPerSecond.Value}%")} of your {Health("maximum health")} per second.";
         public override string EquipmentTokenLore => "Weapon of choice among brutes, the bearer sacrifices his life energy to gain immense strength and power.";
-        public override float EquipmentCooldown => ArmletCooldown;
-        public override string EquipmentIconPath => "ROTA2.Icons.armlet_of_mordiggian.png";
-        public override string EquipmentModelPath => "armlet_of_mordiggian.prefab";
-        public override bool EquipmentIsLunar => true;
-        public override bool EquipmentCanBeRandomlyTriggered => false;
-        public override ColorCatalog.ColorIndex EquipmentColorIndex => ColorCatalog.ColorIndex.LunarItem;
+        public override float EquipmentCooldown => ArmletCooldown.Value;
+        public override string EquipmentDefGUID => Assets.ArmletOfMordiggian.EquipmentDef;
         public override void Hooks()
         {
-            var target = typeof(EquipmentIcon).GetMethod(nameof(EquipmentIcon.SetDisplayData), System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            var destination = typeof(ArmletOfMordiggian).GetMethod(nameof(ModifyDisplayData), System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            new Hook(target, destination, this);
-
+            On.RoR2.UI.EquipmentIcon.SetDisplayData += ModifyDisplayData;
             On.RoR2.CharacterBody.OnEquipmentLost += OnEquipmentLost;
         }
         public override void Init(ConfigFile config)
         {
             CreateConfig(config);
+            CreateSounds();
+            CreateTextures();
             CreateLanguageTokens();
             CreateEquipmentDef();
             Hooks();
         }
 
-        public float DamageBonus;
-        public float AttackSpeedBonus;
-        public float ArmorBonus;
-        public float MaximumHealthLostPerSecond;
-        public float ArmletCooldown;
+        public ConfigEntry<float> DamageBonus;
+        public ConfigEntry<float> AttackSpeedBonus;
+        public ConfigEntry<float> ArmorBonus;
+        public ConfigEntry<float> MaximumHealthLostPerSecond;
+        public ConfigEntry<float> ArmletCooldown;
         private void CreateConfig(ConfigFile config)
         {
-            DamageBonus                 = config.Bind("Equipment: " + EquipmentName, "Active Damage Bonus", 60.0f, "").Value;
-            AttackSpeedBonus            = config.Bind("Equipment: " + EquipmentName, "Active Attack Speed Bonus", 60.0f, "").Value;
-            ArmorBonus                  = config.Bind("Equipment: " + EquipmentName, "Active Armor Bonus", 50.0f, "").Value;
-            MaximumHealthLostPerSecond  = config.Bind("Equipment: " + EquipmentName, "Active Maximum Health Loss Per Second", 5.0f, "").Value;
-            ArmletCooldown              = config.Bind("Equipment: " + EquipmentName, "Cooldown", 5.0f, "").Value;
+            DamageBonus = config.Bind("Equipment: " + EquipmentName, "Active Damage Bonus", 60.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(DamageBonus));
+            AttackSpeedBonus = config.Bind("Equipment: " + EquipmentName, "Active Attack Speed Bonus", 60.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedBonus));
+            ArmorBonus = config.Bind("Equipment: " + EquipmentName, "Active Armor Bonus", 50.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(ArmorBonus));
+            MaximumHealthLostPerSecond = config.Bind("Equipment: " + EquipmentName, "Active Maximum Health Loss Per Second", 5.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthLostPerSecond));
+            ArmletCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 5.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(ArmletCooldown));
+        }
+
+        NetworkSoundEventDef soundOn = null;
+        NetworkSoundEventDef soundOff = null;
+        protected void CreateSounds()
+        {
+            Addressables.LoadAssetAsync<NetworkSoundEventDef>(Assets.ArmletOfMordiggian.SoundOn).Completed += (x) => { ContentAddition.AddNetworkSoundEventDef(x.Result); soundOn = x.Result; };
+            Addressables.LoadAssetAsync<NetworkSoundEventDef>(Assets.ArmletOfMordiggian.SoundOff).Completed += (x) => { ContentAddition.AddNetworkSoundEventDef(x.Result); soundOff = x.Result; };
+        }
+
+        Texture2D OnIcon = null;
+        Texture2D OffIcon = null;
+        protected void CreateTextures()
+        {
+            Addressables.LoadAssetAsync<Sprite>(Assets.ArmletOfMordiggian.IconOn).Completed += (x) => { OnIcon = x.Result.texture; };
+            Addressables.LoadAssetAsync<Sprite>(Assets.ArmletOfMordiggian.IconOff).Completed += (x) => { OffIcon = x.Result.texture; };
         }
 
         protected override bool ActivateEquipment(EquipmentSlot slot)
@@ -57,44 +75,38 @@ namespace ROTA2.Equipment
                 var behavior = slot.characterBody.GetComponent<ArmletOfMordiggianBehavior>();
                 if (behavior)
                 {
-                    slot.characterBody.RemoveBuff(ArmletOfMordiggianBuff.Instance.BuffDef);
+                    slot.characterBody.RemoveBuff(ArmletOfMordiggianBuff.GetBuffDef());
                     slot.characterBody.RemoveBuff(RoR2Content.Buffs.HealingDisabled);
-                    UnityEngine.Object.Destroy(slot.characterBody.GetComponent<ArmletOfMordiggianBehavior>());
-                    Util.PlaySound("ArmletOfMordiggianOff", slot.characterBody.gameObject);
+                    Object.Destroy(slot.characterBody.GetComponent<ArmletOfMordiggianBehavior>());
+
+                    EffectManager.SimpleSoundEffect(soundOff.index, slot.characterBody.corePosition, true);
                 }
                 else
                 {
-                    slot.characterBody.AddBuff(ArmletOfMordiggianBuff.Instance.BuffDef);
+                    slot.characterBody.AddBuff(ArmletOfMordiggianBuff.GetBuffDef());
                     slot.characterBody.AddBuff(RoR2Content.Buffs.HealingDisabled);
                     slot.characterBody.gameObject.AddComponent<ArmletOfMordiggianBehavior>();
-                    Util.PlaySound("ArmletOfMordiggianOn", slot.characterBody.gameObject);
+
+                    EffectManager.SimpleSoundEffect(soundOn.index, slot.characterBody.corePosition, true);
                 }
             }
 
             return true;
         }
 
-        private string OffPath = "ROTA2.Icons.armlet_of_mordiggian.png";
-        private string OnPath = "ROTA2.Icons.armlet_of_mordiggian_toggled.png";
-        private void ModifyDisplayData(Action<EquipmentIcon, EquipmentIcon.DisplayData> orig, EquipmentIcon self, EquipmentIcon.DisplayData data)
+        private void ModifyDisplayData(On.RoR2.UI.EquipmentIcon.orig_SetDisplayData orig, EquipmentIcon self, EquipmentIcon.DisplayData data)
         {
             orig(self, data);
             if (self && self.targetEquipmentSlot && self.targetEquipmentSlot.characterBody && self.currentDisplayData.equipmentDef == EquipmentDef)
             {
-                Texture new_texture = null;
                 var behavior = self.targetEquipmentSlot.characterBody.GetComponent<ArmletOfMordiggianBehavior>();
                 if (!behavior)
                 {
-                    new_texture = Plugin.ExtractSprite(OffPath).texture;
+                    self.iconImage.texture = OffIcon;
                 }
                 else
                 {
-                    new_texture = Plugin.ExtractSprite(OnPath).texture;
-                }
-
-                if (new_texture)
-                {
-                    self.iconImage.texture = new_texture;
+                    self.iconImage.texture = OnIcon;
                 }
             }
         }
@@ -102,10 +114,15 @@ namespace ROTA2.Equipment
         {
             if (equipmentDef == EquipmentDef)
             {
-                self.RemoveBuff(ArmletOfMordiggianBuff.Instance.BuffDef);
+                self.RemoveBuff(ArmletOfMordiggianBuff.GetBuffDef());
                 self.RemoveBuff(RoR2Content.Buffs.HealingDisabled);
-                UnityEngine.Object.Destroy(self.GetComponent<ArmletOfMordiggianBehavior>());
-                Util.PlaySound("ArmletOfMordiggianOff", self.gameObject);
+                var behavior = self.GetComponent<ArmletOfMordiggianBehavior>();
+                if (behavior)
+                {
+                    Object.Destroy(self.GetComponent<ArmletOfMordiggianBehavior>());
+
+                    EffectManager.SimpleSoundEffect(soundOff.index, self.corePosition, true);
+                }
             }
 
             orig(self, equipmentDef);
@@ -135,7 +152,7 @@ namespace ROTA2.Equipment
                     };
                     DamageInfo info = new()
                     {
-                        damage = health.fullCombinedHealth * ArmletOfMordiggian.Instance.MaximumHealthLostPerSecond / 100.0f * tick,
+                        damage = health.fullCombinedHealth * Instance.MaximumHealthLostPerSecond.Value / 100.0f * tick,
                         procCoefficient = 0.0f,
                         damageType = combo,
                         damageColorIndex = DamageColorIndex.Bleed,

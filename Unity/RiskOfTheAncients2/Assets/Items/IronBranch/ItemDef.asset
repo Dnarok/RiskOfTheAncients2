@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1284244208, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
+  m_Name: ItemDef
+  m_EditorClassIdentifier: 
+  deprecatedTier: 0
+  _itemTierDef: {fileID: 0}
+  nameToken: ITEM_IRON_BRANCH_NAME
+  pickupToken: ITEM_IRON_BRANCH_PICKUP
+  descriptionToken: ITEM_IRON_BRANCH_DESCRIPTION
+  loreToken: ITEM_IRON_BRANCH_LORE
+  unlockableDef: {fileID: 0}
+  pickupModelPrefab: {fileID: 0}
+  pickupModelReference:
+    m_AssetGUID: 96c1b567212990d439d3d2d58b19c028
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  pickupIconSprite: {fileID: 21300000, guid: 869ef201cd19be1419b40e2674f26463, type: 3}
+  isConsumed: 0
+  hidden: 0
+  canRemove: 1
+  tags: 010000000200000003000000
+  requiredExpansion: {fileID: 0}

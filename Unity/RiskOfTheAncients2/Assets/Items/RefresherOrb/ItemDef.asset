@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1284244208, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
+  m_Name: ItemDef
+  m_EditorClassIdentifier: 
+  deprecatedTier: 8
+  _itemTierDef: {fileID: 0}
+  nameToken: ITEM_REFRESHER_ORB_NAME
+  pickupToken: ITEM_REFRESHER_ORB_PICKUP
+  descriptionToken: ITEM_REFRESHER_ORB_DESCRIPTION
+  loreToken: ITEM_REFRESHER_ORB_LORE
+  unlockableDef: {fileID: 0}
+  pickupModelPrefab: {fileID: 0}
+  pickupModelReference:
+    m_AssetGUID: bf51569039e3c0c439bc63c8bafaa850
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  pickupIconSprite: {fileID: 21300000, guid: f1045dfb47867ea4e980b010bcbbcc1f, type: 3}
+  isConsumed: 0
+  hidden: 0
+  canRemove: 1
+  tags: 
+  requiredExpansion: {fileID: 0}

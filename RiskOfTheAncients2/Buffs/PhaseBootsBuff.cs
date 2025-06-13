@@ -1,6 +1,4 @@
-﻿using KinematicCharacterController;
-using RoR2;
-using UnityEngine;
+﻿using RoR2;
 
 namespace ROTA2.Buffs
 {
@@ -8,14 +6,7 @@ namespace ROTA2.Buffs
     {
         public override string BuffName => "Phase";
         public override string BuffTokenName => "PHASE_BOOTS_BUFF";
-        public override bool BuffStacks => false;
-        public override bool IsDebuff => false;
-        public override Color BuffColor => Color.white;
-        public override string BuffIconPath => "ROTA2.Icons.phase_boots.png";
-        public override EliteDef BuffEliteDef => null;
-        public override bool IsCooldown => false;
-        public override bool IsHidden => false;
-        public override NetworkSoundEventDef BuffStartSfx => null;
+        public override string BuffDefGUID => Assets.PhaseBoots.BuffDef;
         public override void Hooks()
         {
             On.RoR2.CharacterBody.OnBuffFirstStackGained += OnAdd;

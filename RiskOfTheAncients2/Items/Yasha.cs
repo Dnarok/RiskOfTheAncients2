@@ -1,5 +1,7 @@
 ﻿using BepInEx.Configuration;
 using R2API;
+using RiskOfOptions;
+using RiskOfOptions.Options;
 using RoR2;
 
 namespace ROTA2.Items
@@ -10,12 +12,9 @@ namespace ROTA2.Items
         public override string ConfigItemName => ItemName;
         public override string ItemTokenName => "YASHA";
         public override string ItemTokenPickup => "Increases attack and movement speed. Combines with Sange or Kaya.";
-        public override string ItemTokenDesc => $"Increases {Damage("attack speed")} by {Damage($"{AttackSpeedBase}%")} {Stack($"(+{AttackSpeedPerStack}% per stack)")} and {Utility("movement speed")} by {Utility($"{MovementSpeedBase}%")} {Stack($"(+{MovementSpeedPerStack}% per stack)")}.";
+        public override string ItemTokenDesc => $"Increases {Damage("attack speed")} by {Damage($"{AttackSpeedBase.Value}%")} {Stack($"(+{AttackSpeedPerStack.Value}% per stack)")} and {Utility("movement speed")} by {Utility($"{MovementSpeedBase.Value}%")} {Stack($"(+{MovementSpeedPerStack.Value}% per stack)")}.";
         public override string ItemTokenLore => "Yasha is regarded as the swiftest weapon ever created.";
-        public override ItemTier Tier => ItemTier.Tier2;
-        public override ItemTag[] ItemTags => [ItemTag.Utility, ItemTag.Damage];
-        public override string ItemIconPath => "ROTA2.Icons.yasha.png";
-        public override string ItemModelPath => "yasha.prefab";
+        public override string ItemDefGUID => Assets.Yasha.ItemDef;
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += AddAttackSpeed;
@@ -29,16 +28,20 @@ namespace ROTA2.Items
             Hooks();
         }
 
-        public float AttackSpeedBase;
-        public float AttackSpeedPerStack;
-        public float MovementSpeedBase;
-        public float MovementSpeedPerStack;
+        public ConfigEntry<float> AttackSpeedBase;
+        public ConfigEntry<float> AttackSpeedPerStack;
+        public ConfigEntry<float> MovementSpeedBase;
+        public ConfigEntry<float> MovementSpeedPerStack;
         public void CreateConfig(ConfigFile configuration)
         {
-            AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Attack Speed Bonus", 15.0f, "How much attack speed should be provided by the first stack?").Value;
-            AttackSpeedPerStack = configuration.Bind("Item: " + ItemName, "Stacking Attack Speed Bonus", 15.0f, "How much attack speed should be provided by subsequent stacks?").Value;
-            MovementSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Movement Speed Bonus", 15.0f, "How much movement speed should be provided by the first stack?").Value;
-            MovementSpeedPerStack = configuration.Bind("Item: " + ItemName, "Stacking Movement Speed Bonus", 15.0f, "How much movement speed should be provided by subsequent stacks?").Value;
+            AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Attack Speed Bonus", 15.0f, "How much attack speed should be provided by the first stack?");
+            ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedBase));
+            AttackSpeedPerStack = configuration.Bind("Item: " + ItemName, "Stacking Attack Speed Bonus", 15.0f, "How much attack speed should be provided by subsequent stacks?");
+            ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedPerStack));
+            MovementSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Movement Speed Bonus", 15.0f, "How much movement speed should be provided by the first stack?");
+            ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedBase));
+            MovementSpeedPerStack = configuration.Bind("Item: " + ItemName, "Stacking Movement Speed Bonus", 15.0f, "How much movement speed should be provided by subsequent stacks?");
+            ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedPerStack));
         }
 
         private void AddAttackSpeed(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs arguments)
@@ -46,7 +49,7 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count > 0)
             {
-                arguments.attackSpeedMultAdd += AttackSpeedBase / 100.0f + AttackSpeedPerStack / 100.0f * (count - 1);
+                arguments.attackSpeedMultAdd += AttackSpeedBase.Value / 100.0f + AttackSpeedPerStack.Value / 100.0f * (count - 1);
             }
         }
         private void AddMovementSpeed(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs arguments)
@@ -54,7 +57,7 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count > 0)
             {
-                arguments.moveSpeedMultAdd += MovementSpeedBase / 100.0f + MovementSpeedPerStack / 100.0f * (count - 1);
+                arguments.moveSpeedMultAdd += MovementSpeedBase.Value / 100.0f + MovementSpeedPerStack.Value / 100.0f * (count - 1);
             }
         }
     }

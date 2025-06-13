@@ -1,7 +1,6 @@
-﻿using ROTA2.Items;
-using R2API;
+﻿using R2API;
 using RoR2;
-using UnityEngine;
+using ROTA2.Items;
 
 namespace ROTA2.Buffs
 {
@@ -9,14 +8,7 @@ namespace ROTA2.Buffs
     {
         public override string BuffName => "Lesser Corruption";
         public override string BuffTokenName => "ORB_OF_BLIGHT_BUFF";
-        public override bool BuffStacks => true;
-        public override bool IsDebuff => true;
-        public override Color BuffColor => Color.white;
-        public override string BuffIconPath => "ROTA2.Icons.orb_of_blight.png";
-        public override EliteDef BuffEliteDef => null;
-        public override bool IsCooldown => false;
-        public override bool IsHidden => false;
-        public override NetworkSoundEventDef BuffStartSfx => null;
+        public override string BuffDefGUID => Assets.OrbOfBlight.BuffDef;
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += RemoveArmor;
@@ -27,7 +19,7 @@ namespace ROTA2.Buffs
             int count = GetBuffCount(body);
             if (count > 0)
             {
-                arguments.armorAdd -= OrbOfBlight.Instance.ArmorReduction * count;
+                arguments.armorAdd -= OrbOfBlight.Instance.ArmorReduction.Value * count;
             }
         }
     }

@@ -1,9 +1,7 @@
-﻿using Newtonsoft.Json.Utilities;
-using RoR2;
+﻿using RoR2;
 using ROTA2.Equipment;
 using ROTA2.Items;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -52,7 +50,7 @@ namespace ROTA2
             mixed_recipes.Add(new MixedRecipe
             {
                 items = items.Distinct().ToDictionary(x => x, y => 1),
-                equipment = equipment, 
+                equipment = equipment,
                 output = output
             });
         }
@@ -90,77 +88,85 @@ namespace ROTA2
                 Plugin.ItemsEnabled[OrbOfBlight.Instance] &&
                 Plugin.ItemsEnabled[OrbOfCorrosion.Instance])
             {
-                Add([OrbOfVenom.Instance.ItemDef, OrbOfBlight.Instance.ItemDef, OrbOfFrost.Instance.ItemDef], OrbOfCorrosion.Instance.ItemDef);
+                Add([OrbOfVenom.GetItemDef(), OrbOfBlight.GetItemDef(), OrbOfFrost.GetItemDef()], OrbOfCorrosion.GetItemDef());
                 itemsToWatchFor.AddRange([
-                    OrbOfFrost.Instance.ItemDef,
-                    OrbOfBlight.Instance.ItemDef,
-                    OrbOfVenom.Instance.ItemDef
+                    OrbOfFrost.GetItemDef(),
+                    OrbOfBlight.GetItemDef(),
+                    OrbOfVenom.GetItemDef()
                 ]);
             }
             if (Plugin.ItemsEnabled[KayaAndSange.Instance] &&
                 Plugin.ItemsEnabled[Yasha.Instance] &&
                 Plugin.ItemsEnabled[Trident.Instance])
             {
-                Add([KayaAndSange.Instance.ItemDef, Yasha.Instance.ItemDef], Trident.Instance.ItemDef);
+                Add([KayaAndSange.GetItemDef(), Yasha.GetItemDef()], Trident.GetItemDef());
             }
             if (Plugin.ItemsEnabled[SangeAndYasha.Instance] &&
                 Plugin.ItemsEnabled[Kaya.Instance] &&
                 Plugin.ItemsEnabled[Trident.Instance])
             {
-                Add([SangeAndYasha.Instance.ItemDef, Kaya.Instance.ItemDef], Trident.Instance.ItemDef);
+                Add([SangeAndYasha.GetItemDef(), Kaya.GetItemDef()], Trident.GetItemDef());
             }
             if (Plugin.ItemsEnabled[YashaAndKaya.Instance] &&
                 Plugin.ItemsEnabled[Sange.Instance] &&
                 Plugin.ItemsEnabled[Trident.Instance])
             {
-                Add([YashaAndKaya.Instance.ItemDef, Sange.Instance.ItemDef], Trident.Instance.ItemDef);
+                Add([YashaAndKaya.GetItemDef(), Sange.GetItemDef()], Trident.GetItemDef());
             }
             if (Plugin.ItemsEnabled[Kaya.Instance] &&
                 Plugin.ItemsEnabled[Sange.Instance] &&
                 Plugin.ItemsEnabled[Trident.Instance])
             {
-                Add([Kaya.Instance.ItemDef, Sange.Instance.ItemDef], KayaAndSange.Instance.ItemDef);
+                Add([Kaya.GetItemDef(), Sange.GetItemDef()], KayaAndSange.GetItemDef());
             }
             if (Plugin.ItemsEnabled[Sange.Instance] &&
                 Plugin.ItemsEnabled[Yasha.Instance] &&
                 Plugin.ItemsEnabled[Trident.Instance])
             {
-                Add([Sange.Instance.ItemDef, Yasha.Instance.ItemDef], SangeAndYasha.Instance.ItemDef);
+                Add([Sange.GetItemDef(), Yasha.GetItemDef()], SangeAndYasha.GetItemDef());
             }
             if (Plugin.ItemsEnabled[Yasha.Instance] &&
                 Plugin.ItemsEnabled[Kaya.Instance] &&
                 Plugin.ItemsEnabled[Trident.Instance])
             {
-                Add([Yasha.Instance.ItemDef, Kaya.Instance.ItemDef], YashaAndKaya.Instance.ItemDef);
+                Add([Yasha.GetItemDef(), Kaya.GetItemDef()], YashaAndKaya.GetItemDef());
             }
             if (Plugin.ItemsEnabled[Yasha.Instance] &&
                 Plugin.ItemsEnabled[Kaya.Instance] &&
                 Plugin.ItemsEnabled[Sange.Instance] &&
                 Plugin.ItemsEnabled[Trident.Instance])
             {
-                Add([Yasha.Instance.ItemDef, Kaya.Instance.ItemDef, Sange.Instance.ItemDef], Trident.Instance.ItemDef);
+                Add([Yasha.GetItemDef(), Kaya.GetItemDef(), Sange.GetItemDef()], Trident.GetItemDef());
                 itemsToWatchFor.AddRange([
-                    Yasha.Instance.ItemDef,
-                    Kaya.Instance.ItemDef,
-                    Sange.Instance.ItemDef
+                    Yasha.GetItemDef(),
+                    Kaya.GetItemDef(),
+                    Sange.GetItemDef()
                 ]);
             }
             if (Plugin.ItemsEnabled[BootsOfSpeed.Instance] &&
                 Plugin.ItemsEnabled[TranquilBoots.Instance])
             {
-                Add([BootsOfSpeed.Instance.ItemDef, RoR2Content.Items.HealWhileSafe], TranquilBoots.Instance.ItemDef);
+                Add([BootsOfSpeed.GetItemDef(), RoR2Content.Items.HealWhileSafe], TranquilBoots.GetItemDef());
                 itemsToWatchFor.AddRange([
-                    BootsOfSpeed.Instance.ItemDef,
+                    BootsOfSpeed.GetItemDef(),
                     RoR2Content.Items.HealWhileSafe
                 ]);
             }
             if (Plugin.ItemsEnabled[BladesOfAttack.Instance] &&
                 Plugin.ItemsEnabled[PhaseBoots.Instance])
             {
-                Add([BladesOfAttack.Instance.ItemDef, RoR2Content.Items.SprintBonus], PhaseBoots.Instance.ItemDef);
+                Add([BladesOfAttack.GetItemDef(), RoR2Content.Items.SprintBonus], PhaseBoots.GetItemDef());
                 itemsToWatchFor.AddRange([
-                    BladesOfAttack.Instance.ItemDef,
+                    BladesOfAttack.GetItemDef(),
                     RoR2Content.Items.SprintBonus
+                ]);
+            }
+            if (Plugin.ItemsEnabled[PowerTreads.Instance])
+            {
+                Add([RoR2Content.Items.SprintBonus, RoR2Content.Items.BoostAttackSpeed], PowerTreads.GetItemDef());
+                itemsToWatchFor.AddRange([
+                    RoR2Content.Items.SprintBonus,
+                    RoR2Content.Items.BoostAttackSpeed
                 ]);
             }
 
@@ -169,20 +175,20 @@ namespace ROTA2
                 Plugin.EquipmentEnabled[Mekansm.Instance] &&
                 Plugin.EquipmentEnabled[GuardianGreaves.Instance])
             {
-                Add(ArcaneBoots.Instance.EquipmentDef, Mekansm.Instance.EquipmentDef, GuardianGreaves.Instance.EquipmentDef);
+                Add(ArcaneBoots.GetEquipmentDef(), Mekansm.GetEquipmentDef(), GuardianGreaves.GetEquipmentDef());
             }
 
             // MIXED RECIPES //
             if (Plugin.ItemsEnabled[TranquilBoots.Instance] &&
                 Plugin.EquipmentEnabled[BootsOfBearing.Instance])
             {
-                Add([TranquilBoots.Instance.ItemDef], RoR2Content.Equipment.TeamWarCry, BootsOfBearing.Instance.EquipmentDef);
+                Add([TranquilBoots.GetItemDef()], RoR2Content.Equipment.TeamWarCry, BootsOfBearing.GetEquipmentDef());
             }
 
             // HOOKS //
             CharacterBody.onBodyInventoryChangedGlobal += OnInventoryChanged;
             On.RoR2.EquipmentDef.AttemptGrant += OnAttemptGrant;
-            
+
             Log.Debug($"RecipeManager initialized, added {item_recipes.Count} item recipes and {itemsToWatchFor.Count} items to watch for, and {equipment_recipes.Count} equipment recipes.");
         }
 
@@ -244,7 +250,7 @@ namespace ROTA2
                     foreach (ItemRecipe ItemRecipe in item_recipes)
                     {
                         bool bail = false;
-                        int amount_to_make = int.MaxValue; 
+                        int amount_to_make = int.MaxValue;
                         foreach (var item in ItemRecipe.inputs.Keys)
                         {
                             int count = body.inventory.GetItemCount(item);

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="150">
+	<RootPaths>
+		<ProjectRoot>../..</ProjectRoot>
+		<SourceFilesRoot>../../.cache/Windows</SourceFilesRoot>
+		<SoundBanksRoot>.</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>.</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<SoundBanks>
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{B6CBD692-12EC-CDBA-0932-48F63C40C91F}">
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+			<Plugins>
+				<AudioDevices>
+					<Plugin Id="2317455096" Name="No_Output" LibName="No Output" LibId="11862023"/>
+					<Plugin Id="3859886410" Name="System" LibName="System" LibId="11403271"/>
+				</AudioDevices>
+			</Plugins>
+			<Busses>
+				<Bus Id="3803692087" Name="Master Audio Bus"/>
+			</Busses>
+		</SoundBank>
+		<SoundBank Id="2772149999" Type="User" Language="SFX" Hash="{8F230CF0-DEC6-287F-284D-815E9D913044}">
+			<ShortName>RiskOfTheAncients2Sounds</ShortName>
+			<Path>RiskOfTheAncients2Sounds.bnk</Path>
+			<Media>
+				<File Id="28693738" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>rune_shield.wav</ShortName>
+					<CachePath>SFX/rune_shield_818F3B66.wem</CachePath>
+				</File>
+				<File Id="74064360" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>rune_arcane.wav</ShortName>
+					<CachePath>SFX/rune_arcane_818F3B66.wem</CachePath>
+				</File>
+				<File Id="114285330" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>iron_talon.wav</ShortName>
+					<CachePath>SFX/iron_talon_818F3B66.wem</CachePath>
+				</File>
+				<File Id="143396874" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>ex_machina.wav</ShortName>
+					<CachePath>SFX/ex_machina_818F3B66.wem</CachePath>
+				</File>
+				<File Id="156831162" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>mango.wav</ShortName>
+					<CachePath>SFX/mango_818F3B66.wem</CachePath>
+				</File>
+				<File Id="202951713" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>item_ghost_etherealblade.wav</ShortName>
+					<CachePath>SFX/item_ghost_etherealblade_818F3B66.wem</CachePath>
+				</File>
+				<File Id="244618323" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>moon_shard.wav</ShortName>
+					<CachePath>SFX/moon_shard_818F3B66.wem</CachePath>
+				</File>
+				<File Id="280429653" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>rune_haste.wav</ShortName>
+					<CachePath>SFX/rune_haste_818F3B66.wem</CachePath>
+				</File>
+				<File Id="285067744" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>rune_regen.wav</ShortName>
+					<CachePath>SFX/rune_regen_818F3B66.wem</CachePath>
+				</File>
+				<File Id="305995154" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>item_drum.wav</ShortName>
+					<CachePath>SFX/item_drum_818F3B66.wem</CachePath>
+				</File>
+				<File Id="398886856" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>daedelus.wav</ShortName>
+					<CachePath>SFX/daedelus_818F3B66.wem</CachePath>
+				</File>
+				<File Id="405319993" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>rune_illusion.wav</ShortName>
+					<CachePath>SFX/rune_illusion_818F3B66.wem</CachePath>
+				</File>
+				<File Id="408097234" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>infused_raindrop.wav</ShortName>
+					<CachePath>SFX/infused_raindrop_818F3B66.wem</CachePath>
+				</File>
+				<File Id="476234130" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>midas.wav</ShortName>
+					<CachePath>SFX/midas_818F3B66.wem</CachePath>
+				</File>
+				<File Id="504713812" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>combo_breaker.wav</ShortName>
+					<CachePath>SFX/combo_breaker_818F3B66.wem</CachePath>
+				</File>
+				<File Id="512459058" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>phase_boots.wav</ShortName>
+					<CachePath>SFX/phase_boots_818F3B66.wem</CachePath>
+				</File>
+				<File Id="560199054" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>rune_xp.wav</ShortName>
+					<CachePath>SFX/rune_xp_818F3B66.wem</CachePath>
+				</File>
+				<File Id="575474288" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>dota_item_arcane_boots.wav</ShortName>
+					<CachePath>SFX/dota_item_arcane_boots_818F3B66.wem</CachePath>
+				</File>
+				<File Id="595713856" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>rune_invis.wav</ShortName>
+					<CachePath>SFX/rune_invis_818F3B66.wem</CachePath>
+				</File>
+				<File Id="596405173" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Shadow_Amulet_Fade.wav</ShortName>
+					<CachePath>SFX/Shadow_Amulet_Fade_818F3B66.wem</CachePath>
+				</File>
+				<File Id="610553121" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>refresher.wav</ShortName>
+					<CachePath>SFX/refresher_818F3B66.wem</CachePath>
+				</File>
+				<File Id="621078608" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>skull_basher.wav</ShortName>
+					<CachePath>SFX/skull_basher_818F3B66.wem</CachePath>
+				</File>
+				<File Id="651907797" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>item_armlet_deactivate.wav</ShortName>
+					<CachePath>SFX/item_armlet_deactivate_818F3B66.wem</CachePath>
+				</File>
+				<File Id="741682707" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>guardian_greaves.wav</ShortName>
+					<CachePath>SFX/guardian_greaves_818F3B66.wem</CachePath>
+				</File>
+				<File Id="789500477" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>rune_dd.wav</ShortName>
+					<CachePath>SFX/rune_dd_818F3B66.wem</CachePath>
+				</File>
+				<File Id="825098905" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>mek_cast.wav</ShortName>
+					<CachePath>SFX/mek_cast_818F3B66.wem</CachePath>
+				</File>
+				<File Id="875429918" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>healing_salve.wav</ShortName>
+					<CachePath>SFX/healing_salve_818F3B66.wem</CachePath>
+				</File>
+				<File Id="939259999" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>item_armlet_activate.wav</ShortName>
+					<CachePath>SFX/item_armlet_activate_818F3B66.wem</CachePath>
+				</File>
+				<File Id="979207790" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>rune_water.wav</ShortName>
+					<CachePath>SFX/rune_water_818F3B66.wem</CachePath>
+				</File>
+				<File Id="987141513" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>rune_bounty.wav</ShortName>
+					<CachePath>SFX/rune_bounty_818F3B66.wem</CachePath>
+				</File>
+				<File Id="990722447" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>black_king_bar.wav</ShortName>
+					<CachePath>SFX/black_king_bar_818F3B66.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="461022999" Name="AeonDisk" DurationType="OneShot" DurationMin="3.499796" DurationMax="3.499796">
+					<MediaRefs>
+						<MediaRef Id="504713812"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1825223284" Name="AmplifyDamage" DurationType="OneShot" DurationMin="2.6516325" DurationMax="2.6516325">
+					<MediaRefs>
+						<MediaRef Id="789500477"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2114153135" Name="Arcane" DurationType="OneShot" DurationMin="2.781315" DurationMax="2.781315">
+					<MediaRefs>
+						<MediaRef Id="74064360"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="122669662" Name="ArcaneBoots" DurationType="OneShot" DurationMin="1.8365079" DurationMax="1.8365079">
+					<MediaRefs>
+						<MediaRef Id="575474288"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3329569319" Name="ArmletOfMordiggianOff" DurationType="OneShot" DurationMin="1.1336962" DurationMax="1.1336962">
+					<MediaRefs>
+						<MediaRef Id="651907797"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1592439123" Name="ArmletOfMordiggianOn" DurationType="OneShot" DurationMin="1.2779592" DurationMax="1.2779592">
+					<MediaRefs>
+						<MediaRef Id="939259999"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3471834074" Name="BlackKingBar" DurationType="OneShot" DurationMin="3.8848526" DurationMax="3.8848526">
+					<MediaRefs>
+						<MediaRef Id="990722447"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1109838603" Name="BootsOfBearing" DurationType="OneShot" DurationMin="3.0142858" DurationMax="3.0142858">
+					<MediaRefs>
+						<MediaRef Id="305995154"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1345459588" Name="Bounty" DurationType="OneShot" DurationMin="2.6467347" DurationMax="2.6467347">
+					<MediaRefs>
+						<MediaRef Id="987141513"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1654418736" Name="Daedalus" DurationType="OneShot" DurationMin="1.1409523" DurationMax="1.1409523">
+					<MediaRefs>
+						<MediaRef Id="398886856"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1700204039" Name="EnchantedMango" DurationType="OneShot" DurationMin="2.0358276" DurationMax="2.0358276">
+					<MediaRefs>
+						<MediaRef Id="156831162"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1038581357" Name="ExMachina" DurationType="OneShot" DurationMin="1.8692063" DurationMax="1.8692063">
+					<MediaRefs>
+						<MediaRef Id="143396874"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="4155419568" Name="GhostScepter" DurationType="OneShot" DurationMin="3.9242177" DurationMax="3.9242177">
+					<MediaRefs>
+						<MediaRef Id="202951713"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2861234393" Name="GuardianGreaves" DurationType="OneShot" DurationMin="4.4846034" DurationMax="4.4846034">
+					<MediaRefs>
+						<MediaRef Id="741682707"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1662592590" Name="Haste" DurationType="OneShot" DurationMin="1.6924943" DurationMax="1.6924943">
+					<MediaRefs>
+						<MediaRef Id="280429653"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3242522900" Name="HealingSalve" DurationType="OneShot" DurationMin="2.7623355" DurationMax="2.7623355">
+					<MediaRefs>
+						<MediaRef Id="875429918"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="418558484" Name="Illusion" DurationType="OneShot" DurationMin="2.6708617" DurationMax="2.6708617">
+					<MediaRefs>
+						<MediaRef Id="405319993"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2401952583" Name="InfusedRaindrops" DurationType="OneShot" DurationMin="3.1690476" DurationMax="3.1690476">
+					<MediaRefs>
+						<MediaRef Id="408097234"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="4258276040" Name="Invisibility" DurationType="OneShot" DurationMin="2.4723809" DurationMax="2.4723809">
+					<MediaRefs>
+						<MediaRef Id="595713856"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3264488081" Name="IronTalon" DurationType="OneShot" DurationMin="2.282993" DurationMax="2.282993">
+					<MediaRefs>
+						<MediaRef Id="114285330"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3523774987" Name="Mekansm" DurationType="OneShot" DurationMin="4.472381" DurationMax="4.472381">
+					<MediaRefs>
+						<MediaRef Id="825098905"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1098729742" Name="MoonShard" DurationType="OneShot" DurationMin="2.5469615" DurationMax="2.5469615">
+					<MediaRefs>
+						<MediaRef Id="244618323"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="919632621" Name="PhaseBoots" DurationType="OneShot" DurationMin="0.99052155" DurationMax="0.99052155">
+					<MediaRefs>
+						<MediaRef Id="512459058"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3961105405" Name="PirateHat" DurationType="OneShot" DurationMin="1.9998866" DurationMax="1.9998866">
+					<MediaRefs>
+						<MediaRef Id="476234130"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="614387127" Name="Refresher" DurationType="OneShot" DurationMin="2.9021542" DurationMax="2.9021542">
+					<MediaRefs>
+						<MediaRef Id="610553121"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2663569928" Name="Regeneration" DurationType="OneShot" DurationMin="3.4755557" DurationMax="3.4755557">
+					<MediaRefs>
+						<MediaRef Id="285067744"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2235173055" Name="ShadowAmulet" DurationType="OneShot" DurationMin="3.7151928" DurationMax="3.7151928">
+					<MediaRefs>
+						<MediaRef Id="596405173"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1161967626" Name="Shield" DurationType="OneShot" DurationMin="6.0169163" DurationMax="6.0169163">
+					<MediaRefs>
+						<MediaRef Id="28693738"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="4245387363" Name="SkullBasher" DurationType="OneShot" DurationMin="1.1972789" DurationMax="1.1972789">
+					<MediaRefs>
+						<MediaRef Id="621078608"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2654748154" Name="Water" DurationType="OneShot" DurationMin="2.4565532" DurationMax="2.4565532">
+					<MediaRefs>
+						<MediaRef Id="979207790"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="4033993124" Name="Wisdom" DurationType="OneShot" DurationMin="4.1161" DurationMax="4.1161">
+					<MediaRefs>
+						<MediaRef Id="560199054"/>
+					</MediaRefs>
+				</Event>
+			</Events>
+		</SoundBank>
+	</SoundBanks>
+	<FileHash>{747D2D8F-A328-3EEE-977A-812343199DEA}</FileHash>
+</SoundBanksInfo>

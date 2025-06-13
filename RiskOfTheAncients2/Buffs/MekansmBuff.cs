@@ -1,7 +1,6 @@
 ﻿using R2API;
 using RoR2;
 using ROTA2.Equipment;
-using UnityEngine;
 
 namespace ROTA2.Buffs
 {
@@ -9,14 +8,7 @@ namespace ROTA2.Buffs
     {
         public override string BuffName => "Mekansm Armor";
         public override string BuffTokenName => "MEKANSM_BUFF";
-        public override bool BuffStacks => false;
-        public override bool IsDebuff => false;
-        public override Color BuffColor => Color.white;
-        public override string BuffIconPath => "ROTA2.Icons.mekansm.png";
-        public override EliteDef BuffEliteDef => null;
-        public override bool IsCooldown => false;
-        public override bool IsHidden => false;
-        public override NetworkSoundEventDef BuffStartSfx => null;
+        public override string BuffDefGUID => Assets.Mekansm.BuffDef;
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += AddArmor;
@@ -26,7 +18,7 @@ namespace ROTA2.Buffs
         {
             if (HasThisBuff(body))
             {
-                args.armorAdd += Mekansm.Instance.ArmorBonus;
+                args.armorAdd += Mekansm.Instance.ArmorBonus.Value;
             }
         }
     }

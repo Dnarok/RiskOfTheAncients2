@@ -1,4 +1,6 @@
 ﻿using BepInEx.Configuration;
+using RiskOfOptions;
+using RiskOfOptions.Options;
 using RoR2;
 
 namespace ROTA2.Items
@@ -9,12 +11,9 @@ namespace ROTA2.Items
         public override string ConfigItemName => ItemName;
         public override string ItemTokenName => "QUELLING_BLADE";
         public override string ItemTokenPickup => "Receive flat skill damage increase against non-boss enemies.";
-        public override string ItemTokenDesc => $"Increase {Damage($"outgoing skill damage")} by {Damage($"{DamageBase}")} {Stack($"(+{DamagePerStack} per stack)")} against {Damage("non-Boss enemies")}.";
+        public override string ItemTokenDesc => $"Increase {Damage($"outgoing skill damage")} by {Damage($"{DamageBase.Value}")} {Stack($"(+{DamagePerStack.Value} per stack)")} against {Damage("non-Boss enemies")}.";
         public override string ItemTokenLore => "The axe of a fallen gnome, it allows you to effectively maneuver the forest.";
-        public override ItemTier Tier => ItemTier.Tier1;
-        public override ItemTag[] ItemTags => [ItemTag.Damage];
-        public override string ItemIconPath => "ROTA2.Icons.quelling_blade.png";
-        public override string ItemModelPath => "quelling_blade.prefab";
+        public override string ItemDefGUID => Assets.QuellingBlade.ItemDef;
         public override void Hooks()
         {
             On.RoR2.HealthComponent.TakeDamage += OnDamageDealt;
@@ -28,12 +27,14 @@ namespace ROTA2.Items
             Hooks();
         }
 
-        public float DamageBase;
-        public float DamagePerStack;
+        public ConfigEntry<float> DamageBase;
+        public ConfigEntry<float> DamagePerStack;
         public void CreateConfig(ConfigFile configuration)
         {
-            DamageBase     = configuration.Bind("Item: " + ItemName, "Damage Base",      8.0f, "How much flat damage should the first stack provide?").Value;
-            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 8.0f, "How much flat damage should subsequent stacks provide?").Value;
+            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Base", 8.0f, "How much flat damage should the first stack provide?");
+            ModSettingsManager.AddOption(new FloatFieldOption(DamageBase));
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 8.0f, "How much flat damage should subsequent stacks provide?");
+            ModSettingsManager.AddOption(new FloatFieldOption(DamagePerStack));
         }
 
         private void OnDamageDealt(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo info)
@@ -50,7 +51,7 @@ namespace ROTA2.Items
                 int count = GetCount(attacker_body);
                 if (count > 0)
                 {
-                    info.damage += (DamageBase + DamagePerStack * (count - 1)) * info.procCoefficient;
+                    info.damage += (DamageBase.Value + DamagePerStack.Value * (count - 1)) * info.procCoefficient;
                 }
             }
 

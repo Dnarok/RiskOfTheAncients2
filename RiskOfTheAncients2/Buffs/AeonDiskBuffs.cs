@@ -1,7 +1,6 @@
 ﻿using R2API;
 using RoR2;
 using ROTA2.Items;
-using UnityEngine;
 
 namespace ROTA2.Buffs
 {
@@ -9,14 +8,7 @@ namespace ROTA2.Buffs
     {
         public override string BuffName => "Combo Breaker";
         public override string BuffTokenName => "AEON_DISK_INVULNERABILITY";
-        public override bool BuffStacks => false;
-        public override bool IsDebuff => false;
-        public override Color BuffColor => Color.white;
-        public override string BuffIconPath => "ROTA2.Icons.aeon_disk.png";
-        public override EliteDef BuffEliteDef => null;
-        public override bool IsCooldown => false;
-        public override bool IsHidden => false;
-        public override NetworkSoundEventDef BuffStartSfx => null;
+        public override string BuffDefGUID => Assets.AeonDisk.InvulnerabilityBuffDef;
         public override void Hooks()
         {
             On.RoR2.HealthComponent.TakeDamage += OnTakeDamage;
@@ -36,14 +28,7 @@ namespace ROTA2.Buffs
     {
         public override string BuffName => "Movement Speed";
         public override string BuffTokenName => "AEON_DISK_MOVEMENT_SPEED";
-        public override bool BuffStacks => false;
-        public override bool IsDebuff => false;
-        public override Color BuffColor => Color.white;
-        public override string BuffIconPath => "ROTA2.Icons.aeon_disk.png";
-        public override EliteDef BuffEliteDef => null;
-        public override bool IsCooldown => false;
-        public override bool IsHidden => false;
-        public override NetworkSoundEventDef BuffStartSfx => null;
+        public override string BuffDefGUID => Assets.AeonDisk.MoveSpeedBuffDef;
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += AddMovementSpeed;
@@ -53,7 +38,7 @@ namespace ROTA2.Buffs
         {
             if (HasThisBuff(body))
             {
-                args.moveSpeedMultAdd += AeonDisk.Instance.MovementSpeed / 100.0f;
+                args.moveSpeedMultAdd += AeonDisk.Instance.MovementSpeed.Value / 100.0f;
             }
         }
     }
@@ -61,13 +46,6 @@ namespace ROTA2.Buffs
     {
         public override string BuffName => "Aeon Disk Cooldown";
         public override string BuffTokenName => "AEON_DISK_COOLDOWN";
-        public override bool BuffStacks => false;
-        public override bool IsDebuff => false;
-        public override Color BuffColor => Color.white;
-        public override string BuffIconPath => "ROTA2.Icons.aeon_disk_cooldown.png";
-        public override EliteDef BuffEliteDef => null;
-        public override bool IsCooldown => true;
-        public override bool IsHidden => false;
-        public override NetworkSoundEventDef BuffStartSfx => null;
+        public override string BuffDefGUID => Assets.AeonDisk.CooldownBuffDef;
     }
 }

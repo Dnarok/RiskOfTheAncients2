@@ -1,6 +1,9 @@
 ﻿using BepInEx.Configuration;
+using R2API;
+using RiskOfOptions;
+using RiskOfOptions.Options;
 using RoR2;
-using System;
+using UnityEngine.AddressableAssets;
 
 namespace ROTA2.Equipment
 {
@@ -11,19 +14,27 @@ namespace ROTA2.Equipment
         public override string EquipmentTokenPickup => "Reset all skill cooldowns of all allies.";
         public override string EquipmentTokenDesc => $"{Utility("Reset all skill cooldowns")} of all allies.";
         public override string EquipmentTokenLore => "Magi equipped with these boots are valued in battle.";
-        public override float EquipmentCooldown => ArcaneBootsCooldown;
-        public override string EquipmentIconPath => "ROTA2.Icons.arcane_boots.png";
+        public override float EquipmentCooldown => ArcaneBootsCooldown.Value;
+        public override string EquipmentDefGUID => Assets.ArcaneBoots.EquipmentDef;
         public override void Init(ConfigFile config)
         {
             CreateConfig(config);
+            CreateSounds();
             CreateLanguageTokens();
             CreateEquipmentDef();
         }
 
-        public float ArcaneBootsCooldown;
+        public ConfigEntry<float> ArcaneBootsCooldown;
         private void CreateConfig(ConfigFile config)
         {
-            ArcaneBootsCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 30.0f, "").Value;
+            ArcaneBootsCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 30.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(ArcaneBootsCooldown));
+        }
+
+        NetworkSoundEventDef sound = null;
+        protected void CreateSounds()
+        {
+            Addressables.LoadAssetAsync<NetworkSoundEventDef>(Assets.ArcaneBoots.NetworkSoundEventDef).Completed += (x) => { ContentAddition.AddNetworkSoundEventDef(x.Result); sound = x.Result; };
         }
 
         protected override bool ActivateEquipment(EquipmentSlot slot)
@@ -50,7 +61,7 @@ namespace ROTA2.Equipment
                     }
                 }
 
-                Util.PlaySound("ArcaneBoots", slot.characterBody.gameObject);
+                EffectManager.SimpleSoundEffect(sound.index, slot.characterBody.corePosition, true);
             }
 
             return true;

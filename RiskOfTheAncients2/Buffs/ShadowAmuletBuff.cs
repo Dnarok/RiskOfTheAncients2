@@ -1,7 +1,6 @@
 ﻿using R2API;
 using RoR2;
 using ROTA2.Items;
-using UnityEngine;
 
 namespace ROTA2.Buffs
 {
@@ -9,14 +8,7 @@ namespace ROTA2.Buffs
     {
         public override string BuffName => "Fade";
         public override string BuffTokenName => "SHADOW_AMULET_BUFF";
-        public override bool BuffStacks => true;
-        public override bool IsDebuff => false;
-        public override Color BuffColor => Color.white;
-        public override string BuffIconPath => "ROTA2.Icons.shadow_amulet.png";
-        public override EliteDef BuffEliteDef => null;
-        public override bool IsCooldown => false;
-        public override bool IsHidden => false;
-        public override NetworkSoundEventDef BuffStartSfx => null;
+        public override string BuffDefGUID => Assets.ShadowAmulet.BuffDef;
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += AddAttackSpeed;
@@ -24,10 +16,17 @@ namespace ROTA2.Buffs
 
         private void AddAttackSpeed(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs args)
         {
-            int count = GetBuffCount(body);
-            if (count > 0)
+            if (HasThisBuff(body))
             {
-                args.attackSpeedMultAdd += ShadowAmulet.Instance.AttackSpeedBase / 100.0f + ShadowAmulet.Instance.AttackSpeedPerStack / 100.0f * (count - 1);
+                int count = ShadowAmulet.GetCount(body);
+                if (count > 0)
+                {
+                    args.attackSpeedMultAdd += ShadowAmulet.Instance.AttackSpeedBase.Value / 100.0f + ShadowAmulet.Instance.AttackSpeedPerStack.Value / 100.0f * (count - 1);
+                }
+                else
+                {
+                    body.RemoveBuff(BuffDef);
+                }
             }
         }
     }

@@ -1,0 +1,66 @@
+Event	ID	Name			Wwise Object Path	Notes
+	122669662	ArcaneBoots			\Default Work Unit\ArcaneBoots	
+	418558484	Illusion			\Default Work Unit\Illusion	
+	461022999	AeonDisk			\Default Work Unit\AeonDisk	
+	614387127	Refresher			\Default Work Unit\Refresher	
+	919632621	PhaseBoots			\Default Work Unit\PhaseBoots	
+	1038581357	ExMachina			\Default Work Unit\ExMachina	
+	1098729742	MoonShard			\Default Work Unit\MoonShard	
+	1109838603	BootsOfBearing			\Default Work Unit\BootsOfBearing	
+	1161967626	Shield			\Default Work Unit\Shield	
+	1345459588	Bounty			\Default Work Unit\Bounty	
+	1592439123	ArmletOfMordiggianOn			\Default Work Unit\ArmletOfMordiggianOn	
+	1654418736	Daedalus			\Default Work Unit\Daedalus	
+	1662592590	Haste			\Default Work Unit\Haste	
+	1700204039	EnchantedMango			\Default Work Unit\EnchantedMango	
+	1825223284	AmplifyDamage			\Default Work Unit\AmplifyDamage	
+	2114153135	Arcane			\Default Work Unit\Arcane	
+	2235173055	ShadowAmulet			\Default Work Unit\ShadowAmulet	
+	2401952583	InfusedRaindrops			\Default Work Unit\InfusedRaindrops	
+	2654748154	Water			\Default Work Unit\Water	
+	2663569928	Regeneration			\Default Work Unit\Regeneration	
+	2861234393	GuardianGreaves			\Default Work Unit\GuardianGreaves	
+	3242522900	HealingSalve			\Default Work Unit\HealingSalve	
+	3264488081	IronTalon			\Default Work Unit\IronTalon	
+	3329569319	ArmletOfMordiggianOff			\Default Work Unit\ArmletOfMordiggianOff	
+	3471834074	BlackKingBar			\Default Work Unit\BlackKingBar	
+	3523774987	Mekansm			\Default Work Unit\Mekansm	
+	3961105405	PirateHat			\Default Work Unit\PirateHat	
+	4033993124	Wisdom			\Default Work Unit\Wisdom	
+	4155419568	GhostScepter			\Default Work Unit\GhostScepter	
+	4245387363	SkullBasher			\Default Work Unit\SkullBasher	
+	4258276040	Invisibility			\Default Work Unit\Invisibility	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	28693738	rune_shield	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\rune_shield_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\rune_shield		1061480
+	74064360	rune_arcane	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\rune_arcane_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\rune_arcane		490720
+	114285330	iron_talon	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\iron_talon_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\iron_talon		402816
+	143396874	ex_machina	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\ex_machina_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\ex_machina		329824
+	156831162	mango	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\mango_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\mango		359216
+	202951713	item_ghost_etherealblade	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\item_ghost_etherealblade_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\item_ghost_etherealblade		692328
+	244618323	moon_shard	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\moon_shard_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\moon_shard		449380
+	280429653	rune_haste	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\rune_haste_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\rune_haste		298652
+	285067744	rune_regen	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\rune_regen_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\rune_regen		613184
+	305995154	item_drum	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\item_drum_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\item_drum		531816
+	398886856	daedelus	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\daedelus_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\daedelus		201360
+	405319993	rune_illusion	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\rune_illusion_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\rune_illusion		471236
+	408097234	infused_raindrop	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\infused_raindrop_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\infused_raindrop		559116
+	476234130	midas	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\midas_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\midas		352876
+	504713812	combo_breaker	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\combo_breaker_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\combo_breaker		617460
+	512459058	phase_boots	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\phase_boots_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\phase_boots		174824
+	560199054	rune_xp	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\rune_xp_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\rune_xp		726176
+	575474288	dota_item_arcane_boots	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\dota_item_arcane_boots_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\dota_item_arcane_boots		324056
+	595713856	rune_invis	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\rune_invis_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\rune_invis		436224
+	596405173	Shadow_Amulet_Fade	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\Shadow_Amulet_Fade_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\Shadow_Amulet_Fade		655456
+	610553121	refresher	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\refresher_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\refresher		512036
+	621078608	skull_basher	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\skull_basher_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\skull_basher		105696
+	651907797	item_armlet_deactivate	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\item_armlet_deactivate_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\item_armlet_deactivate		200080
+	741682707	guardian_greaves	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\guardian_greaves_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\guardian_greaves		791180
+	789500477	rune_dd	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\rune_dd_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\rune_dd		467844
+	825098905	mek_cast	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\mek_cast_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\mek_cast		394560
+	875429918	healing_salve	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\healing_salve_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\healing_salve		487372
+	939259999	item_armlet_activate	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\item_armlet_activate_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\item_armlet_activate		225528
+	979207790	rune_water	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\rune_water_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\rune_water		433432
+	987141513	rune_bounty	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\rune_bounty_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\rune_bounty		466980
+	990722447	black_king_bar	C:\Users\Jonathan\Desktop\RiskOfTheAncients2\Unity\RiskOfTheAncients2\RiskOfTheAncients2_WwiseProject\.cache\Windows\SFX\black_king_bar_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\black_king_bar		685384
+

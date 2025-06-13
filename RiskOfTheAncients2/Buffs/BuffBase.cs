@@ -22,20 +22,153 @@ namespace ROTA2.Buffs
                 Instance = this as T;
             }
         }
+
+        public static BuffDef GetBuffDef()
+        {
+            return Instance.BuffDef;
+        }
+        public static bool HasThisBuff(CharacterBody body)
+        {
+            return body && body.HasBuff(GetBuffDef());
+        }
+        public static int GetBuffCount(CharacterBody body)
+        {
+            if (HasThisBuff(body))
+            {
+                return body.GetBuffCount(GetBuffDef());
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        public static void ApplyTo(CharacterBody body)
+        {
+            body.AddBuff(GetBuffDef());
+        }
+        public static void ApplyTo(CharacterBody body, float duration)
+        {
+            body.AddTimedBuff(GetBuffDef(), duration);
+        }
+        public static void ApplyTo(CharacterBody body, int stacks)
+        {
+            for (int i = 0; i < stacks; ++i)
+            {
+                body.AddBuff(GetBuffDef());
+            }
+        }
+        public static void ApplyTo(CharacterBody body, float duration, int stacks)
+        {
+            for (int i = 0; i < stacks; ++i)
+            {
+                body.AddTimedBuff(GetBuffDef(), duration);
+            }
+        }
+        public static void ApplyTo(CharacterBody body, int stacks, int max_stacks)
+        {
+            int count = Math.Min(max_stacks - body.GetBuffCount(GetBuffDef()), stacks);
+            ApplyTo(body, count);
+        }
+        public static void ApplyTo(CharacterBody body, float duration, int stacks, int max_stacks)
+        {
+            for (int i = 0; i < stacks; ++i)
+            {
+                body.AddTimedBuff(GetBuffDef(), duration, max_stacks);
+            }
+        }
+        public static void ApplyTo(CharacterBody victim, CharacterBody attacker, float damage)
+        {
+            InflictDotInfo inflict = new()
+            {
+                victimObject = victim.gameObject,
+                attackerObject = attacker.gameObject,
+                dotIndex = Instance.Index,
+                duration = Mathf.Infinity,
+                damageMultiplier = damage
+            };
+            InflictDot(ref inflict);
+        }
+        public static void ApplyTo(CharacterBody victim, CharacterBody attacker, float damage, float duration)
+        {
+            InflictDotInfo inflict = new()
+            {
+                victimObject = victim.gameObject,
+                attackerObject = attacker.gameObject,
+                dotIndex = Instance.Index,
+                duration = duration,
+                damageMultiplier = damage
+            };
+            InflictDot(ref inflict);
+        }
+        public static void ApplyTo(CharacterBody victim, CharacterBody attacker, float damage, int stacks)
+        {
+            InflictDotInfo inflict = new()
+            {
+                victimObject = victim.gameObject,
+                attackerObject = attacker.gameObject,
+                dotIndex = Instance.Index,
+                duration = Mathf.Infinity,
+                damageMultiplier = damage
+            };
+            for (int i = 0; i < stacks; ++i)
+            {
+                InflictDot(ref inflict);
+            }
+        }
+        public static void ApplyTo(CharacterBody victim, CharacterBody attacker, float damage, float duration, int stacks)
+        {
+            InflictDotInfo inflict = new()
+            {
+                victimObject = victim.gameObject,
+                attackerObject = attacker.gameObject,
+                dotIndex = Instance.Index,
+                duration = duration,
+                damageMultiplier = damage
+            };
+            for (int i = 0; i < stacks; ++i)
+            {
+                InflictDot(ref inflict);
+            }
+        }
+        public static void ApplyTo(CharacterBody victim, CharacterBody attacker, float damage, int stacks, int max_stacks)
+        {
+            InflictDotInfo inflict = new()
+            {
+                victimObject = victim.gameObject,
+                attackerObject = attacker.gameObject,
+                dotIndex = Instance.Index,
+                duration = Mathf.Infinity,
+                damageMultiplier = damage,
+                maxStacksFromAttacker = (uint)max_stacks
+            };
+            for (int i = 0; i < stacks; ++i)
+            {
+                InflictDot(ref inflict);
+            }
+        }
+        public static void ApplyTo(CharacterBody victim, CharacterBody attacker, float damage, float duration, int stacks, int max_stacks)
+        {
+            InflictDotInfo inflict = new()
+            {
+                victimObject = victim.gameObject,
+                attackerObject = attacker.gameObject,
+                dotIndex = Instance.Index,
+                duration = duration,
+                damageMultiplier = damage,
+                maxStacksFromAttacker = (uint)max_stacks
+            };
+            for (int i = 0; i < stacks; ++i)
+            {
+                InflictDot(ref inflict);
+            }
+        }
     }
 
     public abstract class BuffBase
     {
         public abstract string BuffName { get; }
         public abstract string BuffTokenName { get; }
-        public abstract bool BuffStacks { get; }
-        public abstract bool IsDebuff { get; }
-        public abstract Color BuffColor { get; }
-        public abstract string BuffIconPath { get; }
-        public abstract EliteDef BuffEliteDef { get; }
-        public abstract bool IsCooldown { get; }
-        public abstract bool IsHidden { get; }
-        public abstract NetworkSoundEventDef BuffStartSfx { get; }
+        public abstract string BuffDefGUID { get; }
         public virtual DotIndex Index { get; set; } = default;
         public virtual void Init()
         {
@@ -57,47 +190,8 @@ namespace ROTA2.Buffs
             public CharacterBody? attacker;
             public float? damage;
         }
-        public virtual void ApplyTo(ApplyParameters parameters)
-        {
-            if (parameters.victim)
-            {
-                if (parameters.attacker != null && parameters.damage != null)
-                {
-                    InflictDotInfo inflict = new()
-                    {
-                        victimObject = parameters.victim.gameObject,
-                        attackerObject = parameters.attacker.gameObject,
-                        dotIndex = Index,
-                        duration = parameters.duration ?? Mathf.Infinity,
-                        damageMultiplier = (float)parameters.damage,
-                        maxStacksFromAttacker = (uint?)parameters.max_stacks
-                    };
 
-                    for (int i = 0; i < (parameters.stacks ?? 1); ++i)
-                    {
-                        InflictDot(ref inflict);
-                    }
-                }
-                else if (parameters.duration == null)
-                {
-                    for (int i = 0; i < (parameters.stacks ?? 1); ++i)
-                    {
-                        parameters.victim.AddBuff(BuffDef);
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < (parameters.stacks ?? 1); ++i)
-                    {
-                        parameters.victim.AddTimedBuff(BuffDef, (float)parameters.duration, parameters.max_stacks ?? int.MaxValue);
-                    }
-                }
-
-                parameters.victim.MarkAllStatsDirty();
-            }
-        }
-
-        public BuffDef BuffDef;
+        protected BuffDef BuffDef;
 
         protected void CreateLanguageTokens()
         {
@@ -105,42 +199,9 @@ namespace ROTA2.Buffs
         }
         protected void CreateBuffDef()
         {
-            BuffDef = ScriptableObject.CreateInstance<BuffDef>();
-
+            BuffDef = Addressables.LoadAssetAsync<BuffDef>(BuffDefGUID).WaitForCompletion();
             BuffDef.name = BuffName;
-            BuffDef.canStack = BuffStacks;
-            BuffDef.isDebuff = IsDebuff;
-            BuffDef.isCooldown = IsCooldown;
-            BuffDef.buffColor = BuffColor;
-            BuffDef.eliteDef = BuffEliteDef;
-            BuffDef.startSfx = BuffStartSfx;
-
-            if (BuffIconPath == "")
-            {
-                BuffDef.iconSprite = Addressables.LoadAssetAsync<Sprite>("RoR2/Base/Common/MiscIcons/texMysteryIcon.png").WaitForCompletion();
-            }
-            else
-            {
-                BuffDef.iconSprite = Plugin.ExtractSprite(BuffIconPath);
-            }
-
             ContentAddition.AddBuffDef(BuffDef);
-        }
-
-        public bool HasThisBuff(CharacterBody body)
-        {
-            return body && body.HasBuff(BuffDef);
-        }
-        public int GetBuffCount(CharacterBody body)
-        {
-            if (HasThisBuff(body))
-            {
-                return body.GetBuffCount(BuffDef);
-            }
-            else
-            {
-                return 0;
-            }
         }
     }
 }

@@ -1,0 +1,869 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: ROTA2Assets
+  m_EditorClassIdentifier: 
+  m_GroupName: ROTA2Assets
+  m_Data:
+    m_SerializedData: []
+  m_GUID: bc41010a46452894e9ee905b35cfbc52
+  m_SerializeEntries:
+  - m_GUID: 0f15946191cc7a6479d556153940d6c7
+    m_Address: Assets/Equipment/ArmletOfMordiggian/Pickup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f2a3594c78fb95b4a8dd9d66ac622171
+    m_Address: Assets/Equipment/ArmletOfMordiggian/EquipmentDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8ed6af0ceb7eb95438a3d9872306ef72
+    m_Address: Assets/Equipment/ArmletOfMordiggian/IconOff.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c6567580980134b48a537690ca42e6a3
+    m_Address: Assets/Equipment/ArmletOfMordiggian/IconOn.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9e090e55273097443948260361c83c2c
+    m_Address: Assets/Equipment/Bottle/Pickup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7319024ec712f2248b431015cd30bf08
+    m_Address: Assets/Equipment/Bottle/EquipmentDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d6b143fcb0b42a1468d801719098aa55
+    m_Address: Assets/Equipment/Bottle/Wisdom/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 215167ba5c3173e40b40ec145268c425
+    m_Address: Assets/Equipment/Bottle/Water/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 346694860c5fa11418dbd168f38e46a9
+    m_Address: Assets/Equipment/Bottle/Shield/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d1b388d8add901041b560b696cf50e0c
+    m_Address: Assets/Equipment/Bottle/Regeneration/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ad707b8bf5ee6884faf07455ab3bd657
+    m_Address: Assets/Equipment/Bottle/Invisibility/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2a811dddd4e5d1243aa30093abfd5111
+    m_Address: Assets/Equipment/Bottle/Illusion/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8a8ddf9fc935e6740acab6def0801f05
+    m_Address: Assets/Equipment/BlackKingBar/Pickup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d6bbe089b7c23b046a7086490b414b4a
+    m_Address: Assets/Equipment/Bottle/Haste/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d9d7eda858e6a9a46b0ed072c75ba97d
+    m_Address: Assets/Equipment/Bottle/Bounty/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 154739566e031e94c80146bc156af037
+    m_Address: Assets/Equipment/Bottle/AmplifyDamage/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c8613ae243ec8fe42aa3a7f78771dd12
+    m_Address: Assets/Equipment/Bottle/Arcane/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9f377e7e5073fd142b323407ac25d000
+    m_Address: Assets/Equipment/BlackKingBar/EquipmentDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2cfa3b7d8fd9b974ba68d63fc58636ce
+    m_Address: Assets/Equipment/BlackKingBar/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: dfdd877ae9093fe40a4c51896f192580
+    m_Address: Assets/Equipment/BlackKingBar/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: dc201e3cee00aa749bf9035ff7ec9360
+    m_Address: Assets/Equipment/BlackKingBar/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ca867297b1b075b41a59822381099d7a
+    m_Address: Assets/Default/Pickup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 54685de422b04694aa62a9ba668a39c4
+    m_Address: Assets/Default/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 96c1b567212990d439d3d2d58b19c028
+    m_Address: Assets/Items/IronBranch/Pickup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d07170c3cbec89a429e7a464490d2ee5
+    m_Address: Assets/Items/IronBranch/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 869ef201cd19be1419b40e2674f26463
+    m_Address: Assets/Items/IronBranch/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7129b213b70e98742aaccb1052232e21
+    m_Address: Assets/Equipment/Bottle/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d01e00acaef24a749bd98a2fcaf09fe0
+    m_Address: Assets/Equipment/Bottle/AmplifyDamage/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d46c4996b24e70248a08bf6314608c64
+    m_Address: Assets/Equipment/Bottle/AmplifyDamage/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ed186f846790b264098fd01d11cb2268
+    m_Address: Assets/Equipment/Bottle/Arcane/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 979477e5bb3e9eb4a9a890a2f33b00d0
+    m_Address: Assets/Equipment/Bottle/Arcane/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b4508da419a804640843dca74d021467
+    m_Address: Assets/Equipment/Bottle/Bounty/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fa5b9e99c6c463445b8eed3878fc652e
+    m_Address: Assets/Equipment/ArcaneBoots/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: deb4106183f1b144e8688076fcdf9f29
+    m_Address: Assets/Equipment/Bottle/Haste/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d305ba8e158107b46aec0c076b1cab19
+    m_Address: Assets/Equipment/Bottle/Haste/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5e60429d6594dbc4cbca5b35030cbea7
+    m_Address: Assets/Equipment/ArcaneBoots/EquipmentDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f5fb3a65a62830f44a7756e2ceae4789
+    m_Address: Assets/Equipment/Bottle/Illusion/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6c26a2603c8687f4ea5142753d80006c
+    m_Address: Assets/Equipment/ArmletOfMordiggian/SoundOff.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5c27b67c575be7846bb1c44bc290237b
+    m_Address: Assets/Equipment/Bottle/Invisibility/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0a1711b1393118f45a76d52f76c44ac9
+    m_Address: Assets/Equipment/Bottle/Regeneration/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: de20bf9b67253f04a9bb23cf57ae4887
+    m_Address: Assets/Equipment/Bottle/Regeneration/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2023f9e2cd8ad7749ba838130413b321
+    m_Address: Assets/Equipment/ArmletOfMordiggian/SoundOn.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 38e161f855a943148b27bb28149add8e
+    m_Address: Assets/Equipment/Bottle/Shield/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 703e3f91a02a63c468d7cf857314a5ec
+    m_Address: Assets/Equipment/ArmletOfMordiggian/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b5883f579cc8eb3449c12eae45c139be
+    m_Address: Assets/Equipment/Bottle/Water/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b630cadcde60a9d468128943fb57a150
+    m_Address: Assets/Equipment/ArcaneBoots/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 131b7f4e633341b428af84d9992fb759
+    m_Address: Assets/Equipment/GhostScepter/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 576799d36b438244d853b04b418520b7
+    m_Address: Assets/Equipment/GhostScepter/EquipmentDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f8ad3799bf8d01048853df13529b7160
+    m_Address: Assets/Equipment/GhostScepter/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bfe73522e7814344ab68f1c1cf58f091
+    m_Address: Assets/Equipment/GhostScepter/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 79104fd41a1da73469a26b5d5f534e2d
+    m_Address: Assets/Equipment/BootsOfBearing/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 03100b16af7941447b17bff585be8c4e
+    m_Address: Assets/Equipment/BootsOfBearing/EquipmentDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6f9418ee8d2d31d4f963671dccfb6f23
+    m_Address: Assets/Equipment/BootsOfBearing/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6681168f875affc44b40ab8e8d5e3382
+    m_Address: Assets/Equipment/BootsOfBearing/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c5210929be8ccf84a80036d733d0f17d
+    m_Address: Assets/Equipment/GuardianGreaves/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: af5b71b838e16d74faf416fda898b21c
+    m_Address: Assets/Equipment/GuardianGreaves/EquipmentDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c79eaeae4c93e4948ad0c05ecfbb0b1d
+    m_Address: Assets/Equipment/GuardianGreaves/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: af0de085e4893db4b8a7ac3a3feaa1cd
+    m_Address: Assets/Equipment/GuardianGreaves/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e7ec7b4d2a641174d971457449856591
+    m_Address: Assets/Equipment/Mekansm/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c0d2079b94612dd429abe019b8cf789f
+    m_Address: Assets/Equipment/Mekansm/EquipmentDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 800701f42dd81e54c8a912bc504fbaee
+    m_Address: Assets/Equipment/Mekansm/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c8058bf7fcdd12d4eb5ddde4cdcb6500
+    m_Address: Assets/Equipment/Mekansm/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1375f15224702734c961fd6f10e2e5e7
+    m_Address: Assets/Equipment/MoonShard/EquipmentDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5fa26645991e1f14eaa713f22b0700da
+    m_Address: Assets/Equipment/MoonShard/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 730d4d198b433c44585fc7bc6e296771
+    m_Address: Assets/Equipment/MoonShard/IconConsumed.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 51093d008acafe145b3e94a75c061da4
+    m_Address: Assets/Equipment/MoonShard/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: baee982281cde924f97349c3877864ee
+    m_Address: Assets/Equipment/MoonShard/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 649ac47e83631494f97b7e9bfde74cf9
+    m_Address: Assets/Items/AeonDisk/CooldownBuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e8fc64dfc3fa69d46951f1cf49242389
+    m_Address: Assets/Items/AeonDisk/InvulnerabilityBuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e361466e87dceab41b9fd441a0f2fd76
+    m_Address: Assets/Items/AeonDisk/MoveSpeedBuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d14c1f85f66c42c449a905067e14b7d5
+    m_Address: Assets/Items/AeonDisk/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b6db2ddf6150d6148af2d4939320e244
+    m_Address: Assets/Items/AeonDisk/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ec58ea40dd7b699499a12453febc5bb6
+    m_Address: Assets/Items/AeonDisk/IconCooldown.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d938eadf5c751644bbec01141a98c607
+    m_Address: Assets/Items/AeonDisk/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c9d56198702bb4b4686e0fc87d850704
+    m_Address: Assets/Items/AssaultCuirass/Pickup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 591eaba06ff4db94b803b1a428ad9612
+    m_Address: Assets/Items/AssaultCuirass/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e9f66586f20cf47448dde77107c4e723
+    m_Address: Assets/Items/AssaultCuirass/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0291138283415d54282fe84e141118bd
+    m_Address: Assets/Items/AssaultCuirass/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 35dd71d12e4f224459d1d2776b6a9272
+    m_Address: Assets/Items/BladesOfAttack/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b34f5b1e0ea23af46a364639c8490e45
+    m_Address: Assets/Items/BladesOfAttack/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c6e1c9de7e225d44cb8c0a07516f023d
+    m_Address: Assets/Items/BootsOfSpeed/Pickup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3dbb8e95f285c164593c088483a34b25
+    m_Address: Assets/Items/BootsOfSpeed/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 487bd91c45dbc9d4ba0320645350fae1
+    m_Address: Assets/Items/BootsOfSpeed/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c4fdd34e0ad466e4e93d142967a7f83e
+    m_Address: Assets/Items/Daedalus/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 88c90447946e6cb408835d11e1d67ca8
+    m_Address: Assets/Items/Daedalus/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3660ae420c1e79c40b8f97ea32f65162
+    m_Address: Assets/Items/Daedalus/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c26310bc4fc272d4fbb2c3f3783f97b1
+    m_Address: Assets/Items/DragonScale/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bad0f8402148ebb408dbe7865c7179bd
+    m_Address: Assets/Items/DragonScale/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fe88f47c31bbd414b8469e2bfee90c68
+    m_Address: Assets/Items/EnchantedMango/Pickup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 26f456465a165ae448019f8f0dac071f
+    m_Address: Assets/Items/EnchantedMango/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ddddcab2f225b4f448d247071017e873
+    m_Address: Assets/Items/EnchantedMango/ConsumedItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4084c7b34f1e15b498a8a9eeaf3685a7
+    m_Address: Assets/Items/EnchantedMango/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 649902e3e5f6324448f27f29ba2daba3
+    m_Address: Assets/Items/EnchantedMango/IconConsumed.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 24c39bef1342bbe49af274d904cdbfc7
+    m_Address: Assets/Items/EnchantedMango/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 290646652408f4b4da8989f85011a455
+    m_Address: Assets/Items/EnchantedMango/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 528edc9904af1f04799fba817d196940
+    m_Address: Assets/Items/FairysTrinket/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d0ae7ec26ce0f8a4aa32d25039c396a3
+    m_Address: Assets/Items/FairysTrinket/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 724ec17104f32bc49be5a683aa356ce9
+    m_Address: Assets/Items/HealingSalve/Pickup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d1394d9469f5cd642a1f364dc6cb5e25
+    m_Address: Assets/Items/HealingSalve/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 77bf8054a667a8b468e5b95f22c2f83e
+    m_Address: Assets/Items/HealingSalve/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f62e8f02541c9dd489767d201fed2a53
+    m_Address: Assets/Items/HealingSalve/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a812d146cb2a6e644845a4907f878743
+    m_Address: Assets/Items/HealingSalve/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fb528317f559e2e4c846ed5893b454a7
+    m_Address: Assets/Items/HeartOfTarrasque/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7a1d02fadc55ae04bbf9b92de2e73c6c
+    m_Address: Assets/Items/HeartOfTarrasque/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b305f5aefd16e274ba9765af3e4166ae
+    m_Address: Assets/Items/InfusedRaindrops/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d02e9957a0edf69499147bdf2a3a1b1e
+    m_Address: Assets/Items/InfusedRaindrops/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c5d1a76f9d7374a4fb573e00aa7082e4
+    m_Address: Assets/Items/InfusedRaindrops/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 82cdbb17797943a4cac194c7156bd0f5
+    m_Address: Assets/Items/HealingSalve/Effect.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: dddc61c9a1d4ffb4aafd386cfa922da4
+    m_Address: Assets/Items/Javelin/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 46fe4222763ae45439269722c4e81e75
+    m_Address: Assets/Items/Javelin/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b6d40de15a846af48b3503fb841cf3e9
+    m_Address: Assets/Items/Kaya/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 048d2a77c735bbc4dacfb84a6cae40f7
+    m_Address: Assets/Items/Kaya/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 982a6838aa0533f4e9442b3cc261526a
+    m_Address: Assets/Items/KayaAndSange/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9cc1f6bd408ad2848aad2415350d37cd
+    m_Address: Assets/Items/KayaAndSange/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7446d88c95be96d4b8e9774f9e47a1e8
+    m_Address: Assets/Items/LanceOfPursuit/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 098e37d6591e9fd4c89254f7c7c3c2a8
+    m_Address: Assets/Items/LanceOfPursuit/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2241ee82522340e4cb7411c825496589
+    m_Address: Assets/Items/NemesisCurse/CooldownBuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3d6600729ede21d41bf8715b7a9b468e
+    m_Address: Assets/Items/NemesisCurse/CurseBuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5ecc58d0be3ba7e4487419d188d35690
+    m_Address: Assets/Items/NemesisCurse/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 070ab7c1c41dc954ea1ef90c3eaf452f
+    m_Address: Assets/Items/NemesisCurse/IconCooldown.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 397c18cd4ce667d4996bc92828b24c4e
+    m_Address: Assets/Items/NemesisCurse/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2f01a61c9b2090b45b73306f7bc0c0f6
+    m_Address: Assets/Items/OrbOfBlight/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5cd9ceaf13be6d5489c391af1fcf3b42
+    m_Address: Assets/Items/OrbOfBlight/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 660b6335d42bcab42b701f52cb84cea3
+    m_Address: Assets/Items/OrbOfBlight/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 48997438db5751a4eae469247adb2eab
+    m_Address: Assets/Items/OrbOfCorrosion/ArmorBuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f311241b0840f4444b79a67524f9e8ee
+    m_Address: Assets/Items/OrbOfCorrosion/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 21b7e8cbae2413744b65a5910fbc9b56
+    m_Address: Assets/Items/OrbOfCorrosion/PoisonBuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b8df5d1888a6b1c46bd3ff8f0216489a
+    m_Address: Assets/Items/OrbOfCorrosion/SlowBuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 65cb25e7df20dcd459b7ad59db4ba2d2
+    m_Address: Assets/Items/OrbOfCorrosion/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1b5e9926ab1fa07429158e29c7e3b45f
+    m_Address: Assets/Items/OrbOfFrost/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ef83d5329f6ed14489987137f0a2e752
+    m_Address: Assets/Items/OrbOfFrost/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1d9d83cda4089c14980bfb22085a3796
+    m_Address: Assets/Items/OrbOfFrost/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d4518c6084fcbd24295c89846e81f4d2
+    m_Address: Assets/Items/OrbOfVenom/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c6cf5e0cf86063146884f636ec26ed3f
+    m_Address: Assets/Items/OrbOfVenom/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fbdfd4bd35f4d43409a88297f814ae93
+    m_Address: Assets/Items/OrbOfVenom/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4051536b515551045877c46816c9a5cf
+    m_Address: Assets/Items/PhaseBoots/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7f2df0dda2967b34386de26e4bafe2fd
+    m_Address: Assets/Items/PhaseBoots/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 22970b7434f4fac4c8b821cde88d7c37
+    m_Address: Assets/Items/PhaseBoots/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 33253155eb24b0f4b9cbd889e794b784
+    m_Address: Assets/Items/PhaseBoots/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7e1d6f34ef7d7454384a6e66fc172fb1
+    m_Address: Assets/Items/IronTalon/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: acbea0a32c712e547a95b26b365e2a95
+    m_Address: Assets/Items/IronTalon/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 50f92b9abbf7f754da77bbe3f3f8cb39
+    m_Address: Assets/Items/IronTalon/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6227aa9f6399383489c805a4eb606b12
+    m_Address: Assets/Items/PirateHat/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0e8c64f0870eddf4dbbb5d7ce9ff1f83
+    m_Address: Assets/Items/PirateHat/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fcbf861bc62b99d479c7d1eaf0177333
+    m_Address: Assets/Items/PirateHat/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c4a3bb7ed26ba8549b36d5075f825a6d
+    m_Address: Assets/Items/BootsOfTravel/Pickup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 51bfe81c5637ece409f3977241ebd822
+    m_Address: Assets/Items/BootsOfTravel/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fb8731226a4aaba4396a72e58dd66b4d
+    m_Address: Assets/Items/BootsOfTravel/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4d0df846c1332ac43a26fea7faeaca7b
+    m_Address: Assets/Items/PowerTreads/Pickup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 84243713c5040884390c528412a1c4a3
+    m_Address: Assets/Items/PowerTreads/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6b086374a453e1c4496e6edec2a8d100
+    m_Address: Assets/Items/PowerTreads/IconIntelligence.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 75199a01ac978d24babdc128c2ad9902
+    m_Address: Assets/Items/PowerTreads/IconStrength.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3651ddeeab45d6f41bcfc4b3a7ae3361
+    m_Address: Assets/Items/PowerTreads/IconAgility.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 335af9dc40839be42a629e9b5a623347
+    m_Address: Assets/Items/PowerTreads/AgilityBuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 920755e89acbf5340be2d67dc61f7412
+    m_Address: Assets/Items/PowerTreads/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 54b9bd1c60507ba40bdba010715fac46
+    m_Address: Assets/Items/PowerTreads/IntelligenceBuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 22d0abc02eb456a47853b15baba831b6
+    m_Address: Assets/Items/PowerTreads/StrengthBuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a8c8c0ded4a95244aa5ea630ea8c37af
+    m_Address: Assets/Items/QuellingBlade/Pickup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0734ea268c864664796ced72071f2233
+    m_Address: Assets/Items/QuellingBlade/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0b55cc7fa695e7a48a18e34ab3c058f9
+    m_Address: Assets/Items/QuellingBlade/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 74c85530a12861443a8ad91a6f77a220
+    m_Address: Assets/Items/Radiance/Pickup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 67e12766388e85f4ea5c687d69d74a51
+    m_Address: Assets/Items/Radiance/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 31f00aabc0667a247b77acb9f31db20c
+    m_Address: Assets/Items/Radiance/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5a776ffbf892d224e8345883cfeee8b4
+    m_Address: Assets/Items/Radiance/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 56673cadee797d54abd3cecdb4ee2662
+    m_Address: Assets/Items/Sange/Pickup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cbdb1ef7334378040bde54dccdbfbcb5
+    m_Address: Assets/Items/Sange/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4e67809137e204c4b9647c3fe2f02e10
+    m_Address: Assets/Items/Sange/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 352e0b091ef20634688c7688237400f8
+    m_Address: Assets/Items/SangeAndYasha/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f7e60d6d57d56fb4bbcdd02dbf3a1856
+    m_Address: Assets/Items/SangeAndYasha/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2e2e044b2766b7a44afbe210db2ee817
+    m_Address: Assets/Items/ShadowAmulet/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1dacd4e91aadd4848afb60bb47bf321c
+    m_Address: Assets/Items/ShadowAmulet/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6c7df5d865716d34fa20a2e6f8d452b7
+    m_Address: Assets/Items/ShadowAmulet/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 88a3bd6d76d2cee44b9d920774b689c7
+    m_Address: Assets/Items/ShadowAmulet/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2bcbd9f832fee364681db098b55aadc6
+    m_Address: Assets/Items/SkullBasher/Pickup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: df02ff746bf88e048ab76c7027a3f645
+    m_Address: Assets/Items/SkullBasher/IconCooldown.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f2f77ea34e1bf514e8495dfed1431af1
+    m_Address: Assets/Items/SkullBasher/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 879380b39b1747c42bbdcb559a9365fd
+    m_Address: Assets/Items/SkullBasher/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5ce89647bdf4ce545bcb4d390710775d
+    m_Address: Assets/Items/SkullBasher/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d653d4a2b7c54f24ba766f2866bd6d60
+    m_Address: Assets/Items/SkullBasher/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3e2fb67d801a75e4b8775d13a3fb17aa
+    m_Address: Assets/Items/SparkOfCourage/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ee72e1dfaece50a4c8f4e3f333a67793
+    m_Address: Assets/Items/SparkOfCourage/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9d8a163709c5d9f41bf6b174821c18db
+    m_Address: Assets/Items/SparkOfCourage/IconArmor.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8149aa7ecf3ec504d9ab785eaf155113
+    m_Address: Assets/Items/SparkOfCourage/IconDamage.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 990077c6234e00a4daebd6c58791a71a
+    m_Address: Assets/Items/SparkOfCourage/ArmorBuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f55dbd02d318f934faf53c7f9d59617e
+    m_Address: Assets/Items/SparkOfCourage/DamageBuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: dce9024dd4b4b7341ba3bfb874cb1b26
+    m_Address: Assets/Items/TranquilBoots/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 08bafe3de230c764fb0d10b567f9c651
+    m_Address: Assets/Items/TranquilBoots/IconOff.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 07ef6cf9b33d15648a71ceb303a25ad4
+    m_Address: Assets/Items/TranquilBoots/IconOn.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 95433932fdc773a4b8d13ce474988b27
+    m_Address: Assets/Items/TranquilBoots/OnBuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8f7d15e1c6fe5164e9f5e92f6f9781e7
+    m_Address: Assets/Items/TranquilBoots/OffBuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7d471fdd8a47b1c4394b340e2c79db67
+    m_Address: Assets/Items/TranquilBoots/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 340a241a6e8985e458129fb4f96d5f3b
+    m_Address: Assets/Items/Trident/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e774ca90d63809a4fa2c25033c8efb9e
+    m_Address: Assets/Items/Trident/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 442f53d82f56e3542a7b1624396bfa4a
+    m_Address: Assets/Items/Yasha/Pickup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 57feb1c619a4a914d94c8653cc7903e9
+    m_Address: Assets/Items/Yasha/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c24059f49a0ac9e4782c2fdf8503f840
+    m_Address: Assets/Items/Yasha/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d779790ef525a864b9eace4fd33d3fbb
+    m_Address: Assets/Items/YashaAndKaya/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b47820a53bd899d478a90917736e76cb
+    m_Address: Assets/Items/YashaAndKaya/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4d5864d77a48c874f8a1946e01084a5b
+    m_Address: Assets/Items/QuicksilverAmulet/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 696a4271ff7dc9349b988ed3edd6e11b
+    m_Address: Assets/Items/QuicksilverAmulet/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6feaf4c9bb430264b88626c9c955d11d
+    m_Address: Assets/Equipment/Bottle/Wisdom/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7e882d3487033e64bb17c33733b819ce
+    m_Address: Assets/Items/ExMachina/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 916f44ba8f91b37428466970e793da54
+    m_Address: Assets/Items/ExMachina/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4627d35093c67af43831c77d7a467ce2
+    m_Address: Assets/Items/ExMachina/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f1045dfb47867ea4e980b010bcbbcc1f
+    m_Address: Assets/Items/RefresherOrb/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 38b284a14ae4f334487743b34f84902e
+    m_Address: Assets/Items/RefresherOrb/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bf51569039e3c0c439bc63c8bafaa850
+    m_Address: Assets/Items/RefresherOrb/Pickup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 18d51e607c292a94886e652e910abb87
+    m_Address: Assets/Items/RefresherOrb/NetworkSoundEventDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 80cdd6f0f289f1c4db170205c721e6e4
+    m_Address: Assets/Items/RefresherOrb/IconCooldown.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: eebd50c9202ede14382431097799e473
+    m_Address: Assets/Items/RefresherOrb/BuffDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2c47c84c04276284788a629fce27c7f9
+    m_Address: Assets/Default/ModIcon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 22177c4400a3f824ab99cc3b95f14243, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 1f6e74e1d93d316418f99ac3b1531325, type: 2}
+    - {fileID: 11400000, guid: f234f394678aea740b8ef8ba550ec85c, type: 2}

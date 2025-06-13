@@ -1,7 +1,6 @@
-﻿using ROTA2.Items;
-using R2API;
+﻿using R2API;
 using RoR2;
-using UnityEngine;
+using ROTA2.Items;
 using static RoR2.DotController;
 
 namespace ROTA2.Buffs
@@ -10,14 +9,7 @@ namespace ROTA2.Buffs
     {
         public override string BuffName => "Greater Corruption";
         public override string BuffTokenName => "ORB_OF_CORROSION_ARMOR";
-        public override bool BuffStacks => true;
-        public override bool IsDebuff => true;
-        public override Color BuffColor => Color.red;
-        public override string BuffIconPath => "ROTA2.Icons.orb_of_corrosion.png";
-        public override EliteDef BuffEliteDef => null;
-        public override bool IsCooldown => false;
-        public override bool IsHidden => false;
-        public override NetworkSoundEventDef BuffStartSfx => null;
+        public override string BuffDefGUID => Assets.OrbOfCorrosion.ArmorBuffDef;
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += RemoveArmor;
@@ -28,7 +20,7 @@ namespace ROTA2.Buffs
             int count = GetBuffCount(body);
             if (count > 0)
             {
-                arguments.armorAdd -= OrbOfCorrosion.Instance.ArmorReduction * count;
+                arguments.armorAdd -= OrbOfCorrosion.Instance.ArmorReduction.Value * count;
             }
         }
     }
@@ -37,14 +29,7 @@ namespace ROTA2.Buffs
     {
         public override string BuffName => "Greater Frost";
         public override string BuffTokenName => "ORB_OF_CORROSION_SLOW";
-        public override bool BuffStacks => true;
-        public override bool IsDebuff => true;
-        public override Color BuffColor => Color.blue;
-        public override string BuffIconPath => "ROTA2.Icons.orb_of_corrosion.png";
-        public override EliteDef BuffEliteDef => null;
-        public override bool IsCooldown => false;
-        public override bool IsHidden => false;
-        public override NetworkSoundEventDef BuffStartSfx => null;
+        public override string BuffDefGUID => Assets.OrbOfCorrosion.SlowBuffDef;
         public override void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += ReduceMovementSpeed;
@@ -56,7 +41,7 @@ namespace ROTA2.Buffs
             int count = GetBuffCount(body);
             if (count > 0)
             {
-                arguments.moveSpeedReductionMultAdd += OrbOfCorrosion.Instance.MovementSpeedSlowBase / 100.0f + OrbOfCorrosion.Instance.MovementSpeedSlowPerStack / 100.0f * (count - 1);
+                arguments.moveSpeedReductionMultAdd += OrbOfCorrosion.Instance.MovementSpeedSlowBase.Value / 100.0f + OrbOfCorrosion.Instance.MovementSpeedSlowPerStack.Value / 100.0f * (count - 1);
             }
         }
         private void ReduceAttackSpeed(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs arguments)
@@ -64,7 +49,7 @@ namespace ROTA2.Buffs
             int count = GetBuffCount(body);
             if (count > 0)
             {
-                arguments.attackSpeedReductionMultAdd += OrbOfCorrosion.Instance.AttackSpeedSlowBase / 100.0f + OrbOfCorrosion.Instance.AttackSpeedSlowPerStack / 100.0f * (count - 1);
+                arguments.attackSpeedReductionMultAdd += OrbOfCorrosion.Instance.AttackSpeedSlowBase.Value / 100.0f + OrbOfCorrosion.Instance.AttackSpeedSlowPerStack.Value / 100.0f * (count - 1);
             }
         }
     }
@@ -73,14 +58,7 @@ namespace ROTA2.Buffs
     {
         public override string BuffName => "Greater Venom";
         public override string BuffTokenName => "ORB_OF_CORROSION_POISON";
-        public override bool BuffStacks => false;
-        public override bool IsDebuff => true;
-        public override Color BuffColor => Color.green;
-        public override string BuffIconPath => "ROTA2.Icons.orb_of_corrosion.png";
-        public override EliteDef BuffEliteDef => null;
-        public override bool IsCooldown => false;
-        public override bool IsHidden => false;
-        public override NetworkSoundEventDef BuffStartSfx => null;
+        public override string BuffDefGUID => Assets.OrbOfCorrosion.PoisonBuffDef;
 
         public override void Init()
         {

@@ -1,3 +1,25 @@
+## 2.0.0 - Massive code overhaul, new items, and some balance adjustments.
+- All assets are now loaded from Unity Addressables.
+- Significant parts of the project now reside in the associated Unity project (ItemDefs, models, icons, etc.)
+- Added support for Risk of Options.
+- Some items received internal reworks.
+- General code quality and performance improvements.
+- Tranquil Boots and Spark of Courage now have a buff to indicate their "mode".
+- Added Power Treads (green), Boots of Travel (red), Ex Machina (red), and Refresher (void red).
+- Aeon Disk: Now correctly gives movement speed when activated.
+- Aeon Disk: Now removes debuffs when activating.
+- Assault Cuirass: Reduced bonus attack speed per stack from `40` -> `20`.
+- Assault Cuirass: Rescaled bonus armor base/per stack from `30`/`30` -> `40`/`20`.
+- Dragon Scale: Total burn damage base/per stack changed to `210%`/`210%`.
+- Ghost Scepter: Cooldown increased from `30` -> `60`.
+  - On-demand invulnerability is incredibly strong.
+- Iron Talon: Damage is no longer amplified by Crowbars.
+  - Fun as it is, it took 4 crowbars and 2 talons to one-shot every single boss.
+- Orb of Blight: Fixed incorrect buff duration.
+- Radiance: Total burn damage base/per stack changed to `200%`/`200%`.
+- Shadow Amulet: Reduced standing still seconds requirement from `1.5` -> `1`.
+- Shadow Amulet: Increased invisibility linger duration from `1` -> `1.5`.
+
 ## 1.1.7 - Bugfix, new models, and some more balance adjustments.
 - Phase Boots: No longer eats OnBuffFirstStackGained and OnBuffFinalStackLost.
 #### These new models are coming from item sets for different heroes.

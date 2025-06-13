@@ -1,6 +1,10 @@
 ﻿using BepInEx.Configuration;
+using R2API;
+using RiskOfOptions;
+using RiskOfOptions.Options;
 using RoR2;
 using ROTA2.Buffs;
+using UnityEngine.AddressableAssets;
 
 namespace ROTA2.Equipment
 {
@@ -9,27 +13,38 @@ namespace ROTA2.Equipment
         public override string EquipmentName => "Mekansm";
         public override string EquipmentTokenName => "MEKANSM";
         public override string EquipmentTokenPickup => "Heal all allies and give them armor for a short time.";
-        public override string EquipmentTokenDesc => $"{Healing("Heal")} all allies for {Healing($"{MaximumHealthHeal}% of their maximum health")}, and increase their {Damage("armor")} by {Damage($"{ArmorBonus}")} for {Utility($"{ArmorBonusDuration} seconds")}.";
+        public override string EquipmentTokenDesc => $"{Healing("Heal")} all allies for {Healing($"{MaximumHealthHeal.Value}% of their maximum health")}, and increase their {Damage("armor")} by {Damage($"{ArmorBonus.Value}")} for {Utility($"{ArmorBonusDuration.Value} seconds")}.";
         public override string EquipmentTokenLore => "A glowing jewel formed out of assorted parts that somehow fit together perfectly.";
-        public override float EquipmentCooldown => MekansmCooldown;
-        public override string EquipmentIconPath => "ROTA2.Icons.mekansm.png";
+        public override float EquipmentCooldown => MekansmCooldown.Value;
+        public override string EquipmentDefGUID => Assets.Mekansm.EquipmentDef;
         public override void Init(ConfigFile config)
         {
             CreateConfig(config);
+            CreateSounds();
             CreateLanguageTokens();
             CreateEquipmentDef();
         }
 
-        public float MaximumHealthHeal;
-        public float ArmorBonus;
-        public float ArmorBonusDuration;
-        public float MekansmCooldown;
+        public ConfigEntry<float> MaximumHealthHeal;
+        public ConfigEntry<float> ArmorBonus;
+        public ConfigEntry<float> ArmorBonusDuration;
+        public ConfigEntry<float> MekansmCooldown;
         private void CreateConfig(ConfigFile config)
         {
-            MaximumHealthHeal   = config.Bind("Equipment: " + EquipmentName, "Maximum Health Heal", 25.0f, "").Value;
-            ArmorBonus          = config.Bind("Equipment: " + EquipmentName, "Armor Bonus",         50.0f, "").Value;
-            ArmorBonusDuration  = config.Bind("Equipment: " + EquipmentName, "Armor Duration",      8.0f, "").Value;
-            MekansmCooldown     = config.Bind("Equipment: " + EquipmentName, "Cooldown",            30.0f, "").Value;
+            MaximumHealthHeal = config.Bind("Equipment: " + EquipmentName, "Maximum Health Heal", 25.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthHeal));
+            ArmorBonus = config.Bind("Equipment: " + EquipmentName, "Armor Bonus", 50.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(ArmorBonus));
+            ArmorBonusDuration = config.Bind("Equipment: " + EquipmentName, "Armor Duration", 8.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(ArmorBonusDuration));
+            MekansmCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 30.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(MekansmCooldown));
+        }
+
+        NetworkSoundEventDef sound = null;
+        protected void CreateSounds()
+        {
+            Addressables.LoadAssetAsync<NetworkSoundEventDef>(Assets.Mekansm.NetworkSoundEventDef).Completed += (x) => { ContentAddition.AddNetworkSoundEventDef(x.Result); sound = x.Result; };
         }
 
         protected override bool ActivateEquipment(EquipmentSlot slot)
@@ -42,16 +57,15 @@ namespace ROTA2.Equipment
                     HealthComponent ally = member.GetComponent<HealthComponent>();
                     if (ally && ally.isActiveAndEnabled)
                     {
-                        ally.HealFraction(MaximumHealthHeal / 100.0f, default);
-                        MekansmBuff.Instance.ApplyTo(new Buffs.BuffBase.ApplyParameters
-                        {
-                            victim = ally.body,
-                            duration = ArmorBonusDuration
-                        });
+                        ally.HealFraction(MaximumHealthHeal.Value / 100.0f, default);
+                        MekansmBuff.ApplyTo(
+                            body: ally.body,
+                            duration: ArmorBonusDuration.Value
+                        );
                     }
                 }
 
-                Util.PlaySound("Mekansm", slot.characterBody.gameObject);
+                EffectManager.SimpleSoundEffect(sound.index, slot.characterBody.corePosition, true);
             }
 
             return true;

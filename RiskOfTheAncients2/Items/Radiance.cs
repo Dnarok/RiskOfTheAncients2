@@ -1,4 +1,6 @@
 ﻿using BepInEx.Configuration;
+using RiskOfOptions;
+using RiskOfOptions.Options;
 using RoR2;
 using ROTA2.Buffs;
 using UnityEngine;
@@ -13,12 +15,9 @@ namespace ROTA2.Items
         public override string ConfigItemName => ItemName;
         public override string ItemTokenName => "RADIANCE";
         public override string ItemTokenPickup => "Ignite and blind nearby enemies.";
-        public override string ItemTokenDesc => $"{Damage("Ignite")} enemies within {Damage($"{Radius}m")} for {Damage($"{IgniteBase}%")} {Stack($"(+{IgnitePerStack}% per stack)")} base damage. Additionally, enemies {Damage("burn")} for {Damage($"{BurnBase}%")} {Stack($"(+{BurnPerStack}% per stack)")} base damage and are {Utility("blinded")}, causing them to {Utility($"miss {MissChance}%")} of the time. {Utility("Unaffected by luck")}.";
+        public override string ItemTokenDesc => $"{Damage("Ignite")} enemies within {Damage($"{Radius.Value}m")} for {Damage($"{IgniteBase.Value}%")} {Stack($"(+{IgnitePerStack.Value}% per stack)")} base damage. Additionally, enemies {Damage("burn")} for {Damage($"{BurnBase.Value}%")} {Stack($"(+{BurnPerStack.Value}% per stack)")} base damage and are {Utility("blinded")}, causing them to {Utility($"miss {MissChance.Value}%")} of the time. {Utility("Unaffected by luck")}.";
         public override string ItemTokenLore => "A divine weapon that causes damage and a bright burning effect that lays waste to nearby enemies.";
-        public override string ItemIconPath => "ROTA2.Icons.radiance.png";
-        public override string ItemModelPath => "radiance.prefab";
-        public override ItemTier Tier => ItemTier.Tier3;
-        public override ItemTag[] ItemTags => [ItemTag.Damage];
+        public override string ItemDefGUID => Assets.Radiance.ItemDef;
         public override void Hooks()
         {
             CharacterBody.onBodyInventoryChangedGlobal += OnInventoryChanged;
@@ -31,24 +30,29 @@ namespace ROTA2.Items
             Hooks();
         }
 
-        public float Radius;
-        public float IgniteBase;
-        public float IgnitePerStack;
-        public float BurnBase;
-        public float BurnPerStack;
-        public float BurnDuration;
-        public float MissChance;
-        public float LingerDuration;
+        public ConfigEntry<float> Radius;
+        public ConfigEntry<float> IgniteBase;
+        public ConfigEntry<float> IgnitePerStack;
+        public ConfigEntry<float> BurnBase;
+        public ConfigEntry<float> BurnPerStack;
+        public ConfigEntry<float> MissChance;
+        public ConfigEntry<float> LingerDuration;
         private void CreateConfig(ConfigFile configuration)
         {
-            Radius          = configuration.Bind("Item: " + ItemName, "Radius",                     30.0f,  "").Value;
-            IgniteBase      = configuration.Bind("Item: " + ItemName, "Ignite Base Damage",         150.0f, "").Value;
-            IgnitePerStack  = configuration.Bind("Item: " + ItemName, "Ignite Per Stack Damage",    150.0f, "").Value;
-            BurnBase        = configuration.Bind("Item: " + ItemName, "Burn Base Damage",           100.0f, "").Value;
-            BurnPerStack    = configuration.Bind("Item: " + ItemName, "Burn Per Stack Damage",      50.0f,  "").Value;
-            BurnDuration    = configuration.Bind("Item: " + ItemName, "Burn Duration",              3.0f,   "").Value;
-            MissChance      = configuration.Bind("Item: " + ItemName, "Miss Chance",                25.0f,  "").Value;
-            LingerDuration  = configuration.Bind("Item: " + ItemName, "Miss Linger Duration",       1.0f,   "").Value;
+            Radius = configuration.Bind("Item: " + ItemName, "Radius", 30.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(Radius));
+            IgniteBase = configuration.Bind("Item: " + ItemName, "Ignite Base Damage", 150.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(IgniteBase));
+            IgnitePerStack = configuration.Bind("Item: " + ItemName, "Ignite Per Stack Damage", 150.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(IgnitePerStack));
+            BurnBase = configuration.Bind("Item: " + ItemName, "Burn Base Damage", 200.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(BurnBase));
+            BurnPerStack = configuration.Bind("Item: " + ItemName, "Burn Per Stack Damage", 200.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(BurnPerStack));
+            MissChance = configuration.Bind("Item: " + ItemName, "Miss Chance", 25.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(MissChance));
+            LingerDuration = configuration.Bind("Item: " + ItemName, "Miss Linger Duration", 1.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(LingerDuration));
         }
 
         private void OnInventoryChanged(CharacterBody body)
@@ -81,7 +85,7 @@ namespace ROTA2.Items
                     return;
                 }
 
-                int count = Radiance.Instance.GetCount(body);
+                int count = Radiance.GetCount(body);
                 if (count <= 0)
                 {
                     if (indicator != null)
@@ -107,7 +111,7 @@ namespace ROTA2.Items
                     }
                     foreach (Transform child in indicator.transform)
                     {
-                        child.localScale = new Vector3(Instance.Radius * 2, Instance.Radius * 2, Instance.Radius * 2);
+                        child.localScale = new Vector3(Instance.Radius.Value * 2, Instance.Radius.Value * 2, Instance.Radius.Value * 2);
                     }
                     indicator.GetComponent<NetworkedBodyAttachment>().AttachToGameObjectAndSpawn(body.gameObject);
                 }
@@ -116,8 +120,8 @@ namespace ROTA2.Items
                 if (timer > 1.0f)
                 {
                     timer -= 1.0f;
-                    float radius2 = Radiance.Instance.Radius * Radiance.Instance.Radius;
-                    
+                    float radius2 = Instance.Radius.Value * Instance.Radius.Value;
+
                     for (TeamIndex index = TeamIndex.Neutral; index < TeamIndex.Count; index++)
                     {
                         if (index != body.teamComponent.teamIndex)
@@ -127,27 +131,25 @@ namespace ROTA2.Items
                                 CharacterBody enemy = member.GetComponent<CharacterBody>();
                                 if (enemy && enemy.isActiveAndEnabled && enemy.healthComponent && (enemy.transform.position - body.transform.position).sqrMagnitude <= radius2)
                                 {
-                                    InflictDotInfo burn = new()
-                                    {
-                                        attackerObject = body.gameObject,
-                                        victimObject = enemy.gameObject,
-                                        dotIndex = DotController.DotIndex.Burn,
-                                        duration = Radiance.Instance.BurnDuration,
-                                        damageMultiplier = Radiance.Instance.BurnBase / 100.0f + Radiance.Instance.BurnPerStack / 100.0f * (count - 1)
-                                    };
+                                    float damage = body.damage * (Instance.BurnBase.Value / 100f + Instance.BurnPerStack.Value / 100f * (count - 1));
+                                    var burn = default(InflictDotInfo);
+                                    burn.attackerObject = body.gameObject;
+                                    burn.victimObject = enemy.gameObject;
+                                    burn.dotIndex = DotController.DotIndex.Burn;
+                                    burn.totalDamage = damage;
+                                    burn.damageMultiplier = 1f;
                                     StrengthenBurnUtils.CheckDotForUpgrade(body.inventory, ref burn);
                                     DotController.InflictDot(ref burn);
 
-                                    RadianceBuff.Instance.ApplyTo(new BuffBase.ApplyParameters
-                                    {
-                                        victim = enemy,
-                                        duration = 1.0f + Radiance.Instance.LingerDuration
-                                    });
+                                    RadianceBuff.ApplyTo(
+                                        body: enemy,
+                                        duration: 1.0f + Instance.LingerDuration.Value
+                                    );
 
                                     DamageInfo ignite = new()
                                     {
                                         attacker = body.gameObject,
-                                        damage = body.damage * (Radiance.Instance.IgniteBase / 100.0f + Radiance.Instance.IgnitePerStack / 100.0f * (count - 1)),
+                                        damage = body.damage * (Instance.IgniteBase.Value / 100.0f + Instance.IgnitePerStack.Value / 100.0f * (count - 1)),
                                         position = enemy.transform.position,
                                         damageType = DamageType.AOE,
                                         procCoefficient = 0.0f

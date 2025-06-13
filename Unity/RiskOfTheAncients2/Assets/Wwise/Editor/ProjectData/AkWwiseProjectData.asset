@@ -1,0 +1,687 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2930f6627e3650949bf3819ce564b8f3, type: 3}
+  m_Name: AkWwiseProjectData
+  m_EditorClassIdentifier: 
+  AcousticTextureWwu:
+  - PhysicalPath: Virtual Acoustics\Default Work Unit.wwu
+    PathAndIcons:
+    - ElementName: Virtual Acoustics
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: Default Work Unit
+      ObjectType: 12
+      guid: 606291e3beb3394ea4d5ef09fcc8b749
+    ParentPath: Virtual Acoustics\Default Work Unit
+    guid: 606291e3beb3394ea4d5ef09fcc8b749
+    GuidInternal: 
+    m_lastTime: -8584543424011642060
+    List: []
+  AuxBusWwu:
+  - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
+    PathAndIcons:
+    - ElementName: Master-Mixer Hierarchy
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: Default Work Unit
+      ObjectType: 12
+      guid: cc744f932f41bd4ca352954d9e1c25f0
+    ParentPath: Master-Mixer Hierarchy\Default Work Unit
+    guid: cc744f932f41bd4ca352954d9e1c25f0
+    GuidInternal: 
+    m_lastTime: -8584543303369120794
+    List:
+    - name: Master Audio Bus
+      guid: d8a41415a61d2a41a17e75ca0c2149f3
+      id: 3803692087
+      PathAndIcons:
+      - ElementName: Master-Mixer Hierarchy
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: cc744f932f41bd4ca352954d9e1c25f0
+      - ElementName: Master Audio Bus
+        ObjectType: 2
+        guid: d8a41415a61d2a41a17e75ca0c2149f3
+      Path: Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus
+  BankWwu:
+  - PhysicalPath: SoundBanks\Default Work Unit.wwu
+    PathAndIcons:
+    - ElementName: SoundBanks
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: Default Work Unit
+      ObjectType: 12
+      guid: b28592f8c585e34495c8f4ac4486e241
+    ParentPath: SoundBanks\Default Work Unit
+    guid: b28592f8c585e34495c8f4ac4486e241
+    GuidInternal: 
+    m_lastTime: -8584520433865627672
+    List:
+    - name: RiskOfTheAncients2Sounds
+      guid: 6415c1595000a846bc16c28a7a08af00
+      id: 2772149999
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: b28592f8c585e34495c8f4ac4486e241
+      - ElementName: RiskOfTheAncients2Sounds
+        ObjectType: 7
+        guid: 6415c1595000a846bc16c28a7a08af00
+      Path: SoundBanks\Default Work Unit\RiskOfTheAncients2Sounds
+  EventWwu:
+  - PhysicalPath: Events\Default Work Unit.wwu
+    PathAndIcons:
+    - ElementName: Events
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: Default Work Unit
+      ObjectType: 12
+      guid: 021a5a520bf016438e874f7c14a4551f
+    ParentPath: Events\Default Work Unit
+    guid: 021a5a520bf016438e874f7c14a4551f
+    GuidInternal: 
+    m_lastTime: -8584521614020595157
+    List:
+    - name: AeonDisk
+      guid: 835d5def270be145bebe9e48722b2456
+      id: 461022999
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: AeonDisk
+        ObjectType: 3
+        guid: 835d5def270be145bebe9e48722b2456
+      Path: Events\Default Work Unit\AeonDisk
+      maxAttenuation: 0
+      maxDuration: 3.499796
+      minDuration: 3.499796
+    - name: AmplifyDamage
+      guid: c6cf4e9aa4cdd7459d81adbdd9a4729f
+      id: 1825223284
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: AmplifyDamage
+        ObjectType: 3
+        guid: c6cf4e9aa4cdd7459d81adbdd9a4729f
+      Path: Events\Default Work Unit\AmplifyDamage
+      maxAttenuation: 0
+      maxDuration: 2.6516325
+      minDuration: 2.6516325
+    - name: Arcane
+      guid: 0c1dd06907252046a1211c16e0437be6
+      id: 2114153135
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: Arcane
+        ObjectType: 3
+        guid: 0c1dd06907252046a1211c16e0437be6
+      Path: Events\Default Work Unit\Arcane
+      maxAttenuation: 0
+      maxDuration: 2.781315
+      minDuration: 2.781315
+    - name: ArcaneBoots
+      guid: efc1bc6110c57a47bf68b29cb4ac21b4
+      id: 122669662
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: ArcaneBoots
+        ObjectType: 3
+        guid: efc1bc6110c57a47bf68b29cb4ac21b4
+      Path: Events\Default Work Unit\ArcaneBoots
+      maxAttenuation: 0
+      maxDuration: 1.8365079
+      minDuration: 1.8365079
+    - name: ArmletOfMordiggianOff
+      guid: 3179085306df484da3041d92b00269c9
+      id: 3329569319
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: ArmletOfMordiggianOff
+        ObjectType: 3
+        guid: 3179085306df484da3041d92b00269c9
+      Path: Events\Default Work Unit\ArmletOfMordiggianOff
+      maxAttenuation: 0
+      maxDuration: 1.1336962
+      minDuration: 1.1336962
+    - name: ArmletOfMordiggianOn
+      guid: fe6b288fbf1dba4ab5a2cb11bc3392ac
+      id: 1592439123
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: ArmletOfMordiggianOn
+        ObjectType: 3
+        guid: fe6b288fbf1dba4ab5a2cb11bc3392ac
+      Path: Events\Default Work Unit\ArmletOfMordiggianOn
+      maxAttenuation: 0
+      maxDuration: 1.2779592
+      minDuration: 1.2779592
+    - name: BlackKingBar
+      guid: cc1a709d3814fc4ab4de4a852d3eac19
+      id: 3471834074
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: BlackKingBar
+        ObjectType: 3
+        guid: cc1a709d3814fc4ab4de4a852d3eac19
+      Path: Events\Default Work Unit\BlackKingBar
+      maxAttenuation: 0
+      maxDuration: 3.8848526
+      minDuration: 3.8848526
+    - name: BootsOfBearing
+      guid: 8434f0f8c6001a4ba51f890e5f10d419
+      id: 1109838603
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: BootsOfBearing
+        ObjectType: 3
+        guid: 8434f0f8c6001a4ba51f890e5f10d419
+      Path: Events\Default Work Unit\BootsOfBearing
+      maxAttenuation: 0
+      maxDuration: 3.0142858
+      minDuration: 3.0142858
+    - name: Bounty
+      guid: 666dd876bdd99b499a870b74f5696dd4
+      id: 1345459588
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: Bounty
+        ObjectType: 3
+        guid: 666dd876bdd99b499a870b74f5696dd4
+      Path: Events\Default Work Unit\Bounty
+      maxAttenuation: 0
+      maxDuration: 2.6467347
+      minDuration: 2.6467347
+    - name: Daedalus
+      guid: 862bcc23625c9946b9a1c1f72f39355b
+      id: 1654418736
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: Daedalus
+        ObjectType: 3
+        guid: 862bcc23625c9946b9a1c1f72f39355b
+      Path: Events\Default Work Unit\Daedalus
+      maxAttenuation: 0
+      maxDuration: 1.1409523
+      minDuration: 1.1409523
+    - name: EnchantedMango
+      guid: 0678c6b28353b9428e96d7e3acf9bd1a
+      id: 1700204039
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: EnchantedMango
+        ObjectType: 3
+        guid: 0678c6b28353b9428e96d7e3acf9bd1a
+      Path: Events\Default Work Unit\EnchantedMango
+      maxAttenuation: 0
+      maxDuration: 2.0358276
+      minDuration: 2.0358276
+    - name: ExMachina
+      guid: 458a5d2885c2444e858afe9b046da1da
+      id: 1038581357
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: ExMachina
+        ObjectType: 3
+        guid: 458a5d2885c2444e858afe9b046da1da
+      Path: Events\Default Work Unit\ExMachina
+      maxAttenuation: 0
+      maxDuration: 1.8692063
+      minDuration: 1.8692063
+    - name: GhostScepter
+      guid: 5c0520f4a8d902408578d7e026b6d7f5
+      id: 4155419568
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: GhostScepter
+        ObjectType: 3
+        guid: 5c0520f4a8d902408578d7e026b6d7f5
+      Path: Events\Default Work Unit\GhostScepter
+      maxAttenuation: 0
+      maxDuration: 3.9242177
+      minDuration: 3.9242177
+    - name: GuardianGreaves
+      guid: 3de4ce6dcb148949b22a7bfef395e934
+      id: 2861234393
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: GuardianGreaves
+        ObjectType: 3
+        guid: 3de4ce6dcb148949b22a7bfef395e934
+      Path: Events\Default Work Unit\GuardianGreaves
+      maxAttenuation: 0
+      maxDuration: 4.4846034
+      minDuration: 4.4846034
+    - name: Haste
+      guid: ae6b591d63039049bb3002010248450c
+      id: 1662592590
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: Haste
+        ObjectType: 3
+        guid: ae6b591d63039049bb3002010248450c
+      Path: Events\Default Work Unit\Haste
+      maxAttenuation: 0
+      maxDuration: 1.6924943
+      minDuration: 1.6924943
+    - name: HealingSalve
+      guid: fc9321f840c0a94bbe41ec4062e3476e
+      id: 3242522900
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: HealingSalve
+        ObjectType: 3
+        guid: fc9321f840c0a94bbe41ec4062e3476e
+      Path: Events\Default Work Unit\HealingSalve
+      maxAttenuation: 0
+      maxDuration: 2.7623355
+      minDuration: 2.7623355
+    - name: Illusion
+      guid: 8fc172eb686563478984b4c34cbc6dcb
+      id: 418558484
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: Illusion
+        ObjectType: 3
+        guid: 8fc172eb686563478984b4c34cbc6dcb
+      Path: Events\Default Work Unit\Illusion
+      maxAttenuation: 0
+      maxDuration: 2.6708617
+      minDuration: 2.6708617
+    - name: InfusedRaindrops
+      guid: 8c48ceab0af5a6458c678ca445b76f10
+      id: 2401952583
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: InfusedRaindrops
+        ObjectType: 3
+        guid: 8c48ceab0af5a6458c678ca445b76f10
+      Path: Events\Default Work Unit\InfusedRaindrops
+      maxAttenuation: 0
+      maxDuration: 3.1690476
+      minDuration: 3.1690476
+    - name: Invisibility
+      guid: e3c22dda05eb784896c05b5bbff73a0b
+      id: 4258276040
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: Invisibility
+        ObjectType: 3
+        guid: e3c22dda05eb784896c05b5bbff73a0b
+      Path: Events\Default Work Unit\Invisibility
+      maxAttenuation: 0
+      maxDuration: 2.4723809
+      minDuration: 2.4723809
+    - name: IronTalon
+      guid: e921dd27556c1e4ba6923280d1585178
+      id: 3264488081
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: IronTalon
+        ObjectType: 3
+        guid: e921dd27556c1e4ba6923280d1585178
+      Path: Events\Default Work Unit\IronTalon
+      maxAttenuation: 0
+      maxDuration: 2.282993
+      minDuration: 2.282993
+    - name: Mekansm
+      guid: ca081ee1879eaa429bc5afbb21ade7ed
+      id: 3523774987
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: Mekansm
+        ObjectType: 3
+        guid: ca081ee1879eaa429bc5afbb21ade7ed
+      Path: Events\Default Work Unit\Mekansm
+      maxAttenuation: 0
+      maxDuration: 4.472381
+      minDuration: 4.472381
+    - name: MoonShard
+      guid: 124c37352fcbee41ba138077972b13e1
+      id: 1098729742
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: MoonShard
+        ObjectType: 3
+        guid: 124c37352fcbee41ba138077972b13e1
+      Path: Events\Default Work Unit\MoonShard
+      maxAttenuation: 0
+      maxDuration: 2.5469615
+      minDuration: 2.5469615
+    - name: PhaseBoots
+      guid: e11d1b595a835e4db30b8d591f36803b
+      id: 919632621
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: PhaseBoots
+        ObjectType: 3
+        guid: e11d1b595a835e4db30b8d591f36803b
+      Path: Events\Default Work Unit\PhaseBoots
+      maxAttenuation: 0
+      maxDuration: 0.99052155
+      minDuration: 0.99052155
+    - name: PirateHat
+      guid: 64a8b3c38176414693a781730cdfb82c
+      id: 3961105405
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: PirateHat
+        ObjectType: 3
+        guid: 64a8b3c38176414693a781730cdfb82c
+      Path: Events\Default Work Unit\PirateHat
+      maxAttenuation: 0
+      maxDuration: 1.9998866
+      minDuration: 1.9998866
+    - name: Refresher
+      guid: 121e25ccedd7904f8a4d94b2e751680c
+      id: 614387127
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: Refresher
+        ObjectType: 3
+        guid: 121e25ccedd7904f8a4d94b2e751680c
+      Path: Events\Default Work Unit\Refresher
+      maxAttenuation: 0
+      maxDuration: 2.9021542
+      minDuration: 2.9021542
+    - name: Regeneration
+      guid: 8c353b953831ab4c8fc212a2dbb0e96a
+      id: 2663569928
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: Regeneration
+        ObjectType: 3
+        guid: 8c353b953831ab4c8fc212a2dbb0e96a
+      Path: Events\Default Work Unit\Regeneration
+      maxAttenuation: 0
+      maxDuration: 3.4755557
+      minDuration: 3.4755557
+    - name: ShadowAmulet
+      guid: 4090a073fa6fb44eac82e718e537d9d4
+      id: 2235173055
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: ShadowAmulet
+        ObjectType: 3
+        guid: 4090a073fa6fb44eac82e718e537d9d4
+      Path: Events\Default Work Unit\ShadowAmulet
+      maxAttenuation: 0
+      maxDuration: 3.7151928
+      minDuration: 3.7151928
+    - name: Shield
+      guid: e11143865a065c41beb1ca8a7cf280a5
+      id: 1161967626
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: Shield
+        ObjectType: 3
+        guid: e11143865a065c41beb1ca8a7cf280a5
+      Path: Events\Default Work Unit\Shield
+      maxAttenuation: 0
+      maxDuration: 6.0169163
+      minDuration: 6.0169163
+    - name: SkullBasher
+      guid: 93d92e8ace6509498f4531eec5a92456
+      id: 4245387363
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: SkullBasher
+        ObjectType: 3
+        guid: 93d92e8ace6509498f4531eec5a92456
+      Path: Events\Default Work Unit\SkullBasher
+      maxAttenuation: 0
+      maxDuration: 1.1972789
+      minDuration: 1.1972789
+    - name: Water
+      guid: 4a288ad1f1af9a4a84eb5a287399a9ef
+      id: 2654748154
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: Water
+        ObjectType: 3
+        guid: 4a288ad1f1af9a4a84eb5a287399a9ef
+      Path: Events\Default Work Unit\Water
+      maxAttenuation: 0
+      maxDuration: 2.4565532
+      minDuration: 2.4565532
+    - name: Wisdom
+      guid: 98c4dc6eb662544a83e5965c85ca169a
+      id: 4033993124
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 021a5a520bf016438e874f7c14a4551f
+      - ElementName: Wisdom
+        ObjectType: 3
+        guid: 98c4dc6eb662544a83e5965c85ca169a
+      Path: Events\Default Work Unit\Wisdom
+      maxAttenuation: 0
+      maxDuration: 4.1161
+      minDuration: 4.1161
+  RtpcWwu:
+  - PhysicalPath: Game Parameters\Default Work Unit.wwu
+    PathAndIcons:
+    - ElementName: Game Parameters
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: Default Work Unit
+      ObjectType: 12
+      guid: a7c193911be5d1449ffba50cbfe86371
+    ParentPath: Game Parameters\Default Work Unit
+    guid: a7c193911be5d1449ffba50cbfe86371
+    GuidInternal: 
+    m_lastTime: -8584543424013637048
+    List: []
+  StateWwu:
+  - PhysicalPath: States\Default Work Unit.wwu
+    PathAndIcons:
+    - ElementName: States
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: Default Work Unit
+      ObjectType: 12
+      guid: f2a8bf377e4f2f4496b05339a6e2b64b
+    ParentPath: States\Default Work Unit
+    guid: f2a8bf377e4f2f4496b05339a6e2b64b
+    GuidInternal: 
+    m_lastTime: -8584543424013867035
+    List: []
+  SwitchWwu:
+  - PhysicalPath: Switches\Default Work Unit.wwu
+    PathAndIcons:
+    - ElementName: Switches
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: Default Work Unit
+      ObjectType: 12
+      guid: 6a67a3b8a9e0f8469b20268b062d7403
+    ParentPath: Switches\Default Work Unit
+    guid: 6a67a3b8a9e0f8469b20268b062d7403
+    GuidInternal: 
+    m_lastTime: -8584543424012872061
+    List: []
+  TriggerWwu:
+  - PhysicalPath: Triggers\Default Work Unit.wwu
+    PathAndIcons:
+    - ElementName: Triggers
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: Default Work Unit
+      ObjectType: 12
+      guid: e2c55042c04868418c46428744c14b59
+    ParentPath: Triggers\Default Work Unit
+    guid: e2c55042c04868418c46428744c14b59
+    GuidInternal: 
+    m_lastTime: -8584543424012552058
+    List: []
+  ExpandedFileSystemItemIds: 
+  ExpandedWaapiItemIds: 
+  AutoSyncSelection: 0
+  autoPopulateEnabled: 1
+  currentDataSource: 0
+  CurrentPluginConfig: 

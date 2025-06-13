@@ -1,8 +1,9 @@
 ﻿using BepInEx.Configuration;
 using R2API;
+using RiskOfOptions;
+using RiskOfOptions.Options;
 using RoR2;
 using ROTA2.Buffs;
-using System;
 using UnityEngine;
 
 namespace ROTA2.Items
@@ -13,17 +14,14 @@ namespace ROTA2.Items
         public override string ConfigItemName => ItemName;
         public override string ItemTokenName => "TRANQUIL_BOOTS";
         public override string ItemTokenPickup => "Increase base movement speed and rapidly heal outside of danger.";
-        public override string ItemTokenDesc => $"Increases {Utility("base movement speed")} by {Utility($"{MovementSpeedBase}")} {Stack($"(+{MovementSpeedPerStack} per stack)")}. Outside of danger, increases {Healing("base health regeneration")} by {Healing($"+{OODHealthRegenerationBase} hp/s")} {Stack($"(+{OODHealthRegenerationPerStack} hp/s per stack)")} and {Utility("base movement speed")} by a further {Utility($"{OODMovementSpeedBase}")} {Stack($"(+{OODMovementSpeedPerStack} per stack)")}.";
+        public override string ItemTokenDesc => $"Increases {Utility("base movement speed")} by {Utility($"{MovementSpeedBase.Value}")} {Stack($"(+{MovementSpeedPerStack.Value} per stack)")}. Outside of danger, increases {Healing("base health regeneration")} by {Healing($"+{OODHealthRegenerationBase.Value} hp/s")} {Stack($"(+{OODHealthRegenerationPerStack.Value} hp/s per stack)")} and {Utility("base movement speed")} by a further {Utility($"{OODMovementSpeedBase.Value}")} {Stack($"(+{OODMovementSpeedPerStack.Value} per stack)")}.";
         public override string ItemTokenLore => "While they increase the longevity of the wearer, this boot is not particularly reliable.";
-        public override ItemTier Tier => ItemTier.Tier2;
-        public override ItemTag[] ItemTags => [ItemTag.WorldUnique];
-        public override string ItemIconPath => "ROTA2.Icons.tranquil_boots.png";
+        public override string ItemDefGUID => Assets.TranquilBoots.ItemDef;
         public override void Hooks()
         {
             CharacterBody.onBodyInventoryChangedGlobal += OnInventoryChanged;
             RecalculateStatsAPI.GetStatCoefficients += AddMovementSpeed;
         }
-
         public override void Init(ConfigFile configuration)
         {
             CreateConfig(configuration);
@@ -32,22 +30,29 @@ namespace ROTA2.Items
             Hooks();
         }
 
-        public float MovementSpeedBase;
-        public float MovementSpeedPerStack;
-        public float OODHealthRegenerationBase;
-        public float OODHealthRegenerationPerStack;
-        public float OODMovementSpeedBase;
-        public float OODMovementSpeedPerStack;
-        public float OODDelay;
+        public ConfigEntry<float> MovementSpeedBase;
+        public ConfigEntry<float> MovementSpeedPerStack;
+        public ConfigEntry<float> OODHealthRegenerationBase;
+        public ConfigEntry<float> OODHealthRegenerationPerStack;
+        public ConfigEntry<float> OODMovementSpeedBase;
+        public ConfigEntry<float> OODMovementSpeedPerStack;
+        public ConfigEntry<float> OODDelay;
         private void CreateConfig(ConfigFile configuration)
         {
-            MovementSpeedBase               = configuration.Bind("Item: " + ItemName, "Passive Base Movement Speed Base", 0.5f, "").Value;
-            MovementSpeedPerStack           = configuration.Bind("Item: " + ItemName, "Passive Base Movement Speed Per Stack", 0.5f, "").Value;
-            OODHealthRegenerationBase       = configuration.Bind("Item: " + ItemName, "Out Of Danger Health Regeneration Base", 4.5f, "").Value;
-            OODHealthRegenerationPerStack   = configuration.Bind("Item: " + ItemName, "Out Of Danger Health Regeneration Per Stack", 4.5f, "").Value;
-            OODMovementSpeedBase            = configuration.Bind("Item: " + ItemName, "Out Of Danger Base Movement Speed Base", 0.5f, "").Value;
-            OODMovementSpeedPerStack        = configuration.Bind("Item: " + ItemName, "Out Of Danger Base Movement Speed Per Stack", 0.5f, "").Value;
-            OODDelay                        = configuration.Bind("Item: " + ItemName, "Out Of Danger Delay", 5.0f, "").Value;
+            MovementSpeedBase = configuration.Bind("Item: " + ItemName, "Passive Base Movement Speed Base", 0.5f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedBase));
+            MovementSpeedPerStack = configuration.Bind("Item: " + ItemName, "Passive Base Movement Speed Per Stack", 0.5f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedPerStack));
+            OODHealthRegenerationBase = configuration.Bind("Item: " + ItemName, "Out Of Danger Health Regeneration Base", 4.5f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(OODHealthRegenerationBase));
+            OODHealthRegenerationPerStack = configuration.Bind("Item: " + ItemName, "Out Of Danger Health Regeneration Per Stack", 4.5f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(OODHealthRegenerationPerStack));
+            OODMovementSpeedBase = configuration.Bind("Item: " + ItemName, "Out Of Danger Base Movement Speed Base", 0.5f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(OODMovementSpeedBase));
+            OODMovementSpeedPerStack = configuration.Bind("Item: " + ItemName, "Out Of Danger Base Movement Speed Per Stack", 0.5f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(OODMovementSpeedPerStack));
+            OODDelay = configuration.Bind("Item: " + ItemName, "Out Of Danger Delay", 5.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(OODDelay));
         }
 
         private void OnInventoryChanged(CharacterBody body)
@@ -62,64 +67,66 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count > 0)
             {
-                args.baseMoveSpeedAdd += MovementSpeedBase + MovementSpeedPerStack * (count - 1);
+                args.baseMoveSpeedAdd += MovementSpeedBase.Value + MovementSpeedPerStack.Value * (count - 1);
             }
         }
 
         public class TranquilBootsBehavior : MonoBehaviour
         {
             CharacterBody body;
-            public bool last_out_of_danger;
-            public bool out_of_danger;
+            bool cleaned = false;
+            public bool last_out_of_danger = false;
 
             void Awake()
             {
                 body = GetComponent<CharacterBody>();
-                last_out_of_danger = false;
-                out_of_danger = false;
+            }
+            void Start()
+            {
+                if (GetCount(body) <= 0)
+                {
+                    return;
+                }
+
+                bool out_of_danger = body.healthComponent.timeSinceLastHit >= Instance.OODDelay.Value;
+                if (out_of_danger)
+                {
+                    body.AddBuff(TranqbuilBootsOn.GetBuffDef());
+                    Util.PlaySound("Play_item_proc_slug_emerge", body.gameObject);
+                }
+                else
+                {
+                    body.AddBuff(TranquilBootsOff.GetBuffDef());
+                    Util.PlaySound("Play_item_proc_slug_hide", body.gameObject);
+                }
+                last_out_of_danger = out_of_danger;
             }
             void FixedUpdate()
             {
-                int count = Instance.GetCount(body);
-                if (count == 0)
+                if (GetCount(body) <= 0)
                 {
-                    if (out_of_danger)
+                    if (!cleaned)
                     {
-                        body.SetBuffCount(TranquilBootsBuff.Instance.BuffDef.buffIndex, 0);
-                        body.MarkAllStatsDirty();
-                        out_of_danger = false;
-                        last_out_of_danger = false;
+                        body.RemoveBuff(TranqbuilBootsOn.GetBuffDef());
+                        body.RemoveBuff(TranquilBootsOff.GetBuffDef());
+                        cleaned = true;
                     }
                     return;
                 }
 
-                if (body.healthComponent.timeSinceLastHit >= TranquilBoots.Instance.OODDelay)
-                {
-                    out_of_danger = true;
-                }
-                else
-                {
-                    out_of_danger = false;
-                }
-
+                bool out_of_danger = body.healthComponent.timeSinceLastHit >= Instance.OODDelay.Value;
                 if (out_of_danger && !last_out_of_danger)
                 {
-                    TranquilBootsBuff.Instance.ApplyTo(new BuffBase.ApplyParameters
-                    {
-                        victim = body,
-                        stacks = count,
-                        max_stacks = count
-                    });
+                    body.AddBuff(TranqbuilBootsOn.GetBuffDef());
+                    body.RemoveBuff(TranquilBootsOff.GetBuffDef());
                     Util.PlaySound("Play_item_proc_slug_emerge", body.gameObject);
-                    body.MarkAllStatsDirty();
                 }
                 else if (!out_of_danger && last_out_of_danger)
                 {
-                    body.SetBuffCount(TranquilBootsBuff.Instance.BuffDef.buffIndex, 0);
+                    body.AddBuff(TranquilBootsOff.GetBuffDef());
+                    body.RemoveBuff(TranqbuilBootsOn.GetBuffDef());
                     Util.PlaySound("Play_item_proc_slug_hide", body.gameObject);
-                    body.MarkAllStatsDirty();
                 }
-
                 last_out_of_danger = out_of_danger;
             }
         }

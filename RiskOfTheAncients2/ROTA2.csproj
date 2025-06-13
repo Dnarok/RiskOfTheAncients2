@@ -7,171 +7,31 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="Icons\aeon_disk.png" />
-	  <None Remove="Icons\aeon_disk_cooldown.png" />
-	  <None Remove="Icons\arcane_boots.png" />
-	  <None Remove="Icons\armlet_of_mordiggian.png" />
-	  <None Remove="Icons\armlet_of_mordiggian_toggled.png" />
-	  <None Remove="Icons\assault_cuirass.png" />
-	  <None Remove="Icons\black_king_bar.png" />
-	  <None Remove="Icons\blades_of_attack.png" />
-	  <None Remove="Icons\boots_of_bearing.png" />
-	  <None Remove="Icons\bottle.png" />
-	  <None Remove="Icons\bottle_arcane.png" />
-	  <None Remove="Icons\bottle_bounty.png" />
-	  <None Remove="Icons\bottle_haste.png" />
-	  <None Remove="Icons\bottle_illusion.png" />
-	  <None Remove="Icons\bottle_invisibility.png" />
-	  <None Remove="Icons\bottle_regeneration.png" />
-	  <None Remove="Icons\bottle_shield.png" />
-	  <None Remove="Icons\bottle_water.png" />
-	  <None Remove="Icons\bottle_wisdom.png" />
-	  <None Remove="Icons\consumed_mango.png" />
-	  <None Remove="Icons\consumed_moon_shard.png" />
-	  <None Remove="Icons\daedalus.png" />
-	  <None Remove="Icons\dehydrated_raindrops.png" />
-	  <None Remove="Icons\dragon_scale.png" />
-	  <None Remove="Icons\enchanted_mango.png" />
-	  <None Remove="Icons\fairys_trinket.png" />
-	  <None Remove="Icons\ghost_scepter.png" />
-	  <None Remove="Icons\guardian_greaves.png" />
-	  <None Remove="Icons\healing_salve.png" />
-	  <None Remove="Icons\infused_raindrops.png" />
-	  <None Remove="Icons\iron_branch.png" />
-	  <None Remove="Icons\iron_talon.png" />
-	  <None Remove="Icons\javelin.png" />
-	  <None Remove="Icons\lance_of_pursuit.png" />
-	  <None Remove="Icons\mekansm.png" />
-	  <None Remove="Icons\moon_shard.png" />
-	  <None Remove="Icons\nemesis_curse.png" />
-	  <None Remove="Icons\nemesis_curse_cooldown.png" />
-	  <None Remove="Icons\orb_of_blight.png" />
-	  <None Remove="Icons\orb_of_corrosion.png" />
-	  <None Remove="Icons\orb_of_frost.png" />
-	  <None Remove="Icons\orb_of_venom.png" />
-	  <None Remove="Icons\phase_boots.png" />
-	  <None Remove="Icons\pirate_hat.png" />
-	  <None Remove="Icons\quelling_blade.png" />
-	  <None Remove="Icons\quicksilver_amulet.png" />
-	  <None Remove="Icons\radiance.png" />
-	  <None Remove="Icons\shadow_amulet.png" />
-	  <None Remove="Icons\skull_basher.png" />
-	  <None Remove="Icons\skull_basher_cooldown.png" />
-	  <None Remove="Icons\spark_of_courage.png" />
-	  <None Remove="Icons\tranquil_boots.png" />
-	  <None Remove="models" />
-	  <None Remove="models.manifest" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="BepInEx.Analyzers" Version="1.0.*">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-
 		<PackageReference Include="BepInEx.Core" Version="5.4.21" />
-
 		<PackageReference Include="R2API.CommandHelper" Version="1.0.2" />
-
+		<PackageReference Include="R2API.ContentManagement" Version="1.0.10" />
 		<PackageReference Include="R2API.Dot" Version="1.0.4" />
-
-		<PackageReference Include="R2API.Items" Version="1.0.*" />
+		<PackageReference Include="R2API.Items" Version="1.0.7" />
 		<PackageReference Include="R2API.Language" Version="1.0.*" />
 		<PackageReference Include="R2API.ProcType" Version="1.0.2" />
-		<PackageReference Include="R2API.RecalculateStats" Version="1.5.0" />
+		<PackageReference Include="R2API.RecalculateStats" Version="1.6.0" />
 		<PackageReference Include="R2API.Sound" Version="1.0.3" />
-
-		<PackageReference Include="UnityEngine.Modules" Version="6000.1.4" IncludeAssets="compile" />
-    <PackageReference Include="RiskOfRain2.GameLibs" Version="1.3.7.0-r.0" />
-		<PackageReference Include="MMHOOK.RoR2" Version="2025.5.23" NoWarn="NU1701" />
+		<PackageReference Include="UnityEngine.Modules" Version="6000.1.5" IncludeAssets="compile" />
+    <PackageReference Include="RiskOfRain2.GameLibs" Version="1.3.9.0-r.0" />
+		<PackageReference Include="MMHOOK.RoR2" Version="2025.6.3" NoWarn="NU1701" />
 	</ItemGroup>
 
   <ItemGroup>
     <Reference Include="LookingGlass">
       <HintPath>libs\LookingGlass.dll</HintPath>
     </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\aeon_disk.png" />
-    <EmbeddedResource Include="Icons\aeon_disk_cooldown.png" />
-    <EmbeddedResource Include="Icons\arcane_boots.png" />
-    <EmbeddedResource Include="Icons\armlet_of_mordiggian.png" />
-    <EmbeddedResource Include="Icons\armlet_of_mordiggian_toggled.png" />
-    <EmbeddedResource Include="Icons\assault_cuirass.png" />
-    <EmbeddedResource Include="Icons\black_king_bar.png" />
-    <EmbeddedResource Include="Icons\blades_of_attack.png" />
-    <EmbeddedResource Include="Icons\boots_of_bearing.png" />
-    <EmbeddedResource Include="Icons\boots_of_speed.png" />
-    <EmbeddedResource Include="Icons\bottle.png" />
-    <EmbeddedResource Include="Icons\bottle_amplify_damage.png" />
-    <EmbeddedResource Include="Icons\bottle_arcane.png" />
-    <EmbeddedResource Include="Icons\bottle_bounty.png" />
-    <EmbeddedResource Include="Icons\bottle_haste.png" />
-    <EmbeddedResource Include="Icons\bottle_illusion.png" />
-    <EmbeddedResource Include="Icons\bottle_invisibility.png" />
-    <EmbeddedResource Include="Icons\bottle_regeneration.png" />
-    <EmbeddedResource Include="Icons\bottle_shield.png" />
-    <EmbeddedResource Include="Icons\bottle_water.png" />
-    <EmbeddedResource Include="Icons\bottle_wisdom.png" />
-    <EmbeddedResource Include="Icons\consumed_mango.png" />
-    <EmbeddedResource Include="Icons\consumed_moon_shard.png" />
-    <EmbeddedResource Include="Icons\daedalus.png" />
-    <EmbeddedResource Include="Icons\dehydrated_raindrops.png" />
-    <EmbeddedResource Include="Icons\dragon_scale.png" />
-    <EmbeddedResource Include="Icons\enchanted_mango.png" />
-    <EmbeddedResource Include="Icons\fairys_trinket.png" />
-    <EmbeddedResource Include="Icons\ghost_scepter.png" />
-    <EmbeddedResource Include="Icons\guardian_greaves.png" />
-    <EmbeddedResource Include="Icons\healing_salve.png" />
-    <EmbeddedResource Include="Icons\heart_of_tarrasque.png" />
-    <EmbeddedResource Include="Icons\infused_raindrops.png" />
-    <EmbeddedResource Include="Icons\iron_branch.png" />
-    <EmbeddedResource Include="Icons\iron_talon.png" />
-    <EmbeddedResource Include="Icons\javelin.png" />
-    <EmbeddedResource Include="Icons\kaya.png" />
-    <EmbeddedResource Include="Icons\lance_of_pursuit.png" />
-    <EmbeddedResource Include="Icons\mekansm.png" />
-    <EmbeddedResource Include="Icons\moon_shard.png" />
-    <EmbeddedResource Include="Icons\nemesis_curse.png" />
-    <EmbeddedResource Include="Icons\nemesis_curse_cooldown.png" />
-    <EmbeddedResource Include="Icons\orb_of_blight.png" />
-    <EmbeddedResource Include="Icons\orb_of_corrosion.png" />
-    <EmbeddedResource Include="Icons\orb_of_frost.png" />
-    <EmbeddedResource Include="Icons\orb_of_venom.png" />
-    <EmbeddedResource Include="Icons\phase_boots.png" />
-    <EmbeddedResource Include="Icons\pirate_hat.png" />
-    <EmbeddedResource Include="Icons\quelling_blade.png" />
-    <EmbeddedResource Include="Icons\quicksilver_amulet.png" />
-    <EmbeddedResource Include="Icons\radiance.png" />
-    <EmbeddedResource Include="Icons\sange.png" />
-    <EmbeddedResource Include="Icons\shadow_amulet.png" />
-    <EmbeddedResource Include="Icons\skull_basher.png" />
-    <EmbeddedResource Include="Icons\skull_basher_cooldown.png" />
-    <EmbeddedResource Include="Icons\spark_of_courage.png" />
-    <EmbeddedResource Include="Icons\tranquil_boots.png" />
-    <EmbeddedResource Include="Icons\yasha.png" />
-    <EmbeddedResource Include="Icons\kaya_and_sange.png" />
-    <EmbeddedResource Include="Icons\sange_and_yasha.png" />
-    <EmbeddedResource Include="Icons\yasha_and_kaya.png" />
-    <EmbeddedResource Include="Icons\trident.png" />
-    <EmbeddedResource Include="models" />
-    <EmbeddedResource Include="models.manifest" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <Reference Include="RiskOfOptions">
+      <HintPath>libs\RiskOfOptions.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties manifest_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

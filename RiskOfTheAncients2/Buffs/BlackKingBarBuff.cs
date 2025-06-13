@@ -1,5 +1,5 @@
-﻿using ROTA2.Equipment;
-using RoR2;
+﻿using RoR2;
+using ROTA2.Equipment;
 using UnityEngine;
 
 namespace ROTA2.Buffs
@@ -8,14 +8,7 @@ namespace ROTA2.Buffs
     {
         public override string BuffName => "Avatar";
         public override string BuffTokenName => "BLACK_KING_BAR_BUFF";
-        public override bool BuffStacks => false;
-        public override bool IsDebuff => false;
-        public override Color BuffColor => Color.white;
-        public override string BuffIconPath => "ROTA2.Icons.black_king_bar.png";
-        public override EliteDef BuffEliteDef => null;
-        public override bool IsCooldown => false;
-        public override bool IsHidden => false;
-        public override NetworkSoundEventDef BuffStartSfx => null;
+        public override string BuffDefGUID => Assets.BlackKingBar.BuffDef;
         public override void Hooks()
         {
             On.RoR2.HealthComponent.TakeDamage += OnTakeDamage;
@@ -31,7 +24,7 @@ namespace ROTA2.Buffs
         {
             if (self && HasThisBuff(self.body))
             {
-                info.damage *= 1.0f - (BlackKingBar.Instance.DamageReduction / 100.0f);
+                info.damage *= 1.0f - (BlackKingBar.Instance.DamageReduction.Value / 100.0f);
             }
 
             orig(self, info);

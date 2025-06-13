@@ -1,14 +1,15 @@
 ﻿using BepInEx.Configuration;
+using R2API;
+using RiskOfOptions;
+using RiskOfOptions.Options;
 using RoR2;
-using System.Collections.Generic;
-using UnityEngine;
+using RoR2.UI;
 using ROTA2.Buffs;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
-using System.Linq;
-using RoR2.UI;
-using MonoMod.RuntimeDetour;
-using System;
 
 namespace ROTA2.Equipment
 {
@@ -19,85 +20,137 @@ namespace ROTA2.Equipment
         public override string EquipmentTokenPickup => "Drink to gain different temporary rune buffs.";
         public override string EquipmentTokenDesc =>
 $@"Drink to gain one of the following rune effects:
-    {Utility("Amplify Damage")}: Increases {Damage("damage")} by {Damage($"{AmplifyDamageBonus}%")} for {Utility($"{AmplifyDamageDuration} seconds")}.
-    {Color("Arcane", "#FF007F")}: Reduces {Utility("skill cooldowns")} by {Utility($"{ArcaneReduction}%")} for {Utility($"{ArcaneDuration} seconds")}.
-    {Color("Bounty", "#D3AF37")}: Gain {Gold($"{BountyGold} gold")}. {Utility("Scales over time")}.
-    {Health("Haste")}: Increases {Utility("movement speed")} by {Utility($"{HasteBonus}%")} for {Utility($"{HasteDuration} seconds")}.
-    {Color("Illusion", "#FFFF00")}: Creates {Damage($"{IllusionCount} ghosts of yourself")} that last for {Damage($"{IllusionDuration} seconds")}.
-    {Color("Invisibility", "#6C3082")}: Gain {Utility("invisibility")} for {Utility($"{InvisibilityDuration} seconds")}.
-    {Healing("Regeneration")}: Increases {Healing("base health regeneration")} by {Healing($"{RegenerationMaximumHealthPercentage}% of your maximum health")} per second for {Utility($"{RegenerationDuration} seconds")}.
-    {Color("Shield", "#30D5C8")}: Gain a {Healing("temporary barrier")} for {Healing($"{ShieldBarrier}% of your maximum health")}.
-    {Color("Water", "#43EBFF")}: Instantly {Healing("heal")} for {Healing($"{WaterHeal}% of your maximum health")} and {Utility($"restore {WaterStocksRestored} stocks of all skills")}.
-    {Color("Wisdom", "#6C3BAA")}: Instantly {Utility("gain experience")} equal to {Utility($"{WisdomExperience}% of the current level requirement")}.
+    {Utility("Amplify Damage")}: Increases {Damage("damage")} by {Damage($"{AmplifyDamageBonus.Value}%")} for {Utility($"{AmplifyDamageDuration.Value} seconds")}.
+    {Color("Arcane", "#FF007F")}: Reduces {Utility("skill cooldowns")} by {Utility($"{ArcaneReduction.Value}%")} for {Utility($"{ArcaneDuration.Value} seconds")}.
+    {Color("Bounty", "#D3AF37")}: Gain {Gold($"{BountyGold.Value} gold")}. {Utility("Scales over time")}.
+    {Health("Haste")}: Increases {Utility("movement speed")} by {Utility($"{HasteBonus.Value}%")} for {Utility($"{HasteDuration.Value} seconds")}.
+    {Color("Illusion", "#FFFF00")}: Creates {Damage($"{IllusionCount.Value} ghosts of yourself")} that last for {Damage($"{IllusionDuration.Value} seconds")}.
+    {Color("Invisibility", "#6C3082")}: Gain {Utility("invisibility")} for {Utility($"{InvisibilityDuration.Value} seconds")}.
+    {Healing("Regeneration")}: Increases {Healing("base health regeneration")} by {Healing($"{RegenerationMaximumHealthPercentage.Value}% of your maximum health")} per second for {Utility($"{RegenerationDuration.Value} seconds")}.
+    {Color("Shield", "#30D5C8")}: Gain a {Healing("temporary barrier")} for {Healing($"{ShieldBarrier.Value}% of your maximum health")}.
+    {Color("Water", "#43EBFF")}: Instantly {Healing("heal")} for {Healing($"{WaterHeal.Value}% of your maximum health")} and {Utility($"restore {WaterStocksRestored.Value} stocks of all skills")}.
+    {Color("Wisdom", "#6C3BAA")}: Instantly {Utility("gain experience")} equal to {Utility($"{WisdomExperience.Value}% of the current level requirement")}.
 Runes will be removed from the pool until all effects have been seen.";
         public override string EquipmentTokenLore => "An old bottle that survived the ages, the contents placed inside become enchanted.";
-        public override float EquipmentCooldown => BottleCooldown;
-        public override string EquipmentIconPath => "ROTA2.Icons.bottle.png";
-        public override string EquipmentModelPath => "bottle.prefab";
+        public override float EquipmentCooldown => BottleCooldown.Value;
+        public override string EquipmentDefGUID => Assets.Bottle.EquipmentDef;
         public override void Hooks()
         {
-            var target = typeof(EquipmentIcon).GetMethod(nameof(EquipmentIcon.SetDisplayData), System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            var destination = typeof(Bottle).GetMethod(nameof(ModifyDisplayData), System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            new Hook(target, destination, this);
+            On.RoR2.UI.EquipmentIcon.SetDisplayData += ModifyDisplayData;
         }
-
         public override void Init(ConfigFile config)
         {
             CreateConfig(config);
+            CreateSounds();
+            CreateTextures();
             CreateLanguageTokens();
             CreateEquipmentDef();
             Hooks();
         }
 
-        public float AmplifyDamageBonus;
-        public float AmplifyDamageDuration;
-        public float ArcaneReduction;
-        public float ArcaneDuration;
-        public int BountyGold;
-        public float HasteBonus;
-        public float HasteDuration;
-        public float InvisibilityDuration;
-        public int IllusionCount;
-        public float IllusionDuration;
-        public float RegenerationMaximumHealthPercentage;
-        public float RegenerationDuration;
-        public float ShieldBarrier;
-        public float WaterHeal;
-        public float WaterStocksRestored;
-        public float WisdomExperience;
-        public float BottleCooldown;
+        public ConfigEntry<float> AmplifyDamageBonus;
+        public ConfigEntry<float> AmplifyDamageDuration;
+        public ConfigEntry<float> ArcaneReduction;
+        public ConfigEntry<float> ArcaneDuration;
+        public ConfigEntry<int> BountyGold;
+        public ConfigEntry<float> HasteBonus;
+        public ConfigEntry<float> HasteDuration;
+        public ConfigEntry<float> InvisibilityDuration;
+        public ConfigEntry<int> IllusionCount;
+        public ConfigEntry<float> IllusionDuration;
+        public ConfigEntry<float> RegenerationMaximumHealthPercentage;
+        public ConfigEntry<float> RegenerationDuration;
+        public ConfigEntry<float> ShieldBarrier;
+        public ConfigEntry<float> WaterHeal;
+        public ConfigEntry<float> WaterStocksRestored;
+        public ConfigEntry<float> WisdomExperience;
+        public ConfigEntry<float> BottleCooldown;
         private void CreateConfig(ConfigFile config)
         {
-            AmplifyDamageBonus                  = config.Bind("Equipment: " + EquipmentName, "Amplify Damage Bonus Damage",             50.0f,  "").Value;
-            AmplifyDamageDuration               = config.Bind("Equipment: " + EquipmentName, "Amplify Damage Duration",                 10.0f,  "").Value;
-            ArcaneReduction                     = config.Bind("Equipment: " + EquipmentName, "Arcane Skill Cooldown Reduction",         50.0f,  "").Value;
-            ArcaneDuration                      = config.Bind("Equipment: " + EquipmentName, "Arcane Duration",                         10.0f,  "").Value;
-            BountyGold                          = config.Bind("Equipment: " + EquipmentName, "Bounty Gold",                             50,     "").Value;
-            HasteBonus                          = config.Bind("Equipment: " + EquipmentName, "Haste Movement Speed Bonus",              50.0f,  "").Value;
-            HasteDuration                       = config.Bind("Equipment: " + EquipmentName, "Haste Duration",                          10.0f,  "").Value;
-            InvisibilityDuration                = config.Bind("Equipment: " + EquipmentName, "Invisibility Duration",                   10.0f,  "").Value;
-            IllusionCount                       = config.Bind("Equipment: " + EquipmentName, "Illusion Count",                          2,      "").Value;
-            IllusionDuration                    = config.Bind("Equipment: " + EquipmentName, "Illusion Duration",                       25.0f,  "").Value;
-            RegenerationMaximumHealthPercentage = config.Bind("Equipment: " + EquipmentName, "Regeneration Maximum Health Percentage",  5.0f,   "").Value;
-            RegenerationDuration                = config.Bind("Equipment: " + EquipmentName, "Regeneration Duration",                   10.0f,  "").Value;
-            ShieldBarrier                       = config.Bind("Equipment: " + EquipmentName, "Shield Maximum Health Percentage",        100.0f, "").Value;
-            WaterHeal                           = config.Bind("Equipment: " + EquipmentName, "Water Maximum Health Percentage",         33.0f,  "").Value;
-            WaterStocksRestored                 = config.Bind("Equipment: " + EquipmentName, "Water Stocks Restored",                   1.0f,   "").Value;
-            WisdomExperience                    = config.Bind("Equipment: " + EquipmentName, "Wisdom Percent Of Level Requirement",     50.0f,  "").Value;
-            BottleCooldown                      = config.Bind("Equipment: " + EquipmentName, "Cooldown",                                40.0f,  "").Value;
+            AmplifyDamageBonus = config.Bind("Equipment: " + EquipmentName, "Amplify Damage Bonus Damage", 50.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(AmplifyDamageBonus));
+            AmplifyDamageDuration = config.Bind("Equipment: " + EquipmentName, "Amplify Damage Duration", 10.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(AmplifyDamageDuration));
+            ArcaneReduction = config.Bind("Equipment: " + EquipmentName, "Arcane Skill Cooldown Reduction", 50.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(ArcaneReduction));
+            ArcaneDuration = config.Bind("Equipment: " + EquipmentName, "Arcane Duration", 10.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(ArcaneDuration));
+            BountyGold = config.Bind("Equipment: " + EquipmentName, "Bounty Gold", 50, "");
+            ModSettingsManager.AddOption(new IntFieldOption(BountyGold));
+            HasteBonus = config.Bind("Equipment: " + EquipmentName, "Haste Movement Speed Bonus", 50.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(HasteBonus));
+            HasteDuration = config.Bind("Equipment: " + EquipmentName, "Haste Duration", 10.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(HasteDuration));
+            InvisibilityDuration = config.Bind("Equipment: " + EquipmentName, "Invisibility Duration", 10.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(InvisibilityDuration));
+            IllusionCount = config.Bind("Equipment: " + EquipmentName, "Illusion Count", 2, "");
+            ModSettingsManager.AddOption(new IntFieldOption(IllusionCount));
+            IllusionDuration = config.Bind("Equipment: " + EquipmentName, "Illusion Duration", 25.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(IllusionDuration));
+            RegenerationMaximumHealthPercentage = config.Bind("Equipment: " + EquipmentName, "Regeneration Maximum Health Percentage", 5.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(RegenerationMaximumHealthPercentage));
+            RegenerationDuration = config.Bind("Equipment: " + EquipmentName, "Regeneration Duration", 10.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(RegenerationDuration));
+            ShieldBarrier = config.Bind("Equipment: " + EquipmentName, "Shield Maximum Health Percentage", 100.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(ShieldBarrier));
+            WaterHeal = config.Bind("Equipment: " + EquipmentName, "Water Maximum Health Percentage", 33.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(WaterHeal));
+            WaterStocksRestored = config.Bind("Equipment: " + EquipmentName, "Water Stocks Restored", 1.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(WaterStocksRestored));
+            WisdomExperience = config.Bind("Equipment: " + EquipmentName, "Wisdom Percent Of Level Requirement", 50.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(WisdomExperience));
+            BottleCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 40.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(BottleCooldown));
         }
 
-        private string AmplifyDamageIconPath    = "ROTA2.Icons.bottle_amplify_damage.png";
-        private string ArcaneIconPath           = "ROTA2.Icons.bottle_arcane.png";
-        private string BountyIconPath           = "ROTA2.Icons.bottle_bounty.png";
-        private string HasteIconPath            = "ROTA2.Icons.bottle_haste.png";
-        private string IllusionIconPath         = "ROTA2.Icons.bottle_illusion.png";
-        private string InvisibilityIconPath     = "ROTA2.Icons.bottle_invisibility.png";
-        private string RegenerationIconPath     = "ROTA2.Icons.bottle_regeneration.png";
-        private string ShieldIconPath           = "ROTA2.Icons.bottle_shield.png";
-        private string WaterIconPath            = "ROTA2.Icons.bottle_water.png";
-        private string WisdomIconPath           = "ROTA2.Icons.bottle_wisdom.png";
-        private void ModifyDisplayData(Action<EquipmentIcon, EquipmentIcon.DisplayData> orig, EquipmentIcon self, EquipmentIcon.DisplayData data)
+        NetworkSoundEventDef amplifyDamageSound = null;
+        NetworkSoundEventDef arcaneSound = null;
+        NetworkSoundEventDef bountySound = null;
+        NetworkSoundEventDef hasteSound = null;
+        NetworkSoundEventDef illusionSound = null;
+        NetworkSoundEventDef invisibilitySound = null;
+        NetworkSoundEventDef regenerationSound = null;
+        NetworkSoundEventDef shieldSound = null;
+        NetworkSoundEventDef waterSound = null;
+        NetworkSoundEventDef wisdomSound = null;
+        protected void CreateSounds()
+        {
+            Addressables.LoadAssetAsync<NetworkSoundEventDef>(Assets.Bottle.AmplifyDamage.NetworkSoundEventDef).Completed += (x) => { ContentAddition.AddNetworkSoundEventDef(x.Result); amplifyDamageSound = x.Result; };
+            Addressables.LoadAssetAsync<NetworkSoundEventDef>(Assets.Bottle.Arcane.NetworkSoundEventDef).Completed += (x) => { ContentAddition.AddNetworkSoundEventDef(x.Result); arcaneSound = x.Result; };
+            Addressables.LoadAssetAsync<NetworkSoundEventDef>(Assets.Bottle.Bounty.NetworkSoundEventDef).Completed += (x) => { ContentAddition.AddNetworkSoundEventDef(x.Result); bountySound = x.Result; };
+            Addressables.LoadAssetAsync<NetworkSoundEventDef>(Assets.Bottle.Haste.NetworkSoundEventDef).Completed += (x) => { ContentAddition.AddNetworkSoundEventDef(x.Result); hasteSound = x.Result; };
+            Addressables.LoadAssetAsync<NetworkSoundEventDef>(Assets.Bottle.Illusion.NetworkSoundEventDef).Completed += (x) => { ContentAddition.AddNetworkSoundEventDef(x.Result); illusionSound = x.Result; };
+            Addressables.LoadAssetAsync<NetworkSoundEventDef>(Assets.Bottle.Invisibility.NetworkSoundEventDef).Completed += (x) => { ContentAddition.AddNetworkSoundEventDef(x.Result); invisibilitySound = x.Result; };
+            Addressables.LoadAssetAsync<NetworkSoundEventDef>(Assets.Bottle.Regeneration.NetworkSoundEventDef).Completed += (x) => { ContentAddition.AddNetworkSoundEventDef(x.Result); regenerationSound = x.Result; };
+            Addressables.LoadAssetAsync<NetworkSoundEventDef>(Assets.Bottle.Shield.NetworkSoundEventDef).Completed += (x) => { ContentAddition.AddNetworkSoundEventDef(x.Result); shieldSound = x.Result; };
+            Addressables.LoadAssetAsync<NetworkSoundEventDef>(Assets.Bottle.Water.NetworkSoundEventDef).Completed += (x) => { ContentAddition.AddNetworkSoundEventDef(x.Result); waterSound = x.Result; };
+            Addressables.LoadAssetAsync<NetworkSoundEventDef>(Assets.Bottle.Wisdom.NetworkSoundEventDef).Completed += (x) => { ContentAddition.AddNetworkSoundEventDef(x.Result); wisdomSound = x.Result; };
+        }
+
+        Texture2D AmplifyDamageIcon = null;
+        Texture2D ArcaneIcon = null;
+        Texture2D BountyIcon = null;
+        Texture2D HasteIcon = null;
+        Texture2D IllusionIcon = null;
+        Texture2D InvisibilityIcon = null;
+        Texture2D RegenerationIcon = null;
+        Texture2D ShieldIcon = null;
+        Texture2D WaterIcon = null;
+        Texture2D WisdomIcon = null;
+        protected void CreateTextures()
+        {
+            Addressables.LoadAssetAsync<Sprite>(Assets.Bottle.AmplifyDamage.Icon).Completed += (x) => { AmplifyDamageIcon = x.Result.texture; };
+            Addressables.LoadAssetAsync<Sprite>(Assets.Bottle.Arcane.Icon).Completed += (x) => { ArcaneIcon = x.Result.texture; };
+            Addressables.LoadAssetAsync<Sprite>(Assets.Bottle.Bounty.Icon).Completed += (x) => { BountyIcon = x.Result.texture; };
+            Addressables.LoadAssetAsync<Sprite>(Assets.Bottle.Haste.Icon).Completed += (x) => { HasteIcon = x.Result.texture; };
+            Addressables.LoadAssetAsync<Sprite>(Assets.Bottle.Illusion.Icon).Completed += (x) => { IllusionIcon = x.Result.texture; };
+            Addressables.LoadAssetAsync<Sprite>(Assets.Bottle.Invisibility.Icon).Completed += (x) => { InvisibilityIcon = x.Result.texture; };
+            Addressables.LoadAssetAsync<Sprite>(Assets.Bottle.Regeneration.Icon).Completed += (x) => { RegenerationIcon = x.Result.texture; };
+            Addressables.LoadAssetAsync<Sprite>(Assets.Bottle.Shield.Icon).Completed += (x) => { ShieldIcon = x.Result.texture; };
+            Addressables.LoadAssetAsync<Sprite>(Assets.Bottle.Water.Icon).Completed += (x) => { WaterIcon = x.Result.texture; };
+            Addressables.LoadAssetAsync<Sprite>(Assets.Bottle.Wisdom.Icon).Completed += (x) => { WisdomIcon = x.Result.texture; };
+        }
+        private void ModifyDisplayData(On.RoR2.UI.EquipmentIcon.orig_SetDisplayData orig, EquipmentIcon self, EquipmentIcon.DisplayData data)
         {
             orig(self, data);
             if (self && self.targetEquipmentSlot && self.targetEquipmentSlot.characterBody && self.currentDisplayData.equipmentDef == EquipmentDef)
@@ -114,43 +167,43 @@ Runes will be removed from the pool until all effects have been seen.";
                     {
                         // amplify damage
                         case 0:
-                            new_texture = Plugin.ExtractSprite(AmplifyDamageIconPath).texture;
+                            new_texture = AmplifyDamageIcon;
                             break;
                         // arcane
                         case 1:
-                            new_texture = Plugin.ExtractSprite(ArcaneIconPath).texture;
+                            new_texture = ArcaneIcon;
                             break;
                         // bounty
                         case 2:
-                            new_texture = Plugin.ExtractSprite(BountyIconPath).texture;
+                            new_texture = BountyIcon;
                             break;
                         // haste
                         case 3:
-                            new_texture = Plugin.ExtractSprite(HasteIconPath).texture;
+                            new_texture = HasteIcon;
                             break;
                         // invisibility
                         case 4:
-                            new_texture = Plugin.ExtractSprite(InvisibilityIconPath).texture;
+                            new_texture = InvisibilityIcon;
                             break;
                         // illusion
                         case 5:
-                            new_texture = Plugin.ExtractSprite(IllusionIconPath).texture;
+                            new_texture = IllusionIcon;
                             break;
                         // regeneration
                         case 6:
-                            new_texture = Plugin.ExtractSprite(RegenerationIconPath).texture;
+                            new_texture = RegenerationIcon;
                             break;
                         // shield
                         case 7:
-                            new_texture = Plugin.ExtractSprite(ShieldIconPath).texture;
+                            new_texture = ShieldIcon;
                             break;
                         // water
                         case 8:
-                            new_texture = Plugin.ExtractSprite(WaterIconPath).texture;
+                            new_texture = WaterIcon;
                             break;
                         // wisdom
                         case 9:
-                            new_texture = Plugin.ExtractSprite(WisdomIconPath).texture;
+                            new_texture = WisdomIcon;
                             break;
                     }
 
@@ -224,83 +277,79 @@ Runes will be removed from the pool until all effects have been seen.";
 
         void DoAmplifyDamage(CharacterBody body)
         {
-            AmplifyDamageBuff.Instance.ApplyTo(new BuffBase.ApplyParameters
-            {
-                victim = body,
-                duration = AmplifyDamageDuration
-            });
+            AmplifyDamageBuff.ApplyTo(
+                body: body,
+                duration: AmplifyDamageDuration.Value
+            );
 
-            Util.PlaySound("AmplifyDamage", body.gameObject);
+            EffectManager.SimpleSoundEffect(amplifyDamageSound.index, body.corePosition, true);
         }
         void DoArcane(CharacterBody body)
         {
-            ArcaneBuff.Instance.ApplyTo(new BuffBase.ApplyParameters
-            {
-                victim = body,
-                duration = ArcaneDuration
-            });
+            ArcaneBuff.ApplyTo(
+                body: body,
+                duration: ArcaneDuration.Value
+            );
 
-            Util.PlaySound("Arcane", body.gameObject);
+            EffectManager.SimpleSoundEffect(arcaneSound.index, body.corePosition, true);
         }
         void DoBounty(CharacterBody body)
         {
-            float cost = Run.instance.GetDifficultyScaledCost(BountyGold, Run.instance.difficultyCoefficient);
+            float cost = Run.instance.GetDifficultyScaledCost(BountyGold.Value, Run.instance.difficultyCoefficient);
             body.master.GiveMoney((uint)cost);
 
-            Util.PlaySound("Bounty", body.gameObject);
+            EffectManager.SimpleSoundEffect(bountySound.index, body.corePosition, true);
         }
         void DoHaste(CharacterBody body)
         {
-            HasteBuff.Instance.ApplyTo(new BuffBase.ApplyParameters
-            {
-                victim = body,
-                duration = HasteDuration
-            });
+            HasteBuff.ApplyTo(
+                body: body,
+                duration: HasteDuration.Value
+            );
 
-            Util.PlaySound("Haste", body.gameObject);
+            EffectManager.SimpleSoundEffect(hasteSound.index, body.corePosition, true);
         }
         void DoInvisibility(CharacterBody body)
         {
-            body.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, InvisibilityDuration);
+            body.AddTimedBuffAuthority(RoR2Content.Buffs.Cloak.buffIndex, InvisibilityDuration.Value);
 
-            Util.PlaySound("Invisibility", body.gameObject);
+            EffectManager.SimpleSoundEffect(invisibilitySound.index, body.corePosition, true);
         }
         void DoIllusion(CharacterBody body)
         {
             if (body.inventory.GetItemCount(RoR2Content.Items.Ghost) <= 0)
             {
-                for (int i = 0; i < IllusionCount; ++i)
+                for (int i = 0; i < IllusionCount.Value; ++i)
                 {
                     SpawnIllusion(body);
                 }
 
-                Util.PlaySound("Illusion", body.gameObject);
+                EffectManager.SimpleSoundEffect(illusionSound.index, body.corePosition, true);
             }
         }
         void DoRegeneration(CharacterBody body)
         {
-            RegenerationBuff.Instance.ApplyTo(new BuffBase.ApplyParameters
-            {
-                victim = body,
-                duration = RegenerationDuration
-            });
+            RegenerationBuff.ApplyTo(
+                body: body,
+                duration: RegenerationDuration.Value
+            );
 
-            Util.PlaySound("Regeneration", body.gameObject);
+            EffectManager.SimpleSoundEffect(regenerationSound.index, body.corePosition, true);
         }
         void DoShield(CharacterBody body)
         {
             if (body.healthComponent)
             {
-                body.healthComponent.AddBarrier(body.healthComponent.fullCombinedHealth * ShieldBarrier / 100.0f);
+                body.healthComponent.AddBarrier(body.healthComponent.fullCombinedHealth * ShieldBarrier.Value / 100.0f);
             }
 
-            Util.PlaySound("Shield", body.gameObject);
+            EffectManager.SimpleSoundEffect(shieldSound.index, body.corePosition, true);
         }
         void DoWater(CharacterBody body)
         {
             if (body.healthComponent)
             {
-                body.healthComponent.Heal(body.healthComponent.fullCombinedHealth * WaterHeal / 100.0f, default);
+                body.healthComponent.Heal(body.healthComponent.fullCombinedHealth * WaterHeal.Value / 100.0f, default);
             }
             var skills = body.skillLocator.allSkills;
             if (skills != null)
@@ -314,15 +363,15 @@ Runes will be removed from the pool until all effects have been seen.";
                 }
             }
 
-            Util.PlaySound("Water", body.gameObject);
+            EffectManager.SimpleSoundEffect(waterSound.index, body.corePosition, true);
         }
         void DoWisdom(CharacterBody body)
         {
             ulong required_next = TeamManager.GetExperienceForLevel(TeamManager.instance.GetTeamLevel(body.teamComponent.teamIndex) + 1);
             ulong required_now = TeamManager.instance.GetTeamCurrentLevelExperience(body.teamComponent.teamIndex);
-            ExperienceManager.instance.AwardExperience(body.transform.position, body, (ulong)((required_next - required_now) * WisdomExperience / 100.0f));
+            ExperienceManager.instance.AwardExperience(body.transform.position, body, (ulong)((required_next - required_now) * WisdomExperience.Value / 100.0f));
 
-            Util.PlaySound("Wisdom", body.gameObject);
+            EffectManager.SimpleSoundEffect(wisdomSound.index, body.corePosition, true);
         }
 
         private class BottleBehavior : MonoBehaviour
@@ -437,7 +486,7 @@ Runes will be removed from the pool until all effects have been seen.";
                 }
 
                 MasterSuicideOnTimer suicide = master1.gameObject.AddComponent<MasterSuicideOnTimer>();
-                suicide.lifeTimer = IllusionDuration;
+                suicide.lifeTimer = IllusionDuration.Value;
             }
 
             CharacterBody body1 = master1.GetBody();

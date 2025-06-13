@@ -1,5 +1,4 @@
 ﻿using RoR2;
-using UnityEngine;
 
 namespace ROTA2.Buffs
 {
@@ -7,14 +6,7 @@ namespace ROTA2.Buffs
     {
         public override string BuffName => "Ethereal";
         public override string BuffTokenName => "GHOST_SCEPTER_BUFF";
-        public override bool BuffStacks => false;
-        public override bool IsDebuff => false;
-        public override Color BuffColor => Color.white;
-        public override string BuffIconPath => "ROTA2.Icons.ghost_scepter.png";
-        public override EliteDef BuffEliteDef => null;
-        public override bool IsCooldown => false;
-        public override bool IsHidden => false;
-        public override NetworkSoundEventDef BuffStartSfx => null;
+        public override string BuffDefGUID => Assets.GhostScepter.BuffDef;
         public override void Hooks()
         {
             On.RoR2.HealthComponent.TakeDamage += OnTakeDamage;

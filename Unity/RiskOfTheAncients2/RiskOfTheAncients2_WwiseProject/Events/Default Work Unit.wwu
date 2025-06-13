@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{525A1A02-F00B-4316-8E87-4F7C14A4551F}" SchemaVersion="119">
+	<Events>
+		<WorkUnit Name="Default Work Unit" ID="{525A1A02-F00B-4316-8E87-4F7C14A4551F}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="BlackKingBar" ID="{9D701ACC-1438-4AFC-B4DE-4A852D3EAC19}">
+					<ChildrenList>
+						<Action Name="" ID="{0144CBAE-9125-49BB-9E95-2D634D6B2C2C}" ShortID="327358779">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="black_king_bar" ID="{383738E0-F7AC-42A1-85D3-91F82755FBA5}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Daedalus" ID="{23CC2B86-5C62-4699-B9A1-C1F72F39355B}">
+					<ChildrenList>
+						<Action Name="" ID="{7B938F32-83D8-4628-A0C0-DD3F8D0C04BA}" ShortID="909413385">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="daedelus" ID="{A675E9FC-15E8-4C19-B9C3-E101EE47259F}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="HealingSalve" ID="{F82193FC-C040-4BA9-BE41-EC4062E3476E}">
+					<ChildrenList>
+						<Action Name="" ID="{000A8A95-E2A1-4A8C-B23C-8B4DD13215B9}" ShortID="35860847">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="healing_salve" ID="{BFB04341-8AB4-40B0-A685-FC9B49804B6A}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="GhostScepter" ID="{F420055C-D9A8-4002-8578-D7E026B6D7F5}">
+					<ChildrenList>
+						<Action Name="" ID="{75C0C052-0F98-4900-B3CE-6800C6B0DFCF}" ShortID="59244925">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="item_ghost_etherealblade" ID="{99FB8BE0-FE95-4A62-9072-5B7468DC85ED}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="EnchantedMango" ID="{B2C67806-5383-42B9-8E96-D7E3ACF9BD1A}">
+					<ChildrenList>
+						<Action Name="" ID="{E5C2FCF6-C0B1-42E0-B85E-311A3528947F}" ShortID="111901301">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="mango" ID="{854A042D-8CA1-419D-A838-EFAD4A68DD32}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="MoonShard" ID="{35374C12-CB2F-41EE-BA13-8077972B13E1}">
+					<ChildrenList>
+						<Action Name="" ID="{AF5F739A-306B-45D6-BA91-5C1316612C55}" ShortID="684156562">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="moon_shard" ID="{0B6E3E96-3713-411E-99B0-DE5D4FF1847A}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Arcane" ID="{69D01D0C-2507-4620-A121-1C16E0437BE6}">
+					<ChildrenList>
+						<Action Name="" ID="{4BC907B7-29BC-4AD3-B1C6-733825670547}" ShortID="252120710">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="rune_arcane" ID="{D5684432-C5F4-4FC4-8F4D-F813451978A5}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="AmplifyDamage" ID="{9A4ECFC6-CDA4-45D7-9D81-ADBDD9A4729F}">
+					<ChildrenList>
+						<Action Name="" ID="{632FC46C-8315-476F-9799-87BAC900ED85}" ShortID="388445736">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="rune_dd" ID="{874EA5A0-0A43-48DD-A331-1F9618820DF2}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Bounty" ID="{76D86D66-D9BD-499B-9A87-0B74F5696DD4}">
+					<ChildrenList>
+						<Action Name="" ID="{0689D27C-6B98-42CF-AE35-09FC629A4E76}" ShortID="71219791">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="rune_bounty" ID="{DFA6BF94-AB67-4BD2-B038-63321D89FB3F}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Haste" ID="{1D596BAE-0363-4990-BB30-02010248450C}">
+					<ChildrenList>
+						<Action Name="" ID="{88D9056B-45C6-42DF-B2EA-5AF2124B6246}" ShortID="289581429">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="rune_haste" ID="{4CF1CED3-5B24-41C6-8B29-D05FFF407B32}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Illusion" ID="{EB72C18F-6568-4763-8984-B4C34CBC6DCB}">
+					<ChildrenList>
+						<Action Name="" ID="{E6ACF0E2-ABDA-4AB3-98FA-A3D373714FA2}" ShortID="712858306">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="rune_illusion" ID="{058F4F8B-D812-4532-B589-665779696A33}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Invisibility" ID="{DA2DC2E3-EB05-4878-96C0-5B5BBFF73A0B}">
+					<ChildrenList>
+						<Action Name="" ID="{02C682CD-E2CD-42AA-9FA3-5383FED931F5}" ShortID="915410597">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="rune_invis" ID="{4FA48744-E1E3-4BCB-AE49-A381687802A7}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Regeneration" ID="{953B358C-3138-4CAB-8FC2-12A2DBB0E96A}">
+					<ChildrenList>
+						<Action Name="" ID="{2911D891-D56E-40EF-8E2F-9E0355ED4839}" ShortID="508566044">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="rune_regen" ID="{A65C7641-0817-4683-B7B6-4C1374354547}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Shield" ID="{864311E1-065A-415C-BEB1-CA8A7CF280A5}">
+					<ChildrenList>
+						<Action Name="" ID="{3BE00D16-55FE-439D-931A-432FB29116EE}" ShortID="518891153">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="rune_shield" ID="{DB4D12A0-6F1A-4338-9E54-1F5C45013B78}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Water" ID="{D18A284A-AFF1-4A9A-84EB-5A287399A9EF}">
+					<ChildrenList>
+						<Action Name="" ID="{8D028F1F-772B-415A-8AC3-24D7B4EBB451}" ShortID="770154168">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="rune_water" ID="{D90ACF58-4257-44D5-B25E-007B7D41D97F}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Wisdom" ID="{6EDCC498-62B6-4A54-83E5-965C85CA169A}">
+					<ChildrenList>
+						<Action Name="" ID="{7523193F-C8AB-4F99-B5A4-A0DB5BDCEE56}" ShortID="218022380">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="rune_xp" ID="{7391F0B5-2F12-4319-8486-32E1617C6559}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="SkullBasher" ID="{8A2ED993-65CE-4909-8F45-31EEC5A92456}">
+					<ChildrenList>
+						<Action Name="" ID="{EB7EE5F7-8702-4D75-9363-D111DCBBB168}" ShortID="632325520">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="skull_basher" ID="{42156C71-1E28-427C-8A74-294D8BB518A4}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="InfusedRaindrops" ID="{ABCE488C-F50A-45A6-8C67-8CA445B76F10}">
+					<ChildrenList>
+						<Action Name="" ID="{E7D8DEA4-0D1D-4B0F-8752-D7E465A0B26B}" ShortID="828070512">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="infused_raindrop" ID="{D1DFCE04-826E-46EF-B758-03446E9B2235}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="AeonDisk" ID="{EF5D5D83-0B27-45E1-BEBE-9E48722B2456}">
+					<ChildrenList>
+						<Action Name="" ID="{258CB9CE-1786-46A5-8CF3-3AE6D7C2A323}" ShortID="559532896">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="combo_breaker" ID="{1CF55D99-6620-4067-B20C-62E834BF5BF0}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="ArmletOfMordiggianOn" ID="{8F286BFE-1DBF-4ABA-B5A2-CB11BC3392AC}">
+					<ChildrenList>
+						<Action Name="" ID="{EEF146BD-96C8-4D2D-A386-E36F6C0BEF63}" ShortID="548387883">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="item_armlet_activate" ID="{7F725DCD-1227-4C1B-BD2F-20C7B2098104}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="ArmletOfMordiggianOff" ID="{53087931-DF06-4D48-A304-1D92B00269C9}">
+					<ChildrenList>
+						<Action Name="" ID="{DB2B9834-D8BA-4F30-ACA8-89A46AE44DED}" ShortID="668036031">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="item_armlet_deactivate" ID="{D64F2C2B-8573-466A-A558-66F21926C072}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="ShadowAmulet" ID="{73A09040-6FFA-4EB4-AC82-E718E537D9D4}">
+					<ChildrenList>
+						<Action Name="" ID="{850D03D6-16A9-4D05-A8B0-D3179E9CCD24}" ShortID="1024195155">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Shadow_Amulet_Fade" ID="{CB852254-528C-4DD0-9496-70DCB6AB0948}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="ArcaneBoots" ID="{61BCC1EF-C510-477A-BF68-B29CB4AC21B4}">
+					<ChildrenList>
+						<Action Name="" ID="{ED647671-8D94-46B1-B6CA-10E87F7BCCF1}" ShortID="1008794279">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="dota_item_arcane_boots" ID="{B8A00285-DD95-47DF-B006-5C0FB876B69A}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Mekansm" ID="{E11E08CA-9E87-42AA-9BC5-AFBB21ADE7ED}">
+					<ChildrenList>
+						<Action Name="" ID="{DE88E707-220C-4ACF-9F2F-80AB90BBC0C2}" ShortID="1028941957">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="mek_cast" ID="{8A896ACE-E053-4C88-B85C-52652A829035}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="GuardianGreaves" ID="{6DCEE43D-14CB-4989-B22A-7BFEF395E934}">
+					<ChildrenList>
+						<Action Name="" ID="{9B3BA6B2-F677-4FD5-B253-B49798D3181F}" ShortID="634176470">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="guardian_greaves" ID="{5F7A8723-AA9D-4AB5-BD3E-87E3630040B5}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="BootsOfBearing" ID="{F8F03484-00C6-4B1A-A51F-890E5F10D419}">
+					<ChildrenList>
+						<Action Name="" ID="{DCC6CB07-8929-462B-8CA5-D2A4E39A2B97}" ShortID="425662553">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="item_drum" ID="{B61A033C-5245-43CA-807B-D74CFE03785E}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="PirateHat" ID="{C3B3A864-7681-4641-93A7-81730CDFB82C}">
+					<ChildrenList>
+						<Action Name="" ID="{DA7B078D-EC00-494A-8CBC-C21732176D62}" ShortID="276914790">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="midas" ID="{03631C69-2A56-4EC0-9122-7EA7F137D4C7}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="IronTalon" ID="{27DD21E9-6C55-4B1E-A692-3280D1585178}">
+					<ChildrenList>
+						<Action Name="" ID="{4B561FF7-4882-4AF3-989D-39C3BB8869BB}" ShortID="357819512">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="iron_talon" ID="{4486C735-1816-4567-9176-E301282A0C6F}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="PhaseBoots" ID="{591B1DE1-835A-4D5E-B30B-8D591F36803B}">
+					<ChildrenList>
+						<Action Name="" ID="{EEB2DCF4-3AB7-495A-99E7-7FC74C701DE7}" ShortID="69448911">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="phase_boots" ID="{8128AC8C-127F-45D8-9CE0-1EC053BD6A6A}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="ExMachina" ID="{285D8A45-C285-4E44-858A-FE9B046DA1DA}">
+					<ChildrenList>
+						<Action Name="" ID="{67CA1126-B35F-40C1-AC84-E32A4DC091C6}" ShortID="522884417">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="ex_machina" ID="{F6B46F86-182A-4976-9181-48196FD09766}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Refresher" ID="{CC251E12-D7ED-4F90-8A4D-94B2E751680C}">
+					<ChildrenList>
+						<Action Name="" ID="{500A4F86-C86A-41BB-A2DB-7177AF507CB1}" ShortID="930116584">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="refresher" ID="{E218A967-2C98-41CF-AA3C-CBB5DC8C689D}" WorkUnitID="{99331793-A292-4FC1-B301-A14955FC472B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

@@ -1,6 +1,8 @@
 ﻿using BepInEx.Configuration;
-using ROTA2.Buffs;
+using RiskOfOptions;
+using RiskOfOptions.Options;
 using RoR2;
+using ROTA2.Buffs;
 
 namespace ROTA2.Items
 {
@@ -10,11 +12,9 @@ namespace ROTA2.Items
         public override string ConfigItemName => ItemName;
         public override string ItemTokenName => "ORB_OF_FROST";
         public override string ItemTokenPickup => "Slightly slow enemies on hit.";
-        public override string ItemTokenDesc => $"{Utility("Slow")} enemies on hit for {Utility($"{MovementSpeedSlowBase}% movement speed")} {Stack($"(-{MovementSpeedSlowPerStack}% per stack)")} and {Utility($"-{AttackSpeedSlowBase}% attack speed")} {Stack($"-{AttackSpeedSlowPerStack}% per stack)")} for {Utility($"{DebuffDuration} seconds")}.";
+        public override string ItemTokenDesc => $"{Utility("Slow")} enemies on hit for {Utility($"{MovementSpeedSlowBase.Value}% movement speed")} {Stack($"(-{MovementSpeedSlowPerStack.Value}% per stack)")} and {Utility($"-{AttackSpeedSlowBase.Value}% attack speed")} {Stack($"-{AttackSpeedSlowPerStack.Value}% per stack)")} for {Utility($"{DebuffDuration.Value} seconds")}.";
         public override string ItemTokenLore => "Freezes your foes with a frosty force.";
-        public override ItemTier Tier => ItemTier.Tier1;
-        public override ItemTag[] ItemTags => [ItemTag.Utility];
-        public override string ItemIconPath => "ROTA2.Icons.orb_of_frost.png";
+        public override string ItemDefGUID => Assets.OrbOfFrost.ItemDef;
         public override void Hooks()
         {
             On.RoR2.HealthComponent.TakeDamage += OnHit;
@@ -27,18 +27,23 @@ namespace ROTA2.Items
             Hooks();
         }
 
-        public float MovementSpeedSlowBase;
-        public float MovementSpeedSlowPerStack;
-        public float AttackSpeedSlowBase;
-        public float AttackSpeedSlowPerStack;
-        public float DebuffDuration;
+        public ConfigEntry<float> MovementSpeedSlowBase;
+        public ConfigEntry<float> MovementSpeedSlowPerStack;
+        public ConfigEntry<float> AttackSpeedSlowBase;
+        public ConfigEntry<float> AttackSpeedSlowPerStack;
+        public ConfigEntry<float> DebuffDuration;
         public void CreateConfig(ConfigFile configuration)
         {
-            MovementSpeedSlowBase     = configuration.Bind("Item: " + ItemName, "Movement Speed Reduction Base",      10.0f, "How much should movement speed be reduced initially?").Value;
-            MovementSpeedSlowPerStack = configuration.Bind("Item: " + ItemName, "Movement Speed Reduction Per Stack", 10.0f, "How much should movement speed be reduced per stack?").Value;
-            AttackSpeedSlowBase       = configuration.Bind("Item: " + ItemName, "Attack Speed Reduction Base",        10.0f, "How much should attack speed be reduced initially?").Value;
-            AttackSpeedSlowPerStack   = configuration.Bind("Item: " + ItemName, "Attack Speed Reduction Per Stack",   10.0f, "How much should attack speed be reduced per stack?").Value;
-            DebuffDuration            = configuration.Bind("Item: " + ItemName, "Slow Duration",                      3.0f,  "How long should the slows last?").Value;
+            MovementSpeedSlowBase = configuration.Bind("Item: " + ItemName, "Movement Speed Reduction Base", 10.0f, "How much should movement speed be reduced initially?");
+            ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedSlowBase));
+            MovementSpeedSlowPerStack = configuration.Bind("Item: " + ItemName, "Movement Speed Reduction Per Stack", 10.0f, "How much should movement speed be reduced per stack?");
+            ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedSlowPerStack));
+            AttackSpeedSlowBase = configuration.Bind("Item: " + ItemName, "Attack Speed Reduction Base", 10.0f, "How much should attack speed be reduced initially?");
+            ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedSlowBase));
+            AttackSpeedSlowPerStack = configuration.Bind("Item: " + ItemName, "Attack Speed Reduction Per Stack", 10.0f, "How much should attack speed be reduced per stack?");
+            ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedSlowPerStack));
+            DebuffDuration = configuration.Bind("Item: " + ItemName, "Slow Duration", 3.0f, "How long should the slows last?");
+            ModSettingsManager.AddOption(new FloatFieldOption(DebuffDuration));
         }
 
         private void OnHit(On.RoR2.HealthComponent.orig_TakeDamage orig, RoR2.HealthComponent self, RoR2.DamageInfo info)
@@ -49,13 +54,12 @@ namespace ROTA2.Items
                 int count = GetCount(attacker_body);
                 if (count > 0)
                 {
-                    OrbOfFrostBuff.Instance.ApplyTo(new BuffBase.ApplyParameters
-                    {
-                        victim = self.body,
-                        duration = DebuffDuration,
-                        stacks = count,
-                        max_stacks = count
-                    });
+                    OrbOfFrostBuff.ApplyTo(
+                        body: self.body,
+                        duration: DebuffDuration.Value,
+                        stacks: count,
+                        max_stacks: count
+                    );
                 }
             }
 

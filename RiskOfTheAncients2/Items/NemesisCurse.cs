@@ -1,4 +1,6 @@
 ﻿using BepInEx.Configuration;
+using RiskOfOptions;
+using RiskOfOptions.Options;
 using RoR2;
 using ROTA2.Buffs;
 using UnityEngine;
@@ -11,12 +13,11 @@ namespace ROTA2.Items
         public override string ConfigItemName => ItemName;
         public override string ItemTokenName => "NEMESIS_CURSE";
         public override string ItemTokenPickup => $"Curse on hit for increased damage... {Death("BUT receive permanent damage when hit.")}.";
-        public override string ItemTokenDesc => 
-@$"{Damage($"{OutProcChance}%")} chance on hit to {Damage("curse")} an enemy, increasing {Damage("all damage")} they take by {Damage($"{DamageBase}%")} {Stack($"(+{DamagePerStack}% per stack, exponential)")} for {Damage($"{CurseDuration} seconds")}. Recharges every {Damage($"{CurseCooldown} seconds")}.
-{Health($"{InProcChance}%")} chance on {Health("being hit")} to be {Health("cursed")}, receiving {Death("permanent damage")}.";
+        public override string ItemTokenDesc =>
+@$"{Damage($"{OutProcChance.Value}%")} chance on hit to {Damage("curse")} an enemy, increasing {Damage("all damage")} they take by {Damage($"{DamageBase.Value}%")} {Stack($"(+{DamagePerStack.Value}% per stack, exponential)")} for {Damage($"{CurseDuration.Value} seconds")}. Recharges every {Damage($"{CurseCooldown.Value} seconds")}.
+{Health($"{InProcChance.Value}%")} chance on {Health("being hit")} to be {Health("cursed")}, receiving {Death("permanent damage")}.";
         public override string ItemTokenLore => "The cursed amulet of a revenge-obsessed prince.";
-        public override string ItemIconPath => "ROTA2.Icons.nemesis_curse.png";
-        public override ItemTier Tier => ItemTier.Lunar;
+        public override string ItemDefGUID => Assets.NemesisCurse.ItemDef;
         public override void Hooks()
         {
             On.RoR2.HealthComponent.TakeDamage += OnTakeDamage;
@@ -31,24 +32,32 @@ namespace ROTA2.Items
             Hooks();
         }
 
-        public float OutProcChance;
-        public float InProcChance;
-        public float DamageBase;
-        public float DamagePerStack;
-        public float PermanentDamageCoefficientBase;
-        public float PermanentDamageCoefficientPerStack;
-        public float CurseDuration;
-        public float CurseCooldown;
+        public ConfigEntry<float> OutProcChance;
+        public ConfigEntry<float> InProcChance;
+        public ConfigEntry<float> DamageBase;
+        public ConfigEntry<float> DamagePerStack;
+        public ConfigEntry<float> PermanentDamageCoefficientBase;
+        public ConfigEntry<float> PermanentDamageCoefficientPerStack;
+        public ConfigEntry<float> CurseDuration;
+        public ConfigEntry<float> CurseCooldown;
         private void CreateConfig(ConfigFile configuration)
         {
-            OutProcChance                      = configuration.Bind("Item: " + ItemName, "Enemy Proc Chance",                      100.0f, "").Value;
-            InProcChance                       = configuration.Bind("Item: " + ItemName, "Self Proc Chance",                       100.0f, "").Value;
-            DamageBase                         = configuration.Bind("Item: " + ItemName, "Damage Increase Base",                   100.0f, "Exponential").Value;
-            DamagePerStack                     = configuration.Bind("Item: " + ItemName, "Damage Increase Per Stack",              100.0f, "Exponential").Value;
-            PermanentDamageCoefficientBase     = configuration.Bind("Item: " + ItemName, "Permanent Damage Coefficient Base",      80.0f, "Permanent damage curse stacks formula: ([this number] + [per stack number]) * Damage / Max Health. Maximum health is reduced by a factor of 1 + 0.01 * N, where N is the number of stacks total.").Value;
-            PermanentDamageCoefficientPerStack = configuration.Bind("Item: " + ItemName, "Permanent Damage Coefficient Per Stack", 80.0f, "").Value;
-            CurseDuration                      = configuration.Bind("Item: " + ItemName, "Curse Duration", 5.0f, "").Value;
-            CurseCooldown                      = configuration.Bind("Item: " + ItemName, "Curse Cooldown", 7.5f, "").Value;
+            OutProcChance = configuration.Bind("Item: " + ItemName, "Enemy Proc Chance", 100.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(OutProcChance));
+            InProcChance = configuration.Bind("Item: " + ItemName, "Self Proc Chance", 100.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(InProcChance));
+            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Increase Base", 100.0f, "Exponential");
+            ModSettingsManager.AddOption(new FloatFieldOption(DamageBase));
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Increase Per Stack", 100.0f, "Exponential");
+            ModSettingsManager.AddOption(new FloatFieldOption(DamagePerStack));
+            PermanentDamageCoefficientBase = configuration.Bind("Item: " + ItemName, "Permanent Damage Coefficient Base", 80.0f, "Permanent damage curse stacks formula: ([this number] + [per stack number]) * Damage / Max Health. Maximum health is reduced by a factor of 1 + 0.01 * N, where N is the number of stacks total.");
+            ModSettingsManager.AddOption(new FloatFieldOption(PermanentDamageCoefficientBase));
+            PermanentDamageCoefficientPerStack = configuration.Bind("Item: " + ItemName, "Permanent Damage Coefficient Per Stack", 80.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(PermanentDamageCoefficientPerStack));
+            CurseDuration = configuration.Bind("Item: " + ItemName, "Curse Duration", 5.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(CurseDuration));
+            CurseCooldown = configuration.Bind("Item: " + ItemName, "Curse Cooldown", 7.5f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(CurseCooldown));
         }
 
         private void OnTakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, RoR2.HealthComponent self, RoR2.DamageInfo info)
@@ -56,23 +65,21 @@ namespace ROTA2.Items
             if (self && info.attacker && info.procCoefficient > 0.0f)
             {
                 CharacterBody attacker_body = info.attacker.GetComponent<CharacterBody>();
-                if (self.body && !NemesisCurseCooldown.Instance.HasThisBuff(attacker_body))
+                if (self.body && !NemesisCurseCooldown.HasThisBuff(attacker_body))
                 {
                     int count = GetCount(attacker_body);
-                    if (count > 0 && Util.CheckRoll(OutProcChance * info.procCoefficient, attacker_body.master))
+                    if (count > 0 && Util.CheckRoll(OutProcChance.Value * info.procCoefficient, attacker_body.master))
                     {
-                        NemesisCurseBuff.Instance.ApplyTo(new BuffBase.ApplyParameters
-                        {
-                            victim = self.body,
-                            duration = CurseDuration,
-                            stacks = count,
-                            max_stacks = count
-                        });
-                        NemesisCurseCooldown.Instance.ApplyTo(new BuffBase.ApplyParameters
-                        {
-                            victim = attacker_body,
-                            duration = CurseCooldown
-                        });
+                        NemesisCurseBuff.ApplyTo(
+                            body: self.body,
+                            duration: CurseDuration.Value,
+                            stacks: count,
+                            max_stacks: count
+                        );
+                        NemesisCurseCooldown.ApplyTo(
+                            body: attacker_body,
+                            duration: CurseCooldown.Value
+                        );
                     }
                 }
             }
@@ -84,9 +91,9 @@ namespace ROTA2.Items
             if (self)
             {
                 int count = GetCount(self.body);
-                if (count > 0 && !Util.CheckRoll(100.0f - InProcChance, self.body.master))
+                if (count > 0 && !Util.CheckRoll(100.0f - InProcChance.Value, self.body.master))
                 {
-                    float stacks = damageValue * (PermanentDamageCoefficientBase + PermanentDamageCoefficientPerStack * (count - 1)) / self.fullCombinedHealth;
+                    float stacks = damageValue * (PermanentDamageCoefficientBase.Value + PermanentDamageCoefficientPerStack.Value * (count - 1)) / self.fullCombinedHealth;
                     for (int i = 0; i < Mathf.FloorToInt(stacks); ++i)
                     {
                         self.body.AddBuff(RoR2Content.Buffs.PermanentCurse);

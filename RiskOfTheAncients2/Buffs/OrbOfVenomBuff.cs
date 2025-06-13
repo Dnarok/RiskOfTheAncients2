@@ -1,6 +1,5 @@
 ﻿using R2API;
 using RoR2;
-using UnityEngine;
 using static RoR2.DotController;
 
 namespace ROTA2.Buffs
@@ -9,14 +8,7 @@ namespace ROTA2.Buffs
     {
         public override string BuffName => "Lesser Venom";
         public override string BuffTokenName => "ORB_OF_VENOM_BUFF";
-        public override bool BuffStacks => false;
-        public override bool IsDebuff => true;
-        public override Color BuffColor => Color.white;
-        public override string BuffIconPath => "ROTA2.Icons.orb_of_venom.png";
-        public override EliteDef BuffEliteDef => null;
-        public override bool IsCooldown => false;
-        public override bool IsHidden => false;
-        public override NetworkSoundEventDef BuffStartSfx => null;
+        public override string BuffDefGUID => Assets.OrbOfVenom.BuffDef;
 
         public override void Init()
         {

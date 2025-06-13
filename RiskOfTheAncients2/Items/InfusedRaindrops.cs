@@ -1,7 +1,11 @@
 ﻿using BepInEx.Configuration;
+using R2API;
+using RiskOfOptions;
+using RiskOfOptions.Options;
 using RoR2;
 using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace ROTA2.Items
 {
@@ -11,36 +15,46 @@ namespace ROTA2.Items
         public override string ConfigItemName => ItemName;
         public override string ItemTokenName => "INFUSED_RAINDROPS";
         public override string ItemTokenPickup => "Receive flat damage reduction from large attacks.";
-        public override string ItemTokenDesc => $"Reduce all {Damage("incoming damage")} above {Damage($"{IncomingDamageMinimum}")} by {Damage($"{DamageBlockBase}")} {Stack($"(+{DamageBlockPerStack} per stack)")}. Cannot be reduced below {Damage($"{DamageMinimum}")}.";
+        public override string ItemTokenDesc => $"Reduce all {Damage("incoming damage")} above {Damage($"{IncomingDamageMinimum.Value}")} by {Damage($"{DamageBlockBase.Value}")} {Stack($"(+{DamageBlockPerStack.Value} per stack)")}. Cannot be reduced below {Damage($"{DamageMinimum.Value}")}.";
         public override string ItemTokenLore => "Elemental protection from magical assaults.";
-        public override ItemTier Tier => ItemTier.VoidTier1;
+        public override string ItemDefGUID => Assets.InfusedRaindrops.ItemDef;
         public override ItemDef VoidFor => RoR2Content.Items.ArmorPlate;
-        public override string ItemIconPath => "ROTA2.Icons.infused_raindrops.png";
         public override void Hooks()
         {
             CharacterBody.onBodyInventoryChangedGlobal += OnInventoryChanged;
         }
-
         public override void Init(ConfigFile configuration)
         {
             CreateConfig(configuration);
+            CreateSounds();
             CreateLanguageTokens();
             CreateItemDef();
             Hooks();
         }
 
-        public float IncomingDamageMinimum;
-        public float DamageBlockBase;
-        public float DamageBlockPerStack;
-        public float DamageMinimum;
-        public bool PlaySound;
+        public ConfigEntry<float> IncomingDamageMinimum;
+        public ConfigEntry<float> DamageBlockBase;
+        public ConfigEntry<float> DamageBlockPerStack;
+        public ConfigEntry<float> DamageMinimum;
+        public ConfigEntry<bool> PlaySound;
         private void CreateConfig(ConfigFile configuration)
         {
-            IncomingDamageMinimum   = configuration.Bind("Item: " + ItemName, "Incoming Damage Minimum",     60.0f, "").Value;
-            DamageBlockBase         = configuration.Bind("Item: " + ItemName, "Flat Damage Block Base",      15.0f, "").Value;
-            DamageBlockPerStack     = configuration.Bind("Item: " + ItemName, "Flat Damage Block Per Stack", 15.0f, "").Value;
-            DamageMinimum           = configuration.Bind("Item: " + ItemName, "Damage Minimum After Block",  1.0f,  "").Value;
-            PlaySound               = configuration.Bind("Item: " + ItemName, "Play Sound",                  true,  "").Value;
+            IncomingDamageMinimum = configuration.Bind("Item: " + ItemName, "Incoming Damage Minimum", 60.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(IncomingDamageMinimum));
+            DamageBlockBase = configuration.Bind("Item: " + ItemName, "Flat Damage Block Base", 15.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(DamageBlockBase));
+            DamageBlockPerStack = configuration.Bind("Item: " + ItemName, "Flat Damage Block Per Stack", 15.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(DamageBlockPerStack));
+            DamageMinimum = configuration.Bind("Item: " + ItemName, "Damage Minimum After Block", 1.0f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(DamageMinimum));
+            PlaySound = configuration.Bind("Item: " + ItemName, "Play Sound", true, "");
+            ModSettingsManager.AddOption(new CheckBoxOption(PlaySound));
+        }
+
+        NetworkSoundEventDef sound = null;
+        protected void CreateSounds()
+        {
+            Addressables.LoadAssetAsync<NetworkSoundEventDef>(Assets.InfusedRaindrops.NetworkSoundEventDef).Completed += (x) => { ContentAddition.AddNetworkSoundEventDef(x.Result); sound = x.Result; };
         }
 
         private void OnInventoryChanged(CharacterBody body)
@@ -82,16 +96,16 @@ namespace ROTA2.Items
             }
             public void OnIncomingDamageServer(DamageInfo info)
             {
-                int count = Instance.GetCount(body);
-                if (info.rejected || info.damageType.damageType.HasFlag(DamageType.BypassArmor) || info.damage < Instance.IncomingDamageMinimum || count <= 0)
+                int count = GetCount(body);
+                if (info.rejected || info.damageType.damageType.HasFlag(DamageType.BypassArmor) || info.damage < Instance.IncomingDamageMinimum.Value || count <= 0)
                 {
                     return;
                 }
 
-                info.damage = Mathf.Max(Instance.DamageMinimum, info.damage - (Instance.DamageBlockBase + Instance.DamageBlockPerStack * (count - 1)));
-                if (Instance.PlaySound)
+                info.damage = Mathf.Max(Instance.DamageMinimum.Value, info.damage - (Instance.DamageBlockBase.Value + Instance.DamageBlockPerStack.Value * (count - 1)));
+                if (Instance.PlaySound.Value)
                 {
-                    Util.PlaySound("InfusedRaindrops", body.gameObject);
+                    EffectManager.SimpleSoundEffect(Instance.sound.index, info.position, true);
                 }
             }
         }
