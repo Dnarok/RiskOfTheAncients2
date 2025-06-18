@@ -31,15 +31,15 @@ namespace ROTA2.Items
         public ConfigEntry<float> DamagePerStack;
         public void CreateConfig(ConfigFile configuration)
         {
-            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Base", 8.0f, "How much flat damage should the first stack provide?");
+            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Base", 8f, "How much flat damage should the first stack provide?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBase));
-            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 8.0f, "How much flat damage should subsequent stacks provide?");
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 8f, "How much flat damage should subsequent stacks provide?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamagePerStack));
         }
 
         private void OnDamageDealt(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo info)
         {
-            if (info.rejected || info.procCoefficient == 0.0f || !info.damageType.IsDamageSourceSkillBased)
+            if (info.rejected || info.procCoefficient == 0f || !info.damageType.IsDamageSourceSkillBased)
             {
                 orig(self, info);
                 return;

@@ -31,13 +31,13 @@ namespace ROTA2.Equipment
         public ConfigEntry<float> MekansmCooldown;
         private void CreateConfig(ConfigFile config)
         {
-            MaximumHealthHeal = config.Bind("Equipment: " + EquipmentName, "Maximum Health Heal", 25.0f, "");
+            MaximumHealthHeal = config.Bind("Equipment: " + EquipmentName, "Maximum Health Heal", 25f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthHeal));
-            ArmorBonus = config.Bind("Equipment: " + EquipmentName, "Armor Bonus", 50.0f, "");
+            ArmorBonus = config.Bind("Equipment: " + EquipmentName, "Armor Bonus", 50f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(ArmorBonus));
-            ArmorBonusDuration = config.Bind("Equipment: " + EquipmentName, "Armor Duration", 8.0f, "");
+            ArmorBonusDuration = config.Bind("Equipment: " + EquipmentName, "Armor Duration", 8f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(ArmorBonusDuration));
-            MekansmCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 30.0f, "");
+            MekansmCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 30f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(MekansmCooldown));
         }
 
@@ -57,7 +57,7 @@ namespace ROTA2.Equipment
                     HealthComponent ally = member.GetComponent<HealthComponent>();
                     if (ally && ally.isActiveAndEnabled)
                     {
-                        ally.HealFraction(MaximumHealthHeal.Value / 100.0f, default);
+                        ally.HealFraction(MaximumHealthHeal.Value / 100f, default);
                         MekansmBuff.ApplyTo(
                             body: ally.body,
                             duration: ArmorBonusDuration.Value

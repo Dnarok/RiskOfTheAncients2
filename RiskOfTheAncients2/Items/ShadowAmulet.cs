@@ -39,11 +39,11 @@ namespace ROTA2.Items
         public ConfigEntry<bool> PlaySound;
         private void CreateConfig(ConfigFile configuration)
         {
-            StandingStillDuration = configuration.Bind("Item: " + ItemName, "Standing Still Duration", 1.0f, "");
+            StandingStillDuration = configuration.Bind("Item: " + ItemName, "Standing Still Duration", 1f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(StandingStillDuration));
-            AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Attack Speed Base", 30.0f, "");
+            AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Attack Speed Base", 30f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedBase));
-            AttackSpeedPerStack = configuration.Bind("Item: " + ItemName, "Attack Speed Per Stack", 30.0f, "");
+            AttackSpeedPerStack = configuration.Bind("Item: " + ItemName, "Attack Speed Per Stack", 30f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedPerStack));
             LingerDuration = configuration.Bind("Item: " + ItemName, "Linger Duration", 1.5f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(LingerDuration));

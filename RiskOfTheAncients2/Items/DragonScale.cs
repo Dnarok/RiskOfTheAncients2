@@ -32,11 +32,11 @@ namespace ROTA2.Items
         public ConfigEntry<float> DamagePerStack;
         public void CreateConfig(ConfigFile configuration)
         {
-            ProcChance = configuration.Bind("Item: " + ItemName, "Proc Chance", 20.0f, "What is the chance on hit to proc?");
+            ProcChance = configuration.Bind("Item: " + ItemName, "Proc Chance", 20f, "What is the chance on hit to proc?");
             ModSettingsManager.AddOption(new FloatFieldOption(ProcChance));
-            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Base", 210.0f, "How much base damage should the burn do with the first stack?");
+            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Base", 210f, "How much base damage should the burn do with the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBase));
-            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 210.0f, "How much extra base damage should the burn do with subsequent stacks?");
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 210f, "How much extra base damage should the burn do with subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamagePerStack));
         }
 

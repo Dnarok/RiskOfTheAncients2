@@ -40,9 +40,9 @@ namespace ROTA2.Items
         public ConfigEntry<float> MovementSpeedPerStack;
         public void CreateConfig(ConfigFile configuration)
         {
-            MaximumHealthBase = configuration.Bind("Item: " + ItemName, "Initial Maximum Health Bonus", 60.0f, "How much maximum health should be provided by the first stack?");
+            MaximumHealthBase = configuration.Bind("Item: " + ItemName, "Initial Maximum Health Bonus", 60f, "How much maximum health should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthBase));
-            MaximumHealthPerStack = configuration.Bind("Item: " + ItemName, "Stacking Maximum Health Bonus", 60.0f, "How much maximum health should be provided by subsequent stacks?");
+            MaximumHealthPerStack = configuration.Bind("Item: " + ItemName, "Stacking Maximum Health Bonus", 60f, "How much maximum health should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthPerStack));
             BaseHealthRegenerationBase = configuration.Bind("Item: " + ItemName, "Initial Base Health Regeneration Bonus", 2.4f, "How much base health regeneration should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(BaseHealthRegenerationBase));
@@ -79,7 +79,7 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count > 0)
             {
-                arguments.attackSpeedMultAdd += AttackSpeedBase.Value / 100.0f + AttackSpeedPerStack.Value / 100.0f * (count - 1);
+                arguments.attackSpeedMultAdd += AttackSpeedBase.Value / 100f + AttackSpeedPerStack.Value / 100f * (count - 1);
             }
         }
         private void AddMovementSpeed(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs arguments)
@@ -87,7 +87,7 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count > 0)
             {
-                arguments.moveSpeedMultAdd += MovementSpeedBase.Value / 100.0f + MovementSpeedPerStack.Value / 100.0f * (count - 1);
+                arguments.moveSpeedMultAdd += MovementSpeedBase.Value / 100f + MovementSpeedPerStack.Value / 100f * (count - 1);
             }
         }
     }

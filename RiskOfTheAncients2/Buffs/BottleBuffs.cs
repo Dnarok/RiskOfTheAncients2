@@ -18,7 +18,7 @@ namespace ROTA2.Buffs
         {
             if (HasThisBuff(body))
             {
-                arguments.damageMultAdd += Bottle.Instance.AmplifyDamageBonus.Value / 100.0f;
+                arguments.damageMultAdd += Bottle.Instance.AmplifyDamageBonus.Value / 100f;
             }
         }
     }
@@ -37,7 +37,7 @@ namespace ROTA2.Buffs
         {
             if (HasThisBuff(body))
             {
-                arguments.cooldownMultAdd -= 1.0f - (1.0f - Bottle.Instance.ArcaneReduction.Value / 100.0f);
+                arguments.cooldownMultAdd -= 1f - (1f - Bottle.Instance.ArcaneReduction.Value / 100f);
             }
         }
     }
@@ -56,7 +56,7 @@ namespace ROTA2.Buffs
         {
             if (HasThisBuff(body))
             {
-                arguments.moveSpeedMultAdd += Bottle.Instance.HasteBonus.Value / 100.0f;
+                arguments.moveSpeedMultAdd += Bottle.Instance.HasteBonus.Value / 100f;
             }
         }
     }
@@ -78,7 +78,7 @@ namespace ROTA2.Buffs
                 HealthComponent health = body.GetComponent<HealthComponent>();
                 if (health)
                 {
-                    arguments.baseRegenAdd += health.fullHealth * Bottle.Instance.RegenerationMaximumHealthPercentage.Value / 100.0f;
+                    arguments.baseRegenAdd += health.fullHealth * Bottle.Instance.RegenerationMaximumHealthPercentage.Value / 100f;
                 }
             }
         }

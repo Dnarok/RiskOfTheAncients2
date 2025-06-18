@@ -38,11 +38,11 @@ namespace ROTA2.Items
         public ConfigEntry<bool> PlaySound;
         private void CreateConfig(ConfigFile configuration)
         {
-            RestoreChance = configuration.Bind("Item: " + ItemName, "Skill Restore Chance", 100.0f, "");
+            RestoreChance = configuration.Bind("Item: " + ItemName, "Skill Restore Chance", 100f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(RestoreChance));
-            RestoreCooldown = configuration.Bind("Item: " + ItemName, "Restore Cooldown", 10.0f, "");
+            RestoreCooldown = configuration.Bind("Item: " + ItemName, "Restore Cooldown", 10f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(RestoreCooldown));
-            RestoreCooldownReductionPerStack = configuration.Bind("Item: " + ItemName, "Restore Cooldown Reduction Per Stack", 50.0f, "");
+            RestoreCooldownReductionPerStack = configuration.Bind("Item: " + ItemName, "Restore Cooldown Reduction Per Stack", 50f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(RestoreCooldownReductionPerStack));
             PlaySound = configuration.Bind("Item: " + ItemName, "Play Sound", true, "");
             ModSettingsManager.AddOption(new CheckBoxOption(PlaySound));
@@ -66,7 +66,7 @@ namespace ROTA2.Items
                 {
                     foreach (var skill in skills)
                     {
-                        if (skill && skill.CanApplyAmmoPack() && skill.cooldownRemaining > 0.0f)
+                        if (skill && skill.CanApplyAmmoPack() && skill.cooldownRemaining > 0f)
                         {
                             skill.ApplyAmmoPack();
                         }
@@ -75,7 +75,7 @@ namespace ROTA2.Items
 
                 RefresherOrbCooldown.ApplyTo(
                     body: self.characterBody,
-                    duration: RestoreCooldown.Value * MathF.Pow(RestoreCooldownReductionPerStack.Value / 100.0f, count - 1)
+                    duration: RestoreCooldown.Value * MathF.Pow(RestoreCooldownReductionPerStack.Value / 100f, count - 1)
                 );
 
                 if (PlaySound.Value)

@@ -41,7 +41,7 @@ namespace ROTA2.Buffs
             int count = GetBuffCount(body);
             if (count > 0)
             {
-                arguments.moveSpeedReductionMultAdd += OrbOfCorrosion.Instance.MovementSpeedSlowBase.Value / 100.0f + OrbOfCorrosion.Instance.MovementSpeedSlowPerStack.Value / 100.0f * (count - 1);
+                arguments.moveSpeedReductionMultAdd += OrbOfCorrosion.Instance.MovementSpeedSlowBase.Value / 100f + OrbOfCorrosion.Instance.MovementSpeedSlowPerStack.Value / 100f * (count - 1);
             }
         }
         private void ReduceAttackSpeed(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs arguments)
@@ -49,7 +49,7 @@ namespace ROTA2.Buffs
             int count = GetBuffCount(body);
             if (count > 0)
             {
-                arguments.attackSpeedReductionMultAdd += OrbOfCorrosion.Instance.AttackSpeedSlowBase.Value / 100.0f + OrbOfCorrosion.Instance.AttackSpeedSlowPerStack.Value / 100.0f * (count - 1);
+                arguments.attackSpeedReductionMultAdd += OrbOfCorrosion.Instance.AttackSpeedSlowBase.Value / 100f + OrbOfCorrosion.Instance.AttackSpeedSlowPerStack.Value / 100f * (count - 1);
             }
         }
     }
@@ -70,9 +70,9 @@ namespace ROTA2.Buffs
             DotDef dot = new()
             {
                 associatedBuff = BuffDef,
-                damageCoefficient = 1.0f,
+                damageCoefficient = 1f,
                 damageColorIndex = DamageColorIndex.Poison,
-                interval = 1.0f,
+                interval = 1f,
                 resetTimerOnAdd = false
             };
 

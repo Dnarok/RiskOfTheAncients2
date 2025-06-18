@@ -18,7 +18,7 @@ namespace ROTA2.Buffs
         {
             if (HasThisBuff(body))
             {
-                args.baseRegenAdd += PowerTreads.Instance.StrengthRegen.Value * (1.0f + 0.2f * (body.level - 1));
+                args.baseRegenAdd += PowerTreads.Instance.StrengthRegen.Value * (1f + 0.2f * (body.level - 1));
             }
         }
     }
@@ -54,7 +54,7 @@ namespace ROTA2.Buffs
         {
             if (HasThisBuff(body))
             {
-                args.damageMultAdd += PowerTreads.Instance.IntelligenceDamage.Value / 100.0f;
+                args.damageMultAdd += PowerTreads.Instance.IntelligenceDamage.Value / 100f;
             }
         }
     }

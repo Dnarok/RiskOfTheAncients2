@@ -39,11 +39,11 @@ namespace ROTA2.Items
         public ConfigEntry<bool> PlaySound;
         public void CreateConfig(ConfigFile configuration)
         {
-            HealthThreshold = configuration.Bind("Item: " + ItemName, "Health Threshold", 40.0f, "At what percent of health should this item activate?");
+            HealthThreshold = configuration.Bind("Item: " + ItemName, "Health Threshold", 40f, "At what percent of health should this item activate?");
             ModSettingsManager.AddOption(new FloatFieldOption(HealthThreshold));
-            DamageBonus = configuration.Bind("Item: " + ItemName, "Damage Bonus", 50.0f, "How much bonus damage should be provided by activation?");
+            DamageBonus = configuration.Bind("Item: " + ItemName, "Damage Bonus", 50f, "How much bonus damage should be provided by activation?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBonus));
-            DamageDuration = configuration.Bind("Item: " + ItemName, "Damage Duration", 5.0f, "How long should the bonus damage last?");
+            DamageDuration = configuration.Bind("Item: " + ItemName, "Damage Duration", 5f, "How long should the bonus damage last?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageDuration));
             PlaySound = configuration.Bind("Item: " + ItemName, "Play Sound", true, "");
             ModSettingsManager.AddOption(new CheckBoxOption(PlaySound));
@@ -58,7 +58,7 @@ namespace ROTA2.Items
         private void OnHit(On.RoR2.HealthComponent.orig_UpdateLastHitTime orig, RoR2.HealthComponent self, float damageValue, Vector3 damagePosition, bool damageIsSilent, GameObject attacker, bool delayedDamage, bool firstHitOfDelayedDamage)
         {
             orig(self, damageValue, damagePosition, damageIsSilent, attacker, delayedDamage, firstHitOfDelayedDamage);
-            if (NetworkServer.active && self && GetCount(self.body) > 0 && self.IsHealthBelowThreshold(HealthThreshold.Value / 100.0f) && !EnchantedMangoBuff.HasThisBuff(self.body))
+            if (NetworkServer.active && self && GetCount(self.body) > 0 && self.IsHealthBelowThreshold(HealthThreshold.Value / 100f) && !EnchantedMangoBuff.HasThisBuff(self.body))
             {
                 EnchantedMangoBuff.ApplyTo(body: self.body, duration: DamageDuration.Value);
 
@@ -69,7 +69,7 @@ namespace ROTA2.Items
                     {
                         foreach (var skill in skills)
                         {
-                            if (skill && skill.CanApplyAmmoPack() && skill.cooldownRemaining > 0.0f)
+                            if (skill && skill.CanApplyAmmoPack() && skill.cooldownRemaining > 0f)
                             {
                                 skill.ApplyAmmoPack();
                             }
@@ -95,7 +95,7 @@ namespace ROTA2.Items
         public override string ConfigItemName => ItemName;
         public override string ItemTokenName => "CONSUMED_MANGO";
         public override string ItemTokenPickup => "Snack time's over.";
-        public override string ItemTokenDesc => $"Increases {Damage("damage")} by {Damage($"{DamageBase}%")} {Stack($"(+{DamagePerStack} per stack)")}.";
+        public override string ItemTokenDesc => $"Increases {Damage("damage")} by {Damage($"{DamageBase.Value}%")} {Stack($"(+{DamagePerStack.Value} per stack)")}.";
         public override string ItemTokenLore => "I miss it already...";
         public override string ItemDefGUID => Assets.EnchantedMango.ConsumedItemDef;
         public override void Hooks()
@@ -126,7 +126,7 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count > 0)
             {
-                args.damageMultAdd += DamageBase.Value / 100.0f + DamagePerStack.Value / 100.0f * (count - 1);
+                args.damageMultAdd += DamageBase.Value / 100f + DamagePerStack.Value / 100f * (count - 1);
             }
         }
         private void OnStageStart(Stage stage)

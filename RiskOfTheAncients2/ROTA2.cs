@@ -4,6 +4,7 @@ using R2API;
 using RiskOfOptions;
 using RiskOfOptions.Options;
 using RoR2;
+using RoR2.ExpansionManagement;
 using RoR2.Skills;
 using ROTA2.Buffs;
 using ROTA2.Equipment;
@@ -28,7 +29,7 @@ namespace ROTA2
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Dnarok";
         public const string PluginName = "RiskOfTheAncients2";
-        public const string PluginVersion = "2.0.0";
+        public const string PluginVersion = "2.0.2";
 
         public static List<ItemBase> Items = [];
         public static Dictionary<ItemBase, bool> ItemsEnabled = [];
@@ -36,6 +37,7 @@ namespace ROTA2
         public static Dictionary<EquipmentBase, bool> EquipmentEnabled = [];
         public static List<BuffBase> Buffs = [];
 
+        public static ExpansionDef expansion = null;
         public static Dictionary<string, Sprite> SpritesLoaded = [];
         public static SkillDef disabledSkill;
         public static string AddressablesDirectory { get; private set; }
@@ -53,6 +55,8 @@ namespace ROTA2
 
             ModSettingsManager.SetModDescription("Dota 2 items in Risk of Rain 2!");
             Addressables.LoadAssetAsync<Sprite>(Assets.Default.ModIcon).Completed += (x) => ModSettingsManager.SetModIcon(x.Result);
+
+            Addressables.LoadAssetAsync<ExpansionDef>(Assets.Default.ExpansionDef).Completed += (x) => { expansion = x.Result; ContentAddition.AddExpansionDef(expansion); };
 
             var ItemTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(ItemBase)));
             foreach (var type in ItemTypes)

@@ -861,6 +861,54 @@ MonoBehaviour:
     m_Address: Assets/Default/ModIcon.png
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 479b642864e633745a64607d2c4df695
+    m_Address: Assets/Default/ExpansionIcon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b748316c7e9592f48aaa2762b47f9333
+    m_Address: Assets/Default/DisabledExpansionIcon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 94098b57c571f0d40b3f17f8c3e81070
+    m_Address: Assets/Default/ExpansionDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ae2471c9f64048e48aef591e18fab459
+    m_Address: Assets/Items/BootsOfSpeed/DisplayL.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ba150190855280f449ca1f50a6f6f8a4
+    m_Address: Assets/Items/BootsOfSpeed/Material.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 97ab96b801df69b4f95175c9306c9aa6
+    m_Address: Assets/Items/BootsOfSpeed/DisplayR.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c4e948ef2491d58469509977d0573fca
+    m_Address: Assets/Equipment/ArmletOfMordiggian/Material.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 023b23114d6ee7e468791c98fd4ea27b
+    m_Address: Assets/Equipment/ArmletOfMordiggian/Display.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 53d9b344ecd9fd649a8d24215c2a8c0c
+    m_Address: Assets/Items/AssaultCuirass/Display.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 30209f23985e6144f807a01a9ec0f305
+    m_Address: Assets/Items/AssaultCuirass/Material.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 32051df985856f5429895568e6aa130c
+    m_Address: Assets/Equipment/BlackKingBar/Material.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fadb3fd3b098ed2409fa7b433e694965
+    m_Address: Assets/Equipment/BlackKingBar/Display.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 22177c4400a3f824ab99cc3b95f14243, type: 2}
   m_SchemaSet:

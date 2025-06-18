@@ -31,13 +31,13 @@ namespace ROTA2.Equipment
         public ConfigEntry<float> GuardianGreavesCooldown;
         private void CreateConfig(ConfigFile config)
         {
-            MaximumHealthHeal = config.Bind("Equipment: " + EquipmentName, "Maximum Health Heal", 50.0f, "");
+            MaximumHealthHeal = config.Bind("Equipment: " + EquipmentName, "Maximum Health Heal", 50f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthHeal));
-            ArmorBonus = config.Bind("Equipment: " + EquipmentName, "Armor Bonus", 100.0f, "");
+            ArmorBonus = config.Bind("Equipment: " + EquipmentName, "Armor Bonus", 100f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(ArmorBonus));
-            ArmorBonusDuration = config.Bind("Equipment: " + EquipmentName, "Armor Duration", 8.0f, "");
+            ArmorBonusDuration = config.Bind("Equipment: " + EquipmentName, "Armor Duration", 8f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(ArmorBonusDuration));
-            GuardianGreavesCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 30.0f, "");
+            GuardianGreavesCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 30f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(GuardianGreavesCooldown));
         }
 
@@ -62,14 +62,14 @@ namespace ROTA2.Equipment
                         {
                             foreach (var skill in skills)
                             {
-                                if (skill && skill.CanApplyAmmoPack() && skill.cooldownRemaining > 0.0f)
+                                if (skill && skill.CanApplyAmmoPack() && skill.cooldownRemaining > 0f)
                                 {
                                     skill.ApplyAmmoPack();
                                 }
                             }
                         }
 
-                        ally.healthComponent.HealFraction(MaximumHealthHeal.Value / 100.0f, default);
+                        ally.healthComponent.HealFraction(MaximumHealthHeal.Value / 100f, default);
                         GuardianGreavesBuff.ApplyTo(
                             body: ally,
                             duration: ArmorBonusDuration.Value

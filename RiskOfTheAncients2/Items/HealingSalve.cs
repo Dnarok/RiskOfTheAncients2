@@ -43,11 +43,11 @@ namespace ROTA2.Items
         public ConfigEntry<bool> PlaySound;
         public void CreateConfig(ConfigFile configuration)
         {
-            MaximumHealthRegenerationBase = configuration.Bind("Item: " + ItemName, "Maximum Health Regeneration Base", 2.0f, "How much maximum health percentage regeneration should the first stack provide?");
+            MaximumHealthRegenerationBase = configuration.Bind("Item: " + ItemName, "Maximum Health Regeneration Base", 2f, "How much maximum health percentage regeneration should the first stack provide?");
             ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthRegenerationBase));
-            MaximumHealthRegenerationPerStack = configuration.Bind("Item: " + ItemName, "Maximum Health Regeneration Per Stack", 2.0f, "How much maximum health percentage regeneration should subsequent stacks provide?");
+            MaximumHealthRegenerationPerStack = configuration.Bind("Item: " + ItemName, "Maximum Health Regeneration Per Stack", 2f, "How much maximum health percentage regeneration should subsequent stacks provide?");
             ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthRegenerationPerStack));
-            BuffDuration = configuration.Bind("Item: " + ItemName, "Healing Duration", 5.0f, "How long should the regeneration last?");
+            BuffDuration = configuration.Bind("Item: " + ItemName, "Healing Duration", 5f, "How long should the regeneration last?");
             ModSettingsManager.AddOption(new FloatFieldOption(BuffDuration));
             PlaySound = configuration.Bind("Item: " + ItemName, "Play Sound", true, "");
             ModSettingsManager.AddOption(new CheckBoxOption(PlaySound));

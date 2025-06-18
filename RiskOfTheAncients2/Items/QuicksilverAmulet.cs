@@ -39,13 +39,13 @@ namespace ROTA2.Items
         public ConfigEntry<float> MovementSpeedPerStack;
         private void CreateConfig(ConfigFile configuration)
         {
-            AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Attack Speed Base", 10.0f, "");
+            AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Attack Speed Base", 10f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedBase));
-            AttackSpeedPerStack = configuration.Bind("Item: " + ItemName, "Attack Speed Per Stack", 10.0f, "");
+            AttackSpeedPerStack = configuration.Bind("Item: " + ItemName, "Attack Speed Per Stack", 10f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedPerStack));
-            MovementSpeedBase = configuration.Bind("Item: " + ItemName, "Movement Speed Base", 10.0f, "");
+            MovementSpeedBase = configuration.Bind("Item: " + ItemName, "Movement Speed Base", 10f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedBase));
-            MovementSpeedPerStack = configuration.Bind("Item: " + ItemName, "Movement Speed Per Stack", 10.0f, "");
+            MovementSpeedPerStack = configuration.Bind("Item: " + ItemName, "Movement Speed Per Stack", 10f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedPerStack));
         }
 
@@ -60,14 +60,14 @@ namespace ROTA2.Items
                 {
                     foreach (var skill in skills)
                     {
-                        if (skill && skill.cooldownRemaining > 0.0f)
+                        if (skill && skill.cooldownRemaining > 0f)
                         {
                             ++cooldowns;
                         }
                     }
                 }
 
-                args.attackSpeedMultAdd += (AttackSpeedBase.Value / 100.0f + AttackSpeedPerStack.Value / 100.0f * (count - 1)) * cooldowns;
+                args.attackSpeedMultAdd += (AttackSpeedBase.Value / 100f + AttackSpeedPerStack.Value / 100f * (count - 1)) * cooldowns;
             }
         }
         private void AddMovementSpeed(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs args)
@@ -81,14 +81,14 @@ namespace ROTA2.Items
                 {
                     foreach (var skill in skills)
                     {
-                        if (skill && skill.cooldownRemaining > 0.0f)
+                        if (skill && skill.cooldownRemaining > 0f)
                         {
                             ++cooldowns;
                         }
                     }
                 }
 
-                args.moveSpeedMultAdd += (MovementSpeedBase.Value / 100.0f + MovementSpeedPerStack.Value / 100.0f * (count - 1)) * cooldowns;
+                args.moveSpeedMultAdd += (MovementSpeedBase.Value / 100f + MovementSpeedPerStack.Value / 100f * (count - 1)) * cooldowns;
             }
         }
         private void OnInventoryChanged(CharacterBody body)

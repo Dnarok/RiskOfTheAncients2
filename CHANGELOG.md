@@ -1,3 +1,17 @@
+## 2.0.2
+- Added Expansion so you can disable the entire mod at once from in the lobby.
+- Added on-survivor item displays for Assault Cuirass, Boots of Speed, Armlet of Mordiggian, and Black King Bar.
+- Boots of Travel: Reduced base movement speed increase from `50%` -> `30%`.
+- Boots of Travel: Fixed reducing your damage if you were slowed.
+- Nemesis Curse: Now increases the damage of the hit that applies the debuff as well.
+- Armlet of Mordiggian: Damage now bypasses armor as well (and RAP, rip).
+- Armlet of Mordiggian: Damage bonus increased from `60%` -> `75%`.
+- Armlet of Mordiggian: Attack speed bonus increased from `60%` -> `75%`.
+- Armlet of Mordiggian: Armor bonus increased from `50` -> `100`.
+
+## 2.0.1
+- all that to forget a readme...
+
 ## 2.0.0 - Massive code overhaul, new items, and some balance adjustments.
 - All assets are now loaded from Unity Addressables.
 - Significant parts of the project now reside in the associated Unity project (ItemDefs, models, icons, etc.)

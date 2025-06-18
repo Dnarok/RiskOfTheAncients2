@@ -35,13 +35,13 @@ namespace ROTA2.Items
         public ConfigEntry<float> DamagePerStack;
         public void CreateConfig(ConfigFile configuration)
         {
-            SkillCooldownReductionBase = configuration.Bind("Item: " + ItemName, "Initial Skill Cooldown Reduction", 6.0f, "How much skill cooldown reduction should be provided by the first stack?");
+            SkillCooldownReductionBase = configuration.Bind("Item: " + ItemName, "Initial Skill Cooldown Reduction", 6f, "How much skill cooldown reduction should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(SkillCooldownReductionBase));
-            SkillCooldownReductionPerStack = configuration.Bind("Item: " + ItemName, "Stacking Skill Cooldown Reduction", 6.0f, "How much skill cooldown reduction should be provided by subsequent stacks?");
+            SkillCooldownReductionPerStack = configuration.Bind("Item: " + ItemName, "Stacking Skill Cooldown Reduction", 6f, "How much skill cooldown reduction should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(SkillCooldownReductionPerStack));
-            DamageBase = configuration.Bind("Item: " + ItemName, "Initial Damage Bonus", 12.0f, "How much damage should be provided by the first stack?");
+            DamageBase = configuration.Bind("Item: " + ItemName, "Initial Damage Bonus", 12f, "How much damage should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBase));
-            DamagePerStack = configuration.Bind("Item: " + ItemName, "Stacking Damage Bonus", 12.0f, "How much damage should be provided by subsequent stacks?");
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Stacking Damage Bonus", 12f, "How much damage should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamagePerStack));
         }
 
@@ -50,11 +50,11 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count == 1)
             {
-                arguments.cooldownMultAdd -= 1.0f - (1.0f - SkillCooldownReductionBase.Value / 100.0f);
+                arguments.cooldownMultAdd -= 1f - (1f - SkillCooldownReductionBase.Value / 100f);
             }
             else if (count > 1)
             {
-                arguments.cooldownMultAdd -= 1.0f - (1.0f - SkillCooldownReductionBase.Value / 100.0f) * (float)Math.Pow(1.0f - SkillCooldownReductionPerStack.Value / 100.0f, count - 1);
+                arguments.cooldownMultAdd -= 1f - (1f - SkillCooldownReductionBase.Value / 100f) * (float)Math.Pow(1f - SkillCooldownReductionPerStack.Value / 100f, count - 1);
             }
         }
         private void AddDamage(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs arguments)
@@ -62,7 +62,7 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count > 0)
             {
-                arguments.damageMultAdd += DamageBase.Value / 100.0f + DamagePerStack.Value / 100.0f * (count - 1);
+                arguments.damageMultAdd += DamageBase.Value / 100f + DamagePerStack.Value / 100f * (count - 1);
             }
         }
     }

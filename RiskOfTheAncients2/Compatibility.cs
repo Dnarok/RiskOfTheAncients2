@@ -95,7 +95,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        ConsumedMango.Instance.DamageBase.Value / 100.0f + ConsumedMango.Instance.DamagePerStack.Value / 100.0f * (count - 1)
+                        ConsumedMango.Instance.DamageBase.Value / 100f + ConsumedMango.Instance.DamagePerStack.Value / 100f * (count - 1)
                     ];
                     return values;
                 };
@@ -119,8 +119,8 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Utils.GetExponentialStacking(FairysTrinket.Instance.SkillCooldownReductionBase.Value / 100.0f, FairysTrinket.Instance.SkillCooldownReductionPerStack.Value / 100.0f, count),
-                        FairysTrinket.Instance.DamageBase.Value / 100.0f + FairysTrinket.Instance.DamagePerStack.Value / 100.0f * (count - 1),
+                        Utils.GetExponentialStacking(FairysTrinket.Instance.SkillCooldownReductionBase.Value / 100f, FairysTrinket.Instance.SkillCooldownReductionPerStack.Value / 100f, count),
+                        FairysTrinket.Instance.DamageBase.Value / 100f + FairysTrinket.Instance.DamagePerStack.Value / 100f * (count - 1),
                         FairysTrinket.Instance.MaximumHealthBase.Value + FairysTrinket.Instance.MaximumHealthPerStack.Value * (count - 1)
                     ];
                     return values;
@@ -139,7 +139,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        (HealingSalve.Instance.MaximumHealthRegenerationBase.Value / 100.0f + HealingSalve.Instance.MaximumHealthRegenerationPerStack.Value / 100.0f * (count - 1)) * HealingSalve.Instance.BuffDuration.Value
+                        (HealingSalve.Instance.MaximumHealthRegenerationBase.Value / 100f + HealingSalve.Instance.MaximumHealthRegenerationPerStack.Value / 100f * (count - 1)) * HealingSalve.Instance.BuffDuration.Value
                     ];
                     return values;
                 };
@@ -162,8 +162,8 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Utils.CalculateChanceWithLuck(Javelin.Instance.ProcChance.Value / 100.0f, luck),
-                        Javelin.Instance.DamageBase.Value / 100.0f + Javelin.Instance.DamagePerStack.Value / 100.0f * (count - 1)
+                        Utils.CalculateChanceWithLuck(Javelin.Instance.ProcChance.Value / 100f, luck),
+                        Javelin.Instance.DamageBase.Value / 100f + Javelin.Instance.DamagePerStack.Value / 100f * (count - 1)
                     ];
                     return values;
                 };
@@ -202,8 +202,8 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        OrbOfFrost.Instance.MovementSpeedSlowBase.Value / 100.0f + OrbOfFrost.Instance.MovementSpeedSlowPerStack.Value / 100.0f * (count - 1),
-                        OrbOfFrost.Instance.AttackSpeedSlowBase.Value / 100.0f + OrbOfFrost.Instance.AttackSpeedSlowPerStack.Value / 100.0f * (count - 1),
+                        OrbOfFrost.Instance.MovementSpeedSlowBase.Value / 100f + OrbOfFrost.Instance.MovementSpeedSlowPerStack.Value / 100f * (count - 1),
+                        OrbOfFrost.Instance.AttackSpeedSlowBase.Value / 100f + OrbOfFrost.Instance.AttackSpeedSlowPerStack.Value / 100f * (count - 1),
                     ];
                     return values;
                 };
@@ -221,7 +221,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        (OrbOfVenom.Instance.PoisonDamageBase.Value / 100.0f + OrbOfVenom.Instance.PoisonDamagePerStack.Value / 100.0f * (count - 1)) * OrbOfVenom.Instance.PoisonDuration.Value
+                        (OrbOfVenom.Instance.PoisonDamageBase.Value / 100f + OrbOfVenom.Instance.PoisonDamagePerStack.Value / 100f * (count - 1)) * OrbOfVenom.Instance.PoisonDuration.Value
                     ];
                     return values;
                 };
@@ -260,7 +260,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        SparkOfCourage.Instance.DamageBase.Value / 100.0f + SparkOfCourage.Instance.DamagePerStack.Value / 100.0f * (count - 1),
+                        SparkOfCourage.Instance.DamageBase.Value / 100f + SparkOfCourage.Instance.DamagePerStack.Value / 100f * (count - 1),
                         SparkOfCourage.Instance.ArmorBase.Value + SparkOfCourage.Instance.ArmorPerStack.Value * (count - 1)
                     ];
                     return values;
@@ -284,8 +284,8 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Utils.CalculateChanceWithLuck(DragonScale.Instance.ProcChance.Value / 100.0f, luck),
-                        (DragonScale.Instance.DamageBase.Value / 100.0f + DragonScale.Instance.DamagePerStack.Value / 100.0f * (count - 1))
+                        Utils.CalculateChanceWithLuck(DragonScale.Instance.ProcChance.Value / 100f, luck),
+                        (DragonScale.Instance.DamageBase.Value / 100f + DragonScale.Instance.DamagePerStack.Value / 100f * (count - 1))
                     ];
                     return values;
                 };
@@ -303,7 +303,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        LanceOfPursuit.Instance.DamageBase.Value / 100.0f + LanceOfPursuit.Instance.DamagePerStack.Value / 100.0f * (count - 1)
+                        LanceOfPursuit.Instance.DamageBase.Value / 100f + LanceOfPursuit.Instance.DamagePerStack.Value / 100f * (count - 1)
                     ];
                     return values;
                 };
@@ -321,7 +321,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        IronBranch.Instance.StatIncreaseBase.Value / 100.0f + IronBranch.Instance.StatIncreasePerStack.Value / 100.0f * (count - 1)
+                        IronBranch.Instance.StatIncreaseBase.Value / 100f + IronBranch.Instance.StatIncreasePerStack.Value / 100f * (count - 1)
                     ];
                     return values;
                 };
@@ -339,7 +339,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        BladesOfAttack.Instance.DamageBase.Value / 100.0f + BladesOfAttack.Instance.DamagePerStack.Value / 100.0f * (count - 1)
+                        BladesOfAttack.Instance.DamageBase.Value / 100f + BladesOfAttack.Instance.DamagePerStack.Value / 100f * (count - 1)
                     ];
                     return values;
                 };
@@ -360,8 +360,8 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Utils.GetExponentialStacking(Kaya.Instance.SkillCooldownReductionBase.Value / 100.0f, Kaya.Instance.SkillCooldownReductionPerStack.Value / 100.0f, count),
-                        Kaya.Instance.DamageBase.Value / 100.0f + Kaya.Instance.DamagePerStack.Value / 100.0f * (count - 1)
+                        Utils.GetExponentialStacking(Kaya.Instance.SkillCooldownReductionBase.Value / 100f, Kaya.Instance.SkillCooldownReductionPerStack.Value / 100f, count),
+                        Kaya.Instance.DamageBase.Value / 100f + Kaya.Instance.DamagePerStack.Value / 100f * (count - 1)
                     ];
                     return values;
                 };
@@ -404,8 +404,8 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Yasha.Instance.AttackSpeedBase.Value / 100.0f + Yasha.Instance.AttackSpeedPerStack.Value / 100.0f * (count - 1),
-                        Yasha.Instance.MovementSpeedBase.Value / 100.0f + Yasha.Instance.MovementSpeedPerStack.Value / 100.0f * (count - 1)
+                        Yasha.Instance.AttackSpeedBase.Value / 100f + Yasha.Instance.AttackSpeedPerStack.Value / 100f * (count - 1),
+                        Yasha.Instance.MovementSpeedBase.Value / 100f + Yasha.Instance.MovementSpeedPerStack.Value / 100f * (count - 1)
                     ];
                     return values;
                 };
@@ -428,8 +428,8 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Utils.CalculateChanceWithLuck(SkullBasher.Instance.ProcChance.Value / 100.0f, luck),
-                        SkullBasher.Instance.DamageBase.Value / 100.0f + SkullBasher.Instance.DamagePerStack.Value / 100.0f * (count - 1)
+                        Utils.CalculateChanceWithLuck(SkullBasher.Instance.ProcChance.Value / 100f, luck),
+                        SkullBasher.Instance.DamageBase.Value / 100f + SkullBasher.Instance.DamagePerStack.Value / 100f * (count - 1)
                     ];
                     return values;
                 };
@@ -450,8 +450,8 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Utils.CalculateChanceWithLuck(Daedalus.Instance.CriticalChance.Value / 100.0f, luck),
-                        Daedalus.Instance.CriticalDamageBase.Value / 100.0f + Daedalus.Instance.CriticalDamagePerStack.Value / 100.0f * (count - 1)
+                        Utils.CalculateChanceWithLuck(Daedalus.Instance.CriticalChance.Value / 100f, luck),
+                        Daedalus.Instance.CriticalDamageBase.Value / 100f + Daedalus.Instance.CriticalDamagePerStack.Value / 100f * (count - 1)
                     ];
                     return values;
                 };
@@ -478,7 +478,7 @@ namespace ROTA2
                         {
                             // only count skills that can actually have a cooldown.
                             // e.g. Commando's primary *wouldn't* count.
-                            if (skill && skill.baseRechargeInterval > 0.0f)
+                            if (skill && skill.baseRechargeInterval > 0f)
                             {
                                 ++cooldowns;
                             }
@@ -486,8 +486,8 @@ namespace ROTA2
                     }
                     List<float> values =
                     [
-                        (QuicksilverAmulet.Instance.AttackSpeedBase.Value / 100.0f + QuicksilverAmulet.Instance.AttackSpeedPerStack.Value / 100.0f * (count - 1)) * cooldowns,
-                        (QuicksilverAmulet.Instance.MovementSpeedBase.Value / 100.0f + QuicksilverAmulet.Instance.MovementSpeedPerStack.Value / 100.0f * (count - 1)) * cooldowns
+                        (QuicksilverAmulet.Instance.AttackSpeedBase.Value / 100f + QuicksilverAmulet.Instance.AttackSpeedPerStack.Value / 100f * (count - 1)) * cooldowns,
+                        (QuicksilverAmulet.Instance.MovementSpeedBase.Value / 100f + QuicksilverAmulet.Instance.MovementSpeedPerStack.Value / 100f * (count - 1)) * cooldowns
                     ];
                     return values;
                 };
@@ -505,7 +505,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        ShadowAmulet.Instance.AttackSpeedBase.Value / 100.0f + ShadowAmulet.Instance.AttackSpeedPerStack.Value / 100.0f * (count - 1)
+                        ShadowAmulet.Instance.AttackSpeedBase.Value / 100f + ShadowAmulet.Instance.AttackSpeedPerStack.Value / 100f * (count - 1)
                     ];
                     return values;
                 };
@@ -523,7 +523,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        RoR2.Util.ConvertAmplificationPercentageIntoReductionNormalized(IronTalon.Instance.HealthDamageBase.Value / 100.0f + IronTalon.Instance.HealthDamagePerStack.Value / 100.0f * (count - 1))
+                        RoR2.Util.ConvertAmplificationPercentageIntoReductionNormalized(IronTalon.Instance.HealthDamageBase.Value / 100f + IronTalon.Instance.HealthDamagePerStack.Value / 100f * (count - 1))
                     ];
                     return values;
                 };
@@ -562,8 +562,8 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Radiance.Instance.IgniteBase.Value / 100.0f + Radiance.Instance.IgnitePerStack.Value / 100.0f * (count - 1),
-                        (Radiance.Instance.BurnBase.Value / 100.0f + Radiance.Instance.BurnPerStack.Value / 100.0f * (count - 1))
+                        Radiance.Instance.IgniteBase.Value / 100f + Radiance.Instance.IgnitePerStack.Value / 100f * (count - 1),
+                        (Radiance.Instance.BurnBase.Value / 100f + Radiance.Instance.BurnPerStack.Value / 100f * (count - 1))
                     ];
                     return values;
                 };
@@ -606,7 +606,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        AssaultCuirass.Instance.AttackSpeedBase.Value / 100.0f + AssaultCuirass.Instance.AttackSpeedPerStack.Value / 100.0f * (count - 1),
+                        AssaultCuirass.Instance.AttackSpeedBase.Value / 100f + AssaultCuirass.Instance.AttackSpeedPerStack.Value / 100f * (count - 1),
                         AssaultCuirass.Instance.ArmorBase.Value + AssaultCuirass.Instance.ArmorPerStack.Value * (count - 1)
                     ];
                     return values;
@@ -626,7 +626,7 @@ namespace ROTA2
                     CharacterBody body = master.GetBody();
                     List<float> values =
                     [
-                        1 - 1 / (body.moveSpeed / (body.baseMoveSpeed * (1.0f + BootsOfTravel.Instance.MovementSpeedBonus.Value / 100.0f))) * (BootsOfTravel.Instance.DamageBonusBase.Value / 100.0f + BootsOfTravel.Instance.DamageBonusPerStack.Value / 100.0f * (count - 1))
+                        1 - 1 / (body.moveSpeed / (body.baseMoveSpeed * (1f + BootsOfTravel.Instance.MovementSpeedBonus.Value / 100f))) * (BootsOfTravel.Instance.DamageBonusBase.Value / 100f + BootsOfTravel.Instance.DamageBonusPerStack.Value / 100f * (count - 1))
                     ];
                     return values;
                 };
@@ -683,7 +683,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Utils.CalculateChanceWithLuck(PirateHat.Instance.DropChanceBase.Value / 100.0f + PirateHat.Instance.DropChancePerStack.Value / 100.0f * (count - 1), luck)
+                        Utils.CalculateChanceWithLuck(PirateHat.Instance.DropChanceBase.Value / 100f + PirateHat.Instance.DropChancePerStack.Value / 100f * (count - 1), luck)
                     ];
                     return values;
                 };
@@ -701,7 +701,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        RefresherOrb.Instance.RestoreCooldown.Value * MathF.Pow(RefresherOrb.Instance.RestoreCooldownReductionPerStack.Value / 100.0f, count - 1)
+                        RefresherOrb.Instance.RestoreCooldown.Value * MathF.Pow(RefresherOrb.Instance.RestoreCooldownReductionPerStack.Value / 100f, count - 1)
                     ];
                     return values;
                 };
@@ -719,7 +719,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        (1.0f + NemesisCurse.Instance.DamageBase.Value / 100.0f) * Mathf.Pow(1.0f + NemesisCurse.Instance.DamagePerStack.Value / 100.0f, count - 1)
+                        (1f + NemesisCurse.Instance.DamageBase.Value / 100f) * Mathf.Pow(1f + NemesisCurse.Instance.DamagePerStack.Value / 100f, count - 1)
                     ];
                     return values;
                 };
@@ -747,9 +747,9 @@ namespace ROTA2
                     List<float> values =
                     [
                         OrbOfCorrosion.Instance.ArmorReduction.Value * (OrbOfCorrosion.Instance.MaxStacksBase.Value + OrbOfCorrosion.Instance.MaxStacksPerStack.Value * (count - 1)),
-                        OrbOfCorrosion.Instance.MovementSpeedSlowBase.Value / 100.0f + OrbOfCorrosion.Instance.MovementSpeedSlowPerStack.Value / 100.0f * (count - 1),
-                        OrbOfCorrosion.Instance.AttackSpeedSlowBase.Value / 100.0f + OrbOfCorrosion.Instance.AttackSpeedSlowPerStack.Value / 100.0f * (count - 1),
-                        (OrbOfCorrosion.Instance.PoisonDamageBase.Value / 100.0f + OrbOfCorrosion.Instance.PoisonDamagePerStack.Value / 100.0f * (count - 1)) * OrbOfCorrosion.Instance.PoisonDuration.Value
+                        OrbOfCorrosion.Instance.MovementSpeedSlowBase.Value / 100f + OrbOfCorrosion.Instance.MovementSpeedSlowPerStack.Value / 100f * (count - 1),
+                        OrbOfCorrosion.Instance.AttackSpeedSlowBase.Value / 100f + OrbOfCorrosion.Instance.AttackSpeedSlowPerStack.Value / 100f * (count - 1),
+                        (OrbOfCorrosion.Instance.PoisonDamageBase.Value / 100f + OrbOfCorrosion.Instance.PoisonDamagePerStack.Value / 100f * (count - 1)) * OrbOfCorrosion.Instance.PoisonDuration.Value
                     ];
                     return values;
                 };
@@ -796,8 +796,8 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        PhaseBoots.Instance.DamageBase.Value / 100.0f + PhaseBoots.Instance.DamagePerStack.Value / 100.0f * (count - 1),
-                        PhaseBoots.Instance.SprintSpeedBase.Value / 100.0f + PhaseBoots.Instance.SprintSpeedPerStack.Value / 100.0f * (count - 1)
+                        PhaseBoots.Instance.DamageBase.Value / 100f + PhaseBoots.Instance.DamagePerStack.Value / 100f * (count - 1),
+                        PhaseBoots.Instance.SprintSpeedBase.Value / 100f + PhaseBoots.Instance.SprintSpeedPerStack.Value / 100f * (count - 1)
                     ];
                     return values;
                 };
@@ -846,8 +846,8 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Utils.GetExponentialStacking(KayaAndSange.Instance.SkillCooldownReductionBase.Value / 100.0f, KayaAndSange.Instance.SkillCooldownReductionPerStack.Value / 100.0f, count),
-                        KayaAndSange.Instance.DamageBase.Value / 100.0f + KayaAndSange.Instance.DamagePerStack.Value / 100.0f * (count - 1),
+                        Utils.GetExponentialStacking(KayaAndSange.Instance.SkillCooldownReductionBase.Value / 100f, KayaAndSange.Instance.SkillCooldownReductionPerStack.Value / 100f, count),
+                        KayaAndSange.Instance.DamageBase.Value / 100f + KayaAndSange.Instance.DamagePerStack.Value / 100f * (count - 1),
                         KayaAndSange.Instance.MaximumHealthBase.Value + KayaAndSange.Instance.MaximumHealthPerStack.Value * (count - 1),
                         KayaAndSange.Instance.BaseHealthRegenerationBase.Value + KayaAndSange.Instance.BaseHealthRegenerationPerStack.Value * (count - 1)
                     ];
@@ -879,8 +879,8 @@ namespace ROTA2
                     [
                         SangeAndYasha.Instance.MaximumHealthBase.Value + SangeAndYasha.Instance.MaximumHealthPerStack.Value * (count - 1),
                         SangeAndYasha.Instance.BaseHealthRegenerationBase.Value + SangeAndYasha.Instance.BaseHealthRegenerationPerStack.Value * (count - 1),
-                        SangeAndYasha.Instance.AttackSpeedBase.Value / 100.0f + SangeAndYasha.Instance.AttackSpeedPerStack.Value / 100.0f * (count - 1),
-                        SangeAndYasha.Instance.MovementSpeedBase.Value / 100.0f + SangeAndYasha.Instance.MovementSpeedPerStack.Value / 100.0f * (count - 1)
+                        SangeAndYasha.Instance.AttackSpeedBase.Value / 100f + SangeAndYasha.Instance.AttackSpeedPerStack.Value / 100f * (count - 1),
+                        SangeAndYasha.Instance.MovementSpeedBase.Value / 100f + SangeAndYasha.Instance.MovementSpeedPerStack.Value / 100f * (count - 1)
                     ];
                     return values;
                 };
@@ -907,10 +907,10 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Utils.GetExponentialStacking(YashaAndKaya.Instance.SkillCooldownReductionBase.Value / 100.0f, YashaAndKaya.Instance.SkillCooldownReductionPerStack.Value / 100.0f, count),
-                        YashaAndKaya.Instance.AttackSpeedBase.Value / 100.0f + YashaAndKaya.Instance.AttackSpeedPerStack.Value / 100.0f * (count - 1),
-                        YashaAndKaya.Instance.MovementSpeedBase.Value / 100.0f + YashaAndKaya.Instance.MovementSpeedPerStack.Value / 100.0f * (count - 1),
-                        YashaAndKaya.Instance.DamageBase.Value / 100.0f + YashaAndKaya.Instance.DamagePerStack.Value / 100.0f * (count - 1)
+                        Utils.GetExponentialStacking(YashaAndKaya.Instance.SkillCooldownReductionBase.Value / 100f, YashaAndKaya.Instance.SkillCooldownReductionPerStack.Value / 100f, count),
+                        YashaAndKaya.Instance.AttackSpeedBase.Value / 100f + YashaAndKaya.Instance.AttackSpeedPerStack.Value / 100f * (count - 1),
+                        YashaAndKaya.Instance.MovementSpeedBase.Value / 100f + YashaAndKaya.Instance.MovementSpeedPerStack.Value / 100f * (count - 1),
+                        YashaAndKaya.Instance.DamageBase.Value / 100f + YashaAndKaya.Instance.DamagePerStack.Value / 100f * (count - 1)
                     ];
                     return values;
                 };
@@ -943,12 +943,12 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Utils.GetExponentialStacking(Trident.Instance.SkillCooldownReductionBase.Value / 100.0f, Trident.Instance.SkillCooldownReductionPerStack.Value / 100.0f, count),
-                        Trident.Instance.DamageBase.Value / 100.0f + Trident.Instance.DamagePerStack.Value / 100.0f * (count - 1),
+                        Utils.GetExponentialStacking(Trident.Instance.SkillCooldownReductionBase.Value / 100f, Trident.Instance.SkillCooldownReductionPerStack.Value / 100f, count),
+                        Trident.Instance.DamageBase.Value / 100f + Trident.Instance.DamagePerStack.Value / 100f * (count - 1),
                         Trident.Instance.MaximumHealthBase.Value + Trident.Instance.MaximumHealthPerStack.Value * (count - 1),
                         Trident.Instance.BaseHealthRegenerationBase.Value + Trident.Instance.BaseHealthRegenerationPerStack.Value * (count - 1),
-                        Trident.Instance.AttackSpeedBase.Value / 100.0f + Trident.Instance.AttackSpeedPerStack.Value / 100.0f * (count - 1),
-                        Trident.Instance.MovementSpeedBase.Value / 100.0f + Trident.Instance.MovementSpeedPerStack.Value / 100.0f * (count - 1)
+                        Trident.Instance.AttackSpeedBase.Value / 100f + Trident.Instance.AttackSpeedPerStack.Value / 100f * (count - 1),
+                        Trident.Instance.MovementSpeedBase.Value / 100f + Trident.Instance.MovementSpeedPerStack.Value / 100f * (count - 1)
                     ];
                     return values;
                 };
@@ -966,7 +966,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        ConsumedMoonShard.Instance.AttackSpeedBase.Value / 100.0f + ConsumedMoonShard.Instance.AttackSpeedPerStack.Value / 100.0f * (count - 1)
+                        ConsumedMoonShard.Instance.AttackSpeedBase.Value / 100f + ConsumedMoonShard.Instance.AttackSpeedPerStack.Value / 100f * (count - 1)
                     ];
                     return values;
                 };

@@ -14,8 +14,8 @@ namespace ROTA2.Buffs
             {
                 if (HasThisBuff(body))
                 {
-                    args.damageTotalMult *= 1.0f + ArmletOfMordiggian.Instance.DamageBonus.Value / 100.0f;
-                    args.attackSpeedTotalMult *= 1.0f + ArmletOfMordiggian.Instance.AttackSpeedBonus.Value / 100.0f;
+                    args.damageTotalMult *= 1f + ArmletOfMordiggian.Instance.DamageBonus.Value / 100f;
+                    args.attackSpeedTotalMult *= 1f + ArmletOfMordiggian.Instance.AttackSpeedBonus.Value / 100f;
                     args.armorAdd += ArmletOfMordiggian.Instance.ArmorBonus.Value;
                 }
             };

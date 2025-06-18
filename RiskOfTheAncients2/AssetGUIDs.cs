@@ -5,6 +5,9 @@
         public const string Pickup = "ca867297b1b075b41a59822381099d7a";
         public const string Icon = "54685de422b04694aa62a9ba668a39c4";
         public const string ModIcon = "2c47c84c04276284788a629fce27c7f9";
+        public const string ExpansionDef = "94098b57c571f0d40b3f17f8c3e81070";
+        public const string ExpansionIcon = "479b642864e633745a64607d2c4df695";
+        public const string DisabledExpansionIcon = "b748316c7e9592f48aaa2762b47f9333";
     }
     public static class ArcaneBoots
     {
@@ -21,6 +24,8 @@
         public const string BuffDef = "703e3f91a02a63c468d7cf857314a5ec";
         public const string SoundOn = "2023f9e2cd8ad7749ba838130413b321";
         public const string SoundOff = "6c26a2603c8687f4ea5142753d80006c";
+        public const string Display = "023b23114d6ee7e468791c98fd4ea27b";
+        public const string Material = "c4e948ef2491d58469509977d0573fca";
     }
     public static class Bottle
     {
@@ -90,6 +95,8 @@
         public const string BuffDef = "dc201e3cee00aa749bf9035ff7ec9360";
         public const string Icon = "2cfa3b7d8fd9b974ba68d63fc58636ce";
         public const string NetworkSoundEventDef = "dfdd877ae9093fe40a4c51896f192580";
+        public const string Display = "fadb3fd3b098ed2409fa7b433e694965";
+        public const string Material = "32051df985856f5429895568e6aa130c";
     }
     public static class BootsOfBearing
     {
@@ -144,6 +151,8 @@
         public const string BuffDef = "0291138283415d54282fe84e141118bd";
         public const string Pickup = "c9d56198702bb4b4686e0fc87d850704";
         public const string Icon = "e9f66586f20cf47448dde77107c4e723";
+        public const string Display = "53d9b344ecd9fd649a8d24215c2a8c0c";
+        public const string Material = "30209f23985e6144f807a01a9ec0f305";
     }
     public static class BladesOfAttack
     {
@@ -155,6 +164,9 @@
         public const string ItemDef = "487bd91c45dbc9d4ba0320645350fae1";
         public const string Pickup = "c6e1c9de7e225d44cb8c0a07516f023d";
         public const string Icon = "3dbb8e95f285c164593c088483a34b25";
+        public const string DisplayL = "ae2471c9f64048e48aef591e18fab459";
+        public const string DisplayR = "97ab96b801df69b4f95175c9306c9aa6";
+        public const string Material = "ba150190855280f449ca1f50a6f6f8a4";
     }
     public static class BootsOfTravel
     {

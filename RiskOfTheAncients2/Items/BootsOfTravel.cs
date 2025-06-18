@@ -34,11 +34,11 @@ namespace ROTA2.Items
         public ConfigEntry<float> DamageBonusPerStack;
         private void CreateConfig(ConfigFile configuration)
         {
-            MovementSpeedBonus = configuration.Bind("Item: " + ItemName, "Base Movement Speed Bonus", 50.0f, "");
+            MovementSpeedBonus = configuration.Bind("Item: " + ItemName, "Base Movement Speed Bonus", 30f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedBonus));
-            DamageBonusBase = configuration.Bind("Item: " + ItemName, "Speed Damage Bonus Base", 100.0f, "");
+            DamageBonusBase = configuration.Bind("Item: " + ItemName, "Speed Damage Bonus Base", 100f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBonusBase));
-            DamageBonusPerStack = configuration.Bind("Item: " + ItemName, "Speed Damage Bonus Per Stack", 50.0f, "");
+            DamageBonusPerStack = configuration.Bind("Item: " + ItemName, "Speed Damage Bonus Per Stack", 50f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBonusPerStack));
         }
 
@@ -46,8 +46,15 @@ namespace ROTA2.Items
         {
             if (GetCount(body) > 0)
             {
-                args.moveSpeedTotalMult *= 1.0f + MovementSpeedBonus.Value / 100.0f;
+                args.moveSpeedTotalMult *= 1f + MovementSpeedBonus.Value / 100f;
             }
+        }
+        private float CalculateMultiplier(CharacterBody body, int count)
+        {
+            float movespeed_ratio = body.moveSpeed / (body.baseMoveSpeed * (1f + MovementSpeedBonus.Value / 100f));
+            float pre_stacking = 1f - (1f / movespeed_ratio);
+            float multiplier = pre_stacking * (DamageBonusBase.Value / 100f + DamageBonusPerStack.Value / 100f * (count - 1));
+            return multiplier;
         }
         private void OnTakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo info)
         {
@@ -66,8 +73,7 @@ namespace ROTA2.Items
                     int count = GetCount(attacker_body);
                     if (count > 0)
                     {
-                        float multiplier = (1 - 1 / (attacker_body.moveSpeed / (attacker_body.baseMoveSpeed * (1.0f + MovementSpeedBonus.Value / 100.0f)))) * (DamageBonusBase.Value / 100.0f + DamageBonusPerStack.Value / 100.0f * (count - 1));
-                        info.damage *= 1.0f + multiplier;
+                        info.damage *= 1f + Mathf.Max(0f, CalculateMultiplier(attacker_body, count));
                     }
                 }
             }

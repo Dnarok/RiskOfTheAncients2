@@ -35,9 +35,9 @@ namespace ROTA2.Items
         public ConfigEntry<bool> PlaySound;
         private void CreateConfig(ConfigFile configuration)
         {
-            HealthDamageBase = configuration.Bind("Item: " + ItemName, "Current Health Damage Base", 10.0f, "");
+            HealthDamageBase = configuration.Bind("Item: " + ItemName, "Current Health Damage Base", 10f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(HealthDamageBase));
-            HealthDamagePerStack = configuration.Bind("Item: " + ItemName, "Current Health Damage Per Stack", 10.0f, "");
+            HealthDamagePerStack = configuration.Bind("Item: " + ItemName, "Current Health Damage Per Stack", 10f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(HealthDamagePerStack));
             PlaySound = configuration.Bind("Item: " + ItemName, "Play Sound", true, "");
             ModSettingsManager.AddOption(new CheckBoxOption(PlaySound));
@@ -69,11 +69,11 @@ namespace ROTA2.Items
                     {
                         DamageInfo damage = new()
                         {
-                            damage = victim_body.healthComponent.combinedHealth * Util.ConvertAmplificationPercentageIntoReductionNormalized(HealthDamageBase.Value / 100.0f + HealthDamagePerStack.Value / 100.0f * (count - 1)),
+                            damage = victim_body.healthComponent.combinedHealth * Util.ConvertAmplificationPercentageIntoReductionNormalized(HealthDamageBase.Value / 100f + HealthDamagePerStack.Value / 100f * (count - 1)),
                             crit = false,
                             position = info.position,
                             damageColorIndex = DamageColorIndex.WeakPoint,
-                            procCoefficient = 0.0f,
+                            procCoefficient = 0f,
                             damageType = new DamageTypeCombo
                             {
                                 damageType = DamageType.BypassArmor

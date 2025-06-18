@@ -43,9 +43,9 @@ $@"Increases {Utility("movement speed")} by {Utility($"{MovementSpeedBase.Value}
         public ConfigEntry<float> IntelligenceDamage;
         private void CreateConfig(ConfigFile configuration)
         {
-            MovementSpeedBase = configuration.Bind("Item: " + ItemName, "Movement Speed Base", 21.0f, "");
+            MovementSpeedBase = configuration.Bind("Item: " + ItemName, "Movement Speed Base", 21f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedBase));
-            MovementSpeedPerStack = configuration.Bind("Item: " + ItemName, "Movement Speed Per Stack", 21.0f, "");
+            MovementSpeedPerStack = configuration.Bind("Item: " + ItemName, "Movement Speed Per Stack", 21f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedPerStack));
             AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Attack Speed Base", 22.5f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedBase));
@@ -53,9 +53,9 @@ $@"Increases {Utility("movement speed")} by {Utility($"{MovementSpeedBase.Value}
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedPerStack));
             StrengthRegen = configuration.Bind("Item: " + ItemName, "Strength Base Health Regen", 3.2f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(StrengthRegen));
-            AgilityArmor = configuration.Bind("Item: " + ItemName, "Agility Armor", 25.0f, "");
+            AgilityArmor = configuration.Bind("Item: " + ItemName, "Agility Armor", 25f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(AgilityArmor));
-            IntelligenceDamage = configuration.Bind("Item: " + ItemName, "Intelligence Damage", 20.0f, "");
+            IntelligenceDamage = configuration.Bind("Item: " + ItemName, "Intelligence Damage", 20f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(IntelligenceDamage));
         }
 

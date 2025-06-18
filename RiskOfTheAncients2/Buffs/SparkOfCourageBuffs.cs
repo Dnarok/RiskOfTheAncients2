@@ -21,7 +21,7 @@ namespace ROTA2.Buffs
             {
                 if (count > 0)
                 {
-                    args.damageMultAdd += SparkOfCourage.Instance.DamageBase.Value / 100.0f + SparkOfCourage.Instance.DamagePerStack.Value / 100.0f * (count - 1);
+                    args.damageMultAdd += SparkOfCourage.Instance.DamageBase.Value / 100f + SparkOfCourage.Instance.DamagePerStack.Value / 100f * (count - 1);
                 }
                 else
                 {

@@ -42,13 +42,13 @@ namespace ROTA2.Items
         public ConfigEntry<bool> PlaySound;
         private void CreateConfig(ConfigFile configuration)
         {
-            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Base", 15.0f, "");
+            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Base", 15f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBase));
-            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 15.0f, "");
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 15f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(DamagePerStack));
-            SprintSpeedBase = configuration.Bind("Item: " + ItemName, "Sprint Speed Base", 35.0f, "");
+            SprintSpeedBase = configuration.Bind("Item: " + ItemName, "Sprint Speed Base", 35f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(SprintSpeedBase));
-            SprintSpeedPerStack = configuration.Bind("Item: " + ItemName, "Sprint Speed Per Stack", 35.0f, "");
+            SprintSpeedPerStack = configuration.Bind("Item: " + ItemName, "Sprint Speed Per Stack", 35f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(SprintSpeedPerStack));
             PlaySound = configuration.Bind("Item: " + ItemName, "Play Sound", true, "");
             ModSettingsManager.AddOption(new CheckBoxOption(PlaySound));
@@ -65,7 +65,7 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count > 0)
             {
-                args.damageMultAdd += DamageBase.Value / 100.0f + DamagePerStack.Value / 100.0f * (count - 1);
+                args.damageMultAdd += DamageBase.Value / 100f + DamagePerStack.Value / 100f * (count - 1);
             }
         }
         private void AddSprintSpeed(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs args)
@@ -73,7 +73,7 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count > 0 && body.isSprinting)
             {
-                args.moveSpeedMultAdd += (SprintSpeedBase.Value / 100.0f + SprintSpeedPerStack.Value / 100.0f * (count - 1)) / body.sprintingSpeedMultiplier;
+                args.moveSpeedMultAdd += (SprintSpeedBase.Value / 100f + SprintSpeedPerStack.Value / 100f * (count - 1)) / body.sprintingSpeedMultiplier;
             }
         }
         private void OnInventoryChanged(CharacterBody body)

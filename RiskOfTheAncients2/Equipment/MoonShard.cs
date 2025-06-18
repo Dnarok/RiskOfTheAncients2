@@ -33,7 +33,7 @@ namespace ROTA2.Equipment
         public ConfigEntry<float> AttackSpeed;
         private void CreateConfig(ConfigFile config)
         {
-            AttackSpeed = config.Bind("Equipment: " + EquipmentName, "Held Attack Speed", 60.0f, "");
+            AttackSpeed = config.Bind("Equipment: " + EquipmentName, "Held Attack Speed", 60f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeed));
         }
 
@@ -60,7 +60,7 @@ namespace ROTA2.Equipment
         {
             if (HasThisEquipment(body))
             {
-                args.attackSpeedMultAdd += AttackSpeed.Value / 100.0f;
+                args.attackSpeedMultAdd += AttackSpeed.Value / 100f;
             }
         }
     }
@@ -89,9 +89,9 @@ namespace ROTA2.Equipment
         public ConfigEntry<float> AttackSpeedPerStack;
         public void CreateConfig(ConfigFile configuration)
         {
-            AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Attack Speed Base", 20.0f, "");
+            AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Attack Speed Base", 20f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedBase));
-            AttackSpeedPerStack = configuration.Bind("Item: " + ItemName, "Attack Speed Per Stack", 20.0f, "");
+            AttackSpeedPerStack = configuration.Bind("Item: " + ItemName, "Attack Speed Per Stack", 20f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedPerStack));
         }
 
@@ -100,7 +100,7 @@ namespace ROTA2.Equipment
             int count = GetCount(body);
             if (count > 0)
             {
-                args.attackSpeedMultAdd += AttackSpeedBase.Value / 100.0f + AttackSpeedPerStack.Value / 100.0f * (count - 1);
+                args.attackSpeedMultAdd += AttackSpeedBase.Value / 100f + AttackSpeedPerStack.Value / 100f * (count - 1);
             }
         }
     }

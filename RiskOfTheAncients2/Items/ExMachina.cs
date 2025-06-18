@@ -33,9 +33,9 @@ namespace ROTA2.Items
         public ConfigEntry<bool> PlaySound;
         private void CreateConfig(ConfigFile configuration)
         {
-            RestoreChanceBase = configuration.Bind("Item: " + ItemName, "Equipment Restore Chance Base", 30.0f, "");
+            RestoreChanceBase = configuration.Bind("Item: " + ItemName, "Equipment Restore Chance Base", 30f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(RestoreChanceBase));
-            RestoreChancePerStack = configuration.Bind("Item: " + ItemName, "Equipment Restore Chance Per Stack", 15.0f, "");
+            RestoreChancePerStack = configuration.Bind("Item: " + ItemName, "Equipment Restore Chance Per Stack", 15f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(RestoreChancePerStack));
             PlaySound = configuration.Bind("Item: " + ItemName, "Play Sound", true, "");
             ModSettingsManager.AddOption(new CheckBoxOption(PlaySound));

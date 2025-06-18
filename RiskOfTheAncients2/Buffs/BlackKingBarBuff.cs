@@ -24,7 +24,7 @@ namespace ROTA2.Buffs
         {
             if (self && HasThisBuff(self.body))
             {
-                info.damage *= 1.0f - (BlackKingBar.Instance.DamageReduction.Value / 100.0f);
+                info.damage *= 1f - (BlackKingBar.Instance.DamageReduction.Value / 100f);
             }
 
             orig(self, info);

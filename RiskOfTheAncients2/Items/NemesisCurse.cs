@@ -42,19 +42,19 @@ namespace ROTA2.Items
         public ConfigEntry<float> CurseCooldown;
         private void CreateConfig(ConfigFile configuration)
         {
-            OutProcChance = configuration.Bind("Item: " + ItemName, "Enemy Proc Chance", 100.0f, "");
+            OutProcChance = configuration.Bind("Item: " + ItemName, "Enemy Proc Chance", 100f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(OutProcChance));
-            InProcChance = configuration.Bind("Item: " + ItemName, "Self Proc Chance", 100.0f, "");
+            InProcChance = configuration.Bind("Item: " + ItemName, "Self Proc Chance", 100f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(InProcChance));
-            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Increase Base", 100.0f, "Exponential");
+            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Increase Base", 100f, "Exponential");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBase));
-            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Increase Per Stack", 100.0f, "Exponential");
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Increase Per Stack", 100f, "Exponential");
             ModSettingsManager.AddOption(new FloatFieldOption(DamagePerStack));
-            PermanentDamageCoefficientBase = configuration.Bind("Item: " + ItemName, "Permanent Damage Coefficient Base", 80.0f, "Permanent damage curse stacks formula: ([this number] + [per stack number]) * Damage / Max Health. Maximum health is reduced by a factor of 1 + 0.01 * N, where N is the number of stacks total.");
+            PermanentDamageCoefficientBase = configuration.Bind("Item: " + ItemName, "Permanent Damage Coefficient Base", 80f, "Permanent damage curse stacks formula: ([this number] + [per stack number]) * Damage / Max Health. Maximum health is reduced by a factor of 1 + 0.01 * N, where N is the number of stacks total.");
             ModSettingsManager.AddOption(new FloatFieldOption(PermanentDamageCoefficientBase));
-            PermanentDamageCoefficientPerStack = configuration.Bind("Item: " + ItemName, "Permanent Damage Coefficient Per Stack", 80.0f, "");
+            PermanentDamageCoefficientPerStack = configuration.Bind("Item: " + ItemName, "Permanent Damage Coefficient Per Stack", 80f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(PermanentDamageCoefficientPerStack));
-            CurseDuration = configuration.Bind("Item: " + ItemName, "Curse Duration", 5.0f, "");
+            CurseDuration = configuration.Bind("Item: " + ItemName, "Curse Duration", 5f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(CurseDuration));
             CurseCooldown = configuration.Bind("Item: " + ItemName, "Curse Cooldown", 7.5f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(CurseCooldown));
@@ -62,7 +62,7 @@ namespace ROTA2.Items
 
         private void OnTakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, RoR2.HealthComponent self, RoR2.DamageInfo info)
         {
-            if (self && info.attacker && info.procCoefficient > 0.0f)
+            if (self && info.attacker && info.procCoefficient > 0f)
             {
                 CharacterBody attacker_body = info.attacker.GetComponent<CharacterBody>();
                 if (self.body && !NemesisCurseCooldown.HasThisBuff(attacker_body))
@@ -70,6 +70,7 @@ namespace ROTA2.Items
                     int count = GetCount(attacker_body);
                     if (count > 0 && Util.CheckRoll(OutProcChance.Value * info.procCoefficient, attacker_body.master))
                     {
+                        info.damage *= (1f + DamageBase.Value / 100f) * Mathf.Pow(1f + DamagePerStack.Value / 100f, count - 1);
                         NemesisCurseBuff.ApplyTo(
                             body: self.body,
                             duration: CurseDuration.Value,
@@ -91,7 +92,7 @@ namespace ROTA2.Items
             if (self)
             {
                 int count = GetCount(self.body);
-                if (count > 0 && !Util.CheckRoll(100.0f - InProcChance.Value, self.body.master))
+                if (count > 0 && !Util.CheckRoll(100f - InProcChance.Value, self.body.master))
                 {
                     float stacks = damageValue * (PermanentDamageCoefficientBase.Value + PermanentDamageCoefficientPerStack.Value * (count - 1)) / self.fullCombinedHealth;
                     for (int i = 0; i < Mathf.FloorToInt(stacks); ++i)

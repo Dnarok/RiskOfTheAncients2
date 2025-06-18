@@ -34,21 +34,21 @@ namespace ROTA2.Items
         public ConfigEntry<float> DebuffDuration;
         public void CreateConfig(ConfigFile configuration)
         {
-            MovementSpeedSlowBase = configuration.Bind("Item: " + ItemName, "Movement Speed Reduction Base", 10.0f, "How much should movement speed be reduced initially?");
+            MovementSpeedSlowBase = configuration.Bind("Item: " + ItemName, "Movement Speed Reduction Base", 10f, "How much should movement speed be reduced initially?");
             ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedSlowBase));
-            MovementSpeedSlowPerStack = configuration.Bind("Item: " + ItemName, "Movement Speed Reduction Per Stack", 10.0f, "How much should movement speed be reduced per stack?");
+            MovementSpeedSlowPerStack = configuration.Bind("Item: " + ItemName, "Movement Speed Reduction Per Stack", 10f, "How much should movement speed be reduced per stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedSlowPerStack));
-            AttackSpeedSlowBase = configuration.Bind("Item: " + ItemName, "Attack Speed Reduction Base", 10.0f, "How much should attack speed be reduced initially?");
+            AttackSpeedSlowBase = configuration.Bind("Item: " + ItemName, "Attack Speed Reduction Base", 10f, "How much should attack speed be reduced initially?");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedSlowBase));
-            AttackSpeedSlowPerStack = configuration.Bind("Item: " + ItemName, "Attack Speed Reduction Per Stack", 10.0f, "How much should attack speed be reduced per stack?");
+            AttackSpeedSlowPerStack = configuration.Bind("Item: " + ItemName, "Attack Speed Reduction Per Stack", 10f, "How much should attack speed be reduced per stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedSlowPerStack));
-            DebuffDuration = configuration.Bind("Item: " + ItemName, "Slow Duration", 3.0f, "How long should the slows last?");
+            DebuffDuration = configuration.Bind("Item: " + ItemName, "Slow Duration", 3f, "How long should the slows last?");
             ModSettingsManager.AddOption(new FloatFieldOption(DebuffDuration));
         }
 
         private void OnHit(On.RoR2.HealthComponent.orig_TakeDamage orig, RoR2.HealthComponent self, RoR2.DamageInfo info)
         {
-            if (self && self.alive && info.attacker && info.procCoefficient > 0.0f)
+            if (self && self.alive && info.attacker && info.procCoefficient > 0f)
             {
                 var attacker_body = info.attacker.GetComponent<CharacterBody>();
                 int count = GetCount(attacker_body);

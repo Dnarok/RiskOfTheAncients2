@@ -39,19 +39,19 @@ namespace ROTA2.Items
         public ConfigEntry<float> LingerDuration;
         private void CreateConfig(ConfigFile configuration)
         {
-            Radius = configuration.Bind("Item: " + ItemName, "Radius", 30.0f, "");
+            Radius = configuration.Bind("Item: " + ItemName, "Radius", 30f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(Radius));
-            IgniteBase = configuration.Bind("Item: " + ItemName, "Ignite Base Damage", 150.0f, "");
+            IgniteBase = configuration.Bind("Item: " + ItemName, "Ignite Base Damage", 150f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(IgniteBase));
-            IgnitePerStack = configuration.Bind("Item: " + ItemName, "Ignite Per Stack Damage", 150.0f, "");
+            IgnitePerStack = configuration.Bind("Item: " + ItemName, "Ignite Per Stack Damage", 150f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(IgnitePerStack));
-            BurnBase = configuration.Bind("Item: " + ItemName, "Burn Base Damage", 200.0f, "");
+            BurnBase = configuration.Bind("Item: " + ItemName, "Burn Base Damage", 200f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(BurnBase));
-            BurnPerStack = configuration.Bind("Item: " + ItemName, "Burn Per Stack Damage", 200.0f, "");
+            BurnPerStack = configuration.Bind("Item: " + ItemName, "Burn Per Stack Damage", 200f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(BurnPerStack));
-            MissChance = configuration.Bind("Item: " + ItemName, "Miss Chance", 25.0f, "");
+            MissChance = configuration.Bind("Item: " + ItemName, "Miss Chance", 25f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(MissChance));
-            LingerDuration = configuration.Bind("Item: " + ItemName, "Miss Linger Duration", 1.0f, "");
+            LingerDuration = configuration.Bind("Item: " + ItemName, "Miss Linger Duration", 1f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(LingerDuration));
         }
 
@@ -68,7 +68,7 @@ namespace ROTA2.Items
             static GameObject prefab;
             CharacterBody body;
             GameObject indicator;
-            float timer = 0.0f;
+            float timer = 0f;
 
             void Awake()
             {
@@ -103,9 +103,9 @@ namespace ROTA2.Items
                     {
                         renderer.material.SetColor("_TintColor", new UnityEngine.Color()
                         {
-                            r = 1.0f,
+                            r = 1f,
                             g = 0.6f,
-                            b = 0.0f,
+                            b = 0f,
                             a = 0.5f
                         });
                     }
@@ -117,9 +117,9 @@ namespace ROTA2.Items
                 }
 
                 timer += Time.fixedDeltaTime;
-                if (timer > 1.0f)
+                if (timer > 1f)
                 {
-                    timer -= 1.0f;
+                    timer -= 1f;
                     float radius2 = Instance.Radius.Value * Instance.Radius.Value;
 
                     for (TeamIndex index = TeamIndex.Neutral; index < TeamIndex.Count; index++)
@@ -143,16 +143,16 @@ namespace ROTA2.Items
 
                                     RadianceBuff.ApplyTo(
                                         body: enemy,
-                                        duration: 1.0f + Instance.LingerDuration.Value
+                                        duration: 1f + Instance.LingerDuration.Value
                                     );
 
                                     DamageInfo ignite = new()
                                     {
                                         attacker = body.gameObject,
-                                        damage = body.damage * (Instance.IgniteBase.Value / 100.0f + Instance.IgnitePerStack.Value / 100.0f * (count - 1)),
+                                        damage = body.damage * (Instance.IgniteBase.Value / 100f + Instance.IgnitePerStack.Value / 100f * (count - 1)),
                                         position = enemy.transform.position,
                                         damageType = DamageType.AOE,
-                                        procCoefficient = 0.0f
+                                        procCoefficient = 0f
                                     };
                                     enemy.healthComponent.TakeDamage(ignite);
                                 }

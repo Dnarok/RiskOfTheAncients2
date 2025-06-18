@@ -34,13 +34,13 @@ namespace ROTA2.Items
         public ConfigEntry<float> MovementSpeedPerStack;
         public void CreateConfig(ConfigFile configuration)
         {
-            AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Attack Speed Bonus", 15.0f, "How much attack speed should be provided by the first stack?");
+            AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Attack Speed Bonus", 15f, "How much attack speed should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedBase));
-            AttackSpeedPerStack = configuration.Bind("Item: " + ItemName, "Stacking Attack Speed Bonus", 15.0f, "How much attack speed should be provided by subsequent stacks?");
+            AttackSpeedPerStack = configuration.Bind("Item: " + ItemName, "Stacking Attack Speed Bonus", 15f, "How much attack speed should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedPerStack));
-            MovementSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Movement Speed Bonus", 15.0f, "How much movement speed should be provided by the first stack?");
+            MovementSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Movement Speed Bonus", 15f, "How much movement speed should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedBase));
-            MovementSpeedPerStack = configuration.Bind("Item: " + ItemName, "Stacking Movement Speed Bonus", 15.0f, "How much movement speed should be provided by subsequent stacks?");
+            MovementSpeedPerStack = configuration.Bind("Item: " + ItemName, "Stacking Movement Speed Bonus", 15f, "How much movement speed should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedPerStack));
         }
 
@@ -49,7 +49,7 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count > 0)
             {
-                arguments.attackSpeedMultAdd += AttackSpeedBase.Value / 100.0f + AttackSpeedPerStack.Value / 100.0f * (count - 1);
+                arguments.attackSpeedMultAdd += AttackSpeedBase.Value / 100f + AttackSpeedPerStack.Value / 100f * (count - 1);
             }
         }
         private void AddMovementSpeed(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs arguments)
@@ -57,7 +57,7 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count > 0)
             {
-                arguments.moveSpeedMultAdd += MovementSpeedBase.Value / 100.0f + MovementSpeedPerStack.Value / 100.0f * (count - 1);
+                arguments.moveSpeedMultAdd += MovementSpeedBase.Value / 100f + MovementSpeedPerStack.Value / 100f * (count - 1);
             }
         }
     }

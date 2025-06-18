@@ -42,15 +42,15 @@ namespace ROTA2.Equipment
         {
             PassiveMovementSpeed = config.Bind("Equipment: " + EquipmentName, "Passive Base Movement Speed", 1.2f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(PassiveMovementSpeed));
-            PassiveHealthRegeneration = config.Bind("Equipment: " + EquipmentName, "Passive Base Health Regeneration", 5.0f, "");
+            PassiveHealthRegeneration = config.Bind("Equipment: " + EquipmentName, "Passive Base Health Regeneration", 5f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(PassiveHealthRegeneration));
-            ActiveMovementSpeed = config.Bind("Equipment: " + EquipmentName, "Active Movement Speed", 75.0f, "");
+            ActiveMovementSpeed = config.Bind("Equipment: " + EquipmentName, "Active Movement Speed", 75f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(ActiveMovementSpeed));
-            ActiveAttackSpeed = config.Bind("Equipment: " + EquipmentName, "Active Attack Speed", 150.0f, "");
+            ActiveAttackSpeed = config.Bind("Equipment: " + EquipmentName, "Active Attack Speed", 150f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(ActiveAttackSpeed));
-            FrenzyDuration = config.Bind("Equipment: " + EquipmentName, "Frenzy Duration", 7.0f, "");
+            FrenzyDuration = config.Bind("Equipment: " + EquipmentName, "Frenzy Duration", 7f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(FrenzyDuration));
-            BootsOfBearingCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 45.0f, "");
+            BootsOfBearingCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 45f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(BootsOfBearingCooldown));
         }
 
@@ -99,7 +99,7 @@ namespace ROTA2.Equipment
         {
             if (HasThisEquipment(body))
             {
-                args.baseRegenAdd += PassiveHealthRegeneration.Value * (1.0f + 0.2f * (body.level - 1));
+                args.baseRegenAdd += PassiveHealthRegeneration.Value * (1f + 0.2f * (body.level - 1));
             }
         }
     }

@@ -19,14 +19,14 @@ namespace ROTA2.Buffs
         {
             if (HasThisBuff(body))
             {
-                args.attackSpeedMultAdd += BootsOfBearing.Instance.ActiveAttackSpeed.Value / 100.0f;
+                args.attackSpeedMultAdd += BootsOfBearing.Instance.ActiveAttackSpeed.Value / 100f;
             }
         }
         private void AddMovementSpeed(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs args)
         {
             if (HasThisBuff(body))
             {
-                args.moveSpeedMultAdd += BootsOfBearing.Instance.ActiveMovementSpeed.Value / 100.0f;
+                args.moveSpeedMultAdd += BootsOfBearing.Instance.ActiveMovementSpeed.Value / 100f;
             }
         }
     }

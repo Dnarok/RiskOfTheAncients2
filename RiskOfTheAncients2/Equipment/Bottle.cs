@@ -67,39 +67,39 @@ Runes will be removed from the pool until all effects have been seen.";
         public ConfigEntry<float> BottleCooldown;
         private void CreateConfig(ConfigFile config)
         {
-            AmplifyDamageBonus = config.Bind("Equipment: " + EquipmentName, "Amplify Damage Bonus Damage", 50.0f, "");
+            AmplifyDamageBonus = config.Bind("Equipment: " + EquipmentName, "Amplify Damage Bonus Damage", 50f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(AmplifyDamageBonus));
-            AmplifyDamageDuration = config.Bind("Equipment: " + EquipmentName, "Amplify Damage Duration", 10.0f, "");
+            AmplifyDamageDuration = config.Bind("Equipment: " + EquipmentName, "Amplify Damage Duration", 10f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(AmplifyDamageDuration));
-            ArcaneReduction = config.Bind("Equipment: " + EquipmentName, "Arcane Skill Cooldown Reduction", 50.0f, "");
+            ArcaneReduction = config.Bind("Equipment: " + EquipmentName, "Arcane Skill Cooldown Reduction", 50f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(ArcaneReduction));
-            ArcaneDuration = config.Bind("Equipment: " + EquipmentName, "Arcane Duration", 10.0f, "");
+            ArcaneDuration = config.Bind("Equipment: " + EquipmentName, "Arcane Duration", 10f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(ArcaneDuration));
             BountyGold = config.Bind("Equipment: " + EquipmentName, "Bounty Gold", 50, "");
             ModSettingsManager.AddOption(new IntFieldOption(BountyGold));
-            HasteBonus = config.Bind("Equipment: " + EquipmentName, "Haste Movement Speed Bonus", 50.0f, "");
+            HasteBonus = config.Bind("Equipment: " + EquipmentName, "Haste Movement Speed Bonus", 50f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(HasteBonus));
-            HasteDuration = config.Bind("Equipment: " + EquipmentName, "Haste Duration", 10.0f, "");
+            HasteDuration = config.Bind("Equipment: " + EquipmentName, "Haste Duration", 10f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(HasteDuration));
-            InvisibilityDuration = config.Bind("Equipment: " + EquipmentName, "Invisibility Duration", 10.0f, "");
+            InvisibilityDuration = config.Bind("Equipment: " + EquipmentName, "Invisibility Duration", 10f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(InvisibilityDuration));
             IllusionCount = config.Bind("Equipment: " + EquipmentName, "Illusion Count", 2, "");
             ModSettingsManager.AddOption(new IntFieldOption(IllusionCount));
-            IllusionDuration = config.Bind("Equipment: " + EquipmentName, "Illusion Duration", 25.0f, "");
+            IllusionDuration = config.Bind("Equipment: " + EquipmentName, "Illusion Duration", 25f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(IllusionDuration));
-            RegenerationMaximumHealthPercentage = config.Bind("Equipment: " + EquipmentName, "Regeneration Maximum Health Percentage", 5.0f, "");
+            RegenerationMaximumHealthPercentage = config.Bind("Equipment: " + EquipmentName, "Regeneration Maximum Health Percentage", 5f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(RegenerationMaximumHealthPercentage));
-            RegenerationDuration = config.Bind("Equipment: " + EquipmentName, "Regeneration Duration", 10.0f, "");
+            RegenerationDuration = config.Bind("Equipment: " + EquipmentName, "Regeneration Duration", 10f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(RegenerationDuration));
-            ShieldBarrier = config.Bind("Equipment: " + EquipmentName, "Shield Maximum Health Percentage", 100.0f, "");
+            ShieldBarrier = config.Bind("Equipment: " + EquipmentName, "Shield Maximum Health Percentage", 100f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(ShieldBarrier));
-            WaterHeal = config.Bind("Equipment: " + EquipmentName, "Water Maximum Health Percentage", 33.0f, "");
+            WaterHeal = config.Bind("Equipment: " + EquipmentName, "Water Maximum Health Percentage", 33f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(WaterHeal));
-            WaterStocksRestored = config.Bind("Equipment: " + EquipmentName, "Water Stocks Restored", 1.0f, "");
+            WaterStocksRestored = config.Bind("Equipment: " + EquipmentName, "Water Stocks Restored", 1f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(WaterStocksRestored));
-            WisdomExperience = config.Bind("Equipment: " + EquipmentName, "Wisdom Percent Of Level Requirement", 50.0f, "");
+            WisdomExperience = config.Bind("Equipment: " + EquipmentName, "Wisdom Percent Of Level Requirement", 50f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(WisdomExperience));
-            BottleCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 40.0f, "");
+            BottleCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 40f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(BottleCooldown));
         }
 
@@ -340,7 +340,7 @@ Runes will be removed from the pool until all effects have been seen.";
         {
             if (body.healthComponent)
             {
-                body.healthComponent.AddBarrier(body.healthComponent.fullCombinedHealth * ShieldBarrier.Value / 100.0f);
+                body.healthComponent.AddBarrier(body.healthComponent.fullCombinedHealth * ShieldBarrier.Value / 100f);
             }
 
             EffectManager.SimpleSoundEffect(shieldSound.index, body.corePosition, true);
@@ -349,14 +349,14 @@ Runes will be removed from the pool until all effects have been seen.";
         {
             if (body.healthComponent)
             {
-                body.healthComponent.Heal(body.healthComponent.fullCombinedHealth * WaterHeal.Value / 100.0f, default);
+                body.healthComponent.Heal(body.healthComponent.fullCombinedHealth * WaterHeal.Value / 100f, default);
             }
             var skills = body.skillLocator.allSkills;
             if (skills != null)
             {
                 foreach (var skill in skills)
                 {
-                    if (skill && skill.CanApplyAmmoPack() && skill.cooldownRemaining > 0.0f)
+                    if (skill && skill.CanApplyAmmoPack() && skill.cooldownRemaining > 0f)
                     {
                         skill.ApplyAmmoPack();
                     }
@@ -369,7 +369,7 @@ Runes will be removed from the pool until all effects have been seen.";
         {
             ulong required_next = TeamManager.GetExperienceForLevel(TeamManager.instance.GetTeamLevel(body.teamComponent.teamIndex) + 1);
             ulong required_now = TeamManager.instance.GetTeamCurrentLevelExperience(body.teamComponent.teamIndex);
-            ExperienceManager.instance.AwardExperience(body.transform.position, body, (ulong)((required_next - required_now) * WisdomExperience.Value / 100.0f));
+            ExperienceManager.instance.AwardExperience(body.transform.position, body, (ulong)((required_next - required_now) * WisdomExperience.Value / 100f));
 
             EffectManager.SimpleSoundEffect(wisdomSound.index, body.corePosition, true);
         }

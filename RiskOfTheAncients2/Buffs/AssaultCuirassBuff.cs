@@ -20,7 +20,7 @@ namespace ROTA2.Buffs
             int count = GetBuffCount(body);
             if (count > 0)
             {
-                args.attackSpeedMultAdd += AssaultCuirass.Instance.AttackSpeedBase.Value / 100.0f + AssaultCuirass.Instance.AttackSpeedPerStack.Value / 100.0f * (count - 1);
+                args.attackSpeedMultAdd += AssaultCuirass.Instance.AttackSpeedBase.Value / 100f + AssaultCuirass.Instance.AttackSpeedPerStack.Value / 100f * (count - 1);
             }
         }
         private void AddArmor(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs args)

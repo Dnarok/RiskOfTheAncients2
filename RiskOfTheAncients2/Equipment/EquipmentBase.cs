@@ -97,7 +97,7 @@ namespace ROTA2.Equipment
             EquipmentDef.name = "EQUIPMENT_" + EquipmentTokenName;
             EquipmentDef.cooldown = EquipmentCooldown;
 
-            ItemAPI.Add(new CustomEquipment(EquipmentDef, new ItemDisplayRuleDict(null)));
+            ItemAPI.Add(new CustomEquipment(EquipmentDef, CreateItemDisplayRules()));
 
             foreach (string GUID in EquipmentSoundGUIDs)
             {
@@ -107,7 +107,10 @@ namespace ROTA2.Equipment
 
             On.RoR2.EquipmentSlot.PerformEquipmentAction += PerformEquipmentAction;
         }
-
+        protected virtual ItemDisplayRuleDict CreateItemDisplayRules()
+        {
+            return new ItemDisplayRuleDict(null);
+        }
         private bool PerformEquipmentAction(On.RoR2.EquipmentSlot.orig_PerformEquipmentAction orig, RoR2.EquipmentSlot slot, EquipmentDef equipmentDef)
         {
             if (equipmentDef == EquipmentDef)

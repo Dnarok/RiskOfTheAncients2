@@ -39,13 +39,13 @@ namespace ROTA2.Items
         public ConfigEntry<bool> PlaySound;
         private void CreateConfig(ConfigFile configuration)
         {
-            DropChanceBase = configuration.Bind("Item: " + ItemName, "Drop Chance Base", 3.0f, "");
+            DropChanceBase = configuration.Bind("Item: " + ItemName, "Drop Chance Base", 3f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(DropChanceBase));
             DropChancePerStack = configuration.Bind("Item: " + ItemName, "Drop Chance Per Stack", 1.5f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(DropChancePerStack));
-            GreenScrapChance = configuration.Bind("Item: " + ItemName, "Green Scrap Chance", 20.0f, "");
+            GreenScrapChance = configuration.Bind("Item: " + ItemName, "Green Scrap Chance", 20f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(GreenScrapChance));
-            RedScrapChance = configuration.Bind("Item: " + ItemName, "Red Scrap Chance", 1.0f, "");
+            RedScrapChance = configuration.Bind("Item: " + ItemName, "Red Scrap Chance", 1f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(RedScrapChance));
             BossesDropYellowScrap = configuration.Bind("Item: " + ItemName, "Bosses Drop Yellow Scrap Instead", true, "When the drop chance roll succeeds, that is.");
             ModSettingsManager.AddOption(new CheckBoxOption(BossesDropYellowScrap));

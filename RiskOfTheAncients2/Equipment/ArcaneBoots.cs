@@ -27,7 +27,7 @@ namespace ROTA2.Equipment
         public ConfigEntry<float> ArcaneBootsCooldown;
         private void CreateConfig(ConfigFile config)
         {
-            ArcaneBootsCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 30.0f, "");
+            ArcaneBootsCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 30f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(ArcaneBootsCooldown));
         }
 
@@ -52,7 +52,7 @@ namespace ROTA2.Equipment
                         {
                             foreach (var skill in skills)
                             {
-                                if (skill && skill.CanApplyAmmoPack() && skill.cooldownRemaining > 0.0f)
+                                if (skill && skill.CanApplyAmmoPack() && skill.cooldownRemaining > 0f)
                                 {
                                     skill.ApplyAmmoPack();
                                 }

@@ -96,8 +96,12 @@ namespace ROTA2.Items
                         ItemDef.requiredExpansion = y.Result;
                     };
                 }
-                ItemAPI.Add(new CustomItem(ItemDef, new ItemDisplayRuleDict(null)));
+                ItemAPI.Add(new CustomItem(ItemDef, CreateItemDisplayRules()));
             };
+        }
+        protected virtual ItemDisplayRuleDict CreateItemDisplayRules()
+        {
+            return new ItemDisplayRuleDict(null);
         }
     }
 }

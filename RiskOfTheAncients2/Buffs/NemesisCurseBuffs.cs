@@ -19,7 +19,7 @@ namespace ROTA2.Buffs
             int count = GetBuffCount(self.body);
             if (count >= 1)
             {
-                info.damage *= (1.0f + NemesisCurse.Instance.DamageBase.Value / 100.0f) * Mathf.Pow(1.0f + NemesisCurse.Instance.DamagePerStack.Value / 100.0f, count - 1);
+                info.damage *= (1f + NemesisCurse.Instance.DamageBase.Value / 100f) * Mathf.Pow(1f + NemesisCurse.Instance.DamagePerStack.Value / 100f, count - 1);
                 info.damageColorIndex = DamageColorIndex.DeathMark;
             }
 

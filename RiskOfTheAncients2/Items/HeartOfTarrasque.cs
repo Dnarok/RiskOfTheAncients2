@@ -33,9 +33,9 @@ namespace ROTA2.Items
         public ConfigEntry<float> MaximumHealthRegenerationPercentage;
         public void CreateConfig(ConfigFile configuration)
         {
-            MaximumHealthBase = configuration.Bind("Item: " + ItemName, "Initial Maximum Health Bonus", 200.0f, "How much maximum health should be provided by the first stack?");
+            MaximumHealthBase = configuration.Bind("Item: " + ItemName, "Initial Maximum Health Bonus", 200f, "How much maximum health should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthBase));
-            MaximumHealthPerStack = configuration.Bind("Item: " + ItemName, "Stacking Maximum Health Bonus", 200.0f, "How much maximum health should be provided by subsequent stacks?");
+            MaximumHealthPerStack = configuration.Bind("Item: " + ItemName, "Stacking Maximum Health Bonus", 200f, "How much maximum health should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthPerStack));
             MaximumHealthRegenerationPercentage = configuration.Bind("Item: " + ItemName, "Percentage of Maximum Health as Bonus Health Regeneration", 1.4f, "What percentage of maximum health should be provided as health regeneration?");
             ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthRegenerationPercentage));
@@ -56,7 +56,7 @@ namespace ROTA2.Items
                 HealthComponent health = body.GetComponent<HealthComponent>();
                 if (health)
                 {
-                    arguments.baseRegenAdd += health.fullHealth * MaximumHealthRegenerationPercentage.Value / 100.0f;
+                    arguments.baseRegenAdd += health.fullHealth * MaximumHealthRegenerationPercentage.Value / 100f;
                 }
             }
         }

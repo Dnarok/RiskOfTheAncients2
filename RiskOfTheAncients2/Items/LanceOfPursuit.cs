@@ -31,9 +31,9 @@ namespace ROTA2.Items
         public ConfigEntry<float> DamagePerStack;
         public void CreateConfig(ConfigFile configuration)
         {
-            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Base", 20.0f, "How much damage should the first stack provide?");
+            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Base", 20f, "How much damage should the first stack provide?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBase));
-            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 20.0f, "How much damage should subsequent stacks provide?");
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 20f, "How much damage should subsequent stacks provide?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamagePerStack));
         }
 
@@ -55,7 +55,7 @@ namespace ROTA2.Items
                     int count = GetCount(attacker_body);
                     if (count > 0 && BackstabManager.IsBackstab(-vector, self.body))
                     {
-                        info.damage *= 1.0f + DamageBase.Value / 100.0f + DamagePerStack.Value / 100.0f * (count - 1);
+                        info.damage *= 1f + DamageBase.Value / 100f + DamagePerStack.Value / 100f * (count - 1);
                         info.damageColorIndex = DamageColorIndex.WeakPoint;
 
                         if ((bool)BackstabManager.backstabImpactEffectPrefab)

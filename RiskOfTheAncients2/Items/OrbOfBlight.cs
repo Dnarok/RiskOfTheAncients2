@@ -33,19 +33,19 @@ namespace ROTA2.Items
         public ConfigEntry<float> ArmorReductionDuration;
         public void CreateConfig(ConfigFile configuration)
         {
-            ArmorReduction = configuration.Bind("Item: " + ItemName, "Armor Reduction Per Stack", 5.0f, "How much armor should be removed per stack of the debuff?");
+            ArmorReduction = configuration.Bind("Item: " + ItemName, "Armor Reduction Per Stack", 5f, "How much armor should be removed per stack of the debuff?");
             ModSettingsManager.AddOption(new FloatFieldOption(ArmorReduction));
             MaxStacksBase = configuration.Bind("Item: " + ItemName, "Base Max Stacks", 3, "How many debuff stacks can be applied by the first stack?");
             ModSettingsManager.AddOption(new IntFieldOption(MaxStacksBase));
             MaxStacksPerStack = configuration.Bind("Item: " + ItemName, "Stacking Max Stacks", 2, "How many debuff stacks can be applied by subsequent stack?");
             ModSettingsManager.AddOption(new IntFieldOption(MaxStacksPerStack));
-            ArmorReductionDuration = configuration.Bind("Item: " + ItemName, "Armor Reduction Duration", 3.0f, "How long should the armor reduction last?");
+            ArmorReductionDuration = configuration.Bind("Item: " + ItemName, "Armor Reduction Duration", 3f, "How long should the armor reduction last?");
             ModSettingsManager.AddOption(new FloatFieldOption(ArmorReductionDuration));
         }
 
         private void OnHit(On.RoR2.HealthComponent.orig_TakeDamage orig, RoR2.HealthComponent self, RoR2.DamageInfo info)
         {
-            if (self && self.alive && info.attacker && info.procCoefficient > 0.0f)
+            if (self && self.alive && info.attacker && info.procCoefficient > 0f)
             {
                 var attacker_body = info.attacker.GetComponent<CharacterBody>();
                 int count = GetCount(attacker_body);

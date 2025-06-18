@@ -21,7 +21,7 @@ namespace ROTA2.Buffs
                 int count = ShadowAmulet.GetCount(body);
                 if (count > 0)
                 {
-                    args.attackSpeedMultAdd += ShadowAmulet.Instance.AttackSpeedBase.Value / 100.0f + ShadowAmulet.Instance.AttackSpeedPerStack.Value / 100.0f * (count - 1);
+                    args.attackSpeedMultAdd += ShadowAmulet.Instance.AttackSpeedBase.Value / 100f + ShadowAmulet.Instance.AttackSpeedPerStack.Value / 100f * (count - 1);
                 }
                 else
                 {

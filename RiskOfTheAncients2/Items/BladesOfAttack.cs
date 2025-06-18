@@ -31,9 +31,9 @@ namespace ROTA2.Items
         public ConfigEntry<float> DamagePerStack;
         private void CreateConfig(ConfigFile configuration)
         {
-            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Base", 10.0f, "");
+            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Base", 10f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBase));
-            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 10.0f, "");
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 10f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(DamagePerStack));
         }
 
@@ -42,7 +42,7 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count > 0)
             {
-                args.damageMultAdd += DamageBase.Value / 100.0f + DamagePerStack.Value / 100.0f * (count - 1);
+                args.damageMultAdd += DamageBase.Value / 100f + DamagePerStack.Value / 100f * (count - 1);
             }
         }
     }

@@ -49,13 +49,13 @@ namespace ROTA2.Items
             ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedBase));
             MovementSpeedPerStack = configuration.Bind("Item: " + ItemName, "Stacking Movement Speed Bonus", 22.5f, "How much movement speed should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedPerStack));
-            SkillCooldownReductionBase = configuration.Bind("Item: " + ItemName, "Initial Skill Cooldown Reduction", 9.0f, "How much skill cooldown reduction should be provided by the first stack?");
+            SkillCooldownReductionBase = configuration.Bind("Item: " + ItemName, "Initial Skill Cooldown Reduction", 9f, "How much skill cooldown reduction should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(SkillCooldownReductionBase));
-            SkillCooldownReductionPerStack = configuration.Bind("Item: " + ItemName, "Stacking Skill Cooldown Reduction", 9.0f, "How much skill cooldown reduction should be provided by subsequent stacks?");
+            SkillCooldownReductionPerStack = configuration.Bind("Item: " + ItemName, "Stacking Skill Cooldown Reduction", 9f, "How much skill cooldown reduction should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(SkillCooldownReductionPerStack));
-            DamageBase = configuration.Bind("Item: " + ItemName, "Initial Damage Bonus", 18.0f, "How much damage should be provided by the first stack?");
+            DamageBase = configuration.Bind("Item: " + ItemName, "Initial Damage Bonus", 18f, "How much damage should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBase));
-            DamagePerStack = configuration.Bind("Item: " + ItemName, "Stacking Damage Bonus", 18.0f, "How much damage should be provided by subsequent stacks?");
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Stacking Damage Bonus", 18f, "How much damage should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamagePerStack));
         }
 
@@ -64,7 +64,7 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count > 0)
             {
-                arguments.attackSpeedMultAdd += AttackSpeedBase.Value / 100.0f + AttackSpeedPerStack.Value / 100.0f * (count - 1);
+                arguments.attackSpeedMultAdd += AttackSpeedBase.Value / 100f + AttackSpeedPerStack.Value / 100f * (count - 1);
             }
         }
         private void AddMovementSpeed(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs arguments)
@@ -72,7 +72,7 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count > 0)
             {
-                arguments.moveSpeedMultAdd += MovementSpeedBase.Value / 100.0f + MovementSpeedPerStack.Value / 100.0f * (count - 1);
+                arguments.moveSpeedMultAdd += MovementSpeedBase.Value / 100f + MovementSpeedPerStack.Value / 100f * (count - 1);
             }
         }
         private void AddCooldownReduction(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs arguments)
@@ -80,11 +80,11 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count == 1)
             {
-                arguments.cooldownMultAdd -= 1.0f - (1.0f - SkillCooldownReductionBase.Value / 100.0f);
+                arguments.cooldownMultAdd -= 1f - (1f - SkillCooldownReductionBase.Value / 100f);
             }
             else if (count > 1)
             {
-                arguments.cooldownMultAdd -= 1.0f - (1.0f - SkillCooldownReductionBase.Value / 100.0f) * (float)Math.Pow(1.0f - SkillCooldownReductionPerStack.Value / 100.0f, count - 1);
+                arguments.cooldownMultAdd -= 1f - (1f - SkillCooldownReductionBase.Value / 100f) * (float)Math.Pow(1f - SkillCooldownReductionPerStack.Value / 100f, count - 1);
             }
         }
         private void AddDamage(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs arguments)
@@ -92,7 +92,7 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count > 0)
             {
-                arguments.damageMultAdd += DamageBase.Value / 100.0f + DamagePerStack.Value / 100.0f * (count - 1);
+                arguments.damageMultAdd += DamageBase.Value / 100f + DamagePerStack.Value / 100f * (count - 1);
             }
         }
     }

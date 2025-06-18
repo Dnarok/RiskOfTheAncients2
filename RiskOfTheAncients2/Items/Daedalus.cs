@@ -39,11 +39,11 @@ namespace ROTA2.Items
         public ConfigEntry<bool> PlaySound;
         private void CreateConfig(ConfigFile configuration)
         {
-            CriticalChance = configuration.Bind("Item: " + ItemName, "Critical Chance", 15.0f, "");
+            CriticalChance = configuration.Bind("Item: " + ItemName, "Critical Chance", 15f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(CriticalChance));
-            CriticalDamageBase = configuration.Bind("Item: " + ItemName, "Critical Damage Base", 20.0f, "");
+            CriticalDamageBase = configuration.Bind("Item: " + ItemName, "Critical Damage Base", 20f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(CriticalDamageBase));
-            CriticalDamagePerStack = configuration.Bind("Item: " + ItemName, "Critical Damage Per Stack", 20.0f, "");
+            CriticalDamagePerStack = configuration.Bind("Item: " + ItemName, "Critical Damage Per Stack", 20f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(CriticalDamagePerStack));
             PlaySound = configuration.Bind("Item: " + ItemName, "Play Sound", true, "");
             ModSettingsManager.AddOption(new CheckBoxOption(PlaySound));
@@ -68,14 +68,14 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count > 0)
             {
-                args.critDamageMultAdd += CriticalDamageBase.Value / 100.0f + CriticalDamagePerStack.Value / 100.0f * (count - 1);
+                args.critDamageMultAdd += CriticalDamageBase.Value / 100f + CriticalDamagePerStack.Value / 100f * (count - 1);
             }
         }
         private void OnTakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo info)
         {
             orig(self, info);
 
-            if (PlaySound.Value && !info.rejected && info.damage > 0.0f && info.crit && info.attacker && GetCount(info.attacker.GetComponent<CharacterBody>()) > 0)
+            if (PlaySound.Value && !info.rejected && info.damage > 0f && info.crit && info.attacker && GetCount(info.attacker.GetComponent<CharacterBody>()) > 0)
             {
                 EffectManager.SimpleSoundEffect(sound.index, self.body.corePosition, true);
             }

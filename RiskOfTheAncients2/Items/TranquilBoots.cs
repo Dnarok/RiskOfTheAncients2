@@ -51,7 +51,7 @@ namespace ROTA2.Items
             ModSettingsManager.AddOption(new FloatFieldOption(OODMovementSpeedBase));
             OODMovementSpeedPerStack = configuration.Bind("Item: " + ItemName, "Out Of Danger Base Movement Speed Per Stack", 0.5f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(OODMovementSpeedPerStack));
-            OODDelay = configuration.Bind("Item: " + ItemName, "Out Of Danger Delay", 5.0f, "");
+            OODDelay = configuration.Bind("Item: " + ItemName, "Out Of Danger Delay", 5f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(OODDelay));
         }
 

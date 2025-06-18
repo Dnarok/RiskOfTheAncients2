@@ -32,17 +32,17 @@ namespace ROTA2.Items
         public ConfigEntry<float> PoisonDuration;
         public void CreateConfig(ConfigFile configuration)
         {
-            PoisonDamageBase = configuration.Bind("Item: " + ItemName, "Poison Damage Base", 200.0f, "How much base damage should the poison do with the first stack?");
+            PoisonDamageBase = configuration.Bind("Item: " + ItemName, "Poison Damage Base", 200f, "How much base damage should the poison do with the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(PoisonDamageBase));
-            PoisonDamagePerStack = configuration.Bind("Item: " + ItemName, "Poison Damage Per Stack", 200.0f, "How much base damage should the poison do with subsequent stacks?");
+            PoisonDamagePerStack = configuration.Bind("Item: " + ItemName, "Poison Damage Per Stack", 200f, "How much base damage should the poison do with subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(PoisonDamagePerStack));
-            PoisonDuration = configuration.Bind("Item: " + ItemName, "Poison Duration", 3.0f, "How long should the poison last?");
+            PoisonDuration = configuration.Bind("Item: " + ItemName, "Poison Duration", 3f, "How long should the poison last?");
             ModSettingsManager.AddOption(new FloatFieldOption(PoisonDuration));
         }
 
         private void OnHit(On.RoR2.HealthComponent.orig_TakeDamage orig, RoR2.HealthComponent self, RoR2.DamageInfo info)
         {
-            if (self && self.alive && info.attacker && info.procCoefficient > 0.0f)
+            if (self && self.alive && info.attacker && info.procCoefficient > 0f)
             {
                 var attacker_body = info.attacker.GetComponent<CharacterBody>();
                 int count = GetCount(attacker_body);

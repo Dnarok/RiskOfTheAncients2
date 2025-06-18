@@ -18,7 +18,7 @@ namespace ROTA2.Buffs
         {
             if (HasThisBuff(body))
             {
-                arguments.damageMultAdd += EnchantedMango.Instance.DamageBonus.Value / 100.0f;
+                arguments.damageMultAdd += EnchantedMango.Instance.DamageBonus.Value / 100f;
             }
         }
     }

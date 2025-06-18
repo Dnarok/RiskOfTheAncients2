@@ -20,9 +20,9 @@ namespace ROTA2.Buffs
             DotDef dot = new()
             {
                 associatedBuff = BuffDef,
-                damageCoefficient = 1.0f,
+                damageCoefficient = 1f,
                 damageColorIndex = DamageColorIndex.Poison,
-                interval = 1.0f,
+                interval = 1f,
                 resetTimerOnAdd = false
             };
 

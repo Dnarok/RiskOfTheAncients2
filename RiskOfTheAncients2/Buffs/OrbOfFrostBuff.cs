@@ -20,7 +20,7 @@ namespace ROTA2.Buffs
             int count = GetBuffCount(body);
             if (count > 0)
             {
-                arguments.moveSpeedReductionMultAdd += OrbOfFrost.Instance.MovementSpeedSlowBase.Value / 100.0f + OrbOfFrost.Instance.MovementSpeedSlowPerStack.Value / 100.0f * (count - 1);
+                arguments.moveSpeedReductionMultAdd += OrbOfFrost.Instance.MovementSpeedSlowBase.Value / 100f + OrbOfFrost.Instance.MovementSpeedSlowPerStack.Value / 100f * (count - 1);
             }
         }
         private void ReduceAttackSpeed(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs arguments)
@@ -28,7 +28,7 @@ namespace ROTA2.Buffs
             int count = GetBuffCount(body);
             if (count > 0)
             {
-                arguments.attackSpeedReductionMultAdd += OrbOfFrost.Instance.AttackSpeedSlowBase.Value / 100.0f + OrbOfFrost.Instance.AttackSpeedSlowPerStack.Value / 100.0f * (count - 1);
+                arguments.attackSpeedReductionMultAdd += OrbOfFrost.Instance.AttackSpeedSlowBase.Value / 100f + OrbOfFrost.Instance.AttackSpeedSlowPerStack.Value / 100f * (count - 1);
             }
         }
     }

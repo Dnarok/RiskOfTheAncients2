@@ -38,7 +38,7 @@ namespace ROTA2.Buffs
         {
             if (HasThisBuff(body))
             {
-                args.moveSpeedMultAdd += AeonDisk.Instance.MovementSpeed.Value / 100.0f;
+                args.moveSpeedMultAdd += AeonDisk.Instance.MovementSpeed.Value / 100f;
             }
         }
     }

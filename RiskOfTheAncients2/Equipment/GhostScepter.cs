@@ -29,9 +29,9 @@ namespace ROTA2.Equipment
         public ConfigEntry<float> GhostScepterCooldown;
         private void CreateConfig(ConfigFile config)
         {
-            EtherealDuration = config.Bind("Equipment: " + EquipmentName, "Ethereal Duration", 6.0f, "How long should the ethereal form last?");
+            EtherealDuration = config.Bind("Equipment: " + EquipmentName, "Ethereal Duration", 6f, "How long should the ethereal form last?");
             ModSettingsManager.AddOption(new FloatFieldOption(EtherealDuration));
-            GhostScepterCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 60.0f, "");
+            GhostScepterCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 60f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(GhostScepterCooldown));
         }
 

@@ -21,7 +21,7 @@ namespace ROTA2.Items
                 int count = GetCount(body);
                 if (count > 0)
                 {
-                    float multiplier = 1f + (StatIncreaseBase.Value / 100.0f + StatIncreasePerStack.Value / 100.0f * (count - 1));
+                    float multiplier = 1f + (StatIncreaseBase.Value / 100f + StatIncreasePerStack.Value / 100f * (count - 1));
                     args.healthTotalMult *= multiplier;
                     args.shieldTotalMult *= multiplier;
                     args.moveSpeedTotalMult *= multiplier;

@@ -43,15 +43,15 @@ namespace ROTA2.Items
         {
             InvulnerabilityDurationBase = configuration.Bind("Item: " + ItemName, "Invulnerability Duration Base", 2.5f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(InvulnerabilityDurationBase));
-            InvulnerabilityDurationPerStack = configuration.Bind("Item: " + ItemName, "Invulnerability Duration Per Stack", 1.0f, "");
+            InvulnerabilityDurationPerStack = configuration.Bind("Item: " + ItemName, "Invulnerability Duration Per Stack", 1f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(InvulnerabilityDurationPerStack));
-            MovementSpeed = configuration.Bind("Item: " + ItemName, "Movement Speed Bonus", 50.0f, "");
+            MovementSpeed = configuration.Bind("Item: " + ItemName, "Movement Speed Bonus", 50f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeed));
-            MovementSpeedDurationBase = configuration.Bind("Item: " + ItemName, "Movement Speed Duration Base", 5.0f, "");
+            MovementSpeedDurationBase = configuration.Bind("Item: " + ItemName, "Movement Speed Duration Base", 5f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedDurationBase));
-            MovementSpeedDurationPerStack = configuration.Bind("Item: " + ItemName, "Movement Speed Duration Per Stack", 2.0f, "");
+            MovementSpeedDurationPerStack = configuration.Bind("Item: " + ItemName, "Movement Speed Duration Per Stack", 2f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedDurationPerStack));
-            Cooldown = configuration.Bind("Item: " + ItemName, "Cooldown", 90.0f, "");
+            Cooldown = configuration.Bind("Item: " + ItemName, "Cooldown", 90f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(Cooldown));
             PlaySound = configuration.Bind("Item: " + ItemName, "Play Sound", true, "");
             ModSettingsManager.AddOption(new CheckBoxOption(PlaySound));
@@ -68,7 +68,7 @@ namespace ROTA2.Items
             int count = GetCount(self.body);
             if (NetworkServer.active && count > 0 && !AeonDiskCooldown.HasThisBuff(self.body) && !self.alive)
             {
-                self.Networkhealth = 1.0f;
+                self.Networkhealth = 1f;
 
                 AeonDiskInvulnerability.ApplyTo(
                     body: self.body,

@@ -46,9 +46,9 @@ namespace ROTA2.Items
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBase));
             DamagePerStack = configuration.Bind("Item: " + ConfigItemName, "Stacking Damage Bonus", 3.5f, "How much damage should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamagePerStack));
-            MaximumHealthBase = configuration.Bind("Item: " + ConfigItemName, "Initial Maximum Health Bonus", 10.0f, "How much maximum health should be provided by the first stack?");
+            MaximumHealthBase = configuration.Bind("Item: " + ConfigItemName, "Initial Maximum Health Bonus", 10f, "How much maximum health should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthBase));
-            MaximumHealthPerStack = configuration.Bind("Item: " + ConfigItemName, "Stacking Maximum Health Bonus", 10.0f, "How much maximum health should be provided by subsequent stacks?");
+            MaximumHealthPerStack = configuration.Bind("Item: " + ConfigItemName, "Stacking Maximum Health Bonus", 10f, "How much maximum health should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthPerStack));
         }
 
@@ -57,11 +57,11 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count == 1)
             {
-                arguments.cooldownMultAdd -= 1.0f - (1.0f - SkillCooldownReductionBase.Value / 100.0f);
+                arguments.cooldownMultAdd -= 1f - (1f - SkillCooldownReductionBase.Value / 100f);
             }
             else if (count > 1)
             {
-                arguments.cooldownMultAdd -= 1.0f - (1.0f - SkillCooldownReductionBase.Value / 100.0f) * (float)Math.Pow(1.0f - SkillCooldownReductionPerStack.Value / 100.0f, count - 1);
+                arguments.cooldownMultAdd -= 1f - (1f - SkillCooldownReductionBase.Value / 100f) * (float)Math.Pow(1f - SkillCooldownReductionPerStack.Value / 100f, count - 1);
             }
         }
         private void AddDamage(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs arguments)
@@ -69,7 +69,7 @@ namespace ROTA2.Items
             int count = GetCount(body);
             if (count > 0)
             {
-                arguments.damageMultAdd += DamageBase.Value / 100.0f + DamagePerStack.Value / 100.0f * (count - 1);
+                arguments.damageMultAdd += DamageBase.Value / 100f + DamagePerStack.Value / 100f * (count - 1);
             }
         }
         private void AddMaximumHealth(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs arguments)

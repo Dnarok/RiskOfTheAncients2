@@ -52,31 +52,31 @@ Effects stack with component items.";
             ModSettingsManager.AddOption(new IntFieldOption(MaxStacksBase));
             MaxStacksPerStack = configuration.Bind("Item: " + ItemName, "Stacking Max Stacks", 2, "How many debuff stacks can be applied by subsequent stack?");
             ModSettingsManager.AddOption(new IntFieldOption(MaxStacksPerStack));
-            ArmorReductionDuration = configuration.Bind("Item: " + ItemName, "Armor Reduction Duration", 3.0f, "How long should the armor reduction last?");
+            ArmorReductionDuration = configuration.Bind("Item: " + ItemName, "Armor Reduction Duration", 3f, "How long should the armor reduction last?");
             ModSettingsManager.AddOption(new FloatFieldOption(ArmorReductionDuration));
 
-            MovementSpeedSlowBase = configuration.Bind("Item: " + ItemName, "Movement Speed Reduction Base", 15.0f, "How much should movement speed be reduced initially?");
+            MovementSpeedSlowBase = configuration.Bind("Item: " + ItemName, "Movement Speed Reduction Base", 15f, "How much should movement speed be reduced initially?");
             ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedSlowBase));
-            MovementSpeedSlowPerStack = configuration.Bind("Item: " + ItemName, "Movement Speed Reduction Per Stack", 15.0f, "How much should movement speed be reduced per stack?");
+            MovementSpeedSlowPerStack = configuration.Bind("Item: " + ItemName, "Movement Speed Reduction Per Stack", 15f, "How much should movement speed be reduced per stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedSlowPerStack));
-            AttackSpeedSlowBase = configuration.Bind("Item: " + ItemName, "Attack Speed Reduction Base", 15.0f, "How much should attack speed be reduced initially?");
+            AttackSpeedSlowBase = configuration.Bind("Item: " + ItemName, "Attack Speed Reduction Base", 15f, "How much should attack speed be reduced initially?");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedSlowBase));
-            AttackSpeedSlowPerStack = configuration.Bind("Item: " + ItemName, "Attack Speed Reduction Per Stack", 15.0f, "How much should attack speed be reduced per stack?");
+            AttackSpeedSlowPerStack = configuration.Bind("Item: " + ItemName, "Attack Speed Reduction Per Stack", 15f, "How much should attack speed be reduced per stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedSlowPerStack));
-            SlowDuration = configuration.Bind("Item: " + ItemName, "Slow Duration", 3.0f, "How long should the slows last?");
+            SlowDuration = configuration.Bind("Item: " + ItemName, "Slow Duration", 3f, "How long should the slows last?");
             ModSettingsManager.AddOption(new FloatFieldOption(SlowDuration));
 
-            PoisonDamageBase = configuration.Bind("Item: " + ItemName, "Poison Damage Base", 300.0f, "How much base damage should the poison do with the first stack?");
+            PoisonDamageBase = configuration.Bind("Item: " + ItemName, "Poison Damage Base", 300f, "How much base damage should the poison do with the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(PoisonDamageBase));
-            PoisonDamagePerStack = configuration.Bind("Item: " + ItemName, "Poison Damage Per Stack", 300.0f, "How much base damage should the poison do with subsequent stacks?");
+            PoisonDamagePerStack = configuration.Bind("Item: " + ItemName, "Poison Damage Per Stack", 300f, "How much base damage should the poison do with subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(PoisonDamagePerStack));
-            PoisonDuration = configuration.Bind("Item: " + ItemName, "Poison Duration", 3.0f, "How long should the poison last?");
+            PoisonDuration = configuration.Bind("Item: " + ItemName, "Poison Duration", 3f, "How long should the poison last?");
             ModSettingsManager.AddOption(new FloatFieldOption(PoisonDuration));
         }
 
         private void OnHit(On.RoR2.HealthComponent.orig_TakeDamage orig, RoR2.HealthComponent self, RoR2.DamageInfo info)
         {
-            if (self && self.alive && info.attacker && info.procCoefficient > 0.0f)
+            if (self && self.alive && info.attacker && info.procCoefficient > 0f)
             {
                 var attacker_body = info.attacker.GetComponent<CharacterBody>();
                 int count = GetCount(attacker_body);
@@ -98,7 +98,7 @@ Effects stack with component items.";
                         victim: self.body,
                         attacker: attacker_body,
                         duration: PoisonDuration.Value,
-                        damage: (PoisonDamageBase.Value + PoisonDamagePerStack.Value * (count - 1)) / 100.0f / PoisonDuration.Value,
+                        damage: (PoisonDamageBase.Value + PoisonDamagePerStack.Value * (count - 1)) / 100f / PoisonDuration.Value,
                         stacks: 1,
                         max_stacks: 1
                     );

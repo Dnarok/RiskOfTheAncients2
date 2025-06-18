@@ -39,13 +39,13 @@ namespace ROTA2.Items
         public ConfigEntry<bool> PlaySound;
         private void CreateConfig(ConfigFile configuration)
         {
-            IncomingDamageMinimum = configuration.Bind("Item: " + ItemName, "Incoming Damage Minimum", 60.0f, "");
+            IncomingDamageMinimum = configuration.Bind("Item: " + ItemName, "Incoming Damage Minimum", 60f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(IncomingDamageMinimum));
-            DamageBlockBase = configuration.Bind("Item: " + ItemName, "Flat Damage Block Base", 15.0f, "");
+            DamageBlockBase = configuration.Bind("Item: " + ItemName, "Flat Damage Block Base", 15f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBlockBase));
-            DamageBlockPerStack = configuration.Bind("Item: " + ItemName, "Flat Damage Block Per Stack", 15.0f, "");
+            DamageBlockPerStack = configuration.Bind("Item: " + ItemName, "Flat Damage Block Per Stack", 15f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBlockPerStack));
-            DamageMinimum = configuration.Bind("Item: " + ItemName, "Damage Minimum After Block", 1.0f, "");
+            DamageMinimum = configuration.Bind("Item: " + ItemName, "Damage Minimum After Block", 1f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageMinimum));
             PlaySound = configuration.Bind("Item: " + ItemName, "Play Sound", true, "");
             ModSettingsManager.AddOption(new CheckBoxOption(PlaySound));

@@ -36,5 +36,5 @@ MonoBehaviour:
   passiveBuffDef: {fileID: 0}
   appearsInSinglePlayer: 1
   appearsInMultiPlayer: 1
-  requiredExpansion: {fileID: 0}
+  requiredExpansion: {fileID: 11400000, guid: 94098b57c571f0d40b3f17f8c3e81070, type: 2}
   mageElement: 0

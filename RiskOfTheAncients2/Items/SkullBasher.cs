@@ -39,15 +39,15 @@ namespace ROTA2.Items
         public ConfigEntry<bool> PlaySound;
         public void CreateConfig(ConfigFile configuration)
         {
-            ProcChance = configuration.Bind("Item: " + ItemName, "Proc Chance", 15.0f, "What is the chance on hit to proc?");
+            ProcChance = configuration.Bind("Item: " + ItemName, "Proc Chance", 15f, "What is the chance on hit to proc?");
             ModSettingsManager.AddOption(new FloatFieldOption(ProcChance));
-            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Base", 250.0f, "How much total damage should the bash do with the first stack?");
+            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Base", 250f, "How much total damage should the bash do with the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBase));
-            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 250.0f, "How much extra total damage should the bash do for subsequent stacks?");
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 250f, "How much extra total damage should the bash do for subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamagePerStack));
             BashDuration = configuration.Bind("Item: " + ItemName, "Bash Duration", 2.5f, "How long should the bash last?");
             ModSettingsManager.AddOption(new FloatFieldOption(BashDuration));
-            BashCooldown = configuration.Bind("Item: " + ItemName, "Bash Cooldown", 5.0f, "How long should it take to recharge before another bash?");
+            BashCooldown = configuration.Bind("Item: " + ItemName, "Bash Cooldown", 5f, "How long should it take to recharge before another bash?");
             ModSettingsManager.AddOption(new FloatFieldOption(BashCooldown));
             PlaySound = configuration.Bind("Item: " + ItemName, "Play Sound", true, "");
             ModSettingsManager.AddOption(new CheckBoxOption(PlaySound));
@@ -80,11 +80,11 @@ namespace ROTA2.Items
                         DamageInfo bonus_hit = new()
                         {
                             attacker = attacker,
-                            damage = info.damage * (DamageBase.Value / 100.0f + DamagePerStack.Value / 100.0f * (count - 1)),
+                            damage = info.damage * (DamageBase.Value / 100f + DamagePerStack.Value / 100f * (count - 1)),
                             position = info.position,
                             damageColorIndex = DamageColorIndex.Sniper,
                             damageType = info.damageType,
-                            procCoefficient = 0.0f,
+                            procCoefficient = 0f,
                             crit = info.crit,
                             procChainMask = info.procChainMask
                         };

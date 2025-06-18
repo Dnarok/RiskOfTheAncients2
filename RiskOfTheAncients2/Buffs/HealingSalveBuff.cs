@@ -27,13 +27,13 @@ namespace ROTA2.Buffs
                 int count = HealingSalve.GetCount(body);
                 if (health && count > 0)
                 {
-                    arguments.baseRegenAdd += health.fullHealth * (HealingSalve.Instance.MaximumHealthRegenerationBase.Value / 100.0f + HealingSalve.Instance.MaximumHealthRegenerationPerStack.Value / 100.0f * (count - 1));
+                    arguments.baseRegenAdd += health.fullHealth * (HealingSalve.Instance.MaximumHealthRegenerationBase.Value / 100f + HealingSalve.Instance.MaximumHealthRegenerationPerStack.Value / 100f * (count - 1));
                 }
             }
         }
         private void OnTakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
-            if (damageInfo.rejected || damageInfo.damage == 0.0f)
+            if (damageInfo.rejected || damageInfo.damage == 0f)
             {
                 orig(self, damageInfo);
                 return;

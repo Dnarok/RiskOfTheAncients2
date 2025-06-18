@@ -34,9 +34,9 @@ namespace ROTA2.Items
         public ConfigEntry<float> BaseHealthRegenerationPerStack;
         public void CreateConfig(ConfigFile configuration)
         {
-            MaximumHealthBase = configuration.Bind("Item: " + ItemName, "Initial Maximum Health Bonus", 40.0f, "How much maximum health should be provided by the first stack?");
+            MaximumHealthBase = configuration.Bind("Item: " + ItemName, "Initial Maximum Health Bonus", 40f, "How much maximum health should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthBase));
-            MaximumHealthPerStack = configuration.Bind("Item: " + ItemName, "Stacking Maximum Health Bonus", 40.0f, "How much maximum health should be provided by subsequent stacks?");
+            MaximumHealthPerStack = configuration.Bind("Item: " + ItemName, "Stacking Maximum Health Bonus", 40f, "How much maximum health should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthPerStack));
             BaseHealthRegenerationBase = configuration.Bind("Item: " + ItemName, "Initial Base Health Regeneration Bonus", 1.6f, "How much base health regeneration should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(BaseHealthRegenerationBase));

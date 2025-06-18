@@ -36,15 +36,15 @@ namespace ROTA2.Items
         public ConfigEntry<float> HealthThreshold;
         public void CreateConfig(ConfigFile configuration)
         {
-            DamageBase = configuration.Bind("Item: " + ItemName, "Initial Damage Bonus", 15.0f, "How much damage should be provided by the first stack?");
+            DamageBase = configuration.Bind("Item: " + ItemName, "Initial Damage Bonus", 15f, "How much damage should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBase));
-            DamagePerStack = configuration.Bind("Item: " + ItemName, "Stacking Damage Bonus", 15.0f, "How much damage should be provided by subsequent stacks?");
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Stacking Damage Bonus", 15f, "How much damage should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamagePerStack));
-            ArmorBase = configuration.Bind("Item: " + ItemName, "Initial Armor Bonus", 10.0f, "How much armor should be provided by the first stack?");
+            ArmorBase = configuration.Bind("Item: " + ItemName, "Initial Armor Bonus", 10f, "How much armor should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(ArmorBase));
-            ArmorPerStack = configuration.Bind("Item: " + ItemName, "Stacking Armor Bonus", 10.0f, "How much armor should be provided by subsequent stacks?");
+            ArmorPerStack = configuration.Bind("Item: " + ItemName, "Stacking Armor Bonus", 10f, "How much armor should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(ArmorPerStack));
-            HealthThreshold = configuration.Bind("Item: " + ItemName, "Health Threshold", 50.0f, "At what percent of maximum health should the bonus flip from damage to armor?");
+            HealthThreshold = configuration.Bind("Item: " + ItemName, "Health Threshold", 50f, "At what percent of maximum health should the bonus flip from damage to armor?");
             ModSettingsManager.AddOption(new FloatFieldOption(HealthThreshold));
         }
 
@@ -72,7 +72,7 @@ namespace ROTA2.Items
                     return;
                 }
 
-                bool below = body.healthComponent.combinedHealthFraction < Instance.HealthThreshold.Value / 100.0f;
+                bool below = body.healthComponent.combinedHealthFraction < Instance.HealthThreshold.Value / 100f;
                 if (below)
                 {
                     body.AddBuff(SparkOfCourageArmor.GetBuffDef());
@@ -90,7 +90,7 @@ namespace ROTA2.Items
                     return;
                 }
 
-                bool below = body.healthComponent.combinedHealthFraction < Instance.HealthThreshold.Value / 100.0f;
+                bool below = body.healthComponent.combinedHealthFraction < Instance.HealthThreshold.Value / 100f;
                 if (below && !last_below)
                 {
                     body.AddBuff(SparkOfCourageArmor.GetBuffDef());
