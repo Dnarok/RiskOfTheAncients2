@@ -1,6 +1,6 @@
 {
   "name": "RiskOfTheAncients2",
-  "version_number": "2.0.2",
+  "version_number": "2.0.3",
   "website_url": "https://github.com/Dnarok/RiskOfTheAncients2",
   "description": "Dota 2 items in Risk of Rain 2!",
   "dependencies": [
@@ -17,6 +17,7 @@
     "RiskofThunder-R2API_Sound-1.0.3",
     "Rune580-Risk_Of_Options-2.8.4",
     "dotaguys-LogBookPatcher-1.0.1",
-    "dotaguys-RendererInfoPatcher-1.0.0"
+    "dotaguys-RendererInfoPatcher-1.0.0",
+    "LordVGames-DamageSourceForEnemies-1.2.1"
   ]
 }

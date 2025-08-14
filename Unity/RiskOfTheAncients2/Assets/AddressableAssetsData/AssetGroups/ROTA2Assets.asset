@@ -909,6 +909,26 @@ MonoBehaviour:
     m_Address: Assets/Equipment/BlackKingBar/Display.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 85011c80835cc15409aad8a632fd3295
+    m_Address: Assets/Items/UnwaveringCondition/unwavering_condition.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4bb57857e43b6e94181f43b3e0e190cb
+    m_Address: Assets/Items/UnwaveringCondition/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6fc88dcd8eebed74e969e6b68eec7108
+    m_Address: Assets/Items/Cloak/ItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8131e3bd46f6a8d478f7ed4125ddb87d
+    m_Address: Assets/Items/Cloak/Icon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e9c7cce421fea234f94245de73f7c676
+    m_Address: Assets/Items/AeonDisk/UsedItemDef.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 22177c4400a3f824ab99cc3b95f14243, type: 2}
   m_SchemaSet:

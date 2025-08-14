@@ -16,9 +16,17 @@ namespace ROTA2.Buffs
 
         private void AddRegen(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs args)
         {
+            int count = PowerTreads.GetCount(body);
             if (HasThisBuff(body))
             {
-                args.baseRegenAdd += PowerTreads.Instance.StrengthRegen.Value * (1f + 0.2f * (body.level - 1));
+                if (count > 0)
+                {
+                    args.baseRegenAdd += PowerTreads.Instance.StrengthRegen.Value * (1f + 0.2f * (body.level - 1));
+                }
+                else
+                {
+                    body.RemoveBuff(BuffDef);
+                }
             }
         }
     }
@@ -34,9 +42,17 @@ namespace ROTA2.Buffs
 
         private void AddArmor(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs args)
         {
+            int count = PowerTreads.GetCount(body);
             if (HasThisBuff(body))
             {
-                args.armorAdd += PowerTreads.Instance.AgilityArmor.Value;
+                if (count > 0)
+                {
+                    args.armorAdd += PowerTreads.Instance.AgilityArmor.Value;
+                }
+                else
+                {
+                    body.RemoveBuff(BuffDef);
+                }
             }
         }
     }
@@ -52,9 +68,17 @@ namespace ROTA2.Buffs
 
         private void AddDamage(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs args)
         {
+            int count = PowerTreads.GetCount(body);
             if (HasThisBuff(body))
             {
-                args.damageMultAdd += PowerTreads.Instance.IntelligenceDamage.Value / 100f;
+                if (count > 0)
+                {
+                    args.damageMultAdd += PowerTreads.Instance.IntelligenceDamage.Value / 100f;
+                }
+                else
+                {
+                    body.RemoveBuff(BuffDef);
+                }
             }
         }
     }

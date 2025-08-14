@@ -1,3 +1,15 @@
+## 2.0.3
+- Fixed readme discrepancies.
+- Added "Magic Resistance" mechanic.
+  - Magic resistance reduces incoming skill-based damage.
+  - Unlike armor, it does nothing to non-skill-based damage (fall damage, DOTs, etc.).
+- Added Cloak (white), and Unwavering Condition (Lunar).
+- Black King Bar: Now provides Magic Resistance instead of pure damage reduction.
+- Black King Bar: Cooldown decreased from `65` -> `60`.
+- Aeon Disk: Can now only activate once per stage per stack. Durations no longer increase with stacks. Cannot activate again while still invulnerable.
+- Power Treads: Fixed recipe, can now be acquired.
+- Healing Salve: No longer heals a percentage of maximum health. Now heals `5 hp/s` (+`5 hp/s` per stack), scaling with level.
+
 ## 2.0.2
 - Added Expansion so you can disable the entire mod at once from in the lobby.
 - Added on-survivor item displays for Assault Cuirass, Boots of Speed, Armlet of Mordiggian, and Black King Bar.

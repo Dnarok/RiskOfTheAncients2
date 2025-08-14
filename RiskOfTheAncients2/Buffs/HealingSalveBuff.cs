@@ -15,8 +15,6 @@ namespace ROTA2.Buffs
         {
             RecalculateStatsAPI.GetStatCoefficients += AddHealthRegeneration;
             On.RoR2.HealthComponent.TakeDamage += OnTakeDamage;
-            On.RoR2.CharacterBody.OnBuffFirstStackGained += OnAdd;
-            On.RoR2.CharacterBody.OnBuffFinalStackLost += OnRemove;
         }
 
         private void AddHealthRegeneration(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs arguments)
@@ -27,7 +25,7 @@ namespace ROTA2.Buffs
                 int count = HealingSalve.GetCount(body);
                 if (health && count > 0)
                 {
-                    arguments.baseRegenAdd += health.fullHealth * (HealingSalve.Instance.MaximumHealthRegenerationBase.Value / 100f + HealingSalve.Instance.MaximumHealthRegenerationPerStack.Value / 100f * (count - 1));
+                    arguments.baseRegenAdd += (HealingSalve.Instance.RegenerationBase.Value + HealingSalve.Instance.RegenerationPerStack.Value * (count - 1)) * (1 + 0.2f * body.level);
                 }
             }
         }
@@ -45,64 +43,6 @@ namespace ROTA2.Buffs
             }
 
             orig(self, damageInfo);
-        }
-        private void OnAdd(On.RoR2.CharacterBody.orig_OnBuffFirstStackGained orig, CharacterBody self, BuffDef buffDef)
-        {
-            if (buffDef == BuffDef)
-            {
-                var behavior = self.GetComponent<HealingSalveBehavior>();
-                if (behavior)
-                {
-                    behavior.enabled = true;
-                }
-                else
-                {
-                    behavior = self.gameObject.AddComponent<HealingSalveBehavior>();
-                    behavior.enabled = true;
-                }
-            }
-
-            orig(self, buffDef);
-        }
-        private void OnRemove(On.RoR2.CharacterBody.orig_OnBuffFinalStackLost orig, CharacterBody self, BuffDef buffDef)
-        {
-            if (buffDef == BuffDef)
-            {
-                var behavior = self.GetComponent<HealingSalveBehavior>();
-                if (behavior)
-                {
-                    Object.Destroy(behavior);
-                }
-            }
-
-            orig(self, buffDef);
-        }
-
-        public class HealingSalveBehavior : MonoBehaviour
-        {
-            CharacterBody body;
-            GameObject effect;
-
-            void Awake()
-            {
-                body = GetComponent<CharacterBody>();
-            }
-            void OnEnabled()
-            {
-                if (NetworkServer.active)
-                {
-                    effect = Instantiate(HealingSalve.effectPrefab, body.coreTransform);
-                    effect.GetComponent<NetworkedBodyAttachment>().AttachToGameObjectAndSpawn(body.gameObject);
-                }
-            }
-            void OnDisabled()
-            {
-                if (effect)
-                {
-                    Destroy(effect);
-                    effect = null;
-                }
-            }
         }
     }
 }

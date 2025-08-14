@@ -12,6 +12,7 @@ namespace ROTA2.Buffs
         public override void Hooks()
         {
             On.RoR2.HealthComponent.TakeDamage += OnTakeDamage;
+            On.RoR2.CharacterModel.UpdateOverlays += OnUpdateOverlay;
         }
 
         private void OnTakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo info)
@@ -22,6 +23,15 @@ namespace ROTA2.Buffs
             }
 
             orig(self, info);
+        }
+        private void OnUpdateOverlay(On.RoR2.CharacterModel.orig_UpdateOverlays orig, CharacterModel self)
+        {
+            orig(self);
+
+            if (self.activeOverlayCount < CharacterModel.maxOverlays && HasThisBuff(self.body))
+            {
+                self.currentOverlays[self.activeOverlayCount++] = CharacterModel.immuneMaterial;
+            }
         }
     }
     public class AeonDiskMovementSpeed : BuffBase<AeonDiskMovementSpeed>
@@ -42,10 +52,10 @@ namespace ROTA2.Buffs
             }
         }
     }
-    public class AeonDiskCooldown : BuffBase<AeonDiskCooldown>
-    {
-        public override string BuffName => "Aeon Disk Cooldown";
-        public override string BuffTokenName => "AEON_DISK_COOLDOWN";
-        public override string BuffDefGUID => Assets.AeonDisk.CooldownBuffDef;
-    }
+    // public class AeonDiskCooldown : BuffBase<AeonDiskCooldown>
+    // {
+    //     public override string BuffName => "Aeon Disk Cooldown";
+    //     public override string BuffTokenName => "AEON_DISK_COOLDOWN";
+    //     public override string BuffDefGUID => Assets.AeonDisk.CooldownBuffDef;
+    // }
 }

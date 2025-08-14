@@ -29,7 +29,7 @@ namespace ROTA2
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Dnarok";
         public const string PluginName = "RiskOfTheAncients2";
-        public const string PluginVersion = "2.0.2";
+        public const string PluginVersion = "2.0.3";
 
         public static List<ItemBase> Items = [];
         public static Dictionary<ItemBase, bool> ItemsEnabled = [];
@@ -57,6 +57,8 @@ namespace ROTA2
             Addressables.LoadAssetAsync<Sprite>(Assets.Default.ModIcon).Completed += (x) => ModSettingsManager.SetModIcon(x.Result);
 
             Addressables.LoadAssetAsync<ExpansionDef>(Assets.Default.ExpansionDef).Completed += (x) => { expansion = x.Result; ContentAddition.AddExpansionDef(expansion); };
+
+            StatsAPI.Init();
 
             var ItemTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(ItemBase)));
             foreach (var type in ItemTypes)

@@ -1,5 +1,6 @@
 ﻿using RoR2;
 using ROTA2.Equipment;
+using System;
 using UnityEngine;
 
 namespace ROTA2.Buffs
@@ -11,7 +12,7 @@ namespace ROTA2.Buffs
         public override string BuffDefGUID => Assets.BlackKingBar.BuffDef;
         public override void Hooks()
         {
-            On.RoR2.HealthComponent.TakeDamage += OnTakeDamage;
+            StatsAPI.Recalculate += OnRecalculate;
             On.RoR2.DotController.AddDot += OnAddDot;
             On.RoR2.CharacterBody.AddBuff_BuffDef += OnAddBuff_BuffDef;
             On.RoR2.CharacterBody.AddBuff_BuffIndex += OnAddBuff_BuffIndex;
@@ -20,14 +21,12 @@ namespace ROTA2.Buffs
             On.RoR2.CharacterBody.AddTimedBuff_BuffDef_float_int += OnAddTimedBuff_BuffDef_float_int;
         }
 
-        private void OnTakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo info)
+        private void OnRecalculate(CharacterBody body, StatsAPI.RecalculateArgs args)
         {
-            if (self && HasThisBuff(self.body))
+            if (HasThisBuff(body))
             {
-                info.damage *= 1f - (BlackKingBar.Instance.DamageReduction.Value / 100f);
+                args.MagicResistance.Add(BlackKingBar.Instance.MagicResistance.Value / 100f);
             }
-
-            orig(self, info);
         }
         private void OnAddDot(On.RoR2.DotController.orig_AddDot orig, DotController self, GameObject attackerObject, float duration, DotController.DotIndex dotIndex, float damageMultiplier, uint? maxStacksFromAttacker, float? totalDamage, DotController.DotIndex? preUpgradeDotIndex)
         {

@@ -13,8 +13,8 @@ namespace ROTA2.Equipment
     {
         public override string EquipmentName => "Black King Bar";
         public override string EquipmentTokenName => "BLACK_KING_BAR";
-        public override string EquipmentTokenPickup => "Become immune to negative effects and reduce incoming damage for a short time.";
-        public override string EquipmentTokenDesc => $"Become {Utility("immune")} to all negative effects and reduce all {Damage("incoming damage")} by {Damage($"{DamageReduction.Value}%")} for {Utility($"{AvatarDuration.Value} seconds")}.";
+        public override string EquipmentTokenPickup => "Become immune to negative effects and increase magic resistance for a short time.";
+        public override string EquipmentTokenDesc => $"Become {Utility("immune")} to all negative effects and increase {Utility("magic resistance")} by {Utility($"{MagicResistance.Value}%")} for {Utility($"{AvatarDuration.Value} seconds")}.";
         public override string EquipmentTokenLore => "A powerful staff imbued with the strength of giants.";
         public override float EquipmentCooldown => BlackKingBarCooldown.Value;
         public override string EquipmentDefGUID => Assets.BlackKingBar.EquipmentDef;
@@ -249,15 +249,15 @@ namespace ROTA2.Equipment
         }
 
         public ConfigEntry<float> AvatarDuration;
-        public ConfigEntry<float> DamageReduction;
+        public ConfigEntry<float> MagicResistance;
         public ConfigEntry<float> BlackKingBarCooldown;
         private void CreateConfig(ConfigFile config)
         {
             AvatarDuration = config.Bind("Equipment: " + EquipmentName, "Avatar Duration", 6f, "How long should the immunity and damage reduction last?");
             ModSettingsManager.AddOption(new FloatFieldOption(AvatarDuration));
-            DamageReduction = config.Bind("Equipment: " + EquipmentName, "Incoming Damage Reduction", 35f, "What percentage of incoming damage should be reduced while active?");
-            ModSettingsManager.AddOption(new FloatFieldOption(DamageReduction));
-            BlackKingBarCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 65f, "");
+            MagicResistance = config.Bind("Equipment: " + EquipmentName, "Bonus Magic Resistance", 35f, "How much magic resistance should be gained while active?");
+            ModSettingsManager.AddOption(new FloatFieldOption(MagicResistance));
+            BlackKingBarCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 60f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(BlackKingBarCooldown));
         }
 

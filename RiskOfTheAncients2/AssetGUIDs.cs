@@ -138,6 +138,7 @@
     public static class AeonDisk
     {
         public const string ItemDef = "d14c1f85f66c42c449a905067e14b7d5";
+        public const string UsedItemDef = "e9c7cce421fea234f94245de73f7c676";
         public const string InvulnerabilityBuffDef = "e8fc64dfc3fa69d46951f1cf49242389";
         public const string CooldownBuffDef = "649ac47e83631494f97b7e9bfde74cf9";
         public const string MoveSpeedBuffDef = "e361466e87dceab41b9fd441a0f2fd76";
@@ -173,6 +174,11 @@
         public const string ItemDef = "fb8731226a4aaba4396a72e58dd66b4d";
         public const string Pickup = "c4a3bb7ed26ba8549b36d5075f825a6d";
         public const string Icon = "51bfe81c5637ece409f3977241ebd822";
+    }
+    public static class Cloak
+    {
+        public const string ItemDef = "6fc88dcd8eebed74e969e6b68eec7108";
+        public const string Icon = "8131e3bd46f6a8d478f7ed4125ddb87d";
     }
     public static class Daedalus
     {
@@ -393,6 +399,11 @@
     {
         public const string ItemDef = "e774ca90d63809a4fa2c25033c8efb9e";
         public const string Icon = "340a241a6e8985e458129fb4f96d5f3b";
+    }
+    public static class UnwaveringCondition
+    {
+        public const string ItemDef = "4bb57857e43b6e94181f43b3e0e190cb";
+        public const string Icon = "85011c80835cc15409aad8a632fd3295";
     }
     public static class Yasha
     {

@@ -15,14 +15,13 @@ namespace ROTA2.Items
         public override string ConfigItemName => ItemName;
         public override string ItemTokenName => "HEALING_SALVE";
         public override string ItemTokenPickup => "Receive interruptible healing after using your Special skill.";
-        public override string ItemTokenDesc => $"Activating your {Utility("Special skill")} {Healing("heals")} you for {Healing($"{MaximumHealthRegenerationBase.Value}%")} {Stack($"(+{MaximumHealthRegenerationPerStack.Value}% per stack)")} {Healing("of your maximum health")} per second for {Utility($"{BuffDuration.Value} seconds")}. Healing is {Health("interrupted by taking damage.")}";
+        public override string ItemTokenDesc => $"Activating your {Utility("Special skill")} increases {Healing("base health regeneration")} by {Healing($"{RegenerationBase.Value} hp/s")} {Stack($"(+{RegenerationPerStack.Value} hp/s per stack)")} for {Utility($"{BuffDuration.Value} seconds")}. Healing is {Health("interrupted by taking damage.")}";
         public override string ItemTokenLore => "A magical salve that can quickly mend even the deepest of wounds.";
         public override string ItemDefGUID => Assets.HealingSalve.ItemDef;
         public override void Hooks()
         {
             On.RoR2.CharacterBody.OnSkillActivated += OnSkill;
         }
-        public static GameObject effectPrefab;
         public override void Init(ConfigFile configuration)
         {
             CreateConfig(configuration);
@@ -30,23 +29,18 @@ namespace ROTA2.Items
             CreateLanguageTokens();
             CreateItemDef();
             Hooks();
-
-            effectPrefab = Addressables.LoadAssetAsync<GameObject>(Assets.HealingSalve.Effect).WaitForCompletion();
-            var component = effectPrefab.AddComponent<NetworkedBodyAttachment>();
-            component.shouldParentToAttachedBody = true;
-            component.forceHostAuthority = false;
         }
 
-        public ConfigEntry<float> MaximumHealthRegenerationBase;
-        public ConfigEntry<float> MaximumHealthRegenerationPerStack;
+        public ConfigEntry<float> RegenerationBase;
+        public ConfigEntry<float> RegenerationPerStack;
         public ConfigEntry<float> BuffDuration;
         public ConfigEntry<bool> PlaySound;
         public void CreateConfig(ConfigFile configuration)
         {
-            MaximumHealthRegenerationBase = configuration.Bind("Item: " + ItemName, "Maximum Health Regeneration Base", 2f, "How much maximum health percentage regeneration should the first stack provide?");
-            ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthRegenerationBase));
-            MaximumHealthRegenerationPerStack = configuration.Bind("Item: " + ItemName, "Maximum Health Regeneration Per Stack", 2f, "How much maximum health percentage regeneration should subsequent stacks provide?");
-            ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthRegenerationPerStack));
+            RegenerationBase = configuration.Bind("Item: " + ItemName, "Regeneration Base", 5f, "How much health regeneration should the first stack provide?");
+            ModSettingsManager.AddOption(new FloatFieldOption(RegenerationBase));
+            RegenerationPerStack = configuration.Bind("Item: " + ItemName, "Regeneration Per Stack", 5f, "How much health regeneration should subsequent stacks provide?");
+            ModSettingsManager.AddOption(new FloatFieldOption(RegenerationPerStack));
             BuffDuration = configuration.Bind("Item: " + ItemName, "Healing Duration", 5f, "How long should the regeneration last?");
             ModSettingsManager.AddOption(new FloatFieldOption(BuffDuration));
             PlaySound = configuration.Bind("Item: " + ItemName, "Play Sound", true, "");

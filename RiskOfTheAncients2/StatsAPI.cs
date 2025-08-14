@@ -1,12 +1,24 @@
-﻿using RoR2;
+﻿using R2API;
+using RoR2;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ROTA2
 {
-    class StatsAPI
+    public class StatsAPI
     {
+        public static void Init()
+        {
+            DamageTypes.BypassMagicResistance = DamageAPI.ReserveDamageType();
+        }
+
+        public static class DamageTypes
+        {
+            // to use, do R2API.DamageAPI.AddModdedDamageType(ref myDamageTypeCombo, ROTA2.StatsAPI.BypassMagicResistance).
+            public static R2API.DamageAPI.ModdedDamageType BypassMagicResistance;
+        }
+
         public class RecalculateArgs : EventArgs
         {
             #region magic resistance
@@ -16,7 +28,7 @@ namespace ROTA2
         public class CustomStats : MonoBehaviour, IOnIncomingDamageServerReceiver
         {
             CharacterBody body;
-            public float MagicResistanceMultiplier = 0f;
+            public float MagicResistanceMultiplier = 1f;
             void Awake()
             {
                 body = GetComponent<CharacterBody>();
@@ -38,7 +50,7 @@ namespace ROTA2
             }
             public void OnIncomingDamageServer(DamageInfo info)
             {
-                if (info.damageType.IsDamageSourceSkillBased)
+                if (info.damageType.IsDamageSourceSkillBased && !info.HasModdedDamageType(DamageTypes.BypassMagicResistance))
                 {
                     info.damage *= MagicResistanceMultiplier;
                 }
@@ -97,6 +109,7 @@ namespace ROTA2
                 }
             }
 
+            behavior.MagicResistanceMultiplier = 1f;
             foreach (float source in stats.MagicResistance)
             {
                 behavior.MagicResistanceMultiplier *= 1 - source;

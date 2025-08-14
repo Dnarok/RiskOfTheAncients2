@@ -163,10 +163,10 @@ namespace ROTA2
             }
             if (Plugin.ItemsEnabled[PowerTreads.Instance])
             {
-                Add([RoR2Content.Items.SprintBonus, RoR2Content.Items.BoostAttackSpeed], PowerTreads.GetItemDef());
+                Add([RoR2Content.Items.Hoof, RoR2Content.Items.Syringe], PowerTreads.GetItemDef());
                 itemsToWatchFor.AddRange([
-                    RoR2Content.Items.SprintBonus,
-                    RoR2Content.Items.BoostAttackSpeed
+                    RoR2Content.Items.Hoof,
+                    RoR2Content.Items.Syringe
                 ]);
             }
 

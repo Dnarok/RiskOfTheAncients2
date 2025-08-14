@@ -7,38 +7,6 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-// stole it from looking glass because theirs is private...
-class Utils
-{
-    public static float CalculateChanceWithLuck(float baseChance, float luckIn)
-    {
-        float chanceFloored = Mathf.Floor(baseChance);
-        float chanceMod = baseChance % 1f;
-        int luck = Mathf.CeilToInt(luckIn);
-        if (luck > 0)
-            return chanceFloored + (1f - Mathf.Pow(1f - chanceMod, luck + 1));
-        if (luck < 0)
-            return chanceFloored + Mathf.Pow(chanceMod, Mathf.Abs(luck) + 1);
-
-        return baseChance;
-    }
-
-    public static float GetExponentialRechargeTime(float baseCooldown, float extraPercent, int count)
-    {
-        return baseCooldown * Mathf.Pow(1 - extraPercent, count - 1);
-    }
-
-    public static float GetExponentialStacking(float basePercent, float extraPercent, int count)
-    {
-        return 1 - (1 - basePercent) * Mathf.Pow(1 - extraPercent, count - 1);
-    }
-
-    public static float GetHyperbolicStacking(float basePercent, float extraPercent, int count)
-    {
-        return 1f - 1f / (1f + basePercent + extraPercent * (count - 1));
-    }
-}
-
 namespace ROTA2
 {
     public static class Compatibility
@@ -46,6 +14,22 @@ namespace ROTA2
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         public static void LookingGlassCompatibility()
         {
+            Log.Debug("Adding LookingGlass stat display definitions.");
+
+            Func<float, string> utility = x => LookingGlass.StatsDisplay.StatsDisplayClass.builtInColors.Value ? "<style=\"cIsUtility\">" + x.ToString(LookingGlass.StatsDisplay.StatsDisplayDefinitions.floatPrecision) + "</style" : x.ToString(LookingGlass.StatsDisplay.StatsDisplayDefinitions.floatPrecision);
+            LookingGlass.StatsDisplay.StatsDisplayClass.statDictionary.Add("magicResistance", cachedUserBody =>
+            {
+                var component = cachedUserBody.GetComponent<StatsAPI.CustomStats>();
+                if (component)
+                {
+                    return utility((1f - component.MagicResistanceMultiplier) * 100f) + "%";
+                }
+                else
+                {
+                    return utility(0f) + "%";
+                }
+            });
+
             Log.Debug("Adding LookingGlass item definitions.");
             ItemStatsDef item;
             // Boots of Speed
@@ -119,7 +103,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Utils.GetExponentialStacking(FairysTrinket.Instance.SkillCooldownReductionBase.Value / 100f, FairysTrinket.Instance.SkillCooldownReductionPerStack.Value / 100f, count),
+                        LookingGlass.Utils.GetExponentialStacking(FairysTrinket.Instance.SkillCooldownReductionBase.Value / 100f, FairysTrinket.Instance.SkillCooldownReductionPerStack.Value / 100f, count),
                         FairysTrinket.Instance.DamageBase.Value / 100f + FairysTrinket.Instance.DamagePerStack.Value / 100f * (count - 1),
                         FairysTrinket.Instance.MaximumHealthBase.Value + FairysTrinket.Instance.MaximumHealthPerStack.Value * (count - 1)
                     ];
@@ -134,12 +118,12 @@ namespace ROTA2
                 item = new();
                 item.descriptions.Add("Total Heal: ");
                 item.valueTypes.Add(ItemStatsDef.ValueType.Healing);
-                item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.PercentHealth);
-                item.calculateValuesNew = (luck, count, proc) =>
+                item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.FlatHealth);
+                item.calculateValues = (master, count) =>
                 {
                     List<float> values =
                     [
-                        (HealingSalve.Instance.MaximumHealthRegenerationBase.Value / 100f + HealingSalve.Instance.MaximumHealthRegenerationPerStack.Value / 100f * (count - 1)) * HealingSalve.Instance.BuffDuration.Value
+                        (HealingSalve.Instance.RegenerationBase.Value + HealingSalve.Instance.RegenerationPerStack.Value * (count - 1)) * (1 + 0.2f * master.GetBody().level) * HealingSalve.Instance.BuffDuration.Value
                     ];
                     return values;
                 };
@@ -162,7 +146,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Utils.CalculateChanceWithLuck(Javelin.Instance.ProcChance.Value / 100f, luck),
+                        LookingGlass.Utils.CalculateChanceWithLuck(Javelin.Instance.ProcChance.Value / 100f, luck),
                         Javelin.Instance.DamageBase.Value / 100f + Javelin.Instance.DamagePerStack.Value / 100f * (count - 1)
                     ];
                     return values;
@@ -284,7 +268,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Utils.CalculateChanceWithLuck(DragonScale.Instance.ProcChance.Value / 100f, luck),
+                        LookingGlass.Utils.CalculateChanceWithLuck(DragonScale.Instance.ProcChance.Value / 100f, luck),
                         (DragonScale.Instance.DamageBase.Value / 100f + DragonScale.Instance.DamagePerStack.Value / 100f * (count - 1))
                     ];
                     return values;
@@ -346,6 +330,24 @@ namespace ROTA2
                 ItemDefinitions.RegisterItemStatsDef(item, BladesOfAttack.GetItemDef().itemIndex);
             }
 
+            // Cloak
+            if (Plugin.ItemsEnabled[Cloak.Instance])
+            {
+                item = new();
+                item.descriptions.Add("Magic Resistance: ");
+                item.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                item.calculateValuesNew = (luck, count, proc) =>
+                {
+                    List<float> values =
+                    [
+                        1f - ((1f - Cloak.Instance.MagicResistanceBase.Value / 100f) * Mathf.Pow(1f - Cloak.Instance.MagicResistancePerStack.Value / 100f, count - 1)),
+                    ];
+                    return values;
+                };
+                ItemDefinitions.RegisterItemStatsDef(item, Cloak.GetItemDef().itemIndex);
+            }
+
             // Kaya
             if (Plugin.ItemsEnabled[Kaya.Instance])
             {
@@ -360,7 +362,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Utils.GetExponentialStacking(Kaya.Instance.SkillCooldownReductionBase.Value / 100f, Kaya.Instance.SkillCooldownReductionPerStack.Value / 100f, count),
+                        LookingGlass.Utils.GetExponentialStacking(Kaya.Instance.SkillCooldownReductionBase.Value / 100f, Kaya.Instance.SkillCooldownReductionPerStack.Value / 100f, count),
                         Kaya.Instance.DamageBase.Value / 100f + Kaya.Instance.DamagePerStack.Value / 100f * (count - 1)
                     ];
                     return values;
@@ -428,7 +430,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Utils.CalculateChanceWithLuck(SkullBasher.Instance.ProcChance.Value / 100f, luck),
+                        LookingGlass.Utils.CalculateChanceWithLuck(SkullBasher.Instance.ProcChance.Value / 100f, luck),
                         SkullBasher.Instance.DamageBase.Value / 100f + SkullBasher.Instance.DamagePerStack.Value / 100f * (count - 1)
                     ];
                     return values;
@@ -450,7 +452,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Utils.CalculateChanceWithLuck(Daedalus.Instance.CriticalChance.Value / 100f, luck),
+                        LookingGlass.Utils.CalculateChanceWithLuck(Daedalus.Instance.CriticalChance.Value / 100f, luck),
                         Daedalus.Instance.CriticalDamageBase.Value / 100f + Daedalus.Instance.CriticalDamagePerStack.Value / 100f * (count - 1)
                     ];
                     return values;
@@ -584,8 +586,8 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        AeonDisk.Instance.InvulnerabilityDurationBase.Value + AeonDisk.Instance.InvulnerabilityDurationPerStack.Value * (count - 1),
-                        AeonDisk.Instance.MovementSpeedDurationBase.Value + AeonDisk.Instance.MovementSpeedDurationPerStack.Value * (count - 1)
+                        AeonDisk.Instance.InvulnerabilityDuration.Value,
+                        AeonDisk.Instance.MovementSpeedDuration.Value
                     ];
                     return values;
                 };
@@ -645,7 +647,7 @@ namespace ROTA2
                     float chance = 1f - (1f / (1f + 1.5f * (ExMachina.Instance.RestoreChanceBase.Value / 100f + ExMachina.Instance.RestoreChancePerStack.Value / 100f * (count - 1))));
                     List<float> values =
                     [
-                        Utils.CalculateChanceWithLuck(chance, luck)
+                        LookingGlass.Utils.CalculateChanceWithLuck(chance, luck)
                     ];
                     return values;
                 };
@@ -683,7 +685,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Utils.CalculateChanceWithLuck(PirateHat.Instance.DropChanceBase.Value / 100f + PirateHat.Instance.DropChancePerStack.Value / 100f * (count - 1), luck)
+                        LookingGlass.Utils.CalculateChanceWithLuck(PirateHat.Instance.DropChanceBase.Value / 100f + PirateHat.Instance.DropChancePerStack.Value / 100f * (count - 1), luck)
                     ];
                     return values;
                 };
@@ -724,6 +726,33 @@ namespace ROTA2
                     return values;
                 };
                 ItemDefinitions.RegisterItemStatsDef(item, NemesisCurse.GetItemDef().itemIndex);
+            }
+
+            // Unwavering Condition
+            if (Plugin.ItemsEnabled[UnwaveringCondition.Instance])
+            {
+                item = new();
+                item.descriptions.Add("Magic Resistance: ");
+                item.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                item.descriptions.Add("Maximum Health: ");
+                item.valueTypes.Add(ItemStatsDef.ValueType.Health);
+                item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                item.calculateValuesNew = (luck, count, proc) =>
+                {
+                    float multiplier = 1f - UnwaveringCondition.Instance.MagicResistanceBase.Value / 100f;
+                    for (int i = 1; i < count; ++i)
+                    {
+                        multiplier *= 1f - UnwaveringCondition.Instance.MagicResistancePerStack.Value / 100f;
+                    }
+                    List<float> values =
+                    [
+                        1f - ((1f - UnwaveringCondition.Instance.MagicResistanceBase.Value / 100f) * Mathf.Pow(1f - UnwaveringCondition.Instance.MagicResistancePerStack.Value / 100f, count - 1)),
+                        UnwaveringCondition.Instance.CombinedHealthLimit.Value * Mathf.Pow(1f - UnwaveringCondition.Instance.LimitReductionPerStack.Value / 100f, count - 1)
+                    ];
+                    return values;
+                };
+                ItemDefinitions.RegisterItemStatsDef(item, UnwaveringCondition.GetItemDef().itemIndex);
             }
 
             // Orb of Corrosion
@@ -846,7 +875,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Utils.GetExponentialStacking(KayaAndSange.Instance.SkillCooldownReductionBase.Value / 100f, KayaAndSange.Instance.SkillCooldownReductionPerStack.Value / 100f, count),
+                        LookingGlass.Utils.GetExponentialStacking(KayaAndSange.Instance.SkillCooldownReductionBase.Value / 100f, KayaAndSange.Instance.SkillCooldownReductionPerStack.Value / 100f, count),
                         KayaAndSange.Instance.DamageBase.Value / 100f + KayaAndSange.Instance.DamagePerStack.Value / 100f * (count - 1),
                         KayaAndSange.Instance.MaximumHealthBase.Value + KayaAndSange.Instance.MaximumHealthPerStack.Value * (count - 1),
                         KayaAndSange.Instance.BaseHealthRegenerationBase.Value + KayaAndSange.Instance.BaseHealthRegenerationPerStack.Value * (count - 1)
@@ -907,7 +936,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Utils.GetExponentialStacking(YashaAndKaya.Instance.SkillCooldownReductionBase.Value / 100f, YashaAndKaya.Instance.SkillCooldownReductionPerStack.Value / 100f, count),
+                        LookingGlass.Utils.GetExponentialStacking(YashaAndKaya.Instance.SkillCooldownReductionBase.Value / 100f, YashaAndKaya.Instance.SkillCooldownReductionPerStack.Value / 100f, count),
                         YashaAndKaya.Instance.AttackSpeedBase.Value / 100f + YashaAndKaya.Instance.AttackSpeedPerStack.Value / 100f * (count - 1),
                         YashaAndKaya.Instance.MovementSpeedBase.Value / 100f + YashaAndKaya.Instance.MovementSpeedPerStack.Value / 100f * (count - 1),
                         YashaAndKaya.Instance.DamageBase.Value / 100f + YashaAndKaya.Instance.DamagePerStack.Value / 100f * (count - 1)
@@ -943,7 +972,7 @@ namespace ROTA2
                 {
                     List<float> values =
                     [
-                        Utils.GetExponentialStacking(Trident.Instance.SkillCooldownReductionBase.Value / 100f, Trident.Instance.SkillCooldownReductionPerStack.Value / 100f, count),
+                        LookingGlass.Utils.GetExponentialStacking(Trident.Instance.SkillCooldownReductionBase.Value / 100f, Trident.Instance.SkillCooldownReductionPerStack.Value / 100f, count),
                         Trident.Instance.DamageBase.Value / 100f + Trident.Instance.DamagePerStack.Value / 100f * (count - 1),
                         Trident.Instance.MaximumHealthBase.Value + Trident.Instance.MaximumHealthPerStack.Value * (count - 1),
                         Trident.Instance.BaseHealthRegenerationBase.Value + Trident.Instance.BaseHealthRegenerationPerStack.Value * (count - 1),
