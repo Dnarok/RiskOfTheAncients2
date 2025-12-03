@@ -37,9 +37,9 @@ namespace ROTA2.Buffs
                     }
                 }
 
-                if (self.inventory.GetItemCount(RoR2Content.Items.Ghost) <= 0)
+                if (self.inventory.GetItemCountPermanent(RoR2Content.Items.Ghost) <= 0)
                 {
-                    self.inventory.GiveItem(RoR2Content.Items.Ghost);
+                    self.inventory.GiveItemPermanent(RoR2Content.Items.Ghost);
                 }
             }
 
@@ -59,9 +59,9 @@ namespace ROTA2.Buffs
                     }
                 }
 
-                if (self.inventory.GetItemCount(RoR2Content.Items.Ghost) > 0)
+                if (self.inventory.GetItemCountPermanent(RoR2Content.Items.Ghost) > 0)
                 {
-                    self.inventory.RemoveItem(RoR2Content.Items.Ghost);
+                    self.inventory.RemoveItemPermanent(RoR2Content.Items.Ghost);
                 }
             }
 

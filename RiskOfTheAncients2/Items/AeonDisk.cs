@@ -77,15 +77,19 @@ namespace ROTA2.Items
                 };
                 effectData.SetHurtBoxReference(self.body.mainHurtBox);
                 EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/CleanseEffect"), effectData, transmit: true);
-                Util.CleanseBody(self.body, removeDebuffs: true, removeBuffs: false, removeCooldownBuffs: true, removeDots: true, removeStun: true, removeNearbyProjectiles: false);
 
-                self.body.inventory.RemoveItem(ItemDef);
-                self.body.inventory.GiveItem(UsedAeonDisk.GetItemDef());
+                self.body.inventory.RemoveItemPermanent(ItemDef);
+                self.body.inventory.GiveItemPermanent(UsedAeonDisk.GetItemDef());
                 CharacterMasterNotificationQueue.PushItemTransformNotification(self.body.master, GetItemDef().itemIndex, UsedAeonDisk.GetItemDef().itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
 
                 if (PlaySound.Value)
                 {
                     EffectManager.SimpleSoundEffect(sound.index, self.body.corePosition, true);
+                }
+
+                if (NetworkServer.active)
+                {
+                    CleanseSystem.CleanseBodyServer(self.body, removeDebuffs: true, removeBuffs: false, removeCooldownBuffs: true, removeDots: true, removeStun: true, removeNearbyProjectiles: false);
                 }
             }
 
@@ -122,8 +126,8 @@ namespace ROTA2.Items
                     int count = GetCount(master);
                     if (count > 0)
                     {
-                        master.inventory.RemoveItem(ItemDef, count);
-                        master.inventory.GiveItem(AeonDisk.GetItemDef(), count);
+                        master.inventory.RemoveItemPermanent(ItemDef, count);
+                        master.inventory.GiveItemPermanent(AeonDisk.GetItemDef(), count);
                         CharacterMasterNotificationQueue.PushItemTransformNotification(master, ItemDef.itemIndex, AeonDisk.GetItemDef().itemIndex, default);
                     }
                 }

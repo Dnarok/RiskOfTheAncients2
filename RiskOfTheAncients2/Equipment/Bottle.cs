@@ -317,7 +317,7 @@ Runes will be removed from the pool until all effects have been seen.";
         }
         void DoIllusion(CharacterBody body)
         {
-            if (body.inventory.GetItemCount(RoR2Content.Items.Ghost) <= 0)
+            if (body.inventory.GetItemCountPermanent(RoR2Content.Items.Ghost) <= 0)
             {
                 for (int i = 0; i < IllusionCount.Value; ++i)
                 {
@@ -480,9 +480,9 @@ Runes will be removed from the pool until all effects have been seen.";
             Inventory inventory = master1.inventory;
             if (inventory)
             {
-                if (inventory.GetItemCount(RoR2Content.Items.Ghost) <= 0)
+                if (inventory.GetItemCountPermanent(RoR2Content.Items.Ghost) <= 0)
                 {
-                    inventory.GiveItem(RoR2Content.Items.Ghost);
+                    inventory.GiveItemPermanent(RoR2Content.Items.Ghost);
                 }
 
                 MasterSuicideOnTimer suicide = master1.gameObject.AddComponent<MasterSuicideOnTimer>();

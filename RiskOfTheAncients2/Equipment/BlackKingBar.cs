@@ -6,6 +6,7 @@ using RoR2;
 using ROTA2.Buffs;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Networking;
 
 namespace ROTA2.Equipment
 {
@@ -284,9 +285,12 @@ namespace ROTA2.Equipment
                 };
                 effectData.SetHurtBoxReference(body.mainHurtBox);
                 EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/CleanseEffect"), effectData, transmit: true);
-                Util.CleanseBody(body, removeDebuffs: true, removeBuffs: false, removeCooldownBuffs: true, removeDots: true, removeStun: true, removeNearbyProjectiles: false);
-
                 EffectManager.SimpleSoundEffect(sound.index, body.corePosition, true);
+
+                if (NetworkServer.active)
+                {
+                    CleanseSystem.CleanseBodyServer(body, removeDebuffs: true, removeBuffs: false, removeCooldownBuffs: true, removeDots: true, removeStun: true, removeNearbyProjectiles: false);
+                }
             }
 
             return true;

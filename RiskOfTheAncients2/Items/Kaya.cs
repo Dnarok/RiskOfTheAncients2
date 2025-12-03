@@ -48,13 +48,9 @@ namespace ROTA2.Items
         private void AddCooldownReduction(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs arguments)
         {
             int count = GetCount(body);
-            if (count == 1)
+            if (count > 0)
             {
-                arguments.cooldownMultAdd -= 1f - (1f - SkillCooldownReductionBase.Value / 100f);
-            }
-            else if (count > 1)
-            {
-                arguments.cooldownMultAdd -= 1f - (1f - SkillCooldownReductionBase.Value / 100f) * (float)Math.Pow(1f - SkillCooldownReductionPerStack.Value / 100f, count - 1);
+                arguments.allSkills.cooldownReductionMultAdd += SkillCooldownReductionBase.Value / 100f + SkillCooldownReductionPerStack.Value / 100f * (count - 1);
             }
         }
         private void AddDamage(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs arguments)

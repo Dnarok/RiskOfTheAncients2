@@ -58,33 +58,48 @@ namespace ROTA2.Items
         private void OnHit(On.RoR2.HealthComponent.orig_UpdateLastHitTime orig, RoR2.HealthComponent self, float damageValue, Vector3 damagePosition, bool damageIsSilent, GameObject attacker, bool delayedDamage, bool firstHitOfDelayedDamage)
         {
             orig(self, damageValue, damagePosition, damageIsSilent, attacker, delayedDamage, firstHitOfDelayedDamage);
-            if (NetworkServer.active && self && GetCount(self.body) > 0 && self.IsHealthBelowThreshold(HealthThreshold.Value / 100f) && !EnchantedMangoBuff.HasThisBuff(self.body))
+            if (NetworkServer.active && self)
             {
-                EnchantedMangoBuff.ApplyTo(body: self.body, duration: DamageDuration.Value);
-
-                if (self.body.skillLocator)
+                int count = GetCount(self.body);
+                bool damaged = self.IsHealthBelowThreshold(HealthThreshold.Value / 100f);
+                bool not_buffed = !EnchantedMangoBuff.HasThisBuff(self.body);
+                if (count > 0 && damaged && not_buffed)
                 {
-                    var skills = self.body.skillLocator.allSkills;
-                    if (skills != null)
+                    Inventory.ItemTransformation.TryTransformResult result;
+                    Inventory.ItemTransformation trans = default;
+                    trans.originalItemIndex = ItemDef.itemIndex;
+                    trans.newItemIndex = ConsumedMango.GetItemDef().itemIndex;
+                    trans.maxToTransform = 1;
+                    trans.transformationType = ItemTransformationTypeIndex.None;
+                    if (trans.TryTransform(self.body.inventory, out result))
                     {
-                        foreach (var skill in skills)
+                        EnchantedMangoBuff.ApplyTo(body: self.body, duration: DamageDuration.Value);
+
+                        if (self.body.skillLocator)
                         {
-                            if (skill && skill.CanApplyAmmoPack() && skill.cooldownRemaining > 0f)
+                            var skills = self.body.skillLocator.allSkills;
+                            if (skills != null)
                             {
-                                skill.ApplyAmmoPack();
+                                foreach (var skill in skills)
+                                {
+                                    if (skill && skill.CanApplyAmmoPack() && skill.cooldownRemaining > 0f)
+                                    {
+                                        skill.ApplyAmmoPack();
+                                    }
+                                }
                             }
+                        }
+
+                        if (PlaySound.Value)
+                        {
+                            EffectManager.SimpleSoundEffect(sound.index, self.body.corePosition, true);
                         }
                     }
                 }
 
-                self.body.inventory.RemoveItem(ItemDef);
-                self.body.inventory.GiveItem(ConsumedMango.GetItemDef());
-                CharacterMasterNotificationQueue.PushItemTransformNotification(self.body.master, GetItemDef().itemIndex, ConsumedMango.GetItemDef().itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
-
-                if (PlaySound.Value)
-                {
-                    EffectManager.SimpleSoundEffect(sound.index, self.body.corePosition, true);
-                }
+                // self.body.inventory.RemoveItemPermanent(ItemDef);
+                // self.body.inventory.GiveItemPermanent(ConsumedMango.GetItemDef());
+                // CharacterMasterNotificationQueue.PushItemTransformNotification(self.body.master, GetItemDef().itemIndex, ConsumedMango.GetItemDef().itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
             }
         }
     }
@@ -131,16 +146,24 @@ namespace ROTA2.Items
         }
         private void OnStageStart(Stage stage)
         {
-            if (CharacterMaster.instancesList != null)
+            if (CharacterMaster.instancesList != null && NetworkServer.active)
             {
                 foreach (CharacterMaster master in CharacterMaster.instancesList)
                 {
+                    Inventory.ItemTransformation.TryTransformResult result;
                     int count = GetCount(master);
                     if (count > 0)
                     {
-                        master.inventory.RemoveItem(ItemDef, count);
-                        master.inventory.GiveItem(EnchantedMango.GetItemDef(), count);
-                        CharacterMasterNotificationQueue.PushItemTransformNotification(master, ItemDef.itemIndex, EnchantedMango.GetItemDef().itemIndex, default);
+                        Inventory.ItemTransformation trans = default;
+                        trans.originalItemIndex = ItemDef.itemIndex;
+                        trans.newItemIndex = EnchantedMango.GetItemDef().itemIndex;
+                        trans.maxToTransform = count;
+                        trans.transformationType = ItemTransformationTypeIndex.None;
+                        trans.TryTransform(master.inventory, out result);
+
+                        // master.inventory.RemoveItemPermanent(ItemDef, count);
+                        // master.inventory.GiveItemPermanent(EnchantedMango.GetItemDef(), count);
+                        // CharacterMasterNotificationQueue.PushItemTransformNotification(master, ItemDef.itemIndex, EnchantedMango.GetItemDef().itemIndex, default);
                     }
                 }
             }

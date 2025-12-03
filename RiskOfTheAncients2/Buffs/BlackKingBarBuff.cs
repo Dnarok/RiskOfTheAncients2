@@ -13,7 +13,7 @@ namespace ROTA2.Buffs
         public override void Hooks()
         {
             StatsAPI.Recalculate += OnRecalculate;
-            On.RoR2.DotController.AddDot += OnAddDot;
+            On.RoR2.DotController.AddDot_GameObject_float_HurtBox_DotIndex_float_Nullable1_Nullable1_Nullable1 += OnAddDot;
             On.RoR2.CharacterBody.AddBuff_BuffDef += OnAddBuff_BuffDef;
             On.RoR2.CharacterBody.AddBuff_BuffIndex += OnAddBuff_BuffIndex;
             On.RoR2.CharacterBody.AddTimedBuffAuthority += OnAddTimedBuffAuthority;
@@ -28,7 +28,7 @@ namespace ROTA2.Buffs
                 args.MagicResistance.Add(BlackKingBar.Instance.MagicResistance.Value / 100f);
             }
         }
-        private void OnAddDot(On.RoR2.DotController.orig_AddDot orig, DotController self, GameObject attackerObject, float duration, DotController.DotIndex dotIndex, float damageMultiplier, uint? maxStacksFromAttacker, float? totalDamage, DotController.DotIndex? preUpgradeDotIndex)
+        private void OnAddDot(On.RoR2.DotController.orig_AddDot_GameObject_float_HurtBox_DotIndex_float_Nullable1_Nullable1_Nullable1 orig, DotController self, GameObject attackerObject, float duration, HurtBox hurtBox, DotController.DotIndex dotIndex, float damageMultiplier, uint? maxStacksFromAttacker, float? totalDamage, DotController.DotIndex? preUpgradeDotIndex)
         {
             if (self && HasThisBuff(self.victimBody))
             {
@@ -37,7 +37,7 @@ namespace ROTA2.Buffs
             }
             else
             {
-                orig(self, attackerObject, duration, dotIndex, damageMultiplier, maxStacksFromAttacker, totalDamage, preUpgradeDotIndex);
+                orig(self, attackerObject, duration, hurtBox, dotIndex, damageMultiplier, maxStacksFromAttacker, totalDamage, preUpgradeDotIndex);
             }
         }
         private void OnAddBuff_BuffDef(On.RoR2.CharacterBody.orig_AddBuff_BuffDef orig, CharacterBody self, BuffDef buffDef)

@@ -29,7 +29,7 @@ namespace ROTA2
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Dnarok";
         public const string PluginName = "RiskOfTheAncients2";
-        public const string PluginVersion = "2.0.3";
+        public const string PluginVersion = "2.0.5";
 
         public static List<ItemBase> Items = [];
         public static Dictionary<ItemBase, bool> ItemsEnabled = [];
@@ -146,7 +146,7 @@ namespace ROTA2
 
             if (disabledSkill == null)
             {
-                Addressables.LoadAssetAsync<SkillDef>(RoR2BepInExPack.GameAssetPaths.RoR2_Base_Captain.CaptainSkillUsedUp_asset).Completed += (x) =>
+                Addressables.LoadAssetAsync<SkillDef>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_Base_Captain.CaptainSkillUsedUp_asset).Completed += (x) =>
                 {
                     var captain = x.Result;
 

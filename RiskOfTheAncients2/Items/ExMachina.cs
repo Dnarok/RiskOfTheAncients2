@@ -57,7 +57,7 @@ namespace ROTA2.Items
                 float chance = 1f - (1f / (1f + 1.5f * (RestoreChanceBase.Value / 100f + RestoreChancePerStack.Value / 100f * (count - 1))));
                 if (Util.CheckRoll0To1(chance, self.characterBody.master))
                 {
-                    self.inventory.RestockEquipmentCharges(self.activeEquipmentSlot, 1);
+                    self.inventory.RestockEquipmentCharges(self.activeEquipmentSlot, self.activeEquipmentSet[self.activeEquipmentSlot], 1);
 
                     if (PlaySound.Value)
                     {

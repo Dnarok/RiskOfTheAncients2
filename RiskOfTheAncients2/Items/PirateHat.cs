@@ -79,7 +79,7 @@ namespace ROTA2.Items
                     {
                         index = PickupCatalog.FindPickupIndex(RoR2Content.Items.ScrapGreen.itemIndex);
                     }
-                    PickupDropletController.CreatePickupDroplet(index, report.victim.transform.position + Vector3.up * 1.5f, Vector3.up * 20f);
+                    PickupDropletController.CreatePickupDroplet(new UniquePickup(index), report.victim.transform.position + Vector3.up * 1.5f, Vector3.up * 20f, isDuplicated: false);
 
                     if (PlaySound.Value)
                     {

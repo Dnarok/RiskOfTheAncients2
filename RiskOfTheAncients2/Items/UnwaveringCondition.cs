@@ -64,7 +64,7 @@ namespace ROTA2.Items
             if (!cursor.TryGotoNext
                 (
                     x => x.MatchLdsfld(typeof(DLC2Content.Items), nameof(DLC2Content.Items.BoostAllStats)),
-                    x => x.MatchCallOrCallvirt<Inventory>(nameof(Inventory.GetItemCount)),
+                    x => x.MatchCallOrCallvirt<Inventory>(nameof(Inventory.GetItemCountEffective)),
                     x => x.MatchStloc(out index)
                 ) ||
                 !cursor.TryGotoNext

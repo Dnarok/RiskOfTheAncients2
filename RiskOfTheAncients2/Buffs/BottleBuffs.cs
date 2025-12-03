@@ -37,7 +37,7 @@ namespace ROTA2.Buffs
         {
             if (HasThisBuff(body))
             {
-                arguments.cooldownMultAdd -= 1f - (1f - Bottle.Instance.ArcaneReduction.Value / 100f);
+                arguments.allSkills.cooldownReductionMultAdd += Bottle.Instance.ArcaneReduction.Value / 100f;
             }
         }
     }

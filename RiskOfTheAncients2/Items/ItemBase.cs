@@ -27,7 +27,7 @@ namespace ROTA2.Items
         {
             if (body && body.inventory)
             {
-                return body.inventory.GetItemCount(GetItemDef());
+                return body.inventory.GetItemCountEffective(GetItemDef());
             }
             else
             {
@@ -38,7 +38,53 @@ namespace ROTA2.Items
         {
             if (master && master.inventory)
             {
-                return master.inventory.GetItemCount(GetItemDef());
+                return master.inventory.GetItemCountEffective(GetItemDef());
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public static int GetPermanentCount(CharacterBody body)
+        {
+            if (body && body.inventory)
+            {
+                return body.inventory.GetItemCountPermanent(GetItemDef());
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        public static int GetPermanentCount(CharacterMaster master)
+        {
+            if (master && master.inventory)
+            {
+                return master.inventory.GetItemCountPermanent(GetItemDef());
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public static int GetTemporaryCount(CharacterBody body)
+        {
+            if (body && body.inventory)
+            {
+                return body.inventory.GetItemCountTemp(GetItemDef());
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        public static int GetTemporaryCount(CharacterMaster master)
+        {
+            if (master && master.inventory)
+            {
+                return master.inventory.GetItemCountTemp(GetItemDef());
             }
             else
             {
@@ -91,7 +137,7 @@ namespace ROTA2.Items
                     ItemDef.tier == ItemTier.VoidTier3 ||
                     ItemDef.tier == ItemTier.VoidBoss)
                 {
-                    Addressables.LoadAssetAsync<ExpansionDef>(RoR2BepInExPack.GameAssetPaths.RoR2_DLC1_Common.DLC1_asset).Completed += (y) =>
+                    Addressables.LoadAssetAsync<ExpansionDef>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_DLC1_Common.DLC1_asset).Completed += (y) =>
                     {
                         ItemDef.requiredExpansion = y.Result;
                     };

@@ -1,3 +1,9 @@
+## 2.0.5
+- Fixed all sources of cooldown reduction being broken (Fairy's Trinket, and Kaya's upgrades). Scaling might be slightly worse, barely worth noting.
+
+## 2.0.4
+- Fixed for Alloyed Collective.
+
 ## 2.0.3
 - Fixed readme discrepancies.
 - Added "Magic Resistance" mechanic.

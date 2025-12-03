@@ -31,10 +31,13 @@ namespace ROTA2.Equipment
             {
                 for (uint i = 0; i < body.inventory.GetEquipmentSlotCount(); i++)
                 {
-                    var equipment = body.inventory.GetEquipment(i);
-                    if (equipment.equipmentIndex == EquipmentDef.equipmentIndex)
+                    for (uint j = 0; j < body.inventory.GetEquipmentSetCount(i); j++)
                     {
-                        return true;
+                        var equipment = body.inventory.GetEquipment(i, j);
+                        if (equipment.equipmentIndex == EquipmentDef.equipmentIndex)
+                        {
+                            return true;
+                        }
                     }
                 }
             }
@@ -47,10 +50,13 @@ namespace ROTA2.Equipment
             {
                 for (uint i = 0; i < master.inventory.GetEquipmentSlotCount(); i++)
                 {
-                    var equipment = master.inventory.GetEquipment(i);
-                    if (equipment.equipmentIndex == EquipmentDef.equipmentIndex)
+                    for (uint j = 0; j < master.inventory.GetEquipmentSetCount(i); j++)
                     {
-                        return true;
+                        var equipment = master.inventory.GetEquipment(i, j);
+                        if (equipment.equipmentIndex == EquipmentDef.equipmentIndex)
+                        {
+                            return true;
+                        }
                     }
                 }
             }

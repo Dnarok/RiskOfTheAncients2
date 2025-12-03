@@ -198,9 +198,9 @@ namespace ROTA2
             {
                 foreach (ItemDef item in itemsToWatchFor)
                 {
-                    if (body.inventory.GetItemCount(item) > 0)
+                    if (body.inventory.GetItemCountPermanent(item) > 0)
                     {
-                        Log.Debug($"Found at least 1 {item.nameToken}, adding RecipeBehavior to {body.GetDisplayName()}.");
+                        Log.Debug($"Found at least 1 PERMANENT {item.nameToken}, adding RecipeBehavior to {body.GetDisplayName()}.");
                         body.gameObject.AddComponent<RecipeBehavior>();
                         return;
                     }
@@ -211,7 +211,7 @@ namespace ROTA2
         {
             bool callOriginal = true;
             EquipmentIndex currentEquipmentIndex = context.body.inventory.currentEquipmentIndex;
-            EquipmentIndex equipmentIndex = PickupCatalog.GetPickupDef(context.controller.pickupIndex)?.equipmentIndex ?? EquipmentIndex.None;
+            EquipmentIndex equipmentIndex = PickupCatalog.GetPickupDef(context.controller._pickupState.pickupIndex)?.equipmentIndex ?? EquipmentIndex.None;
             foreach (EquipmentRecipe recipe in equipment_recipes)
             {
                 if ((currentEquipmentIndex == recipe.input_1.equipmentIndex &&
@@ -219,7 +219,7 @@ namespace ROTA2
                     (currentEquipmentIndex == recipe.input_2.equipmentIndex &&
                      equipmentIndex == recipe.input_1.equipmentIndex))
                 {
-                    context.body.inventory.SetEquipmentIndex(recipe.output.equipmentIndex);
+                    context.body.inventory.SetEquipmentIndex(recipe.output.equipmentIndex, isRemovingEquipment: true);
                     context.controller.StartWaitTime();
                     context.shouldDestroy = true;
                     context.shouldNotify = false;
@@ -253,7 +253,7 @@ namespace ROTA2
                         int amount_to_make = int.MaxValue;
                         foreach (var item in ItemRecipe.inputs.Keys)
                         {
-                            int count = body.inventory.GetItemCount(item);
+                            int count = body.inventory.GetItemCountPermanent(item);
                             if (count < ItemRecipe.inputs[item])
                             {
                                 bail = true;
@@ -271,11 +271,11 @@ namespace ROTA2
 
                         foreach (var pair in ItemRecipe.inputs)
                         {
-                            body.inventory.RemoveItem(pair.Key, amount_to_make * pair.Value);
+                            body.inventory.RemoveItemPermanent(pair.Key, amount_to_make * pair.Value);
 
                             CharacterMasterNotificationQueue.PushItemTransformNotification(body.master, pair.Key.itemIndex, ItemRecipe.output.Key.itemIndex, default);
                         }
-                        body.inventory.GiveItem(ItemRecipe.output.Key, amount_to_make * ItemRecipe.output.Value);
+                        body.inventory.GiveItemPermanent(ItemRecipe.output.Key, amount_to_make * ItemRecipe.output.Value);
                     }
 
                     foreach (MixedRecipe MixedRecipe in mixed_recipes)
@@ -283,7 +283,7 @@ namespace ROTA2
                         bool bail = false;
                         foreach (var item in MixedRecipe.items.Keys)
                         {
-                            int count = body.inventory.GetItemCount(item);
+                            int count = body.inventory.GetItemCountPermanent(item);
                             if (count < MixedRecipe.items[item])
                             {
                                 bail = true;
@@ -300,10 +300,10 @@ namespace ROTA2
 
                         foreach (var pair in MixedRecipe.items)
                         {
-                            body.inventory.RemoveItem(pair.Key, pair.Value);
+                            body.inventory.RemoveItemPermanent(pair.Key, pair.Value);
                         }
                         CharacterMasterNotificationQueue.PushEquipmentTransformNotification(body.master, MixedRecipe.equipment.equipmentIndex, MixedRecipe.output.equipmentIndex, default);
-                        body.inventory.SetEquipmentIndexForSlot(MixedRecipe.output.equipmentIndex, body.inventory.activeEquipmentSlot);
+                        body.inventory.SetEquipmentIndexForSlot(MixedRecipe.output.equipmentIndex, body.inventory.activeEquipmentSlot, body.inventory.activeEquipmentSet[body.inventory.activeEquipmentSlot]);
                     }
                 }
             }
