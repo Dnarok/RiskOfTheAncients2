@@ -256,9 +256,9 @@ namespace ROTA2.Equipment
         {
             AvatarDuration = config.Bind("Equipment: " + EquipmentName, "Avatar Duration", 6f, "How long should the immunity and damage reduction last?");
             ModSettingsManager.AddOption(new FloatFieldOption(AvatarDuration));
-            MagicResistance = config.Bind("Equipment: " + EquipmentName, "Bonus Magic Resistance", 35f, "How much magic resistance should be gained while active?");
+            MagicResistance = config.Bind("Equipment: " + EquipmentName, "Bonus Magic Resistance", 50f, "How much magic resistance should be gained while active?");
             ModSettingsManager.AddOption(new FloatFieldOption(MagicResistance));
-            BlackKingBarCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 60f, "");
+            BlackKingBarCooldown = config.Bind("Equipment: " + EquipmentName, "Cooldown", 45f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(BlackKingBarCooldown));
         }
 

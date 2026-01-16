@@ -43,7 +43,7 @@ namespace ROTA2.Items
             ModSettingsManager.AddOption(new FloatFieldOption(CriticalChance));
             CriticalDamageBase = configuration.Bind("Item: " + ItemName, "Critical Damage Base", 20f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(CriticalDamageBase));
-            CriticalDamagePerStack = configuration.Bind("Item: " + ItemName, "Critical Damage Per Stack", 20f, "");
+            CriticalDamagePerStack = configuration.Bind("Item: " + ItemName, "Critical Damage Per Stack", 35f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(CriticalDamagePerStack));
             PlaySound = configuration.Bind("Item: " + ItemName, "Play Sound", true, "");
             ModSettingsManager.AddOption(new CheckBoxOption(PlaySound));

@@ -16,9 +16,11 @@ namespace ROTA2.Buffs
 
         private void AddDamage(CharacterBody body, RecalculateStatsAPI.StatHookEventArgs arguments)
         {
-            if (HasThisBuff(body))
+            int buff_count = GetBuffCount(body);
+            int item_count = EnchantedMango.GetCount(body);
+            if (buff_count > 0 && item_count > 0)
             {
-                arguments.damageMultAdd += EnchantedMango.Instance.DamageBonus.Value / 100f;
+                arguments.damageMultAdd += (EnchantedMango.Instance.DamageBonusBase.Value / 100f + EnchantedMango.Instance.DamageBonusPerStack.Value / 100f * (item_count - 1)) * buff_count;
             }
         }
     }

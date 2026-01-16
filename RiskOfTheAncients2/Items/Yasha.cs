@@ -34,9 +34,9 @@ namespace ROTA2.Items
         public ConfigEntry<float> MovementSpeedPerStack;
         public void CreateConfig(ConfigFile configuration)
         {
-            AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Attack Speed Bonus", 15f, "How much attack speed should be provided by the first stack?");
+            AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Attack Speed Bonus", 20f, "How much attack speed should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedBase));
-            AttackSpeedPerStack = configuration.Bind("Item: " + ItemName, "Stacking Attack Speed Bonus", 15f, "How much attack speed should be provided by subsequent stacks?");
+            AttackSpeedPerStack = configuration.Bind("Item: " + ItemName, "Stacking Attack Speed Bonus", 20f, "How much attack speed should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedPerStack));
             MovementSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Movement Speed Bonus", 15f, "How much movement speed should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedBase));

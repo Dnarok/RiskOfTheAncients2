@@ -45,9 +45,9 @@ namespace ROTA2.Items
             ModSettingsManager.AddOption(new FloatFieldOption(SkillCooldownReductionBase));
             SkillCooldownReductionPerStack = configuration.Bind("Item: " + ItemName, "Stacking Skill Cooldown Reduction", 9f, "How much skill cooldown reduction should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(SkillCooldownReductionPerStack));
-            DamageBase = configuration.Bind("Item: " + ItemName, "Initial Damage Bonus", 18f, "How much damage should be provided by the first stack?");
+            DamageBase = configuration.Bind("Item: " + ItemName, "Initial Damage Bonus", 22.5f, "How much damage should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBase));
-            DamagePerStack = configuration.Bind("Item: " + ItemName, "Stacking Damage Bonus", 18f, "How much damage should be provided by subsequent stacks?");
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Stacking Damage Bonus", 22.5f, "How much damage should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamagePerStack));
             MaximumHealthBase = configuration.Bind("Item: " + ItemName, "Initial Maximum Health Bonus", 60f, "How much maximum health should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthBase));

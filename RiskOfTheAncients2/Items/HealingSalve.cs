@@ -41,7 +41,7 @@ namespace ROTA2.Items
             ModSettingsManager.AddOption(new FloatFieldOption(RegenerationBase));
             RegenerationPerStack = configuration.Bind("Item: " + ItemName, "Regeneration Per Stack", 5f, "How much health regeneration should subsequent stacks provide?");
             ModSettingsManager.AddOption(new FloatFieldOption(RegenerationPerStack));
-            BuffDuration = configuration.Bind("Item: " + ItemName, "Healing Duration", 5f, "How long should the regeneration last?");
+            BuffDuration = configuration.Bind("Item: " + ItemName, "Healing Duration", 10f, "How long should the regeneration last?");
             ModSettingsManager.AddOption(new FloatFieldOption(BuffDuration));
             PlaySound = configuration.Bind("Item: " + ItemName, "Play Sound", true, "");
             ModSettingsManager.AddOption(new CheckBoxOption(PlaySound));

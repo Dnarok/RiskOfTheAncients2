@@ -48,9 +48,9 @@ namespace ROTA2.Items
             ModSettingsManager.AddOption(new FloatFieldOption(BaseHealthRegenerationBase));
             BaseHealthRegenerationPerStack = configuration.Bind("Item: " + ItemName, "Stacking Base Health Regeneration Bonus", 2.4f, "How much base health regeneration should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(BaseHealthRegenerationPerStack));
-            AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Attack Speed Bonus", 22.5f, "How much attack speed should be provided by the first stack?");
+            AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Attack Speed Bonus", 30f, "How much attack speed should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedBase));
-            AttackSpeedPerStack = configuration.Bind("Item: " + ItemName, "Stacking Attack Speed Bonus", 22.5f, "How much attack speed should be provided by subsequent stacks?");
+            AttackSpeedPerStack = configuration.Bind("Item: " + ItemName, "Stacking Attack Speed Bonus", 30f, "How much attack speed should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedPerStack));
             MovementSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Movement Speed Bonus", 22.5f, "How much movement speed should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedBase));

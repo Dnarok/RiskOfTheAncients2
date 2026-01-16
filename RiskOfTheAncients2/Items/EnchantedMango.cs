@@ -15,13 +15,13 @@ namespace ROTA2.Items
         public override string ItemName => "Enchanted Mango";
         public override string ConfigItemName => ItemName;
         public override string ItemTokenName => "ENCHANTED_MANGO";
-        public override string ItemTokenPickup => "Receive bonus damage and reset all skill cooldowns at low health. Consumed on use.";
-        public override string ItemTokenDesc => $"Taking damage to below {Health($"{HealthThreshold.Value}% health")} {Utility("consumes")} this item, {Utility("resetting all skill cooldowns")} and increasing {Damage("damage")} by {Damage($"{DamageBonus.Value}%")} for {Damage($"{DamageDuration.Value} seconds")}. Regenerates at the start of each stage.";
+        public override string ItemTokenPickup => "Activating your Secondary skill reduces your Special skill's cooldown and increases damage.";
+        public override string ItemTokenDesc => $"Activating {Utility("Secondary skill")} reduces {Utility("Special skill remaining cooldown")} by {Utility($"{SpecialCooldownReduction.Value}%")}, and increases {Damage("damage")} by {Damage($"{DamageBonusBase.Value}%")} {Stack($"(+{DamageBonusPerStack.Value}% per stack)")} for {Damage($"{DamageDuration.Value} seconds")}.";
         public override string ItemTokenLore => "The bittersweet flavors of Jidi Isle are irresistible to amphibians.";
         public override string ItemDefGUID => Assets.EnchantedMango.ItemDef;
         public override void Hooks()
         {
-            On.RoR2.HealthComponent.UpdateLastHitTime += OnHit;
+            On.RoR2.CharacterBody.OnSkillActivated += OnSkill;
         }
 
         public override void Init(ConfigFile configuration)
@@ -33,17 +33,20 @@ namespace ROTA2.Items
             Hooks();
         }
 
-        public ConfigEntry<float> HealthThreshold;
-        public ConfigEntry<float> DamageBonus;
+        public ConfigEntry<float> SpecialCooldownReduction;
+        public ConfigEntry<float> DamageBonusBase;
+        public ConfigEntry<float> DamageBonusPerStack;
         public ConfigEntry<float> DamageDuration;
         public ConfigEntry<bool> PlaySound;
         public void CreateConfig(ConfigFile configuration)
         {
-            HealthThreshold = configuration.Bind("Item: " + ItemName, "Health Threshold", 40f, "At what percent of health should this item activate?");
-            ModSettingsManager.AddOption(new FloatFieldOption(HealthThreshold));
-            DamageBonus = configuration.Bind("Item: " + ItemName, "Damage Bonus", 50f, "How much bonus damage should be provided by activation?");
-            ModSettingsManager.AddOption(new FloatFieldOption(DamageBonus));
-            DamageDuration = configuration.Bind("Item: " + ItemName, "Damage Duration", 5f, "How long should the bonus damage last?");
+            SpecialCooldownReduction = configuration.Bind("Item: " + ItemName, "Special Cooldown Reduction", 15f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(SpecialCooldownReduction));
+            DamageBonusBase = configuration.Bind("Item: " + ItemName, "Damage Bonus Base", 5f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(DamageBonusBase));
+            DamageBonusPerStack = configuration.Bind("Item: " + ItemName, "Damage Bonus Per Stack", 5f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(DamageBonusPerStack));
+            DamageDuration = configuration.Bind("Item: " + ItemName, "Damage Duration", 5f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageDuration));
             PlaySound = configuration.Bind("Item: " + ItemName, "Play Sound", true, "");
             ModSettingsManager.AddOption(new CheckBoxOption(PlaySound));
@@ -55,52 +58,29 @@ namespace ROTA2.Items
             Addressables.LoadAssetAsync<NetworkSoundEventDef>(Assets.EnchantedMango.NetworkSoundEventDef).Completed += (x) => { ContentAddition.AddNetworkSoundEventDef(x.Result); sound = x.Result; };
         }
 
-        private void OnHit(On.RoR2.HealthComponent.orig_UpdateLastHitTime orig, RoR2.HealthComponent self, float damageValue, Vector3 damagePosition, bool damageIsSilent, GameObject attacker, bool delayedDamage, bool firstHitOfDelayedDamage)
+        private void OnSkill(On.RoR2.CharacterBody.orig_OnSkillActivated orig, CharacterBody body, GenericSkill skill)
         {
-            orig(self, damageValue, damagePosition, damageIsSilent, attacker, delayedDamage, firstHitOfDelayedDamage);
-            if (NetworkServer.active && self)
+            int count = GetCount(body);
+            if (count > 0 && skill == body.skillLocator.secondary && skill.cooldownRemaining > 0f)
             {
-                int count = GetCount(self.body);
-                bool damaged = self.IsHealthBelowThreshold(HealthThreshold.Value / 100f);
-                bool not_buffed = !EnchantedMangoBuff.HasThisBuff(self.body);
-                if (count > 0 && damaged && not_buffed)
+                EnchantedMangoBuff.ApplyTo(
+                    body: body,
+                    duration: DamageDuration.Value
+                );
+
+                var special = body.skillLocator.special;
+                if (special.stock < special.maxStock)
                 {
-                    Inventory.ItemTransformation.TryTransformResult result;
-                    Inventory.ItemTransformation trans = default;
-                    trans.originalItemIndex = ItemDef.itemIndex;
-                    trans.newItemIndex = ConsumedMango.GetItemDef().itemIndex;
-                    trans.maxToTransform = 1;
-                    trans.transformationType = ItemTransformationTypeIndex.None;
-                    if (trans.TryTransform(self.body.inventory, out result))
-                    {
-                        EnchantedMangoBuff.ApplyTo(body: self.body, duration: DamageDuration.Value);
-
-                        if (self.body.skillLocator)
-                        {
-                            var skills = self.body.skillLocator.allSkills;
-                            if (skills != null)
-                            {
-                                foreach (var skill in skills)
-                                {
-                                    if (skill && skill.CanApplyAmmoPack() && skill.cooldownRemaining > 0f)
-                                    {
-                                        skill.ApplyAmmoPack();
-                                    }
-                                }
-                            }
-                        }
-
-                        if (PlaySound.Value)
-                        {
-                            EffectManager.SimpleSoundEffect(sound.index, self.body.corePosition, true);
-                        }
-                    }
+                    special.rechargeStopwatch += special.baseRechargeInterval * (SpecialCooldownReduction.Value / 100f);
                 }
 
-                // self.body.inventory.RemoveItemPermanent(ItemDef);
-                // self.body.inventory.GiveItemPermanent(ConsumedMango.GetItemDef());
-                // CharacterMasterNotificationQueue.PushItemTransformNotification(self.body.master, GetItemDef().itemIndex, ConsumedMango.GetItemDef().itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
+                if (PlaySound.Value)
+                {
+                    EffectManager.SimpleSoundEffect(sound.index, body.corePosition, true);
+                }
             }
+
+            orig(body, skill);
         }
     }
 

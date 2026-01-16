@@ -1,14 +1,17 @@
 using BepInEx;
 using BepInEx.Bootstrap;
+using BepInEx.Configuration;
 using R2API;
 using RiskOfOptions;
 using RiskOfOptions.Options;
 using RoR2;
+using RoR2.ContentManagement;
 using RoR2.ExpansionManagement;
 using RoR2.Skills;
 using ROTA2.Buffs;
 using ROTA2.Equipment;
 using ROTA2.Items;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -29,7 +32,7 @@ namespace ROTA2
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Dnarok";
         public const string PluginName = "RiskOfTheAncients2";
-        public const string PluginVersion = "2.0.5";
+        public const string PluginVersion = "2.1.0";
 
         public static List<ItemBase> Items = [];
         public static Dictionary<ItemBase, bool> ItemsEnabled = [];
@@ -40,6 +43,7 @@ namespace ROTA2
         public static ExpansionDef expansion = null;
         public static Dictionary<string, Sprite> SpritesLoaded = [];
         public static SkillDef disabledSkill;
+        public static ConfigEntry<bool> useOldRecipes;
         public static string AddressablesDirectory { get; private set; }
 
         public static bool isLookingGlassInstalled => Chainloader.PluginInfos.ContainsKey("droppod.lookingglass");
@@ -59,6 +63,8 @@ namespace ROTA2
             Addressables.LoadAssetAsync<ExpansionDef>(Assets.Default.ExpansionDef).Completed += (x) => { expansion = x.Result; ContentAddition.AddExpansionDef(expansion); };
 
             StatsAPI.Init();
+            useOldRecipes = Config.Bind("General", "Use old recipes", false, "Should items like Sange and Yasha automatically be formed in-inventory, instead of using CHEF? (Orb of Corrosion always auto-crafts either way.)");
+            ModSettingsManager.AddOption(new CheckBoxOption(useOldRecipes, true));
 
             var ItemTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(ItemBase)));
             foreach (var type in ItemTypes)
@@ -115,11 +121,19 @@ namespace ROTA2
                 Log.Info($"Buff: {buff.BuffName} initialized!");
             }
 
-            RoR2Application.onLoad += () =>
+            if (useOldRecipes.Value)
             {
-                Log.Debug("Initializing RecipeManager.");
-                RecipeManager.Init();
-            };
+                Log.Debug("Initializing old RecipeManager.");
+                RoR2Application.onLoad += () =>
+                {
+                    RecipeManager.InitOld();
+                };
+            }
+            else
+            {
+                Log.Debug("Initializing new RecipeManager.");
+                RecipeManager.InitNew();
+            }
 
             On.RoR2.Items.ContagiousItemManager.Init += (orig) =>
             {
@@ -220,6 +234,44 @@ namespace ROTA2
                 ContentAddition.AddNetworkSoundEventDef(x.Result);
                 sound = x.Result;
             };
+        }
+    }
+
+    public class Content : IContentPackProvider
+    {
+        internal ContentPack content = new ContentPack();
+        public static List<CraftableDef> craftables = new List<CraftableDef>();
+        public string identifier => Plugin.PluginGUID + ".Recipes";
+
+        public void Initialize()
+        {
+            ContentManager.collectContentPackProviders += AddSelf;
+        }
+
+        private void AddSelf(ContentManager.AddContentPackProviderDelegate add)
+        {
+            add(this);
+        }
+
+        public IEnumerator LoadStaticContentAsync(LoadStaticContentAsyncArgs args)
+        {
+            content.identifier = identifier;
+            content.craftableDefs.Add(craftables.ToArray());
+            args.ReportProgress(1f);
+            yield break;
+        }
+
+        public IEnumerator GenerateContentPackAsync(GetContentPackAsyncArgs args)
+        {
+            ContentPack.Copy(content, args.output);
+            args.ReportProgress(1f);
+            yield break;
+        }
+
+        public IEnumerator FinalizeAsync(FinalizeAsyncArgs args)
+        {
+            args.ReportProgress(1f);
+            yield break;
         }
     }
 }

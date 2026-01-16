@@ -36,13 +36,13 @@ namespace ROTA2.Items
         public ConfigEntry<float> ProcCoefficient;
         public void CreateConfig(ConfigFile configuration)
         {
-            ProcChance = configuration.Bind("Item: " + ItemName, "Proc Chance", 20f, "What is the chance on hit to proc?");
+            ProcChance = configuration.Bind("Item: " + ItemName, "Proc Chance", 25f, "What is the chance on hit to proc?");
             ModSettingsManager.AddOption(new FloatFieldOption(ProcChance));
-            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Base", 20f, "How much total damage should the bonus hit do on the first stack?");
+            DamageBase = configuration.Bind("Item: " + ItemName, "Damage Base", 33f, "How much total damage should the bonus hit do on the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBase));
-            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 20f, "How much extra total damage should the bonus hit do for subsequent stacks?");
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Damage Per Stack", 33f, "How much extra total damage should the bonus hit do for subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamagePerStack));
-            ProcCoefficient = configuration.Bind("Item: " + ItemName, "Proc Coefficient", 0.3f, "What is the proc coefficient of the bonus hit?");
+            ProcCoefficient = configuration.Bind("Item: " + ItemName, "Proc Coefficient", 0.2f, "What is the proc coefficient of the bonus hit?");
             ModSettingsManager.AddOption(new FloatFieldOption(ProcCoefficient));
         }
 

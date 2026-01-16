@@ -889,7 +889,6 @@ namespace ROTA2
             if (Plugin.ItemsEnabled[SangeAndYasha.Instance])
             {
                 item = new();
-                item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
                 item.descriptions.Add("Bonus Health: ");
                 item.valueTypes.Add(ItemStatsDef.ValueType.Health);
                 item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.FlatHealth);

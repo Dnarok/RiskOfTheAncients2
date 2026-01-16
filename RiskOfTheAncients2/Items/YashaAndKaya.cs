@@ -41,9 +41,9 @@ namespace ROTA2.Items
         public ConfigEntry<float> DamagePerStack;
         public void CreateConfig(ConfigFile configuration)
         {
-            AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Attack Speed Bonus", 22.5f, "How much attack speed should be provided by the first stack?");
+            AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Attack Speed Bonus", 30f, "How much attack speed should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedBase));
-            AttackSpeedPerStack = configuration.Bind("Item: " + ItemName, "Stacking Attack Speed Bonus", 22.5f, "How much attack speed should be provided by subsequent stacks?");
+            AttackSpeedPerStack = configuration.Bind("Item: " + ItemName, "Stacking Attack Speed Bonus", 30f, "How much attack speed should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedPerStack));
             MovementSpeedBase = configuration.Bind("Item: " + ItemName, "Initial Movement Speed Bonus", 22.5f, "How much movement speed should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(MovementSpeedBase));
@@ -53,9 +53,9 @@ namespace ROTA2.Items
             ModSettingsManager.AddOption(new FloatFieldOption(SkillCooldownReductionBase));
             SkillCooldownReductionPerStack = configuration.Bind("Item: " + ItemName, "Stacking Skill Cooldown Reduction", 9f, "How much skill cooldown reduction should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(SkillCooldownReductionPerStack));
-            DamageBase = configuration.Bind("Item: " + ItemName, "Initial Damage Bonus", 18f, "How much damage should be provided by the first stack?");
+            DamageBase = configuration.Bind("Item: " + ItemName, "Initial Damage Bonus", 22.5f, "How much damage should be provided by the first stack?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBase));
-            DamagePerStack = configuration.Bind("Item: " + ItemName, "Stacking Damage Bonus", 18f, "How much damage should be provided by subsequent stacks?");
+            DamagePerStack = configuration.Bind("Item: " + ItemName, "Stacking Damage Bonus", 22.5f, "How much damage should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(DamagePerStack));
         }
 

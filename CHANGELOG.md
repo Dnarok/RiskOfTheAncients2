@@ -1,3 +1,32 @@
+## 2.1.0
+- Most automatic combinations have been removed, and replaced with crafting at CHEF.
+  - Some affected base items have been buffed.
+  - There is now an option to revert to the old method of crafting.
+- Various crafting recipes with vanilla items have been added.
+  - See bottom of mod page for all recipes.
+  - The old crafting option removes these recipes as well.
+- Javelin: Increased proc chance from `20%` -> `25%`.
+- Javelin: Increased damage base/per stack from `20%` -> `33%`.
+- Javelin: Proc coefficient decreased from `0.3` -> `0.2`.
+- Enchanted Mango: Reworked.
+  - Old behavior: Taking damage to below `40%` health consumes this item, resetting all skill cooldowns and increasing damage by `50%` for `5` seconds. Regenerates at the start of each stage.
+  - New behavior: Activating Secondary skill reduces Special skill cooldown by `15%`, and increases damage by `5%` (+`5%` per stack) for `5` seconds.
+- Healing Salve: Increased healing duration from `5` -> `10`.
+- Spark of Courage: Increased armor from `10` -> `15`.
+- Iron Branch: Increased stat increase from `1.5%` -> `2%`.
+- Kaya, Yasha, and Sange no longer automatically combine.
+- Kaya: Increased damage base/per stack from `12%` -> `15%`.
+- Yasha: Increased attack speed base/per stack from `15%` -> `20%`.
+- Yasha and Kaya: Increased damage base/per stack from `18%` -> `22.5%`.
+- Yasha and Kaya: Increased attack speed base/per stack from `22.5%` -> `30%`.
+- Sange and Yasha: Increased attack speed base/per stack from `22.5%` -> `30%`.
+- Kaya and Sange: Increased damage base/per stack from `18%` -> `22.5%`.
+- Trident: Increased damage base/per stack from `24%` -> `30%`.
+- Trident: Increased attack speed base/per stack from `30%` -> `40%`.
+- Daedalus: Increased critical strike damage per stack from `20%` -> `35%`.
+- Black King Bar: Increased magic resistance from `35%` -> `50%`.
+- Black King Bar: Reduced cooldown from `60` -> `45`.
+
 ## 2.0.5
 - Fixed all sources of cooldown reduction being broken (Fairy's Trinket, and Kaya's upgrades). Scaling might be slightly worse, barely worth noting.
 
