@@ -37,7 +37,7 @@ namespace ROTA2.Items
             ModSettingsManager.AddOption(new FloatFieldOption(ArmorReduction));
             MaxStacksBase = configuration.Bind("Item: " + ItemName, "Base Max Stacks", 3, "How many debuff stacks can be applied by the first stack?");
             ModSettingsManager.AddOption(new IntFieldOption(MaxStacksBase));
-            MaxStacksPerStack = configuration.Bind("Item: " + ItemName, "Stacking Max Stacks", 2, "How many debuff stacks can be applied by subsequent stack?");
+            MaxStacksPerStack = configuration.Bind("Item: " + ItemName, "Stacking Max Stacks", 3, "How many debuff stacks can be applied by subsequent stack?");
             ModSettingsManager.AddOption(new IntFieldOption(MaxStacksPerStack));
             ArmorReductionDuration = configuration.Bind("Item: " + ItemName, "Armor Reduction Duration", 3f, "How long should the armor reduction last?");
             ModSettingsManager.AddOption(new FloatFieldOption(ArmorReductionDuration));

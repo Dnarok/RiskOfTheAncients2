@@ -40,11 +40,11 @@ namespace ROTA2.Items
         public ConfigEntry<bool> PlaySound;
         public void CreateConfig(ConfigFile configuration)
         {
-            SpecialCooldownReduction = configuration.Bind("Item: " + ItemName, "Special Cooldown Reduction", 15f, "");
+            SpecialCooldownReduction = configuration.Bind("Item: " + ItemName, "Special Cooldown Reduction", 7.5f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(SpecialCooldownReduction));
-            DamageBonusBase = configuration.Bind("Item: " + ItemName, "Damage Bonus Base", 5f, "");
+            DamageBonusBase = configuration.Bind("Item: " + ItemName, "Damage Bonus Base", 8f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBonusBase));
-            DamageBonusPerStack = configuration.Bind("Item: " + ItemName, "Damage Bonus Per Stack", 5f, "");
+            DamageBonusPerStack = configuration.Bind("Item: " + ItemName, "Damage Bonus Per Stack", 8f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBonusPerStack));
             DamageDuration = configuration.Bind("Item: " + ItemName, "Damage Duration", 5f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageDuration));

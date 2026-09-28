@@ -1,24 +1,24 @@
 {
   "name": "RiskOfTheAncients2",
-  "version_number": "2.1.0",
+  "version_number": "2.1.1",
   "website_url": "https://github.com/Dnarok/RiskOfTheAncients2",
   "description": "Dota 2 items in Risk of Rain 2!",
   "dependencies": [
-    "bbepis-BepInExPack-5.4.2109",
+    "bbepis-BepInExPack-5.4.2122",
     "RiskofThunder-HookGenPatcher-1.2.9",
-    "RiskofThunder-R2API_Core-5.1.5",
-    "RiskofThunder-R2API_ContentManagement-1.0.10",
+    "RiskofThunder-R2API_Core-5.3.0",
+    "RiskofThunder-R2API_ContentManagement-1.0.11",
     "RiskofThunder-R2API_Dot-1.1.2",
-    "RiskofThunder-R2API_Language-1.0.1",
-    "RiskofThunder-R2API_Items-1.0.4",
-    "RiskofThunder-R2API_RecalculateStats-1.6.5",
+    "RiskofThunder-R2API_Language-1.1.0",
+    "RiskofThunder-R2API_Items-1.0.8",
+    "RiskofThunder-R2API_RecalculateStats-1.6.6",
     "RiskofThunder-R2API_CommandHelper-1.0.2",
     "RiskofThunder-R2API_ProcType-1.0.2",
     "RiskofThunder-R2API_Sound-1.0.3",
     "RiskofThunder-R2API_DamageType-1.1.7",
-    "Rune580-Risk_Of_Options-2.8.4",
+    "Rune580-Risk_Of_Options-2.8.6",
     "dotaguys-LogBookPatcher-1.0.1",
     "dotaguys-RendererInfoPatcher-1.0.0",
-    "LordVGames-DamageSourceForEnemies-1.2.1"
+    "LordVGames-DamageSourceForEnemies-2.0.2"
   ]
 }

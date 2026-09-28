@@ -1,3 +1,28 @@
+## 2.1.1
+- Added new CHEF recipes:
+  - Stun Grenade + Runald's Band = Skull Basher
+  - Dragon Scale + Runald's Band = Kjaro's Band
+  - Orb of Frost + Kjaro's Band = Runald's Band
+  - Iron Branch + Bustling Fungus = Seed of Life (Consumed)
+  - Cloak + Aegis = Ben's Raincoat
+  - Crowbar + Quelling Blade = Iron Talon
+- Shadow Amulet: Minor rework.
+  - Old behavior: After standing still for `1` second, become invisible and increase attack speed by `30%` (+`30%` per stack). Invisibility lingers for `1.5` seconds. (No speed boost with the invisibility.)
+  - New behavior: Increase attack speed while invisible by `25%` (+`25%` per stack). After standing still for `1.25` second, become invisible. Invisibility lingers for `2` (+`0.5` per stack) seconds after moving. (Speed boost with the invisibility.)
+- Boots of Speed: Increased base movement speed base/per stack from `0.7` -> `0.85`.
+- Enchanted Mango: Decreased Special skill cooldown reduction from `15%` -> `7.5%`.
+- Enchanted Mango: Increased damage from Secondary skill usage from `5%` -> `8%`.
+  - Attempting to make it a bit less OP on False Son and Merc, but still feeling nice.
+- Fixed Enchanted Mango tooltip.
+- Orb of Blight: Increased maximum stacks per stack from `2` -> `3`.
+- Orb of Corrosion: Increased maximum armor reduction stacks per stack from `2` -> `3`.
+- Spark of Courage: Health threshold increased from `50%` -> `60%`.
+  - Was a bit too good for its supposed "downside". Will be a bit more punishing now.
+- Iron Branch: Increased stat increase base/per stack from `2%` -> `2.5%`.
+- Heart of Tarrasque: Increased maximum health regeneration from `1.4%` -> `1.8%`.
+- Infused Raindrops: Increased flat damage reduction base/per stack from `15` -> `20`.
+- Unwavering Condition: Increased maximum health cap from `100` -> `125`.
+
 ## 2.1.0
 - Most automatic combinations have been removed, and replaced with crafting at CHEF.
   - Some affected base items have been buffed.
@@ -13,7 +38,7 @@
   - New behavior: Activating Secondary skill reduces Special skill cooldown by `15%`, and increases damage by `5%` (+`5%` per stack) for `5` seconds.
 - Healing Salve: Increased healing duration from `5` -> `10`.
 - Spark of Courage: Increased armor from `10` -> `15`.
-- Iron Branch: Increased stat increase from `1.5%` -> `2%`.
+- Iron Branch: Increased stat increase base/per stack from `1.5%` -> `2%`.
 - Kaya, Yasha, and Sange no longer automatically combine.
 - Kaya: Increased damage base/per stack from `12%` -> `15%`.
 - Yasha: Increased attack speed base/per stack from `15%` -> `20%`.

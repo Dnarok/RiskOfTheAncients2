@@ -37,7 +37,7 @@ namespace ROTA2.Items
             ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthBase));
             MaximumHealthPerStack = configuration.Bind("Item: " + ItemName, "Stacking Maximum Health Bonus", 200f, "How much maximum health should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthPerStack));
-            MaximumHealthRegenerationPercentage = configuration.Bind("Item: " + ItemName, "Percentage of Maximum Health as Bonus Health Regeneration", 1.4f, "What percentage of maximum health should be provided as health regeneration?");
+            MaximumHealthRegenerationPercentage = configuration.Bind("Item: " + ItemName, "Percentage of Maximum Health as Bonus Health Regeneration", 1.8f, "What percentage of maximum health should be provided as health regeneration?");
             ModSettingsManager.AddOption(new FloatFieldOption(MaximumHealthRegenerationPercentage));
         }
 

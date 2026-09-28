@@ -50,7 +50,7 @@ namespace ROTA2.Items
             ModSettingsManager.AddOption(new FloatFieldOption(MagicResistanceBase));
             MagicResistancePerStack = configuration.Bind("Item: " + ItemName, "Magic Resistance Increase Per Stack", 50f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(MagicResistancePerStack));
-            CombinedHealthLimit = configuration.Bind("Item: " + ItemName, "Combined Health Limit", 100f, "Combined health is max health + max shields.");
+            CombinedHealthLimit = configuration.Bind("Item: " + ItemName, "Combined Health Limit", 125f, "Combined health is max health + max shields.");
             ModSettingsManager.AddOption(new FloatFieldOption(CombinedHealthLimit));
             LimitReductionPerStack = configuration.Bind("Item: " + ItemName, "Limit Reduction Per Stack", 50f, "Exponential (100 -> 50 -> 25...)");
             ModSettingsManager.AddOption(new FloatFieldOption(LimitReductionPerStack));

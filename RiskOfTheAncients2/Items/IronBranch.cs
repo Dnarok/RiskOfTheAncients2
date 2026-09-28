@@ -46,9 +46,9 @@ namespace ROTA2.Items
         public ConfigEntry<float> StatIncreasePerStack;
         private void CreateConfig(ConfigFile configuration)
         {
-            StatIncreaseBase = configuration.Bind("Item: " + ItemName, "All Stats Increase Base", 2f, "");
+            StatIncreaseBase = configuration.Bind("Item: " + ItemName, "All Stats Increase Base", 2.5f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(StatIncreaseBase));
-            StatIncreasePerStack = configuration.Bind("Item: " + ItemName, "All Stats Increase Per Stack", 2f, "");
+            StatIncreasePerStack = configuration.Bind("Item: " + ItemName, "All Stats Increase Per Stack", 2.5f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(StatIncreasePerStack));
         }
     }

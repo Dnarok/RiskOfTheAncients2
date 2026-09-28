@@ -295,6 +295,8 @@ namespace ROTA2
             {
                 // 17
                 AddBlankCraftable("DragonScale and Infusion");
+                // 26
+                AddBlankCraftable("DragonScale and IceRing");
             }
             if (Plugin.ItemsEnabled[HeartOfTarrasque.Instance])
             {
@@ -333,6 +335,33 @@ namespace ROTA2
             {
                 // 24
                 AddBlankCraftable("ScrapWhite and Radiance");
+            }
+            if (Plugin.ItemsEnabled[SkullBasher.Instance])
+            {
+                // 25
+                AddBlankCraftable("StunChanceOnHit and IceRing");
+            }
+            // 26 -> DragonScale and IceRing
+            if (Plugin.ItemsEnabled[OrbOfFrost.Instance])
+            {
+                // 27
+                AddBlankCraftable("OrbOfFrost and FireRing");
+            }
+            if (Plugin.ItemsEnabled[IronBranch.Instance])
+            {
+                // 28
+                AddBlankCraftable("IronBranch and Mushroom");
+            }
+            if (Plugin.ItemsEnabled[Cloak.Instance])
+            {
+                // 29
+                AddBlankCraftable("Cloak and BarrierOnOverHeal");
+            }
+            if (Plugin.ItemsEnabled[QuellingBlade.Instance] &&
+                Plugin.ItemsEnabled[IronTalon.Instance])
+            {
+                // 30
+                AddBlankCraftable("Crowbar and QuellingBlade");
             }
 
             new Content().Initialize();
@@ -411,6 +440,8 @@ namespace ROTA2
             {
                 // 17
                 FinishCraftable(17, DragonScale.GetItemDef(), RoR2Content.Items.Infusion, DLC1Content.Items.StrengthenBurn);
+                // 26
+                FinishCraftable(26, DragonScale.GetItemDef(), RoR2Content.Items.IceRing, RoR2Content.Items.FireRing);
             }
             if (Plugin.ItemsEnabled[HeartOfTarrasque.Instance])
             {
@@ -449,6 +480,33 @@ namespace ROTA2
             {
                 // 24
                 FinishCraftable(24, RoR2Content.Items.ScrapWhite, Radiance.GetItemDef(), DragonScale.GetItemDef(), 4);
+            }
+            if (Plugin.ItemsEnabled[SkullBasher.Instance])
+            {
+                // 25
+                FinishCraftable(25, RoR2Content.Items.StunChanceOnHit, RoR2Content.Items.IceRing, SkullBasher.GetItemDef());
+            }
+            // 26 -> DragonScale and IceRing
+            if (Plugin.ItemsEnabled[OrbOfFrost.Instance])
+            {
+                // 27
+                FinishCraftable(27, OrbOfFrost.GetItemDef(), RoR2Content.Items.FireRing, RoR2Content.Items.IceRing);
+            }
+            if (Plugin.ItemsEnabled[IronBranch.Instance])
+            {
+                // 28
+                FinishCraftable(28, IronBranch.GetItemDef(), RoR2Content.Items.Mushroom, DLC2Content.Equipment.HealAndReviveConsumed);
+            }
+            if (Plugin.ItemsEnabled[Cloak.Instance])
+            {
+                // 29
+                FinishCraftable(29, Cloak.GetItemDef(), RoR2Content.Items.BarrierOnOverHeal, DLC1Content.Items.ImmuneToDebuff);
+            }
+            if (Plugin.ItemsEnabled[QuellingBlade.Instance] &&
+                Plugin.ItemsEnabled[IronTalon.Instance])
+            {
+                // 30
+                FinishCraftable(30, QuellingBlade.GetItemDef(), RoR2Content.Items.Crowbar, IronTalon.GetItemDef());
             }
         }
 

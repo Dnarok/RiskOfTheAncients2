@@ -41,9 +41,9 @@ namespace ROTA2.Items
         {
             IncomingDamageMinimum = configuration.Bind("Item: " + ItemName, "Incoming Damage Minimum", 60f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(IncomingDamageMinimum));
-            DamageBlockBase = configuration.Bind("Item: " + ItemName, "Flat Damage Block Base", 15f, "");
+            DamageBlockBase = configuration.Bind("Item: " + ItemName, "Flat Damage Block Base", 20f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBlockBase));
-            DamageBlockPerStack = configuration.Bind("Item: " + ItemName, "Flat Damage Block Per Stack", 15f, "");
+            DamageBlockPerStack = configuration.Bind("Item: " + ItemName, "Flat Damage Block Per Stack", 20f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageBlockPerStack));
             DamageMinimum = configuration.Bind("Item: " + ItemName, "Damage Minimum After Block", 1f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(DamageMinimum));

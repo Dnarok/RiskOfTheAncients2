@@ -54,14 +54,14 @@ namespace ROTA2
             if (Plugin.ItemsEnabled[EnchantedMango.Instance])
             {
                 item = new();
-                item.descriptions.Add("Mangos: ");
-                item.valueTypes.Add(ItemStatsDef.ValueType.Utility);
-                item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                item.descriptions.Add("Damage Per Stack: ");
+                item.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
                 item.calculateValuesNew = (luck, count, proc) =>
                 {
                     List<float> values =
                     [
-                        count
+                        EnchantedMango.Instance.DamageBonusBase.Value / 100f + EnchantedMango.Instance.DamageBonusPerStack.Value / 100f * (count - 1)
                     ];
                     return values;
                 };
@@ -500,14 +500,18 @@ namespace ROTA2
             if (Plugin.ItemsEnabled[ShadowAmulet.Instance])
             {
                 item = new();
-                item.descriptions.Add("Attack Speed: ");
+                item.descriptions.Add("Invisibility Attack Speed: ");
                 item.valueTypes.Add(ItemStatsDef.ValueType.Damage);
                 item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                item.descriptions.Add("Invisibility Linger Duration: ");
+                item.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                item.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Seconds);
                 item.calculateValuesNew = (luck, count, proc) =>
                 {
                     List<float> values =
                     [
-                        ShadowAmulet.Instance.AttackSpeedBase.Value / 100f + ShadowAmulet.Instance.AttackSpeedPerStack.Value / 100f * (count - 1)
+                        ShadowAmulet.Instance.AttackSpeedBase.Value / 100f + ShadowAmulet.Instance.AttackSpeedPerStack.Value / 100f * (count - 1),
+                        ShadowAmulet.Instance.LingerDurationBase.Value + ShadowAmulet.Instance.LingerDurationPerStack.Value * (count - 1)
                     ];
                     return values;
                 };

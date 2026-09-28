@@ -44,7 +44,7 @@ namespace ROTA2.Items
             ModSettingsManager.AddOption(new FloatFieldOption(ArmorBase));
             ArmorPerStack = configuration.Bind("Item: " + ItemName, "Stacking Armor Bonus", 15f, "How much armor should be provided by subsequent stacks?");
             ModSettingsManager.AddOption(new FloatFieldOption(ArmorPerStack));
-            HealthThreshold = configuration.Bind("Item: " + ItemName, "Health Threshold", 50f, "At what percent of maximum health should the bonus flip from damage to armor?");
+            HealthThreshold = configuration.Bind("Item: " + ItemName, "Health Threshold", 60f, "At what percent of maximum health should the bonus flip from damage to armor?");
             ModSettingsManager.AddOption(new FloatFieldOption(HealthThreshold));
         }
 

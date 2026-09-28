@@ -14,8 +14,8 @@ namespace ROTA2.Items
         public override string ItemName => "Shadow Amulet";
         public override string ConfigItemName => ItemName;
         public override string ItemTokenName => "SHADOW_AMULET";
-        public override string ItemTokenPickup => $"Become invisible and gain attack speed after standing still for {StandingStillDuration.Value} seconds.";
-        public override string ItemTokenDesc => $"After standing still for {Utility($"{StandingStillDuration.Value} seconds")}, become {Utility("invisible")} and increase {Damage("attack speed")} by {Damage($"{AttackSpeedBase.Value}%")} {Stack($"(+{AttackSpeedPerStack.Value}% per stack)")}.";
+        public override string ItemTokenPickup => $"Increased attack speed while invisible, and becoming invisible after standing still.";
+        public override string ItemTokenDesc => $"Increase {Damage("attack speed")} while {Utility("invisible")} by {Damage($"{AttackSpeedBase.Value}")} {Stack($"(+{AttackSpeedPerStack.Value}% per stack)")}. After standing still for {Utility($"{StandingStillDuration.Value}")} seconds, become {Utility("invisible")}, which {Utility("lingers")} for {Utility($"{LingerDurationBase.Value}")} {Stack($"(+{LingerDurationPerStack.Value} per stack)")} seconds after moving.";
         public override string ItemTokenLore => "A small talisman that clouds the senses of one's enemies when held perfectly still.";
         public override string ItemDefGUID => Assets.ShadowAmulet.ItemDef;
         public override void Hooks()
@@ -35,18 +35,21 @@ namespace ROTA2.Items
         public ConfigEntry<float> StandingStillDuration;
         public ConfigEntry<float> AttackSpeedBase;
         public ConfigEntry<float> AttackSpeedPerStack;
-        public ConfigEntry<float> LingerDuration;
+        public ConfigEntry<float> LingerDurationBase;
+        public ConfigEntry<float> LingerDurationPerStack;
         public ConfigEntry<bool> PlaySound;
         private void CreateConfig(ConfigFile configuration)
         {
-            StandingStillDuration = configuration.Bind("Item: " + ItemName, "Standing Still Duration", 1f, "");
+            StandingStillDuration = configuration.Bind("Item: " + ItemName, "Standing Still Duration", 1.25f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(StandingStillDuration));
-            AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Attack Speed Base", 30f, "");
+            AttackSpeedBase = configuration.Bind("Item: " + ItemName, "Attack Speed Base", 25f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedBase));
-            AttackSpeedPerStack = configuration.Bind("Item: " + ItemName, "Attack Speed Per Stack", 30f, "");
+            AttackSpeedPerStack = configuration.Bind("Item: " + ItemName, "Attack Speed Per Stack", 25f, "");
             ModSettingsManager.AddOption(new FloatFieldOption(AttackSpeedPerStack));
-            LingerDuration = configuration.Bind("Item: " + ItemName, "Linger Duration", 1.5f, "");
-            ModSettingsManager.AddOption(new FloatFieldOption(LingerDuration));
+            LingerDurationBase = configuration.Bind("Item: " + ItemName, "Linger Duration Base", 2f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(LingerDurationBase));
+            LingerDurationPerStack = configuration.Bind("Item: " + ItemName, "Linger Duration Per Stack", 0.5f, "");
+            ModSettingsManager.AddOption(new FloatFieldOption(LingerDurationPerStack));
             PlaySound = configuration.Bind("Item: " + ItemName, "Play Sound", true, "");
             ModSettingsManager.AddOption(new CheckBoxOption(PlaySound));
         }
@@ -68,7 +71,7 @@ namespace ROTA2.Items
         public class ShadowAmuletBehavior : MonoBehaviour
         {
             CharacterBody body;
-            public bool last_invisible = false;
+            public bool last_immobile = false;
 
             void Awake()
             {
@@ -76,29 +79,40 @@ namespace ROTA2.Items
             }
             void FixedUpdate()
             {
-                if (GetCount(body) <= 0)
+                int count = GetCount(body);
+                if (count <= 0)
                 {
                     return;
                 }
 
-                bool invisible = body.notMovingStopwatch >= Instance.StandingStillDuration.Value;
-                if (invisible)
+                bool immobile = body.notMovingStopwatch >= Instance.StandingStillDuration.Value;
+                if (immobile)
                 {
-                    body.AddTimedBuff(RoR2Content.Buffs.Cloak, Instance.LingerDuration.Value, 1);
-                    if (!last_invisible)
+                    float duration = Instance.LingerDurationBase.Value + Instance.LingerDurationPerStack.Value * (count - 1);
+                    body.AddTimedBuff(RoR2Content.Buffs.Cloak, duration, 1);
+                    body.AddTimedBuff(RoR2Content.Buffs.CloakSpeed, duration, 1);
+                    if (!last_immobile)
                     {
-                        body.AddBuff(ShadowAmuletBuff.GetBuffDef());
                         if (Instance.PlaySound.Value)
                         {
                             EffectManager.SimpleSoundEffect(Instance.sound.index, body.corePosition, true);
                         }
                     }
                 }
-                else if (!invisible && last_invisible)
+                last_immobile = immobile;
+
+                bool has_fade = body.HasBuff(ShadowAmuletBuff.GetBuffDef());
+                if (body.HasBuff(RoR2Content.Buffs.Cloak))
+                {
+                    if (!has_fade)
+                    {
+                        body.AddBuff(ShadowAmuletBuff.GetBuffDef());
+                    }
+                }
+                else if (has_fade)
                 {
                     body.RemoveBuff(ShadowAmuletBuff.GetBuffDef());
                 }
-                last_invisible = invisible;
             }
         }
     }

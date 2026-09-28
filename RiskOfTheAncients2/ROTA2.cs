@@ -32,7 +32,7 @@ namespace ROTA2
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "Dnarok";
         public const string PluginName = "RiskOfTheAncients2";
-        public const string PluginVersion = "2.1.0";
+        public const string PluginVersion = "2.1.1";
 
         public static List<ItemBase> Items = [];
         public static Dictionary<ItemBase, bool> ItemsEnabled = [];
