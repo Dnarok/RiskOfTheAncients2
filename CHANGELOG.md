@@ -1,3 +1,10 @@
+## 2.1.3
+- Enchanted Mango will now proc off of Railgunner scoped shots, like Luminous Shot.
+- Equipment combining (Greaves) will search all of your slots and sets for a matching item, instead of just the current active slot.
+
+## 2.1.2
+- Updated for Hallowed Concepts.
+
 ## 2.1.1
 - Added new CHEF recipes:
   - Stun Grenade + Runald's Band = Skull Basher

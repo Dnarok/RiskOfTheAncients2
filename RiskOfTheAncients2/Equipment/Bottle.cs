@@ -296,7 +296,7 @@ Runes will be removed from the pool until all effects have been seen.";
         void DoBounty(CharacterBody body)
         {
             float cost = Run.instance.GetDifficultyScaledCost(BountyGold.Value, Run.instance.difficultyCoefficient);
-            body.master.GiveMoney((uint)cost);
+            body.master.GiveMoney((uint)cost, false);
 
             EffectManager.SimpleSoundEffect(bountySound.index, body.corePosition, true);
         }

@@ -20,7 +20,7 @@ namespace ROTA2.Items
         public override ItemDef VoidFor => DLC2Content.Items.ItemDropChanceOnKill;
         public override void Hooks()
         {
-            GlobalEventManager.onCharacterDeathGlobal += OnKill;
+            GlobalEventManager.onCharacterDeathServer += OnKill;
         }
         public override void Init(ConfigFile configuration)
         {

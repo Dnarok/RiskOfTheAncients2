@@ -61,7 +61,9 @@ namespace ROTA2.Items
         private void OnSkill(On.RoR2.CharacterBody.orig_OnSkillActivated orig, CharacterBody body, GenericSkill skill)
         {
             int count = GetCount(body);
-            if (count > 0 && skill == body.skillLocator.secondary && skill.cooldownRemaining > 0f)
+            bool primaryIsSecondary = body.canAddIncrasePrimaryDamage &&
+                                      body.skillLocator.primary == skill;
+            if (count > 0 && ((skill == body.skillLocator.secondary && skill.cooldownRemaining > 0f) || primaryIsSecondary))
             {
                 EnchantedMangoBuff.ApplyTo(
                     body: body,

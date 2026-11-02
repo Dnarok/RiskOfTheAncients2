@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using HG;
+using RoR2;
 using ROTA2.Equipment;
 using ROTA2.Items;
 using System;
@@ -644,23 +645,79 @@ namespace ROTA2
         private static void OnAttemptGrant(On.RoR2.EquipmentDef.orig_AttemptGrant orig, ref PickupDef.GrantContext context)
         {
             bool callOriginal = true;
-            EquipmentIndex currentEquipmentIndex = context.body.inventory.currentEquipmentIndex;
             EquipmentIndex equipmentIndex = PickupCatalog.GetPickupDef(context.controller._pickupState.pickupIndex)?.equipmentIndex ?? EquipmentIndex.None;
+            if (equipmentIndex == EquipmentIndex.None)
+            {
+                return;
+            }
+
             foreach (EquipmentRecipe recipe in equipment_recipes)
             {
-                if ((currentEquipmentIndex == recipe.input_1.equipmentIndex &&
-                     equipmentIndex == recipe.input_2.equipmentIndex) ||
-                    (currentEquipmentIndex == recipe.input_2.equipmentIndex &&
-                     equipmentIndex == recipe.input_1.equipmentIndex))
+                if (equipmentIndex == recipe.input_1.equipmentIndex)
                 {
-                    context.body.inventory.SetEquipmentIndex(recipe.output.equipmentIndex, isRemovingEquipment: true);
-                    context.controller.StartWaitTime();
-                    context.shouldDestroy = true;
-                    context.shouldNotify = false;
-                    CharacterMasterNotificationQueue.PushEquipmentTransformNotification(context.body.master, currentEquipmentIndex, recipe.output.equipmentIndex, default);
-                    CharacterMasterNotificationQueue.PushEquipmentTransformNotification(context.body.master, equipmentIndex, recipe.output.equipmentIndex, default);
-                    callOriginal = false;
-                    break;
+                    EquipmentMask mask;
+                    CollectionPool<EquipmentIndex, EquipmentMask>.DisposableRental rental = EquipmentMask.Rent(out mask);
+                    try
+                    {
+                        mask.Add(recipe.input_2.equipmentIndex);
+                        Inventory.EquipmentLocationQueryArgs args = new Inventory.EquipmentLocationQueryArgs
+                        {
+                            equipmentWhitelist = mask,
+                            allowOccupied = true,
+                            allowEmpty = false,
+                            allowInaccessible = false,
+                            searchAllSlots = true
+                        };
+                        EquipmentLocation location = new EquipmentLocation();
+                        if (context.body.inventory.TryFindBestEquipmentLocation(args, out location))
+                        {
+                            context.body.inventory.SetEquipmentIndex(recipe.output.equipmentIndex, location);
+                            context.controller.StartWaitTime();
+                            context.shouldDestroy = true;
+                            context.shouldNotify = false;
+                            CharacterMasterNotificationQueue.PushEquipmentTransformNotification(context.body.master, recipe.input_2.equipmentIndex, recipe.output.equipmentIndex, default);
+                            CharacterMasterNotificationQueue.PushEquipmentTransformNotification(context.body.master, equipmentIndex, recipe.output.equipmentIndex, default);
+                            callOriginal = false;
+                            break;
+                        }
+                    }
+                    finally
+                    {
+                        rental.Dispose();
+                    }
+                }
+                else if (equipmentIndex == recipe.input_2.equipmentIndex)
+                {
+                    EquipmentMask mask;
+                    CollectionPool<EquipmentIndex, EquipmentMask>.DisposableRental rental = EquipmentMask.Rent(out mask);
+                    try
+                    {
+                        mask.Add(recipe.input_1.equipmentIndex);
+                        Inventory.EquipmentLocationQueryArgs args = new Inventory.EquipmentLocationQueryArgs
+                        {
+                            equipmentWhitelist = mask,
+                            allowOccupied = true,
+                            allowEmpty = false,
+                            allowInaccessible = false,
+                            searchAllSlots = true
+                        };
+                        EquipmentLocation location = new EquipmentLocation();
+                        if (context.body.inventory.TryFindBestEquipmentLocation(args, out location))
+                        {
+                            context.body.inventory.SetEquipmentIndex(recipe.output.equipmentIndex, location);
+                            context.controller.StartWaitTime();
+                            context.shouldDestroy = true;
+                            context.shouldNotify = false;
+                            CharacterMasterNotificationQueue.PushEquipmentTransformNotification(context.body.master, recipe.input_1.equipmentIndex, recipe.output.equipmentIndex, default);
+                            CharacterMasterNotificationQueue.PushEquipmentTransformNotification(context.body.master, equipmentIndex, recipe.output.equipmentIndex, default);
+                            callOriginal = false;
+                            break;
+                        }
+                    }
+                    finally
+                    {
+                        rental.Dispose();
+                    }
                 }
             }
 
@@ -737,7 +794,7 @@ namespace ROTA2
                             body.inventory.RemoveItemPermanent(pair.Key, pair.Value);
                         }
                         CharacterMasterNotificationQueue.PushEquipmentTransformNotification(body.master, MixedRecipe.equipment.equipmentIndex, MixedRecipe.output.equipmentIndex, default);
-                        body.inventory.SetEquipmentIndexForSlot(MixedRecipe.output.equipmentIndex, body.inventory.activeEquipmentSlot, body.inventory.activeEquipmentSet[body.inventory.activeEquipmentSlot]);
+                        body.inventory.SetEquipmentIndex(MixedRecipe.output.equipmentIndex, body.inventory.activeEquipmentLocation);
                     }
                 }
             }

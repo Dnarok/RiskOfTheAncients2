@@ -31,9 +31,11 @@ namespace ROTA2.Equipment
             {
                 for (uint i = 0; i < body.inventory.GetEquipmentSlotCount(); i++)
                 {
-                    for (uint j = 0; j < body.inventory.GetEquipmentSetCount(i); j++)
+                    for (uint j = 0; j < body.inventory.GetEquipmentSetCount(); j++)
                     {
+#pragma warning disable CS0618 // Type or member is obsolete
                         var equipment = body.inventory.GetEquipment(i, j);
+#pragma warning restore CS0618 // Type or member is obsolete
                         if (equipment.equipmentIndex == EquipmentDef.equipmentIndex)
                         {
                             return true;
@@ -50,9 +52,11 @@ namespace ROTA2.Equipment
             {
                 for (uint i = 0; i < master.inventory.GetEquipmentSlotCount(); i++)
                 {
-                    for (uint j = 0; j < master.inventory.GetEquipmentSetCount(i); j++)
+                    for (uint j = 0; j < master.inventory.GetEquipmentSetCount(); j++)
                     {
+#pragma warning disable CS0618 // Type or member is obsolete
                         var equipment = master.inventory.GetEquipment(i, j);
+#pragma warning restore CS0618 // Type or member is obsolete
                         if (equipment.equipmentIndex == EquipmentDef.equipmentIndex)
                         {
                             return true;

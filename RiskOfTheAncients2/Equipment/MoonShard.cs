@@ -47,7 +47,7 @@ namespace ROTA2.Equipment
         {
             if (slot && HasThisEquipment(slot.characterBody))
             {
-                slot.characterBody.inventory.SetEquipmentIndexForSlot(EquipmentIndex.None, slot.activeEquipmentSlot, slot.activeEquipmentSet[slot.activeEquipmentSlot]);
+                slot.characterBody.inventory.SetEquipmentIndex(EquipmentIndex.None, slot.characterBody.inventory.activeEquipmentLocation);
                 slot.characterBody.inventory.GiveItemPermanent(ConsumedMoonShard.GetItemDef());
 
                 EffectManager.SimpleSoundEffect(sound.index, slot.characterBody.corePosition, true);

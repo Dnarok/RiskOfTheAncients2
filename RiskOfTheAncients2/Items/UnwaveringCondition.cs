@@ -63,8 +63,8 @@ namespace ROTA2.Items
             ILLabel label = null;
             if (!cursor.TryGotoNext
                 (
-                    x => x.MatchLdsfld(typeof(DLC2Content.Items), nameof(DLC2Content.Items.BoostAllStats)),
-                    x => x.MatchCallOrCallvirt<Inventory>(nameof(Inventory.GetItemCountEffective)),
+                    x => x.MatchLdsfld(typeof(DLC2Content.Buffs), nameof(DLC2Content.Buffs.BoostAllStatsBuff)),
+                    x => x.MatchCallOrCallvirt<CharacterBody>(nameof(CharacterBody.GetBuffCount)),
                     x => x.MatchStloc(out index)
                 ) ||
                 !cursor.TryGotoNext

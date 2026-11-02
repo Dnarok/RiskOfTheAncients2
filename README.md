@@ -40,7 +40,7 @@ A mod that adds Dota 2 items to Risk of Rain 2!
 |<img src="https://raw.githubusercontent.com/Dnarok/RiskOfTheAncients2/refs/heads/main/RiskOfTheAncients2/Icons/nemesis_curse.png" width="128"/>|**Nemesis Curse**|`100%` chance on hit to curse an enemy, increasing all damage they take by `100%` (+`100%` per stack, exponential) for `5` seconds. Recharges every `7.5` seconds.<br>`100%` chance on **being hit** to be **cursed**, receiving **permanent damage**.|Lunar|
 |<img src="https://raw.githubusercontent.com/Dnarok/RiskOfTheAncients2/refs/heads/main/RiskOfTheAncients2/Icons/unwavering_condition.png" width="128"/>|**Unwavering Condition**|Increases magic resistance by `95%` (+`50%` per stack).<br>Combined maximum health cannot go above `125` (-`50%` per stack).|Lunar|
 
-The following items and equipment cannot drop - instead, they are combinations of other items or equipment made at CHEF. Equipment that are made from two other equipment will give you the item when you try to swap them instead.
+The following items and equipment cannot drop - instead, they are combinations of other items or equipment made at CHEF. Equipment that are made from two other equipment will give you the item when you pick one up while holding the other one somewhere in your slots.
 
 |Icon|Name|Description|Components|Tier|
 |-|-|-|-|:-:|
